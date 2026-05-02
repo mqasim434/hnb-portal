@@ -1,0 +1,70 @@
+/**
+ * H&B Service Group — design tokens (dark navy + gold).
+ * Import once; consume via var(--primary), etc.
+ */
+:root {
+  /* Brand */
+  --primary: #c9a84c;
+  --primary-hover: #e2bc5e;
+  --secondary: #3d4d73;
+  --accent: #d4b65a;
+
+  /* Surfaces */
+  --background: #0a0f1e;
+  --surface: #111827;
+  --surface2: #1a2235;
+
+  /* Typography */
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+
+  /* UI */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.12);
+
+  /* Feedback */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --error: #ef4444;
+
+  /* Text on gold buttons */
+  --on-primary: #0a0f1e;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.28);
+  --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 0 0 1px rgba(201, 168, 76, 0.25),
+    0 12px 40px rgba(201, 168, 76, 0.18);
+
+  /* Layout & rhythm */
+  --content-max-width: 1200px;
+  --section-padding-y: 100px;
+  --section-padding-x: 24px;
+  --radius-card: 16px;
+  --radius-button: 8px;
+  --radius-icon-tile: 12px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-fast: 0.2s var(--ease-out);
+  --transition-medium: 0.35s var(--ease-out);
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-hero-size: clamp(2.75rem, 6vw, 4rem);
+  --font-hero-weight: 800;
+  --font-hero-tracking: -0.03em;
+  --font-section-size: clamp(2rem, 4vw, 2.625rem);
+  --font-section-weight: 700;
+  --font-subhead-size: 1.125rem;
+  --font-subhead-weight: 400;
+  --font-subhead-line: 1.7;
+  --font-body-size: 1rem;
+  --font-body-weight: 400;
+  --font-body-line: 1.6;
+
+  --z-nav: 100;
+  --z-modal: 200;
+}

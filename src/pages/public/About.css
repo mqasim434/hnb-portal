@@ -1,0 +1,220 @@
+/* About — H&B Service Group (theme tokens only) */
+
+.about {
+  overflow-x: clip;
+}
+
+.about-hero {
+  padding-block: clamp(2.75rem, 7vw, 4rem);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--surface2) 35%, var(--background)) 0%,
+    var(--background) 100%
+  );
+  border-bottom: 1px solid var(--border);
+}
+
+.about-hero__title {
+  margin: 0;
+  font-size: var(--font-section-size);
+  font-weight: var(--font-section-weight);
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  color: var(--text);
+}
+
+.about-hero__accent {
+  color: var(--primary);
+}
+
+.about-section {
+  padding-block: clamp(2.75rem, 6vw, var(--section-padding-y));
+}
+
+.about-section--surface {
+  background-color: var(--surface);
+}
+
+.about-section--muted {
+  background-color: color-mix(in srgb, var(--surface2) 45%, var(--background));
+}
+
+.about-section__inner {
+  max-width: 46rem;
+}
+
+.about-section__inner--wide {
+  max-width: var(--content-max-width);
+}
+
+.about-section__eyebrow {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 0.65rem;
+}
+
+.about-section__title {
+  margin: 0 0 1rem;
+  font-size: clamp(1.35rem, 2.8vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.about-prose {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+}
+
+.about-prose + .about-prose {
+  margin-top: 1rem;
+}
+
+.about-prose--after-title {
+  margin-bottom: 1.75rem;
+}
+
+.about-mission {
+  margin: 0;
+  font-size: clamp(1.125rem, 2.5vw, 1.35rem);
+  line-height: 1.65;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.about-split {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .about-split {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+  }
+}
+
+.about-pillar {
+  padding: 1.5rem;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.about-pillar__icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-icon-tile);
+  background-color: color-mix(in srgb, var(--primary) 12%, transparent);
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.about-pillar__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.about-pillar__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.about-pillar__text {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.62;
+  color: var(--text-muted);
+}
+
+.about-values {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 640px) {
+  .about-values {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-values {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.about-value {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  padding: 1.15rem;
+  border-radius: var(--radius-button);
+  border: 1px solid var(--border);
+  background-color: color-mix(in srgb, var(--surface) 70%, transparent);
+}
+
+.about-value__icon {
+  flex-shrink: 0;
+  color: var(--primary);
+  margin-top: 0.1rem;
+}
+
+.about-value__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.about-value__title {
+  margin: 0 0 0.3rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.about-value__text {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.about-team {
+  padding: clamp(2rem, 5vw, 2.75rem);
+  border-radius: var(--radius-card);
+  border: 1px dashed color-mix(in srgb, var(--primary) 35%, var(--border));
+  background-color: color-mix(in srgb, var(--surface) 88%, var(--background));
+  text-align: center;
+}
+
+.about-team__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.about-team__text {
+  margin: 0 auto;
+  max-width: 32rem;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
