@@ -15,7 +15,7 @@ export default function ProtectedRoute({ allowedRole }) {
         style={{ padding: '4rem 0', textAlign: 'center' }}
         aria-live="polite"
       >
-        <p className="hnb-type-subhead">Loading session…</p>
+        <p className="hnb-type-subhead">Sessie laden…</p>
       </div>
     )
   }

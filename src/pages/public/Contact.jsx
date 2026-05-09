@@ -41,12 +41,12 @@ export default function Contact() {
       <section className="contact-hero" aria-labelledby="contact-hero-title">
         <div className="hnb-container">
           <h1 id="contact-hero-title" className="contact-hero__title">
-            Get In <span className="contact-hero__accent">Touch</span>
+            Neem <span className="contact-hero__accent">contact op</span>
           </h1>
         </div>
       </section>
 
-      <section className="contact-body" aria-label="Contact form and details">
+      <section className="contact-body" aria-label="Contactformulier en gegevens">
         <div className="hnb-container">
           <div className="contact-layout">
             <div className="contact-layout__main">
@@ -60,17 +60,17 @@ export default function Contact() {
                     <FiCheckCircle />
                   </div>
                   <div>
-                    <h2 className="contact-success__title">Message sent</h2>
+                    <h2 className="contact-success__title">Bericht verstuurd</h2>
                     <p className="contact-success__text">
-                      Thanks for reaching out — we&apos;ll get back to you using the
-                      email you provided. (Demo: nothing was saved to a server yet.)
+                      Bedankt voor uw bericht — we reageren via het door u opgegeven
+                      e-mailadres. (Demo: er is nog niets opgeslagen op een server.)
                     </p>
                     <button
                       type="button"
                       className="hnb-btn hnb-btn--outline contact-success__btn"
                       onClick={() => setSubmitSuccess(false)}
                     >
-                      Send another message
+                      Nog een bericht sturen
                     </button>
                   </div>
                 </div>
@@ -84,7 +84,7 @@ export default function Contact() {
                 <div className="contact-form__row contact-form__row--2">
                   <div className="contact-form__field">
                     <label className="contact-form__label" htmlFor="contact-name">
-                      Name
+                      Naam
                     </label>
                     <input
                       id="contact-name"
@@ -96,10 +96,10 @@ export default function Contact() {
                         errors.name ? 'contact-name-error' : undefined
                       }
                       {...register('name', {
-                        required: 'Name is required',
+                        required: 'Naam is verplicht',
                         maxLength: {
                           value: 80,
-                          message: 'Maximum 80 characters',
+                          message: 'Maximaal 80 tekens',
                         },
                       })}
                     />
@@ -111,7 +111,7 @@ export default function Contact() {
                   </div>
                   <div className="contact-form__field">
                     <label className="contact-form__label" htmlFor="contact-email">
-                      Email
+                      E-mail
                     </label>
                     <input
                       id="contact-email"
@@ -123,10 +123,10 @@ export default function Contact() {
                         errors.email ? 'contact-email-error' : undefined
                       }
                       {...register('email', {
-                        required: 'Email is required',
+                        required: 'E-mail is verplicht',
                         pattern: {
                           value: emailPattern,
-                          message: 'Enter a valid email address',
+                          message: 'Voer een geldig e-mailadres in',
                         },
                       })}
                     />
@@ -140,7 +140,7 @@ export default function Contact() {
 
                 <div className="contact-form__field">
                   <label className="contact-form__label" htmlFor="contact-subject">
-                    Subject
+                    Onderwerp
                   </label>
                   <input
                     id="contact-subject"
@@ -152,14 +152,14 @@ export default function Contact() {
                       errors.subject ? 'contact-subject-error' : undefined
                     }
                     {...register('subject', {
-                      required: 'Subject is required',
+                      required: 'Onderwerp is verplicht',
                       minLength: {
                         value: 3,
-                        message: 'Subject is too short',
+                        message: 'Onderwerp is te kort',
                       },
                       maxLength: {
                         value: 160,
-                        message: 'Maximum 160 characters',
+                        message: 'Maximaal 160 tekens',
                       },
                     })}
                   />
@@ -172,7 +172,7 @@ export default function Contact() {
 
                 <div className="contact-form__field">
                   <label className="contact-form__label" htmlFor="contact-message">
-                    Message
+                    Bericht
                   </label>
                   <textarea
                     id="contact-message"
@@ -183,14 +183,14 @@ export default function Contact() {
                       errors.message ? 'contact-message-error' : undefined
                     }
                     {...register('message', {
-                      required: 'Message is required',
+                      required: 'Bericht is verplicht',
                       minLength: {
                         value: 20,
-                        message: 'Please write at least 20 characters',
+                        message: 'Schrijf minstens 20 tekens',
                       },
                       maxLength: {
                         value: 4000,
-                        message: 'Maximum 4000 characters',
+                        message: 'Maximaal 4000 tekens',
                       },
                     })}
                   />
@@ -205,16 +205,16 @@ export default function Contact() {
                   type="submit"
                   className="hnb-btn hnb-btn--primary contact-form__submit"
                 >
-                  Send message
+                  Bericht verzenden
                 </button>
               </form>
             </div>
 
-            <aside className="contact-aside" aria-label="Contact details">
-              <h2 className="contact-aside__title">Contact details</h2>
+            <aside className="contact-aside" aria-label="Contactgegevens">
+              <h2 className="contact-aside__title">Contactgegevens</h2>
               <ul className="contact-aside__list">
                 <li className="contact-aside__item">
-                  <span className="contact-aside__label">Email</span>
+                  <span className="contact-aside__label">E-mail</span>
                   <a
                     className="contact-aside__value"
                     href="mailto:bookings@hbservicegroup.com"
@@ -223,15 +223,15 @@ export default function Contact() {
                   </a>
                 </li>
                 <li className="contact-aside__item">
-                  <span className="contact-aside__label">Phone</span>
+                  <span className="contact-aside__label">Telefoon</span>
                   <a className="contact-aside__value" href="tel:+31200000000">
                     +31 (0) 20 000 0000
                   </a>
                 </li>
                 <li className="contact-aside__item">
-                  <span className="contact-aside__label">Location</span>
+                  <span className="contact-aside__label">Locatie</span>
                   <span className="contact-aside__value">
-                    Amsterdam, Netherlands
+                    Amsterdam, Nederland
                   </span>
                 </li>
               </ul>

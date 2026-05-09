@@ -16,15 +16,15 @@ export default function FindWork() {
       <section className="fw-hero" aria-labelledby="fw-hero-title">
         <div className="hnb-container">
           <h1 id="fw-hero-title" className="fw-hero__title">
-            Find Flexible{' '}
-            <span className="fw-hero__accent">Event Work</span>
+            Vind flexibel{' '}
+            <span className="fw-hero__accent">eventwerk</span>
           </h1>
           <p className="fw-hero__sub">
-            Join the H&amp;B Service Group freelancer network — pick up shifts that
-            fit your schedule, get clear briefings before you arrive, and work with
-            teams who respect your time on site and after the doors close. Whether
-            you&apos;re building experience or stacking peak-season hours, we&apos;ll
-            match you to gigs that suit your skills and certifications.
+            Sluit u aan bij het freelancer-netwerk van H&amp;B Service Group —
+            kies diensten die in uw planning passen, ontvang duidelijke briefings
+            vóór aankomst en werk met teams die uw tijd op en na het event
+            respecteren. Of u nu ervaring opbouwt of piekseizoenuren maakt: wij
+            matchen u aan klussen die passen bij uw skills en certificaten.
           </p>
         </div>
       </section>
@@ -35,14 +35,15 @@ export default function FindWork() {
       >
         <div className="hnb-container">
           <header className="fw-section__head">
-            <span className="fw-section__eyebrow">Why work with us</span>
+            <span className="fw-section__eyebrow">Waarom met ons werken</span>
             <h2 id="fw-benefits-title" className="fw-section__title">
-              Built for people who actually work the show
+              Gemaakt voor mensen die de show echt draaien
             </h2>
             <p className="fw-section__lead">
-              We know the job doesn&apos;t end when the lights go down — so we focus
-              on fair scheduling, predictable pay cycles, and coordinators who pick
-              up the phone when something changes last minute.
+              We weten dat het werk niet stopt als het licht uitgaat — daarom
+              zetten we in op eerlijke planning, voorspelbare uitbetaling en
+              coördinatoren die bereikbaar zijn als het op het laatste moment
+              schuift.
             </p>
           </header>
           <ul className="fw-benefits">
@@ -50,44 +51,43 @@ export default function FindWork() {
               <div className="fw-benefit__icon" aria-hidden="true">
                 <FiClock />
               </div>
-              <h3 className="fw-benefit__title">Flexible hours</h3>
+              <h3 className="fw-benefit__title">Flexibele uren</h3>
               <p className="fw-benefit__text">
-                Choose shifts that fit around study, family, or other jobs. We
-                publish call times and wrap expectations up front so you can plan
-                your week with confidence.
+                Kies diensten rond studie, gezin of een andere baan. Call times en
+                verwachte eindtijd communiceren we vooraf, zodat u uw week kunt
+                plannen.
               </p>
             </li>
             <li className="fw-benefit">
               <div className="fw-benefit__icon" aria-hidden="true">
                 <FiCreditCard />
               </div>
-              <h3 className="fw-benefit__title">Fast payments</h3>
+              <h3 className="fw-benefit__title">Snelle uitbetalingen</h3>
               <p className="fw-benefit__text">
-                Invoicing and timesheets shouldn&apos;t be a puzzle. We use a
-                structured payout rhythm and keep paperwork light so you get paid
-                on time after your shift is signed off.
+                Facturatie en mutatierondes hoeven geen puzzel te zijn. We hanteren
+                een vast ritme en houden administratie beperkt, zodat u op tijd
+                betaald wordt na akkoord op uw dienst.
               </p>
             </li>
             <li className="fw-benefit">
               <div className="fw-benefit__icon" aria-hidden="true">
                 <FiMessageSquare />
               </div>
-              <h3 className="fw-benefit__title">Structured communication</h3>
+              <h3 className="fw-benefit__title">Gestructureerde communicatie</h3>
               <p className="fw-benefit__text">
-                One channel for briefings, dress code, access points, and on-site
-                contacts — no chasing DMs across five apps. If the run-of-show
-                moves, you hear it from us first.
+                Eén kanaal voor briefing, dresscode, toegang en contacten op locatie
+                — geen DM&apos;s over vijf apps. Als het programma verschuift, hoort
+                u dat als eerste van ons.
               </p>
             </li>
             <li className="fw-benefit">
               <div className="fw-benefit__icon" aria-hidden="true">
                 <FiCalendar />
               </div>
-              <h3 className="fw-benefit__title">Variety of events</h3>
+              <h3 className="fw-benefit__title">Afzwakking in events</h3>
               <p className="fw-benefit__text">
-                From intimate corporate receptions to late-night venues and outdoor
-                festivals — build a CV that stays interesting while staying aligned
-                to what you&apos;re licensed and trained to do.
+                Van intieme recepties tot late locaties en buitenfestivals — bouw
+                een cv dat interessant blijft én binnen uw vergunning valt.
               </p>
             </li>
           </ul>
@@ -97,14 +97,14 @@ export default function FindWork() {
       <section className="fw-section" aria-labelledby="fw-roles-title">
         <div className="hnb-container">
           <header className="fw-section__head">
-            <span className="fw-section__eyebrow">Roles</span>
+            <span className="fw-section__eyebrow">Rollen</span>
             <h2 id="fw-roles-title" className="fw-section__title">
-              Types of roles we roster
+              Rollen die we inplannen
             </h2>
             <p className="fw-section__lead">
-              Tell us what you&apos;re qualified for during onboarding — we&apos;ll
-              only offer you work that matches your profile, tickets, and right to
-              work.
+              Tijdens onboarding geeft u aan waarvoor u gekwalificeerd bent — wij
+              bieden alleen werk dat past bij profiel, papieren en recht om te
+              werken.
             </p>
           </header>
           <ul className="fw-roles">
@@ -114,31 +114,30 @@ export default function FindWork() {
               </div>
               <h3 className="fw-role__title">Hospitality</h3>
               <p className="fw-role__text">
-                Hosts, hostesses, bar support, and guest-facing roles where
-                polish and pace matter — ideal if you love reading a room and
-                keeping service smooth under pressure.
+                Hosts, hostesses, barondersteuning en gastrollen waar tempo én
+                uitstraling tellen — ideaal als u een zaal leest en service onder
+                druk stabiel houdt.
               </p>
             </li>
             <li className="fw-role">
               <div className="fw-role__icon" aria-hidden="true">
                 <FiShield />
               </div>
-              <h3 className="fw-role__title">Security</h3>
+              <h3 className="fw-role__title">Beveiliging</h3>
               <p className="fw-role__text">
-                Licensed door and event security — access control, patrols, and
-                calm, professional presence when crowds peak. We only roster where
-                your licence and venue policy align.
+                Bevoegde portiers en eventbeveiliging — toegang, rondes en rustige,
+                professionele aanwezigheid tijdens drukte. Alleen ingepland waar uw
+                vergunning en beleid passend zijn.
               </p>
             </li>
             <li className="fw-role">
               <div className="fw-role__icon" aria-hidden="true">
                 <FiUsers />
               </div>
-              <h3 className="fw-role__title">General event staff</h3>
+              <h3 className="fw-role__title">Algemeen eventpersoneel</h3>
               <p className="fw-role__text">
-                Runners, accreditation, wristbanding, backstage support, and the
-                hands-on logistics that keep changeovers tight — great if you like
-                being where the action is.
+                Runners, accreditatie, bandjes, backstage en hands-on logistiek —
+                perfect als u midden in de actie wilt staan.
               </p>
             </li>
           </ul>
@@ -151,13 +150,13 @@ export default function FindWork() {
       >
         <div className="hnb-container">
           <header className="fw-section__head">
-            <span className="fw-section__eyebrow">Getting started</span>
+            <span className="fw-section__eyebrow">Beginnen</span>
             <h2 id="fw-steps-title" className="fw-section__title">
-              How it works
+              Zo werkt het
             </h2>
             <p className="fw-section__lead">
-              A simple path from application to your first shift — we review every
-              profile so clients know who is walking through their door.
+              Een eenvoudige route van aanmelding tot eerste dienst — we beoordelen
+              elk profiel zodat opdrachtgevers weten wie bij hen binnenkomt.
             </p>
           </header>
           <ol className="fw-steps">
@@ -166,11 +165,10 @@ export default function FindWork() {
                 1
               </span>
               <div className="fw-step__body">
-                <h3 className="fw-step__label">Apply</h3>
+                <h3 className="fw-step__label">Aanmelden</h3>
                 <p className="fw-step__text">
-                  Complete our registration flow with your experience, availability,
-                  and documents. It takes a little effort up front — it saves
-                  everyone time on site later.
+                  Doorloop registratie met ervaring, beschikbaarheid en documenten.
+                  Wat meer moeite vooraf bespaart iedereen tijd op locatie.
                 </p>
               </div>
             </li>
@@ -179,11 +177,11 @@ export default function FindWork() {
                 2
               </span>
               <div className="fw-step__body">
-                <h3 className="fw-step__label">Get approved</h3>
+                <h3 className="fw-step__label">Goedkeuring</h3>
                 <p className="fw-step__text">
-                  Our team checks licences, right to work, and role fit. You&apos;ll
-                  hear back with next steps — and we&apos;ll flag anything missing
-                  clearly so you&apos;re not left guessing.
+                  We controleren vergunningen, recht om te werken en rolpas. U hoort
+                  duidelijke vervolgstappen — ontbrekend materiaal melden we
+                  concreet.
                 </p>
               </div>
             </li>
@@ -192,11 +190,11 @@ export default function FindWork() {
                 3
               </span>
               <div className="fw-step__body">
-                <h3 className="fw-step__label">Start working</h3>
+                <h3 className="fw-step__label">Aan de slag</h3>
                 <p className="fw-step__text">
-                  Once you&apos;re live on the roster, you&apos;ll see shifts that
-                  match your profile. Accept what works for you, show up briefed,
-                  and build a relationship with a team that books again and again.
+                  Live op het roster ziet u passende shifts. Accepteer wat past,
+                  kom gebriefd opdagen en bouw een relatie met een team dat u
+                  terugvraagt.
                 </p>
               </div>
             </li>
@@ -208,15 +206,15 @@ export default function FindWork() {
         <div className="fw-cta__inner hnb-container">
           <div>
             <h2 id="fw-cta-title" className="fw-cta__title">
-              Ready to join our team?
+              Klaar om mee te doen?
             </h2>
             <p className="fw-cta__sub">
-              Start your application — it only takes a few minutes to tell us who
-              you are and what you&apos;re great at.
+              Start uw aanmelding — in een paar minuten vertelt u wie u bent en
+              waar u goed in bent.
             </p>
           </div>
           <Link to="/register" className="hnb-btn hnb-btn--primary">
-            Apply Now
+            Nu aanmelden
           </Link>
         </div>
       </section>

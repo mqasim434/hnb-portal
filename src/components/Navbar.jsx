@@ -1,21 +1,11 @@
-import { useCallback, useEffect, useState } from 'react'
-import { FiMenu, FiX } from 'react-icons/fi'
+import { useCallback, useEffect, useId, useState } from 'react'
+import { FiChevronDown, FiMenu, FiX } from 'react-icons/fi'
 import { Link, NavLink, useLocation } from 'react-router-dom'
+import { HEADER_CTAS, NAV_GROUPS } from '../content/navigation'
 import './Navbar.css'
 
-const navItems = [
-  { to: '/', label: 'Home', end: true },
-  { to: '/hire-staff', label: 'Hire Staff' },
-  { to: '/find-work', label: 'Find Work' },
-  { to: '/services', label: 'Services' },
-  { to: '/about', label: 'About' },
-  { to: '/contact', label: 'Contact' },
-]
-
 function linkClassName({ isActive }) {
-  return isActive
-    ? 'site-header__link site-header__link--active'
-    : 'site-header__link'
+  return isActive ? 'site-header__sublink site-header__sublink--active' : 'site-header__sublink'
 }
 
 function loginClassName({ isActive }) {
@@ -24,8 +14,14 @@ function loginClassName({ isActive }) {
     : 'site-header__login'
 }
 
+function groupIsActive(prefix, pathname) {
+  return pathname === prefix || pathname.startsWith(`${prefix}/`)
+}
+
 export default function Navbar() {
+  const menuId = useId()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [mobileOpenGroup, setMobileOpenGroup] = useState(null)
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
 
@@ -40,6 +36,7 @@ export default function Navbar() {
 
   useEffect(() => {
     setMenuOpen(false)
+    setMobileOpenGroup(null)
   }, [location.pathname])
 
   useEffect(() => {
@@ -65,6 +62,10 @@ export default function Navbar() {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [menuOpen, closeMenu])
 
+  const toggleMobileGroup = (id) => {
+    setMobileOpenGroup((g) => (g === id ? null : id))
+  }
+
   return (
     <header
       className={`site-header${scrolled ? ' site-header--scrolled' : ''}`}
@@ -79,48 +80,77 @@ export default function Navbar() {
           type="button"
           className="site-header__menu-toggle"
           aria-expanded={menuOpen}
-          aria-controls="primary-navigation"
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-controls={menuId}
+          aria-label={menuOpen ? 'Menu sluiten' : 'Menu openen'}
           onClick={toggleMenu}
         >
           {menuOpen ? <FiX aria-hidden /> : <FiMenu aria-hidden />}
         </button>
 
         <nav
-          id="primary-navigation"
+          id={menuId}
           className={`site-header__nav${menuOpen ? ' site-header__nav--open' : ''}`}
-          aria-label="Primary"
+          aria-label="Hoofdnavigatie"
         >
-          <ul className="site-header__links">
-            {navItems.map(({ to, label, end }) => (
-              <li key={to}>
-                <NavLink
-                  to={to}
-                  {...(end ? { end: true } : {})}
-                  className={linkClassName}
-                  onClick={closeMenu}
+          <ul className="site-header__groups">
+            {NAV_GROUPS.map((group) => {
+              const active = groupIsActive(group.pathPrefix, location.pathname)
+              return (
+                <li
+                  key={group.id}
+                  className={`site-header__group${active ? ' site-header__group--active' : ''}${mobileOpenGroup === group.id ? ' site-header__group--mobile-open' : ''}`}
                 >
-                  {label}
-                </NavLink>
-              </li>
-            ))}
+                  <button
+                    type="button"
+                    className="site-header__group-trigger site-header__group-trigger--mobile"
+                    aria-expanded={mobileOpenGroup === group.id}
+                    onClick={() => toggleMobileGroup(group.id)}
+                  >
+                    <span>{group.label}</span>
+                    <FiChevronDown
+                      className={`site-header__chev${mobileOpenGroup === group.id ? ' site-header__chev--open' : ''}`}
+                      aria-hidden
+                    />
+                  </button>
+                  <span className="site-header__group-label site-header__group-label--desktop">
+                    {group.label}
+                    <FiChevronDown className="site-header__chev-desktop" aria-hidden />
+                  </span>
+                  <div className="site-header__dropdown-shell">
+                    <ul className="site-header__dropdown">
+                      {group.items.map(({ to, label }) => (
+                        <li key={to}>
+                          <NavLink
+                            to={to}
+                            className={linkClassName}
+                            onClick={closeMenu}
+                          >
+                            {label}
+                          </NavLink>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              )
+            })}
           </ul>
 
           <div className="site-header__ctas">
-            <Link
-              to="/hire-staff"
-              className="hnb-btn hnb-btn--primary"
-              onClick={closeMenu}
-            >
-              Hire Staff
-            </Link>
-            <Link
-              to="/find-work"
-              className="hnb-btn hnb-btn--outline"
-              onClick={closeMenu}
-            >
-              Find Work
-            </Link>
+            {HEADER_CTAS.map(({ to, label, variant }) => (
+              <Link
+                key={to}
+                to={to}
+                className={
+                  variant === 'primary'
+                    ? 'hnb-btn hnb-btn--primary'
+                    : 'hnb-btn hnb-btn--outline'
+                }
+                onClick={closeMenu}
+              >
+                {label}
+              </Link>
+            ))}
           </div>
 
           <div className="site-header__login-wrap">
@@ -129,7 +159,7 @@ export default function Navbar() {
               className={loginClassName}
               onClick={closeMenu}
             >
-              Login
+              Inloggen
             </NavLink>
           </div>
         </nav>
@@ -138,7 +168,7 @@ export default function Navbar() {
       <button
         type="button"
         className={`site-header__backdrop${menuOpen ? ' site-header__backdrop--visible' : ''}`}
-        aria-label="Close menu"
+        aria-label="Menu sluiten"
         tabIndex={menuOpen ? 0 : -1}
         onClick={closeMenu}
       />

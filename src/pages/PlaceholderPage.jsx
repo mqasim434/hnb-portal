@@ -6,7 +6,7 @@ export default function PlaceholderPage({ title }) {
         className="hnb-type-subhead"
         style={{ marginTop: '1rem', maxWidth: '42rem' }}
       >
-        Placeholder page for H&amp;B Service Group — content coming soon.
+        Placeholderpagina voor H&amp;B Service Group — inhoud volgt.
       </p>
     </main>
   )

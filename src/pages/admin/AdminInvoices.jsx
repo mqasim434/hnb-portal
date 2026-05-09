@@ -1,5 +1,5 @@
 import PlaceholderPage from '../PlaceholderPage'
 
 export default function AdminInvoices() {
-  return <PlaceholderPage title="Admin — Invoices" />
+  return <PlaceholderPage title="Beheer — facturen" />
 }

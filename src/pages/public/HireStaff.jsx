@@ -4,11 +4,11 @@ import { FiCheckCircle, FiCoffee, FiShield, FiUsers } from 'react-icons/fi'
 import './HireStaff.css'
 
 const STAFF_TYPES = [
-  { value: '', label: 'Select staff type' },
-  { value: 'hosts-hostesses', label: 'Hosts / Hostesses' },
-  { value: 'security', label: 'Security personnel' },
-  { value: 'general-event', label: 'General event staff' },
-  { value: 'mixed', label: 'Mixed / multiple categories' },
+  { value: '', label: 'Kies type personeel' },
+  { value: 'hosts-hostesses', label: 'Hosts / hostesses' },
+  { value: 'security', label: 'Beveiligingsmedewerkers' },
+  { value: 'general-event', label: 'Algemeen eventpersoneel' },
+  { value: 'mixed', label: 'Gemengd / meerdere categorieën' },
 ]
 
 const emailPattern =
@@ -60,13 +60,14 @@ export default function HireStaff() {
       <section className="hire-hero" aria-labelledby="hire-hero-title">
         <div className="hire-hero__inner hnb-container">
           <h1 id="hire-hero-title" className="hire-hero__title">
-            Staff Your Event With{' '}
-            <span className="hire-hero__accent">Confidence</span>
+            Bezet uw event met{' '}
+            <span className="hire-hero__accent">vertrouwen</span>
           </h1>
           <p className="hire-hero__sub">
-            Tell us what you need — dates, headcount, and venue — and H&amp;B
-            Service Group will propose vetted hospitality and security crews
-            aligned to your run-of-show. No obligation until you approve the roster.
+            Vertel wat u nodig heeft — data, bezetting en locatie — en H&amp;B
+            Service Group stelt gecontroleerde hospitality- en
+            beveiligingsteams voor, afgestemd op uw programma. Geen verplichting
+            tot u het roster goedkeurt.
           </p>
         </div>
       </section>
@@ -77,13 +78,13 @@ export default function HireStaff() {
       >
         <div className="hnb-container">
           <header className="hire-section__head">
-            <span className="hire-section__eyebrow">Process</span>
+            <span className="hire-section__eyebrow">Proces</span>
             <h2 id="hire-steps-title" className="hire-section__title">
-              How it works
+              Zo werkt het
             </h2>
             <p className="hire-section__lead">
-              A straightforward path from first brief to boots on the ground — your
-              coordinator stays on the thread the whole way.
+              Een heldere route van eerste briefing tot mensen op de vloer — uw
+              coördinator blijft aangesloten.
             </p>
           </header>
           <ol className="hire-steps">
@@ -92,11 +93,10 @@ export default function HireStaff() {
                 1
               </span>
               <div className="hire-step__body">
-                <h3 className="hire-step__label">Submit request</h3>
+                <h3 className="hire-step__label">Aanvraag indienen</h3>
                 <p className="hire-step__text">
-                  Share company details, site location, dates, and the roles you
-                  need. We confirm receipt and follow up with any clarifying
-                  questions within one business day.
+                  Deel bedrijfsgegevens, locatie, data en rollen. We bevestigen
+                  ontvangst en nemen binnen één werkdag contact op bij vragen.
                 </p>
               </div>
             </li>
@@ -105,11 +105,11 @@ export default function HireStaff() {
                 2
               </span>
               <div className="hire-step__body">
-                <h3 className="hire-step__label">We match staff</h3>
+                <h3 className="hire-step__label">Wij matchen personeel</h3>
                 <p className="hire-step__text">
-                  We shortlist people who fit your brand, licensing profile, and
-                  shift pattern — then send a roster for your approval before anyone
-                  is confirmed.
+                  We selecteren mensen op merk, vergunningen en dienstrooster —
+                  daarna ontvangt u een roster ter goedkeuring vóór definitieve
+                  bevestiging.
                 </p>
               </div>
             </li>
@@ -118,11 +118,10 @@ export default function HireStaff() {
                 3
               </span>
               <div className="hire-step__body">
-                <h3 className="hire-step__label">Event covered</h3>
+                <h3 className="hire-step__label">Event gedekt</h3>
                 <p className="hire-step__text">
-                  Call times, briefing notes, and on-site check-in are coordinated
-                  with your production lead so teams arrive ready — and you get a
-                  clean handover after load-out.
+                  Call times, briefing en check-in stemmen we af met uw
+                  productieleiding — en na load-out een nette overdracht.
                 </p>
               </div>
             </li>
@@ -133,13 +132,13 @@ export default function HireStaff() {
       <section className="hire-section" aria-labelledby="hire-cats-title">
         <div className="hnb-container">
           <header className="hire-section__head">
-            <span className="hire-section__eyebrow">Coverage</span>
+            <span className="hire-section__eyebrow">Dekking</span>
             <h2 id="hire-cats-title" className="hire-section__title">
-              Staff categories
+              Personeelscategorieën
             </h2>
             <p className="hire-section__lead">
-              Book one discipline or blend teams under a single contract — we keep
-              ratios and licensing consistent across the roster.
+              Boek één discipline of combineer onder één contract — wij houden
+              verhoudingen en vergunningen consistent op het roster.
             </p>
           </header>
           <ul className="hire-cats">
@@ -147,32 +146,30 @@ export default function HireStaff() {
               <div className="hire-cat__icon" aria-hidden="true">
                 <FiCoffee />
               </div>
-              <h3 className="hire-cat__title">Hosts / Hostesses</h3>
+              <h3 className="hire-cat__title">Hosts / hostesses</h3>
               <p className="hire-cat__text">
-                Guest greeting, coat service, VIP lanes, and brand-appropriate
-                front-of-house presence for receptions, launches, and high-touch
-                programs.
+                Ontvangst, garderobe, VIP-routes en merkpassend front-of-house voor
+                recepties, lanceringen en high-touch programma&apos;s.
               </p>
             </li>
             <li className="hire-cat">
               <div className="hire-cat__icon" aria-hidden="true">
                 <FiShield />
               </div>
-              <h3 className="hire-cat__title">Security personnel</h3>
+              <h3 className="hire-cat__title">Beveiligingsmedewerkers</h3>
               <p className="hire-cat__text">
-                Licensed door supervisors and event security for access control,
-                perimeter patrols, and crowd-aware comms with your duty manager.
+                Bevoegde portiers en eventbeveiliging voor toegang, perimeter en
+                crowdbewuste communicatie met uw duty manager.
               </p>
             </li>
             <li className="hire-cat">
               <div className="hire-cat__icon" aria-hidden="true">
                 <FiUsers />
               </div>
-              <h3 className="hire-cat__title">General event staff</h3>
+              <h3 className="hire-cat__title">Algemeen eventpersoneel</h3>
               <p className="hire-cat__text">
-                Runners, barbacks, wristbanding, accreditation desks, and logistics
-                support — the backbone crew that keeps changeovers and service
-                windows on time.
+                Runners, barbacks, bandjes, accreditatie en logistiek — het team
+                dat wissels en servicewindows op tijd houdt.
               </p>
             </li>
           </ul>
@@ -185,23 +182,26 @@ export default function HireStaff() {
       >
         <div className="hnb-container">
           <header className="hire-section__head">
-            <span className="hire-section__eyebrow">Sectors</span>
+            <span className="hire-section__eyebrow">Sectoren</span>
             <h2 id="hire-cases-title" className="hire-section__title">
-              Use cases we support
+              Typische inzetgebieden
             </h2>
             <p className="hire-section__lead">
-              From single-night peaks to multi-day builds — we scale headcount and
-              shift patterns to match your production schedule.
+              Van enkele pieknachten tot meerdaagse opbouw — we schalen bezetting
+              en diensten aan op uw productie.
             </p>
           </header>
           <ul className="hire-cases">
-            {['Festivals', 'Corporate events', 'Nightlife', 'Venues'].map(
-              (label) => (
-                <li key={label} className="hire-case">
-                  {label}
-                </li>
-              ),
-            )}
+            {[
+              'Festivals',
+              'Zakelijke events',
+              'Nachtleven',
+              'Locaties',
+            ].map((label) => (
+              <li key={label} className="hire-case">
+                {label}
+              </li>
+            ))}
           </ul>
         </div>
       </section>
@@ -209,14 +209,13 @@ export default function HireStaff() {
       <section className="hire-section" aria-labelledby="hire-form-title">
         <div className="hnb-container">
           <header className="hire-section__head">
-            <span className="hire-section__eyebrow">Get started</span>
+            <span className="hire-section__eyebrow">Aan de slag</span>
             <h2 id="hire-form-title" className="hire-section__title">
-              Request staffing
+              Personeelsaanvraag
             </h2>
             <p className="hire-section__lead">
-              Complete the form below. A coordinator will respond to confirm scope,
-              availability, and next steps — no payment details required at this
-              stage.
+              Vul het formulier in. Een coördinator reageert om scope, beschikbaarheid
+              en vervolgstappen te bevestigen — nog geen betalingsgegevens nodig.
             </p>
           </header>
 
@@ -232,18 +231,18 @@ export default function HireStaff() {
                   <FiCheckCircle />
                 </div>
                 <div>
-                  <h3 className="hire-success__title">Request received</h3>
+                  <h3 className="hire-success__title">Aanvraag ontvangen</h3>
                   <p className="hire-success__text">
-                    Thank you — your brief has been captured. Our team will review
-                    it and contact you shortly using the details you provided. (Demo:
-                    no data was sent to a server yet.)
+                    Dank u — uw briefing is vastgelegd. Ons team neemt contact op via
+                    de door u opgegeven gegevens. (Demo: er is nog geen data naar een
+                    server verstuurd.)
                   </p>
                   <button
                     type="button"
                     className="hnb-btn hnb-btn--outline hire-success__cta"
                     onClick={() => setSubmitSuccess(false)}
                   >
-                    Submit another request
+                    Nog een aanvraag indienen
                   </button>
                 </div>
               </div>
@@ -256,7 +255,7 @@ export default function HireStaff() {
             >
               <div className="hire-form__field">
                 <label className="hire-form__label" htmlFor="companyName">
-                  Company name
+                  Bedrijfsnaam
                 </label>
                 <input
                   id="companyName"
@@ -268,10 +267,10 @@ export default function HireStaff() {
                     errors.companyName ? 'companyName-error' : undefined
                   }
                   {...register('companyName', {
-                    required: 'Company name is required',
+                    required: 'Bedrijfsnaam is verplicht',
                     maxLength: {
                       value: 120,
-                      message: 'Maximum 120 characters',
+                      message: 'Maximaal 120 tekens',
                     },
                   })}
                 />
@@ -285,7 +284,7 @@ export default function HireStaff() {
               <div className="hire-form__row hire-form__row--2">
                 <div className="hire-form__field">
                   <label className="hire-form__label" htmlFor="contactPerson">
-                    Contact person
+                    Contactpersoon
                   </label>
                   <input
                     id="contactPerson"
@@ -297,10 +296,10 @@ export default function HireStaff() {
                       errors.contactPerson ? 'contactPerson-error' : undefined
                     }
                     {...register('contactPerson', {
-                      required: 'Contact name is required',
+                      required: 'Naam contactpersoon is verplicht',
                       maxLength: {
                         value: 80,
-                        message: 'Maximum 80 characters',
+                        message: 'Maximaal 80 tekens',
                       },
                     })}
                   />
@@ -312,7 +311,7 @@ export default function HireStaff() {
                 </div>
                 <div className="hire-form__field">
                   <label className="hire-form__label" htmlFor="email">
-                    Work email
+                    Zakelijk e-mailadres
                   </label>
                   <input
                     id="email"
@@ -322,10 +321,10 @@ export default function HireStaff() {
                     aria-invalid={errors.email ? 'true' : 'false'}
                     aria-describedby={errors.email ? 'email-error' : undefined}
                     {...register('email', {
-                      required: 'Email is required',
+                      required: 'E-mail is verplicht',
                       pattern: {
                         value: emailPattern,
-                        message: 'Enter a valid email address',
+                        message: 'Voer een geldig e-mailadres in',
                       },
                     })}
                   />
@@ -340,7 +339,7 @@ export default function HireStaff() {
               <div className="hire-form__row hire-form__row--2">
                 <div className="hire-form__field">
                   <label className="hire-form__label" htmlFor="phone">
-                    Phone
+                    Telefoon
                   </label>
                   <input
                     id="phone"
@@ -350,10 +349,10 @@ export default function HireStaff() {
                     aria-invalid={errors.phone ? 'true' : 'false'}
                     aria-describedby={errors.phone ? 'phone-error' : undefined}
                     {...register('phone', {
-                      required: 'Phone number is required',
+                      required: 'Telefoonnummer is verplicht',
                       pattern: {
                         value: phonePattern,
-                        message: 'Enter a valid phone number',
+                        message: 'Voer een geldig telefoonnummer in',
                       },
                     })}
                   />
@@ -365,7 +364,7 @@ export default function HireStaff() {
                 </div>
                 <div className="hire-form__field">
                   <label className="hire-form__label" htmlFor="staffType">
-                    Staff type
+                    Type personeel
                   </label>
                   <select
                     id="staffType"
@@ -375,7 +374,7 @@ export default function HireStaff() {
                       errors.staffType ? 'staffType-error' : undefined
                     }
                     {...register('staffType', {
-                      required: 'Please select a staff type',
+                      required: 'Selecteer een type personeel',
                     })}
                   >
                     {STAFF_TYPES.map(({ value, label }) => (
@@ -394,23 +393,23 @@ export default function HireStaff() {
 
               <div className="hire-form__field">
                 <label className="hire-form__label" htmlFor="location">
-                  Event location
+                  Locatie event
                 </label>
                 <input
                   id="location"
                   type="text"
                   autoComplete="street-address"
-                  placeholder="Venue or city / region"
+                  placeholder="Locatie of stad / regio"
                   className={inputClass('location')}
                   aria-invalid={errors.location ? 'true' : 'false'}
                   aria-describedby={
                     errors.location ? 'location-error' : undefined
                   }
                   {...register('location', {
-                    required: 'Location is required',
+                    required: 'Locatie is verplicht',
                     maxLength: {
                       value: 200,
-                      message: 'Maximum 200 characters',
+                      message: 'Maximaal 200 tekens',
                     },
                   })}
                 />
@@ -423,32 +422,32 @@ export default function HireStaff() {
 
               <div className="hire-form__field">
                 <label className="hire-form__label" htmlFor="eventDates">
-                  Event date(s)
+                  Eventdatum(s)
                 </label>
                 <input
                   id="eventDates"
                   type="text"
-                  placeholder="e.g. 14–16 June 2026 or single date"
+                  placeholder="bijv. 14–16 juni 2026 of één datum"
                   className={inputClass('eventDates')}
                   aria-invalid={errors.eventDates ? 'true' : 'false'}
                   aria-describedby={
                     errors.eventDates ? 'eventDates-error' : 'eventDates-hint'
                   }
                   {...register('eventDates', {
-                    required: 'Event date(s) are required',
+                    required: 'Datum(s) zijn verplicht',
                     minLength: {
                       value: 3,
-                      message: 'Add at least a short date description',
+                      message: 'Geef minstens een korte datumbeschrijving',
                     },
                     maxLength: {
                       value: 200,
-                      message: 'Maximum 200 characters',
+                      message: 'Maximaal 200 tekens',
                     },
                   })}
                 />
                 {!errors.eventDates && (
                   <p id="eventDates-hint" className="hire-form__hint">
-                    Include timezone or load-in day if relevant.
+                    Vermeld tijdzone of opbouwdag indien relevant.
                   </p>
                 )}
                 {errors.eventDates && (
@@ -460,7 +459,7 @@ export default function HireStaff() {
 
               <div className="hire-form__field">
                 <label className="hire-form__label" htmlFor="numberOfWorkers">
-                  Number of workers
+                  Aantal medewerkers
                 </label>
                 <input
                   id="numberOfWorkers"
@@ -477,14 +476,14 @@ export default function HireStaff() {
                     validate: (v) => {
                       const raw =
                         v === undefined || v === null ? '' : String(v).trim()
-                      if (raw === '') return 'Number of workers is required'
+                      if (raw === '') return 'Aantal medewerkers is verplicht'
                       const n = Number(raw)
                       if (!Number.isFinite(n))
-                        return 'Enter a valid number'
-                      if (n < 1) return 'Enter at least 1'
+                        return 'Voer een geldig getal in'
+                      if (n < 1) return 'Minimaal 1'
                       if (n > 5000)
-                        return 'For very large crews, call us directly'
-                      if (!Number.isInteger(n)) return 'Enter a whole number'
+                        return 'Voor zeer grote crews: neem telefonisch contact op'
+                      if (!Number.isInteger(n)) return 'Voer een geheel getal in'
                       return true
                     },
                   })}
@@ -498,14 +497,14 @@ export default function HireStaff() {
 
               <div className="hire-form__field">
                 <label className="hire-form__label" htmlFor="additionalNotes">
-                  Additional notes{' '}
-                  <span className="hire-form__optional">(optional)</span>
+                  Aanvullende opmerkingen{' '}
+                  <span className="hire-form__optional">(optioneel)</span>
                 </label>
                 <textarea
                   id="additionalNotes"
                   rows={5}
                   className={textareaClass}
-                  placeholder="Uniforms, licensing, access hours, languages, or other requirements"
+                  placeholder="Uniform, vergunningen, toegangstijden, talen of andere eisen"
                   aria-invalid={errors.additionalNotes ? 'true' : 'false'}
                   aria-describedby={
                     errors.additionalNotes ? 'additionalNotes-error' : undefined
@@ -513,7 +512,7 @@ export default function HireStaff() {
                   {...register('additionalNotes', {
                     maxLength: {
                       value: 2000,
-                      message: 'Maximum 2000 characters',
+                      message: 'Maximaal 2000 tekens',
                     },
                   })}
                 />
@@ -525,7 +524,7 @@ export default function HireStaff() {
               </div>
 
               <button type="submit" className="hnb-btn hnb-btn--primary hire-form__submit">
-                Send Request
+                Verstuur aanvraag
               </button>
             </form>
           </div>

@@ -15,13 +15,13 @@ export default function Services() {
       <section className="svc-hero" aria-labelledby="svc-hero-title">
         <div className="hnb-container">
           <h1 id="svc-hero-title" className="svc-hero__title">
-            Staffing <span className="svc-hero__accent">Services</span>
+            Personeels-<span className="svc-hero__accent">diensten</span>
           </h1>
           <p className="svc-hero__sub">
-            H&amp;B Service Group supplies hospitality and security teams for live
-            events — from brief and roster through on-site coordination — so your
-            production lead can focus on the guest experience, not last-minute
-            gaps.
+            H&amp;B Service Group levert hospitality en beveiliging voor live
+            events — van briefing en roster tot coördinatie op locatie — zodat uw
+            productieleiding zich op de gast kan richten, niet op gaten in de
+            planning.
           </p>
         </div>
       </section>
@@ -29,22 +29,21 @@ export default function Services() {
       <section className="svc-section" aria-labelledby="svc-overview-title">
         <div className="hnb-container">
           <header className="svc-section__head">
-            <span className="svc-section__eyebrow">Overview</span>
+            <span className="svc-section__eyebrow">Overzicht</span>
             <h2 id="svc-overview-title" className="svc-section__title">
-              One partner for front-of-house and controlled access
+              Eén partner voor gastheerschap en gecontroleerde toegang
             </h2>
             <p className="svc-section__lead">
-              We combine rostering, compliance checks, and a single coordinator so
-              you are not juggling separate agencies for bar teams and door staff.
-              Every engagement is scoped to your venue, licensing context, and
-              run-of-show.
+              We combineren planning, compliance-checks en één coördinator, zodat u
+              niet twee bureaus hoeft te managen voor bar en deur. Elke opdracht is
+              afgestemd op locatie, vergunningscontext en programma.
             </p>
           </header>
           <p className="svc-prose">
-            Whether you need a tight pool for a recurring club night or a larger
-            crew for a festival weekend, we align headcount, shift patterns, and
-            skill mix to your risk profile — without compromising service warmth at
-            the door or at the bar.
+            Of u nu een compacte pool voor een vaste clubavond nodig heeft of een
+            grote crew voor een festivalweekend: we stemmen bezetting, diensten en
+            skillmix af op uw risicoprofiel — zonder koude service bij de deur of
+            aan de bar.
           </p>
         </div>
       </section>
@@ -55,14 +54,14 @@ export default function Services() {
       >
         <div className="hnb-container">
           <header className="svc-section__head">
-            <span className="svc-section__eyebrow">What we deliver</span>
+            <span className="svc-section__eyebrow">Wat we leveren</span>
             <h2 id="svc-deliver-title" className="svc-section__title">
-              Hospitality and security, scoped together
+              Hospitality en beveiliging gezamenlijk ingekocht
             </h2>
             <p className="svc-section__lead">
-              Two disciplines, one briefing pack — so hosts, bartenders, and
-              security share the same call times, access rules, and escalation path
-              on the night.
+              Twee disciplines, één briefing — hosts, bartenders en beveiliging
+              delen dezelfde call times, toegangsregels en escalatielijn op de
+              avond.
             </p>
           </header>
           <div className="svc-grid-2">
@@ -70,24 +69,24 @@ export default function Services() {
               <div className="svc-card__icon" aria-hidden="true">
                 <FiCoffee />
               </div>
-              <h3 className="svc-card__title">Hospitality staffing</h3>
+              <h3 className="svc-card__title">Hospitality</h3>
               <ul className="svc-card__list">
-                <li>Hosts, hostesses, and guest-facing reception roles</li>
-                <li>Bar, barback, and service support for peak-volume service</li>
-                <li>Coat check, accreditation desks, and VIP lane coverage</li>
-                <li>Briefings aligned to your brand tone and service standards</li>
+                <li>Hosts, hostesses en ontvangst aan de deur</li>
+                <li>Bar, barback en ondersteuning bij piekdrukte</li>
+                <li>Garderobe, accreditatie en VIP-routes</li>
+                <li>Briefings op toon en servicenorm van uw merk</li>
               </ul>
             </article>
             <article className="svc-card">
               <div className="svc-card__icon" aria-hidden="true">
                 <FiShield />
               </div>
-              <h3 className="svc-card__title">Security staffing</h3>
+              <h3 className="svc-card__title">Beveiliging</h3>
               <ul className="svc-card__list">
-                <li>Licensed door supervisors and event security personnel</li>
-                <li>Access control, perimeter awareness, and crowd monitoring</li>
-                <li>Radio discipline with your duty manager and production desk</li>
-                <li>Rostered only where licence class and venue policy match</li>
+                <li>Bevoegde portiers en eventbeveiliging</li>
+                <li>Toegang, perimeter en overzicht in de menigte</li>
+                <li>Portofoondiscipline met duty manager en productie</li>
+                <li>Alleen rosteren waar vergunning en locatiebeleid matchen</li>
               </ul>
             </article>
           </div>
@@ -97,46 +96,49 @@ export default function Services() {
       <section className="svc-section" aria-labelledby="svc-process-title">
         <div className="hnb-container">
           <header className="svc-section__head">
-            <span className="svc-section__eyebrow">Engagement</span>
+            <span className="svc-section__eyebrow">Samenwerking</span>
             <h2 id="svc-process-title" className="svc-section__title">
-              How a typical engagement works
+              Zo loopt een typische opdracht
             </h2>
             <p className="svc-section__lead">
-              Transparent steps from first call to post-event wrap — no black-box
-              staffing lists or surprise substitutions at the gate.
+              Transparante stappen van eerste gesprek tot nabespreking — geen
+              black-box personeelslijsten en geen verrassende vervanging bij de
+              ingang.
             </p>
           </header>
           <ol className="svc-steps">
             <li className="svc-step">
               <span className="svc-step__num">1</span>
-              <h3 className="svc-step__title">Discovery &amp; scope</h3>
+              <h3 className="svc-step__title">Verkenning &amp; scope</h3>
               <p className="svc-step__text">
-                We capture dates, headcount ranges, site layout, licensing notes, and
-                uniform expectations — then confirm feasibility and timelines.
+                We vastleggen data, bezettingsbandbreedte, plattegrond,
+                vergunning-notities en uniform — daarna bevestigen we haalbaarheid
+                en planning.
               </p>
             </li>
             <li className="svc-step">
               <span className="svc-step__num">2</span>
-              <h3 className="svc-step__title">Roster &amp; approvals</h3>
+              <h3 className="svc-step__title">Roster &amp; akkoord</h3>
               <p className="svc-step__text">
-                You receive a proposed roster with roles and call times. Nothing is
-                confirmed until you sign off on names and shift splits.
+                U ontvangt een voorstel met rollen en call times. Niets is
+                definitief zonder uw akkoord op namen en verdeling.
               </p>
             </li>
             <li className="svc-step">
               <span className="svc-step__num">3</span>
               <h3 className="svc-step__title">Brief &amp; dispatch</h3>
               <p className="svc-step__text">
-                Teams receive a consolidated brief: access points, escalation
-                contacts, service windows, and any site-specific rules.
+                Teams krijgen één pakket: ingangen, escalatie, bedieningsvensters
+                en locatieregels.
               </p>
             </li>
             <li className="svc-step">
               <span className="svc-step__num">4</span>
-              <h3 className="svc-step__title">On-site &amp; review</h3>
+              <h3 className="svc-step__title">Op locatie &amp; evaluatie</h3>
               <p className="svc-step__text">
-                Your coordinator stays reachable during the run. After load-out we
-                review hours, incidents, and learnings for the next booking.
+                Uw coördinator blijft bereikbaar tijdens de run. Na afbouw
+                bespreken we uren, incidenten en learnings voor de volgende
+                boeking.
               </p>
             </li>
           </ol>
@@ -149,21 +151,21 @@ export default function Services() {
       >
         <div className="hnb-container">
           <header className="svc-section__head">
-            <span className="svc-section__eyebrow">Sectors</span>
+            <span className="svc-section__eyebrow">Sectoren</span>
             <h2 id="svc-sectors-title" className="svc-section__title">
-              Where we most often deploy
+              Waar we vooral actief zijn
             </h2>
             <p className="svc-section__lead">
-              Programs differ by risk and tempo — we tune ratios and shift patterns
-              to the environment instead of sending generic “event packs.”
+              Programma&apos;s verschillen in risico en tempo — we tunen verhoudingen
+              en diensten op de omgeving in plaats van generieke “eventpakketten”.
             </p>
           </header>
           <ul className="svc-sectors">
             {[
               'Festivals & outdoor',
-              'Corporate & private',
-              'Nightlife & venues',
-              'Theatre & arenas',
+              'Corporate & besloten',
+              'Nachtleven & venues',
+              'Theater & arena’s',
             ].map((label) => (
               <li key={label} className="svc-sector">
                 {label}
@@ -176,9 +178,9 @@ export default function Services() {
       <section className="svc-section svc-section--surface" aria-labelledby="svc-includes-title">
         <div className="hnb-container">
           <header className="svc-section__head">
-            <span className="svc-section__eyebrow">Included</span>
+            <span className="svc-section__eyebrow">Inbegrepen</span>
             <h2 id="svc-includes-title" className="svc-section__title">
-              What you can expect in every package
+              Wat u in elk pakket mag verwachten
             </h2>
           </header>
           <div className="svc-grid-2">
@@ -186,41 +188,40 @@ export default function Services() {
               <div className="svc-card__icon" aria-hidden="true">
                 <FiCheckSquare />
               </div>
-              <h3 className="svc-card__title">Compliance-ready rostering</h3>
+              <h3 className="svc-card__title">Compliance-klaar rosteren</h3>
               <p className="svc-card__copy">
-                Right-to-work and licence checks before confirmation; documentation
-                organised so your venue security and finance teams see a clean trail.
+                Arbeidsrecht en vergunningen vóór bevestiging; documentatie
+                geordend voor locatiebeveiliging en finance.
               </p>
             </article>
             <article className="svc-card">
               <div className="svc-card__icon" aria-hidden="true">
                 <FiHeadphones />
               </div>
-              <h3 className="svc-card__title">Dedicated coordination</h3>
+              <h3 className="svc-card__title">Vaste coördinatie</h3>
               <p className="svc-card__copy">
-                One point of contact for changes, substitutions, and on-site
-                questions — fewer handoffs and faster decisions when the schedule
-                moves.
+                Eén aanspreekpunt voor wijzigingen, vervanging en vragen op locatie
+                — minder overdracht en sneller beslissen als het programma schuift.
               </p>
             </article>
             <article className="svc-card">
               <div className="svc-card__icon" aria-hidden="true">
                 <FiLayers />
               </div>
-              <h3 className="svc-card__title">Flexible scale</h3>
+              <h3 className="svc-card__title">Flexibele schaal</h3>
               <p className="svc-card__copy">
-                Scale up for peak nights or multi-day builds; hold a smaller core
-                team for recurring programs with familiar faces on the roster.
+                Opschalen voor piek of meerdaagse opbouw; kleinere kernteams met
+                bekende gezichten voor terugkerende programma&apos;s.
               </p>
             </article>
             <article className="svc-card">
               <div className="svc-card__icon" aria-hidden="true">
                 <FiBriefcase />
               </div>
-              <h3 className="svc-card__title">Commercial clarity</h3>
+              <h3 className="svc-card__title">Commerciële helderheid</h3>
               <p className="svc-card__copy">
-                Clear scopes, rate cards where applicable, and structured
-                timesheets — so finance and operations are aligned before doors open.
+                Heldere scopes, tariefkaarten waar van toepassing en gestructureerde
+                mutaties — zodat finance en operatie vóór open gekend zijn.
               </p>
             </article>
           </div>
@@ -231,19 +232,19 @@ export default function Services() {
         <div className="svc-cta__inner hnb-container">
           <div>
             <h2 id="svc-cta-title" className="svc-cta__title">
-              Ready to scope your next event?
+              Klaar om uw volgende event te plannen?
             </h2>
             <p className="svc-cta__sub">
-              Send a staffing request or speak with a coordinator — we&apos;ll reply
-              with availability and next steps.
+              Dien een personeelsaanvraag in of spreek een coördinator — wij
+              reageren met beschikbaarheid en vervolgstappen.
             </p>
           </div>
           <div className="svc-cta__actions">
-            <Link to="/hire-staff" className="hnb-btn hnb-btn--primary">
-              Hire Staff
+            <Link to="/bedrijven/vind-talent" className="hnb-btn hnb-btn--primary">
+              Vind talent
             </Link>
             <Link to="/contact" className="hnb-btn hnb-btn--outline">
-              Contact us
+              Contact opnemen
             </Link>
           </div>
         </div>

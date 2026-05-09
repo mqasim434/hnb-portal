@@ -1,4 +1,4 @@
-import { createBrowserRouter, Outlet } from 'react-router-dom'
+import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom'
 import ProtectedRoute from '../components/ProtectedRoute'
 import RootLayout from './RootLayout'
 
@@ -9,6 +9,7 @@ import Services from '../pages/public/Services'
 import About from '../pages/public/About'
 import Contact from '../pages/public/Contact'
 import Login from '../pages/public/Login'
+import StaticMarketingPage from '../pages/public/StaticMarketingPage'
 
 import RegisterStep1 from '../pages/onboarding/RegisterStep1'
 import RegisterStep2 from '../pages/onboarding/RegisterStep2'
@@ -34,12 +35,100 @@ export const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <Home /> },
-      { path: 'hire-staff', element: <HireStaff /> },
-      { path: 'find-work', element: <FindWork /> },
-      { path: 'services', element: <Services /> },
-      { path: 'about', element: <About /> },
+
+      /* Freelancers */
+      {
+        path: 'freelancers/ontdek-mogelijkheden',
+        element: <FindWork />,
+      },
+      {
+        path: 'freelancers/zo-werkt-het',
+        element: <StaticMarketingPage pageKey="fl-zo-werkt-het" />,
+      },
+      {
+        path: 'freelancers/inkomsten-betalingen',
+        element: <StaticMarketingPage pageKey="fl-inkomsten-betalingen" />,
+      },
+      {
+        path: 'freelancers/veiligheid-certificering',
+        element: <StaticMarketingPage pageKey="fl-veiligheid-certificering" />,
+      },
+      {
+        path: 'freelancers/werkwijze',
+        element: <StaticMarketingPage pageKey="fl-werkwijze" />,
+      },
+      {
+        path: 'freelancers/aan-de-slag',
+        element: <StaticMarketingPage pageKey="fl-aan-de-slag" />,
+      },
+
+      /* Bedrijven */
+      { path: 'bedrijven/vind-talent', element: <HireStaff /> },
+      {
+        path: 'bedrijven/vergelijk-professionals',
+        element: <StaticMarketingPage pageKey="bv-vergelijk-professionals" />,
+      },
+      {
+        path: 'bedrijven/tarieven',
+        element: <StaticMarketingPage pageKey="bv-tarieven" />,
+      },
+      {
+        path: 'bedrijven/filters',
+        element: <StaticMarketingPage pageKey="bv-filters" />,
+      },
+      {
+        path: 'bedrijven/sectoren',
+        element: <StaticMarketingPage pageKey="bv-sectoren" />,
+      },
+      { path: 'bedrijven/functies', element: <Services /> },
+      {
+        path: 'bedrijven/flexpools',
+        element: <StaticMarketingPage pageKey="bv-flexpools" />,
+      },
+
+      /* Over H&B */
+      { path: 'over-hb/over-ons', element: <About /> },
+      {
+        path: 'over-hb/wie-wij-zijn',
+        element: <StaticMarketingPage pageKey="hb-wie-wij-zijn" />,
+      },
+      {
+        path: 'over-hb/wat-wij-doen',
+        element: <StaticMarketingPage pageKey="hb-wat-wij-doen" />,
+      },
+      {
+        path: 'over-hb/nieuws',
+        element: <StaticMarketingPage pageKey="hb-nieuws" />,
+      },
+      {
+        path: 'over-hb/chat',
+        element: <StaticMarketingPage pageKey="hb-chat" />,
+      },
+      {
+        path: 'over-hb/netwerk',
+        element: <StaticMarketingPage pageKey="hb-netwerk" />,
+      },
+      {
+        path: 'over-hb/beleid',
+        element: <StaticMarketingPage pageKey="hb-beleid" />,
+      },
+
       { path: 'contact', element: <Contact /> },
       { path: 'login', element: <Login /> },
+
+      {
+        path: 'hire-staff',
+        element: <Navigate to="/bedrijven/vind-talent" replace />,
+      },
+      {
+        path: 'find-work',
+        element: <Navigate to="/freelancers/ontdek-mogelijkheden" replace />,
+      },
+      {
+        path: 'services',
+        element: <Navigate to="/bedrijven/functies" replace />,
+      },
+      { path: 'about', element: <Navigate to="/over-hb/over-ons" replace /> },
 
       {
         path: 'register',

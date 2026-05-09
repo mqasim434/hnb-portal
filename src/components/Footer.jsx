@@ -1,14 +1,6 @@
 import { Link } from 'react-router-dom'
+import { FOOTER_TAGLINE, NAV_GROUPS } from '../content/navigation'
 import './Footer.css'
-
-const quickLinks = [
-  { to: '/', label: 'Home' },
-  { to: '/hire-staff', label: 'Hire Staff' },
-  { to: '/find-work', label: 'Find Work' },
-  { to: '/services', label: 'Services' },
-  { to: '/about', label: 'About' },
-  { to: '/contact', label: 'Contact' },
-]
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -22,32 +14,33 @@ export default function Footer() {
               <span className="site-footer__logo-mark">H&amp;B</span>
               <span className="site-footer__logo-name">Service Group</span>
             </Link>
-            <p className="site-footer__tagline">
-              Reliable Event Staff. On Demand.
-            </p>
+            <p className="site-footer__tagline">{FOOTER_TAGLINE}</p>
           </div>
 
-          <nav
-            className="site-footer__col site-footer__col--links"
-            aria-label="Footer quick links"
-          >
-            <h2 className="site-footer__heading">Quick links</h2>
-            <ul className="site-footer__links">
-              {quickLinks.map(({ to, label }) => (
-                <li key={to}>
-                  <Link to={to} className="site-footer__link">
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          {NAV_GROUPS.map((group) => (
+            <nav
+              key={group.id}
+              className="site-footer__col site-footer__col--nav"
+              aria-label={group.label}
+            >
+              <h2 className="site-footer__heading">{group.label}</h2>
+              <ul className="site-footer__links">
+                {group.items.map(({ to, label }) => (
+                  <li key={to}>
+                    <Link to={to} className="site-footer__link">
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
 
           <div className="site-footer__col site-footer__col--contact">
             <h2 className="site-footer__heading">Contact</h2>
             <ul className="site-footer__contact-list">
               <li className="site-footer__contact-item">
-                <span className="site-footer__contact-label">Email</span>
+                <span className="site-footer__contact-label">E-mail</span>
                 <a
                   className="site-footer__contact-value"
                   href="mailto:bookings@hbservicegroup.com"
@@ -56,7 +49,7 @@ export default function Footer() {
                 </a>
               </li>
               <li className="site-footer__contact-item">
-                <span className="site-footer__contact-label">Phone</span>
+                <span className="site-footer__contact-label">Telefoon</span>
                 <a
                   className="site-footer__contact-value"
                   href="tel:+31200000000"
@@ -65,18 +58,26 @@ export default function Footer() {
                 </a>
               </li>
               <li className="site-footer__contact-item">
-                <span className="site-footer__contact-label">Location</span>
+                <span className="site-footer__contact-label">Locatie</span>
                 <span className="site-footer__contact-value">
-                  Amsterdam, Netherlands
+                  Amsterdam, Nederland
                 </span>
+              </li>
+              <li className="site-footer__contact-item">
+                <Link to="/contact" className="site-footer__link">
+                  Contactformulier →
+                </Link>
               </li>
             </ul>
             <div className="site-footer__ctas">
-              <Link to="/hire-staff" className="hnb-btn hnb-btn--primary">
-                Hire Staff
+              <Link to="/bedrijven/vind-talent" className="hnb-btn hnb-btn--primary">
+                Vind talent
               </Link>
-              <Link to="/find-work" className="hnb-btn hnb-btn--outline">
-                Find Work
+              <Link
+                to="/freelancers/ontdek-mogelijkheden"
+                className="hnb-btn hnb-btn--outline"
+              >
+                Ontdek mogelijkheden
               </Link>
             </div>
           </div>
@@ -85,9 +86,18 @@ export default function Footer() {
         <div className="site-footer__bar">
           <div className="site-footer__bar-inner">
             <p className="site-footer__copyright">
-              © {year} H&amp;B Service Group. All rights reserved.
+              © {year} H&amp;B Service Group. Alle rechten voorbehouden.
             </p>
-            <p className="site-footer__credit">Built by <a href="https://www.devtanics.com" target="_blank" rel="noopener noreferrer">Devtanics</a></p>
+            <p className="site-footer__credit">
+              Gebouwd door{' '}
+              <a
+                href="https://www.devtanics.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Devtanics
+              </a>
+            </p>
           </div>
         </div>
       </div>

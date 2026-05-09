@@ -1,5 +1,5 @@
 import PlaceholderPage from '../PlaceholderPage'
 
 export default function AdminCompliance() {
-  return <PlaceholderPage title="Admin — Compliance" />
+  return <PlaceholderPage title="Beheer — compliance" />
 }
