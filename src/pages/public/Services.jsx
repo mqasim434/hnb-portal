@@ -240,8 +240,8 @@ export default function Services() {
             </p>
           </div>
           <div className="svc-cta__actions">
-            <Link to="/bedrijven/vind-talent" className="hnb-btn hnb-btn--primary">
-              Vind talent
+            <Link to="/bedrijven/personeel-aanvragen" className="hnb-btn hnb-btn--primary">
+              Personeel aanvragen
             </Link>
             <Link to="/contact" className="hnb-btn hnb-btn--outline">
               Contact opnemen

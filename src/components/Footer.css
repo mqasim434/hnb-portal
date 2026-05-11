@@ -154,6 +154,39 @@ a.site-footer__contact-value:hover {
 .site-footer__bar-inner {
   display: flex;
   flex-direction: column;
+  gap: 1.25rem;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.site-footer__legal-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+}
+
+.site-footer__legal-link {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-footer-muted);
+  text-decoration: none;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.site-footer__legal-link:hover {
+  color: var(--color-gold);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.site-footer__meta {
+  display: flex;
+  flex-direction: column;
   gap: 0.75rem;
   align-items: flex-start;
 }
@@ -163,8 +196,13 @@ a.site-footer__contact-value:hover {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     gap: 1rem;
+  }
+
+  .site-footer__meta {
+    align-items: flex-end;
+    text-align: right;
   }
 }
 

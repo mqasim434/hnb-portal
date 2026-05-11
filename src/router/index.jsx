@@ -38,11 +38,11 @@ export const router = createBrowserRouter([
 
       /* Freelancers */
       {
-        path: 'freelancers/ontdek-mogelijkheden',
+        path: 'freelancers/openstaande-opdrachten',
         element: <FindWork />,
       },
       {
-        path: 'freelancers/zo-werkt-het',
+        path: 'freelancers/hoe-het-werkt',
         element: <StaticMarketingPage pageKey="fl-zo-werkt-het" />,
       },
       {
@@ -50,31 +50,19 @@ export const router = createBrowserRouter([
         element: <StaticMarketingPage pageKey="fl-inkomsten-betalingen" />,
       },
       {
-        path: 'freelancers/veiligheid-certificering',
+        path: 'freelancers/jouw-certificering',
         element: <StaticMarketingPage pageKey="fl-veiligheid-certificering" />,
-      },
-      {
-        path: 'freelancers/werkwijze',
-        element: <StaticMarketingPage pageKey="fl-werkwijze" />,
-      },
-      {
-        path: 'freelancers/aan-de-slag',
-        element: <StaticMarketingPage pageKey="fl-aan-de-slag" />,
       },
 
       /* Bedrijven */
-      { path: 'bedrijven/vind-talent', element: <HireStaff /> },
+      { path: 'bedrijven/personeel-aanvragen', element: <HireStaff /> },
       {
-        path: 'bedrijven/vergelijk-professionals',
-        element: <StaticMarketingPage pageKey="bv-vergelijk-professionals" />,
+        path: 'bedrijven/ons-aanbod',
+        element: <StaticMarketingPage pageKey="bv-ons-aanbod" />,
       },
       {
         path: 'bedrijven/tarieven',
         element: <StaticMarketingPage pageKey="bv-tarieven" />,
-      },
-      {
-        path: 'bedrijven/filters',
-        element: <StaticMarketingPage pageKey="bv-filters" />,
       },
       {
         path: 'bedrijven/sectoren',
@@ -82,53 +70,121 @@ export const router = createBrowserRouter([
       },
       { path: 'bedrijven/functies', element: <Services /> },
       {
-        path: 'bedrijven/flexpools',
+        path: 'bedrijven/vaste-samenwerking',
         element: <StaticMarketingPage pageKey="bv-flexpools" />,
       },
 
       /* Over H&B */
-      { path: 'over-hb/over-ons', element: <About /> },
+      { path: 'over-hb/ons-verhaal', element: <About /> },
       {
-        path: 'over-hb/wie-wij-zijn',
+        path: 'over-hb/het-team',
         element: <StaticMarketingPage pageKey="hb-wie-wij-zijn" />,
       },
       {
-        path: 'over-hb/wat-wij-doen',
+        path: 'over-hb/werkgebied',
+        element: <StaticMarketingPage pageKey="hb-werkgebied" />,
+      },
+      {
+        path: 'over-hb/onze-aanpak',
         element: <StaticMarketingPage pageKey="hb-wat-wij-doen" />,
+      },
+      {
+        path: 'over-hb/vergunningen-compliance',
+        element: <StaticMarketingPage pageKey="hb-vergunningen" />,
       },
       {
         path: 'over-hb/nieuws',
         element: <StaticMarketingPage pageKey="hb-nieuws" />,
       },
+
+      /* Juridisch (footer) */
       {
-        path: 'over-hb/chat',
-        element: <StaticMarketingPage pageKey="hb-chat" />,
+        path: 'juridisch/privacy',
+        element: <StaticMarketingPage pageKey="legal-privacy" />,
       },
       {
-        path: 'over-hb/netwerk',
-        element: <StaticMarketingPage pageKey="hb-netwerk" />,
+        path: 'juridisch/cookies',
+        element: <StaticMarketingPage pageKey="legal-cookies" />,
       },
       {
-        path: 'over-hb/beleid',
-        element: <StaticMarketingPage pageKey="hb-beleid" />,
+        path: 'juridisch/algemene-voorwaarden',
+        element: <StaticMarketingPage pageKey="legal-voorwaarden" />,
       },
 
       { path: 'contact', element: <Contact /> },
       { path: 'login', element: <Login /> },
 
+      /* Legacy URL’s */
+      {
+        path: 'freelancers/ontdek-mogelijkheden',
+        element: <Navigate to="/freelancers/openstaande-opdrachten" replace />,
+      },
+      {
+        path: 'freelancers/zo-werkt-het',
+        element: <Navigate to="/freelancers/hoe-het-werkt" replace />,
+      },
+      {
+        path: 'freelancers/veiligheid-certificering',
+        element: <Navigate to="/freelancers/jouw-certificering" replace />,
+      },
+      {
+        path: 'freelancers/werkwijze',
+        element: <Navigate to="/freelancers/hoe-het-werkt" replace />,
+      },
+      {
+        path: 'freelancers/aan-de-slag',
+        element: <Navigate to="/register" replace />,
+      },
+      { path: 'bedrijven/vind-talent', element: <Navigate to="/bedrijven/personeel-aanvragen" replace /> },
+      {
+        path: 'bedrijven/vergelijk-professionals',
+        element: <Navigate to="/bedrijven/ons-aanbod" replace />,
+      },
+      {
+        path: 'bedrijven/filters',
+        element: <Navigate to="/bedrijven/ons-aanbod" replace />,
+      },
+      {
+        path: 'bedrijven/flexpools',
+        element: <Navigate to="/bedrijven/vaste-samenwerking" replace />,
+      },
+      { path: 'over-hb/over-ons', element: <Navigate to="/over-hb/ons-verhaal" replace /> },
+      {
+        path: 'over-hb/wie-wij-zijn',
+        element: <Navigate to="/over-hb/het-team" replace />,
+      },
+      {
+        path: 'over-hb/wat-wij-doen',
+        element: <Navigate to="/over-hb/onze-aanpak" replace />,
+      },
+      {
+        path: 'over-hb/chat',
+        element: <Navigate to="/contact" replace />,
+      },
+      {
+        path: 'over-hb/netwerk',
+        element: <Navigate to="/over-hb/het-team" replace />,
+      },
+      {
+        path: 'over-hb/beleid',
+        element: <Navigate to="/juridisch/privacy" replace />,
+      },
       {
         path: 'hire-staff',
-        element: <Navigate to="/bedrijven/vind-talent" replace />,
+        element: <Navigate to="/bedrijven/personeel-aanvragen" replace />,
       },
       {
         path: 'find-work',
-        element: <Navigate to="/freelancers/ontdek-mogelijkheden" replace />,
+        element: <Navigate to="/freelancers/openstaande-opdrachten" replace />,
       },
       {
         path: 'services',
         element: <Navigate to="/bedrijven/functies" replace />,
       },
-      { path: 'about', element: <Navigate to="/over-hb/over-ons" replace /> },
+      {
+        path: 'about',
+        element: <Navigate to="/over-hb/ons-verhaal" replace />,
+      },
 
       {
         path: 'register',

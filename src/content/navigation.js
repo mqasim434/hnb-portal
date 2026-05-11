@@ -1,4 +1,4 @@
-/** Primary marketing navigation (Dutch). */
+/** Primary marketing navigation (Dutch). Chat, Netwerk en Beleid staan niet in het hoofdmenu. */
 
 export const NAV_GROUPS = [
   {
@@ -6,12 +6,11 @@ export const NAV_GROUPS = [
     label: 'Freelancers',
     pathPrefix: '/freelancers',
     items: [
-      { to: '/freelancers/ontdek-mogelijkheden', label: 'Ontdek mogelijkheden' },
-      { to: '/freelancers/zo-werkt-het', label: 'Zo werkt het' },
+      { to: '/freelancers/openstaande-opdrachten', label: 'Openstaande opdrachten' },
+      { to: '/freelancers/hoe-het-werkt', label: 'Hoe het werkt' },
       { to: '/freelancers/inkomsten-betalingen', label: 'Inkomsten & betalingen' },
-      { to: '/freelancers/veiligheid-certificering', label: 'Veiligheid & certificering' },
-      { to: '/freelancers/werkwijze', label: 'Werkwijze' },
-      { to: '/freelancers/aan-de-slag', label: 'Aan de slag' },
+      { to: '/freelancers/jouw-certificering', label: 'Jouw certificering' },
+      { to: '/register', label: 'Direct aanmelden' },
     ],
   },
   {
@@ -19,13 +18,12 @@ export const NAV_GROUPS = [
     label: 'Bedrijven',
     pathPrefix: '/bedrijven',
     items: [
-      { to: '/bedrijven/vind-talent', label: 'Vind talent' },
-      { to: '/bedrijven/vergelijk-professionals', label: 'Vergelijk professionals' },
-      { to: '/bedrijven/tarieven', label: 'Tarieven' },
-      { to: '/bedrijven/filters', label: 'Filters' },
-      { to: '/bedrijven/sectoren', label: 'Sectoren' },
-      { to: '/bedrijven/functies', label: 'Functies' },
-      { to: '/bedrijven/flexpools', label: 'Flexpools' },
+      { to: '/bedrijven/personeel-aanvragen', label: 'Personeel aanvragen' },
+      { to: '/bedrijven/ons-aanbod', label: 'Ons aanbod' },
+      { to: '/bedrijven/tarieven', label: 'Tarieven op aanvraag' },
+      { to: '/bedrijven/sectoren', label: 'Onze sectoren' },
+      { to: '/bedrijven/functies', label: 'Functieprofielen' },
+      { to: '/bedrijven/vaste-samenwerking', label: 'Vaste samenwerking' },
     ],
   },
   {
@@ -33,21 +31,42 @@ export const NAV_GROUPS = [
     label: 'Over H&B Service Group',
     pathPrefix: '/over-hb',
     items: [
-      { to: '/over-hb/over-ons', label: 'Over ons' },
-      { to: '/over-hb/wie-wij-zijn', label: 'Wie wij zijn' },
-      { to: '/over-hb/wat-wij-doen', label: 'Wat wij doen' },
+      { to: '/over-hb/ons-verhaal', label: 'Ons verhaal' },
+      { to: '/over-hb/het-team', label: 'Het team' },
+      { to: '/over-hb/werkgebied', label: 'Werkgebied' },
+      { to: '/over-hb/onze-aanpak', label: 'Onze aanpak' },
+      { to: '/over-hb/vergunningen-compliance', label: 'Vergunningen & compliance' },
       { to: '/over-hb/nieuws', label: 'Nieuws' },
-      { to: '/over-hb/chat', label: 'Chat' },
-      { to: '/over-hb/netwerk', label: 'Netwerk' },
-      { to: '/over-hb/beleid', label: 'Beleid' },
     ],
   },
 ]
 
+/** Desktop header CTAs (mobile menu gebruikt vaste labels onderaan). */
 export const HEADER_CTAS = [
-  { to: '/bedrijven/vind-talent', label: 'Vind talent', variant: 'primary' },
-  { to: '/freelancers/ontdek-mogelijkheden', label: 'Ontdek mogelijkheden', variant: 'outline' },
+  { to: '/bedrijven/personeel-aanvragen', label: 'Personeel aanvragen', variant: 'primary' },
+  {
+    to: '/freelancers/openstaande-opdrachten',
+    label: 'Openstaande opdrachten',
+    variant: 'outline',
+  },
 ]
+
+export const MOBILE_MENU_PRIMARY_CTA = {
+  to: '/bedrijven/personeel-aanvragen',
+  label: 'Personeel aanvragen',
+}
+
+export const MOBILE_MENU_SECONDARY_CTA = {
+  to: '/register',
+  label: 'Direct aanmelden',
+}
 
 export const FOOTER_TAGLINE =
   'Betrouwbaar eventpersoneel. Wanneer u het nodig heeft.'
+
+/** Juridische pagina’s (footer, niet in hoofdnavigatie). */
+export const FOOTER_LEGAL_LINKS = [
+  { to: '/juridisch/privacy', label: 'Privacy' },
+  { to: '/juridisch/cookies', label: 'Cookies' },
+  { to: '/juridisch/algemene-voorwaarden', label: 'Algemene voorwaarden' },
+]

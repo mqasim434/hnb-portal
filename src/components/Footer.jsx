@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { FOOTER_TAGLINE, NAV_GROUPS } from '../content/navigation'
+import { FOOTER_LEGAL_LINKS, FOOTER_TAGLINE, NAV_GROUPS } from '../content/navigation'
 import './Footer.css'
 
 export default function Footer() {
@@ -70,14 +70,11 @@ export default function Footer() {
               </li>
             </ul>
             <div className="site-footer__ctas">
-              <Link to="/bedrijven/vind-talent" className="hnb-btn hnb-btn--primary">
-                Vind talent
+              <Link to="/bedrijven/personeel-aanvragen" className="hnb-btn hnb-btn--primary">
+                Personeel aanvragen
               </Link>
-              <Link
-                to="/freelancers/ontdek-mogelijkheden"
-                className="hnb-btn hnb-btn--outline"
-              >
-                Ontdek mogelijkheden
+              <Link to="/register" className="hnb-btn hnb-btn--outline">
+                Direct aanmelden
               </Link>
             </div>
           </div>
@@ -85,6 +82,18 @@ export default function Footer() {
 
         <div className="site-footer__bar">
           <div className="site-footer__bar-inner">
+            <div className="site-footer__legal" aria-label="Juridische informatie">
+              <ul className="site-footer__legal-links">
+                {FOOTER_LEGAL_LINKS.map(({ to, label }) => (
+                  <li key={to}>
+                    <Link to={to} className="site-footer__legal-link">
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="site-footer__meta">
             <p className="site-footer__copyright">
               © {year} H&amp;B Service Group. Alle rechten voorbehouden.
             </p>
@@ -98,6 +107,7 @@ export default function Footer() {
                 Devtanics
               </a>
             </p>
+            </div>
           </div>
         </div>
       </div>

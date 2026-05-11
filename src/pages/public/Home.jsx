@@ -45,14 +45,14 @@ export default function Home() {
             juiste moment, met één coördinator vanaf de boeking tot de afbouw.
           </p>
           <div className="home-hero__actions">
-            <Link to="/bedrijven/vind-talent" className="hnb-btn hnb-btn--primary">
-              Vind talent
+            <Link to="/bedrijven/personeel-aanvragen" className="hnb-btn hnb-btn--primary">
+              Personeel aanvragen
             </Link>
             <Link
-              to="/freelancers/ontdek-mogelijkheden"
+              to="/freelancers/openstaande-opdrachten"
               className="hnb-btn hnb-btn--outline"
             >
-              Ontdek mogelijkheden
+              Openstaande opdrachten
             </Link>
           </div>
         </div>
@@ -241,14 +241,14 @@ export default function Home() {
             Klaar om uw volgende event te bezetten?
           </h2>
           <div className="home-cta__actions">
-            <Link to="/bedrijven/vind-talent" className="hnb-btn hnb-btn--primary">
-              Vind talent
+            <Link to="/bedrijven/personeel-aanvragen" className="hnb-btn hnb-btn--primary">
+              Personeel aanvragen
             </Link>
             <Link
-              to="/freelancers/ontdek-mogelijkheden"
+              to="/freelancers/openstaande-opdrachten"
               className="hnb-btn hnb-btn--outline"
             >
-              Ontdek mogelijkheden
+              Openstaande opdrachten
             </Link>
           </div>
         </div>

@@ -5,7 +5,7 @@
 export const MARKETING_PAGES = {
   'fl-zo-werkt-het': {
     eyebrow: 'Freelancers',
-    title: 'Zo werkt het',
+    title: 'Hoe het werkt',
     lead: 'Van aanmelding tot definitieve bevestiging op de planning: heldere stappen en vaste afspraken, zodat u weet wat u kunt verwachten.',
     sections: [
       {
@@ -64,7 +64,7 @@ export const MARKETING_PAGES = {
 
   'fl-veiligheid-certificering': {
     eyebrow: 'Freelancers',
-    title: 'Veiligheid & certificering',
+    title: 'Jouw certificering',
     lead: 'We rosteren alleen mensen die passen bij de risico’s en compliance-eisen van de locatie — voor uw veiligheid, die van collega’s en bezoekers.',
     sections: [
       {
@@ -158,7 +158,7 @@ export const MARKETING_PAGES = {
       },
     ],
     ctas: [
-      { to: '/bedrijven/vind-talent', label: 'Talent aanvragen', primary: true },
+      { to: '/bedrijven/personeel-aanvragen', label: 'Talent aanvragen', primary: true },
     ],
   },
 
@@ -182,7 +182,7 @@ export const MARKETING_PAGES = {
         ],
       },
     ],
-    ctas: [{ to: '/bedrijven/vind-talent', label: 'Personeelsaanvraag indienen', primary: true }],
+    ctas: [{ to: '/bedrijven/personeel-aanvragen', label: 'Personeelsaanvraag indienen', primary: true }],
   },
 
   'bv-filters': {
@@ -272,7 +272,7 @@ export const MARKETING_PAGES = {
         ],
       },
     ],
-    ctas: [{ to: '/over-hb/over-ons', label: 'Lees meer over ons' }],
+    ctas: [{ to: '/over-hb/ons-verhaal', label: 'Lees meer over ons' }],
   },
 
   'hb-wat-wij-doen': {
@@ -298,7 +298,7 @@ export const MARKETING_PAGES = {
     ],
     ctas: [
       { to: '/bedrijven/functies', label: 'Functies & diensten', primary: true },
-      { to: '/freelancers/ontdek-mogelijkheden', label: 'Werken via H&B' },
+      { to: '/freelancers/openstaande-opdrachten', label: 'Werken via H&B' },
     ],
   },
 
@@ -396,6 +396,128 @@ export const MARKETING_PAGES = {
         ],
       },
     ],
-    ctas: [{ to: '/contact', label: 'Vragen over beleid?' }],
+  },
+
+  'bv-ons-aanbod': {
+    eyebrow: 'Bedrijven',
+    title: 'Ons aanbod',
+    lead: 'Hospitality en beveiliging uit één hand: van korte piek tot vaste pool — altijd met voorgecontroleerde professionals en één coördinator.',
+    sections: [
+      {
+        heading: 'Wat u kunt inzetten',
+        bullets: [
+          'Hosts, barteams en service-ondersteuning voor hoge drukte.',
+          'Bevoegde portiers en eventbeveiliging, afgestemd op locatiebeleid.',
+          'Algemeen eventpersoneel: runners, accreditatie, logistiek.',
+        ],
+      },
+      {
+        heading: 'Hoe we leveren',
+        paragraphs: [
+          'We combineren briefing, roster en nazorg. U kiest het profiel; wij leveren namen die passen bij uw merk, vergunningen en planning — transparant tot aan uitbetaling.',
+        ],
+      },
+    ],
+    ctas: [
+      { to: '/bedrijven/personeel-aanvragen', label: 'Personeel aanvragen', primary: true },
+      { to: '/bedrijven/tarieven', label: 'Tarieven op aanvraag' },
+    ],
+  },
+
+  'hb-werkgebied': {
+    eyebrow: 'Over H&B Service Group',
+    title: 'Werkgebied',
+    lead: 'We zijn sterk vertegenwoordigd in de Randstad en ondersteunen landelijke programma’s waar orchestratie vanuit één bureau nodig is.',
+    sections: [
+      {
+        heading: 'Focusregio',
+        paragraphs: [
+          'Amsterdam en omgeving vormen onze thuisbasis — korte lijnen met vaste venues en terugkerende producties. Voor uitwaarts schakelen we met partners die dezelfde kwaliteitsnorm hanteren.',
+        ],
+      },
+      {
+        heading: 'Nationaal',
+        bullets: [
+          'Festivals en tours met meerdere stops.',
+          'Zakelijke reeksen in verschillende steden.',
+          'Logistiek en planning afgestemd op reis- en hotelschema’s waar nodig.',
+        ],
+      },
+    ],
+  },
+
+  'hb-vergunningen': {
+    eyebrow: 'Over H&B Service Group',
+    title: 'Vergunningen & compliance',
+    lead: 'We rosteren volgens geldende wet- en locatie-eisen — met traceerbare documentatie voor uw verzekeraar en vergunningverlener.',
+    sections: [
+      {
+        heading: 'Wat we controleren',
+        bullets: [
+          'Recht om te werken en identiteit.',
+          'Diploma’s en registraties voor beveiligingsrollen.',
+          'Aanvullende certificaten (BHV, sociale hygiëne) die uw venue voorschrijft.',
+        ],
+      },
+      {
+        heading: 'Samen met uw locatie',
+        paragraphs: [
+          'We stemmen bezetting af op RI&E en huisregels. Wijzigingen in beleidsregels communiceren we actief door naar teams vóór aanvang.',
+        ],
+      },
+    ],
+    ctas: [{ to: '/contact', label: 'Compliance bespreken' }],
+  },
+
+  'legal-privacy': {
+    eyebrow: 'Juridisch',
+    title: 'Privacyverklaring',
+    lead: 'H&B Service Group verwerkt persoonsgegevens zorgvuldig, in lijn met de AVG.',
+    sections: [
+      {
+        heading: 'Verwerkingsdoelen',
+        bullets: [
+          'Aanmelding en matching van freelancers.',
+          'Uitvoering van opdrachten en facturatie.',
+          'Wettelijke bewaarplicht en geschilafhandeling.',
+        ],
+      },
+      {
+        heading: 'Rechten',
+        paragraphs: [
+          'U kunt bezwaar maken, inzage vragen of verwijdering aanvragen voor zover dat wettelijk kan. Neem contact op via het adres op onze contactpagina — wij beantwoorden binnen de wettelijke termijn.',
+        ],
+      },
+    ],
+    ctas: [{ to: '/contact', label: 'Contact' }],
+  },
+
+  'legal-cookies': {
+    eyebrow: 'Juridisch',
+    title: 'Cookiebeleid',
+    lead: 'Deze site gebruikt functionele cookies die nodig zijn voor gebruik en beveiliging. Analytische of marketingcookies worden alleen geplaatst met uw toestemming.',
+    sections: [
+      {
+        heading: 'Beheer',
+        paragraphs: [
+          'Via uw browser kunt u cookies beheren of verwijderen. Zonder strikt noodzakelijke cookies kan deel van het portaal beperkt werken.',
+        ],
+      },
+    ],
+  },
+
+  'legal-voorwaarden': {
+    eyebrow: 'Juridisch',
+    title: 'Algemene voorwaarden',
+    lead: 'Hier vindt u de algemene voorwaarden voor dienstverlening door H&B Service Group. Definitieve teksten worden bij contract ondertekend of per offerte bevestigd.',
+    sections: [
+      {
+        heading: 'Toepasselijkheid',
+        paragraphs: [
+          'Voor elk project geldt de schriftelijke opdrachtbevestiging met tarieven, annuleringsvoorwaarden en aansprakelijkheid. Bij tegenstrijdigheid prevaleert de getekende overeenkomst.',
+        ],
+      },
+    ],
+    ctas: [{ to: '/contact', label: 'Vraag een offerte aan' }],
   },
 }
