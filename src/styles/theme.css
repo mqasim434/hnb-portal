@@ -1,70 +1,140 @@
 /**
- * H&B Service Group — design tokens (dark navy + gold).
- * Import once; consume via var(--primary), etc.
+ * H&B Service Group — global design tokens (mobile-first).
+ * Consume via var(--token-name). No pure #FFFFFF page backgrounds; no white on gold buttons.
  */
+
 :root {
-  /* Brand */
-  --primary: #c9a84c;
-  --primary-hover: #e2bc5e;
-  --secondary: #3d4d73;
-  --accent: #d4b65a;
+  /* ----- Palette (exact values) ----- */
+  --color-navy: #0d1b2a;
+  --color-deep-navy: #0a1520;
+  --color-mid-navy: #132336;
+  --color-gold: #d4a017;
+  --color-gold-muted: #b8972e;
+  --color-warm-white: #f5f1ea;
+  --color-light-gold: #f5edd6;
+  --color-paper: #fdfcfa; /* off-white for subtle lift; still not pure white */
+  --color-body-dark: #1a1a1a;
+  --color-body-light: #cccccc;
+  --color-footer-grey: #aaaaaa;
+  --color-error: #cc0000;
+  --color-success: #006600;
+  --color-warning: #9a3412;
 
-  /* Surfaces */
-  --background: #0a0f1e;
-  --surface: #111827;
-  --surface2: #1a2235;
+  /* ----- Semantic aliases (light-first UI) ----- */
+  --background: var(--color-warm-white);
+  --background-subtle: var(--color-light-gold);
+  --surface: var(--color-light-gold);
+  --surface-raised: var(--color-paper);
+  --surface-inverse: var(--color-mid-navy);
+  --surface-footer: var(--color-deep-navy);
 
-  /* Typography */
-  --text: #f1f5f9;
-  --text-muted: #94a3b8;
+  --primary: var(--color-gold);
+  --primary-hover: color-mix(in srgb, var(--color-gold) 88%, var(--color-navy));
+  --primary-muted: var(--color-gold-muted);
+  --secondary: var(--color-mid-navy);
 
-  /* UI */
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.12);
+  --text: var(--color-body-dark);
+  --text-muted: color-mix(in srgb, var(--color-navy) 62%, #6b7280);
+  --text-subtle: color-mix(in srgb, var(--color-navy) 45%, #9ca3af);
+  --text-on-dark: var(--color-warm-white);
+  --text-on-inverse: var(--color-warm-white);
+  --text-on-primary: var(--color-navy);
+  --text-on-hero: var(--color-warm-white);
+  --text-footer-muted: var(--color-footer-grey);
 
-  /* Feedback */
-  --success: #22c55e;
-  --warning: #f59e0b;
-  --error: #ef4444;
+  --border: color-mix(in srgb, var(--color-navy) 14%, transparent);
+  --border-strong: color-mix(in srgb, var(--color-navy) 22%, transparent);
+  --border-inverse: color-mix(in srgb, var(--color-warm-white) 18%, transparent);
 
-  /* Text on gold buttons */
-  --on-primary: #0a0f1e;
+  /* Legacy mapping (page CSS compatibility) */
+  --surface2: color-mix(in srgb, var(--color-light-gold) 55%, var(--color-warm-white));
+  --on-primary: var(--text-on-primary);
+  --accent: var(--color-gold-muted);
+  --success: var(--color-success);
+  --error: var(--color-error);
+  --warning: var(--color-warning);
 
-  /* Shadows */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.24);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.28);
-  --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.45);
-  --shadow-glow: 0 0 0 1px rgba(201, 168, 76, 0.25),
-    0 12px 40px rgba(201, 168, 76, 0.18);
-
-  /* Layout & rhythm */
-  --content-max-width: 1200px;
-  --section-padding-y: 100px;
-  --section-padding-x: 24px;
-  --radius-card: 16px;
+  /* ----- Radius ----- */
   --radius-button: 8px;
+  --radius-card: 12px;
   --radius-icon-tile: 12px;
+  --radius-input: 8px;
 
-  /* Motion */
+  /* ----- Shadows (soft; cards have no hard border) ----- */
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.15);
+  --shadow-xs: 0 1px 2px rgba(13, 27, 42, 0.06);
+  --shadow-sm: 0 2px 10px rgba(13, 27, 42, 0.08);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.14);
+  --shadow-glow: 0 0 0 1px color-mix(in srgb, var(--color-gold) 35%, transparent),
+    0 12px 36px rgba(212, 160, 23, 0.2);
+
+  /* ----- Spacing scale (4px base, mobile-first) ----- */
+  --space-0: 0;
+  --space-1: 0.25rem; /* 4 */
+  --space-2: 0.5rem; /* 8 */
+  --space-3: 0.75rem; /* 12 */
+  --space-4: 1rem; /* 16 */
+  --space-5: 1.25rem; /* 20 */
+  --space-6: 1.5rem; /* 24 */
+  --space-8: 2rem; /* 32 */
+  --space-10: 2.5rem; /* 40 */
+  --space-12: 3rem; /* 48 */
+  --space-16: 4rem; /* 64 */
+  --space-20: 5rem; /* 80 */
+
+  /* ----- Layout ----- */
+  --content-max-width: 1200px;
+  --section-padding-y: clamp(3rem, 8vw, 6.25rem);
+  --section-padding-x: clamp(1rem, 4vw, 1.5rem);
+
+  /* Breakpoints (reference — use rem in @media) */
+  --bp-mobile: 768px;
+  --bp-tablet: 1024px;
+  --bp-desktop: 1440px;
+
+  /* ----- Typography (mobile-first) ----- */
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* H1: 30px mobile → 40px desktop */
+  --font-h1-size: clamp(1.875rem, 0.5rem + 4.2vw, 2.5rem);
+  --font-h1-weight: 800;
+  --font-h1-tracking: -0.03em;
+  --font-h1-line: 1.1;
+
+  --font-hero-size: var(--font-h1-size);
+  --font-hero-weight: var(--font-h1-weight);
+  --font-hero-tracking: var(--font-h1-tracking);
+
+  --font-h2-size: clamp(1.5rem, 0.35rem + 3vw, 2rem);
+  --font-h2-weight: 700;
+  --font-h3-size: clamp(1.25rem, 0.2rem + 2vw, 1.375rem);
+  --font-h3-weight: 600;
+
+  --font-section-size: var(--font-h2-size);
+  --font-section-weight: var(--font-h2-weight);
+
+  /* Body minimum 18px on mobile */
+  --font-body-size: clamp(1.125rem, 0.2rem + 1vw, 1.1875rem);
+  --font-body-weight: 400;
+  --font-body-line: 1.65;
+
+  --font-subhead-size: clamp(1.0625rem, 0.15rem + 1vw, 1.125rem);
+  --font-subhead-weight: 400;
+  --font-subhead-line: 1.65;
+
+  --font-label-size: 0.8125rem;
+  --font-label-weight: 600;
+  --font-label-tracking: 0.1em;
+
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --transition-fast: 0.2s var(--ease-out);
   --transition-medium: 0.35s var(--ease-out);
 
-  /* Typography */
-  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-hero-size: clamp(2.75rem, 6vw, 4rem);
-  --font-hero-weight: 800;
-  --font-hero-tracking: -0.03em;
-  --font-section-size: clamp(2rem, 4vw, 2.625rem);
-  --font-section-weight: 700;
-  --font-subhead-size: 1.125rem;
-  --font-subhead-weight: 400;
-  --font-subhead-line: 1.7;
-  --font-body-size: 1rem;
-  --font-body-weight: 400;
-  --font-body-line: 1.6;
-
   --z-nav: 100;
   --z-modal: 200;
+
+  /* Focus ring (WCAG visible on light + gold) */
+  --focus-ring: 2px solid var(--color-navy);
+  --focus-ring-offset: 2px;
 }
