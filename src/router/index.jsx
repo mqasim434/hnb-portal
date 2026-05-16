@@ -1,33 +1,23 @@
-import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom'
+import { createBrowserRouter, Navigate } from 'react-router-dom'
 import ProtectedRoute from '../components/ProtectedRoute'
 import RootLayout from './RootLayout'
-
 import Home from '../pages/public/Home'
-import HireStaff from '../pages/public/HireStaff'
-import FindWork from '../pages/public/FindWork'
-import Services from '../pages/public/Services'
-import About from '../pages/public/About'
-import Contact from '../pages/public/Contact'
-import Login from '../pages/public/Login'
-import StaticMarketingPage from '../pages/public/StaticMarketingPage'
 
-import RegisterStep1 from '../pages/onboarding/RegisterStep1'
-import RegisterStep2 from '../pages/onboarding/RegisterStep2'
-import RegisterStep3 from '../pages/onboarding/RegisterStep3'
+const page = (importer) => async () => {
+  const m = await importer()
+  return { Component: m.default }
+}
 
-import PortalDashboard from '../pages/portal/PortalDashboard'
-import PortalJobs from '../pages/portal/PortalJobs'
-import PortalHours from '../pages/portal/PortalHours'
-import SubmitHours from '../pages/portal/SubmitHours'
-import PortalInvoices from '../pages/portal/PortalInvoices'
-
-import AdminDashboard from '../pages/admin/AdminDashboard'
-import AdminUsers from '../pages/admin/AdminUsers'
-import AdminOnboarding from '../pages/admin/AdminOnboarding'
-import AdminAssignments from '../pages/admin/AdminAssignments'
-import AdminHours from '../pages/admin/AdminHours'
-import AdminInvoices from '../pages/admin/AdminInvoices'
-import AdminCompliance from '../pages/admin/AdminCompliance'
+const staticMarketing = (pageKey) => async () => {
+  const { default: StaticMarketingPage } = await import(
+    '../pages/public/StaticMarketingPage'
+  )
+  return {
+    Component: function StaticMarketingRoute() {
+      return <StaticMarketingPage pageKey={pageKey} />
+    },
+  }
+}
 
 export const router = createBrowserRouter([
   {
@@ -37,82 +27,84 @@ export const router = createBrowserRouter([
       { index: true, element: <Home /> },
 
       /* Freelancers */
+      { path: 'freelancers', lazy: page(() => import('../pages/freelancers/FreelancersHub')) },
       {
         path: 'freelancers/openstaande-opdrachten',
-        element: <FindWork />,
+        lazy: page(() => import('../pages/freelancers/FreelancerOpenAssignments')),
       },
       {
         path: 'freelancers/hoe-het-werkt',
-        element: <StaticMarketingPage pageKey="fl-zo-werkt-het" />,
+        lazy: page(() => import('../pages/freelancers/FreelancerHowItWorks')),
       },
       {
         path: 'freelancers/inkomsten-betalingen',
-        element: <StaticMarketingPage pageKey="fl-inkomsten-betalingen" />,
+        lazy: page(() => import('../pages/freelancers/FreelancerIncome')),
       },
       {
         path: 'freelancers/jouw-certificering',
-        element: <StaticMarketingPage pageKey="fl-veiligheid-certificering" />,
+        lazy: page(() => import('../pages/freelancers/FreelancerCertification')),
+      },
+      {
+        path: 'freelancers/direct-aanmelden',
+        lazy: page(() => import('../pages/freelancers/FreelancerDirectRegister')),
       },
 
       /* Bedrijven */
-      { path: 'bedrijven/personeel-aanvragen', element: <HireStaff /> },
+      {
+        path: 'bedrijven/personeel-aanvragen',
+        lazy: page(() => import('../pages/public/HireStaff')),
+      },
       {
         path: 'bedrijven/ons-aanbod',
-        element: <StaticMarketingPage pageKey="bv-ons-aanbod" />,
+        lazy: page(() => import('../pages/bedrijven/OnsAanbodPage')),
       },
       {
         path: 'bedrijven/tarieven',
-        element: <StaticMarketingPage pageKey="bv-tarieven" />,
+        lazy: page(() => import('../pages/bedrijven/TarievenPage')),
       },
       {
         path: 'bedrijven/sectoren',
-        element: <StaticMarketingPage pageKey="bv-sectoren" />,
+        lazy: page(() => import('../pages/bedrijven/SectorenPage')),
       },
-      { path: 'bedrijven/functies', element: <Services /> },
+      { path: 'bedrijven/functies', lazy: page(() => import('../pages/public/Services')) },
       {
         path: 'bedrijven/vaste-samenwerking',
-        element: <StaticMarketingPage pageKey="bv-flexpools" />,
+        lazy: page(() => import('../pages/bedrijven/VasteSamenwerkingPage')),
       },
 
       /* Over H&B */
-      { path: 'over-hb/ons-verhaal', element: <About /> },
-      {
-        path: 'over-hb/het-team',
-        element: <StaticMarketingPage pageKey="hb-wie-wij-zijn" />,
-      },
+      { path: 'over-hb/ons-verhaal', lazy: page(() => import('../pages/public/About')) },
+      { path: 'over-hb/het-team', lazy: page(() => import('../pages/overhb/HetTeamPage')) },
       {
         path: 'over-hb/werkgebied',
-        element: <StaticMarketingPage pageKey="hb-werkgebied" />,
+        lazy: page(() => import('../pages/overhb/WerkgebiedPage')),
       },
       {
         path: 'over-hb/onze-aanpak',
-        element: <StaticMarketingPage pageKey="hb-wat-wij-doen" />,
+        lazy: page(() => import('../pages/overhb/OnzeAanpakPage')),
       },
       {
         path: 'over-hb/vergunningen-compliance',
-        element: <StaticMarketingPage pageKey="hb-vergunningen" />,
+        lazy: page(() => import('../pages/overhb/VergunningenCompliancePage')),
       },
-      {
-        path: 'over-hb/nieuws',
-        element: <StaticMarketingPage pageKey="hb-nieuws" />,
-      },
+      { path: 'over-hb/nieuws', lazy: page(() => import('../pages/overhb/NieuwsPage')) },
 
       /* Juridisch (footer) */
       {
         path: 'juridisch/privacy',
-        element: <StaticMarketingPage pageKey="legal-privacy" />,
+        lazy: staticMarketing('legal-privacy'),
       },
       {
         path: 'juridisch/cookies',
-        element: <StaticMarketingPage pageKey="legal-cookies" />,
+        lazy: staticMarketing('legal-cookies'),
       },
       {
         path: 'juridisch/algemene-voorwaarden',
-        element: <StaticMarketingPage pageKey="legal-voorwaarden" />,
+        lazy: staticMarketing('legal-voorwaarden'),
       },
 
-      { path: 'contact', element: <Contact /> },
-      { path: 'login', element: <Login /> },
+      { path: 'contact', lazy: page(() => import('../pages/public/Contact')) },
+      { path: 'login', lazy: page(() => import('../pages/public/Login')) },
 
       /* Legacy URL’s */
       {
@@ -133,9 +125,12 @@ export const router = createBrowserRouter([
       },
       {
         path: 'freelancers/aan-de-slag',
-        element: <Navigate to="/register" replace />,
+        element: <Navigate to="/freelancers/direct-aanmelden" replace />,
       },
-      { path: 'bedrijven/vind-talent', element: <Navigate to="/bedrijven/personeel-aanvragen" replace /> },
+      {
+        path: 'bedrijven/vind-talent',
+        element: <Navigate to="/bedrijven/personeel-aanvragen" replace />,
+      },
       {
         path: 'bedrijven/vergelijk-professionals',
         element: <Navigate to="/bedrijven/ons-aanbod" replace />,
@@ -148,7 +143,10 @@ export const router = createBrowserRouter([
         path: 'bedrijven/flexpools',
         element: <Navigate to="/bedrijven/vaste-samenwerking" replace />,
       },
-      { path: 'over-hb/over-ons', element: <Navigate to="/over-hb/ons-verhaal" replace /> },
+      {
+        path: 'over-hb/over-ons',
+        element: <Navigate to="/over-hb/ons-verhaal" replace />,
+      },
       {
         path: 'over-hb/wie-wij-zijn',
         element: <Navigate to="/over-hb/het-team" replace />,
@@ -188,23 +186,19 @@ export const router = createBrowserRouter([
 
       {
         path: 'register',
-        element: <Outlet />,
-        children: [
-          { index: true, element: <RegisterStep1 /> },
-          { path: 'work-type', element: <RegisterStep2 /> },
-          { path: 'compliance', element: <RegisterStep3 /> },
-        ],
+        element: <Navigate to="/freelancers/direct-aanmelden" replace />,
       },
+      { path: 'register/*', element: <Navigate to="/freelancers/direct-aanmelden" replace /> },
 
       {
         path: 'portal',
         element: <ProtectedRoute allowedRole="freelancer" />,
         children: [
-          { path: 'dashboard', element: <PortalDashboard /> },
-          { path: 'jobs', element: <PortalJobs /> },
-          { path: 'hours/new', element: <SubmitHours /> },
-          { path: 'hours', element: <PortalHours /> },
-          { path: 'invoices', element: <PortalInvoices /> },
+          { path: 'dashboard', lazy: page(() => import('../pages/portal/PortalDashboard')) },
+          { path: 'jobs', lazy: page(() => import('../pages/portal/PortalJobs')) },
+          { path: 'hours/new', lazy: page(() => import('../pages/portal/SubmitHours')) },
+          { path: 'hours', lazy: page(() => import('../pages/portal/PortalHours')) },
+          { path: 'invoices', lazy: page(() => import('../pages/portal/PortalInvoices')) },
         ],
       },
 
@@ -212,15 +206,23 @@ export const router = createBrowserRouter([
         path: 'admin',
         element: <ProtectedRoute allowedRole="admin" />,
         children: [
-          { path: 'dashboard', element: <AdminDashboard /> },
-          { path: 'users', element: <AdminUsers /> },
-          { path: 'onboarding', element: <AdminOnboarding /> },
-          { path: 'assignments', element: <AdminAssignments /> },
-          { path: 'hours', element: <AdminHours /> },
-          { path: 'invoices', element: <AdminInvoices /> },
-          { path: 'compliance', element: <AdminCompliance /> },
+          { path: 'dashboard', lazy: page(() => import('../pages/admin/AdminDashboard')) },
+          { path: 'users', lazy: page(() => import('../pages/admin/AdminUsers')) },
+          { path: 'onboarding', lazy: page(() => import('../pages/admin/AdminOnboarding')) },
+          {
+            path: 'assignments',
+            lazy: page(() => import('../pages/admin/AdminAssignments')),
+          },
+          { path: 'hours', lazy: page(() => import('../pages/admin/AdminHours')) },
+          { path: 'invoices', lazy: page(() => import('../pages/admin/AdminInvoices')) },
+          {
+            path: 'compliance',
+            lazy: page(() => import('../pages/admin/AdminCompliance')),
+          },
         ],
       },
+
+      { path: '*', lazy: page(() => import('../pages/public/NotFound')) },
     ],
   },
 ])

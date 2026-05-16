@@ -73,7 +73,7 @@ export default function Footer() {
               <Link to="/bedrijven/personeel-aanvragen" className="hnb-btn hnb-btn--primary">
                 Personeel aanvragen
               </Link>
-              <Link to="/register" className="hnb-btn hnb-btn--outline">
+              <Link to="/freelancers/direct-aanmelden" className="hnb-btn hnb-btn--outline">
                 Direct aanmelden
               </Link>
             </div>

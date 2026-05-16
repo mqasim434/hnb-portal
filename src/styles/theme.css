@@ -88,6 +88,10 @@
   --section-padding-y: clamp(3rem, 8vw, 6.25rem);
   --section-padding-x: clamp(1rem, 4vw, 1.5rem);
 
+  /* Touch / sticky header offset (mobile menu & anchor links) */
+  --touch-target-min: 3rem; /* 48px — WCAG-advised minimum */
+  --header-sticky-offset: 4.25rem;
+
   /* Breakpoints (reference — use rem in @media) */
   --bp-mobile: 768px;
   --bp-tablet: 1024px;
@@ -137,4 +141,18 @@
   /* Focus ring (WCAG visible on light + gold) */
   --focus-ring: 2px solid var(--color-navy);
   --focus-ring-offset: 2px;
+}
+
+/* Small phones: iets compactere horizontale marge */
+@media (max-width: 23.4375rem) {
+  :root {
+    --section-padding-x: 0.875rem;
+  }
+}
+
+/* Phones / small tablets: iets kortere sectie-verticaal voor betere scroll-rhythm */
+@media (max-width: 47.99875rem) {
+  :root {
+    --section-padding-y: clamp(2.35rem, 7vw, 5.5rem);
+  }
 }

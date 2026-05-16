@@ -23,9 +23,8 @@ function loginClassName({ isActive }) {
 
 function groupIsActive(group, pathname) {
   if (pathname.startsWith(group.pathPrefix)) return true
-  if (group.id === 'freelancers' && pathname.startsWith('/register')) return true
   return group.items.some((item) => {
-    if (item.to === '/register') return pathname.startsWith('/register')
+    if (item.to === '/freelancers') return pathname === '/freelancers'
     return pathname === item.to || pathname.startsWith(`${item.to}/`)
   })
 }
@@ -45,6 +44,7 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mobiel menu sluiten na route-wissel
     setMenuOpen(false)
     setMobileOpenGroup(null)
   }, [location.pathname])
@@ -96,7 +96,10 @@ export default function Navbar() {
                   key={group.id}
                   className={`site-header__group${active ? ' site-header__group--active' : ''}`}
                 >
-                  <span className="site-header__group-label">
+                  <span
+                    className="site-header__group-label"
+                    title={group.groupTitle ?? undefined}
+                  >
                     {group.label}
                     <FiChevronDown className="site-header__chev-desktop" aria-hidden />
                   </span>
@@ -107,7 +110,7 @@ export default function Navbar() {
                           <NavLink
                             to={to}
                             className={sublinkClassName}
-                            end={to === '/register'}
+                            end={to === '/freelancers'}
                           >
                             {label}
                           </NavLink>
@@ -191,7 +194,7 @@ export default function Navbar() {
                           <NavLink
                             to={to}
                             className={sublinkClassName}
-                            end={to === '/register'}
+                            end={to === '/freelancers'}
                             onClick={closeMenu}
                           >
                             {label}

@@ -8,4 +8,24 @@ export default defineConfig({
     react(),
     babel({ presets: [reactCompilerPreset()] })
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return undefined
+          if (id.includes('firebase')) return 'firebase'
+          if (id.includes('react-router')) return 'react-router'
+          if (id.includes('@reduxjs') || id.includes('react-redux')) return 'redux'
+          if (id.includes('react-icons')) return 'icons'
+          if (
+            id.includes('node_modules/react-dom') ||
+            id.includes('node_modules/react/')
+          ) {
+            return 'react-vendor'
+          }
+          return undefined
+        },
+      },
+    },
+  },
 })

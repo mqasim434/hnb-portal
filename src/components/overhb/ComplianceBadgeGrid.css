@@ -1,0 +1,78 @@
+.ohb-badges {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .ohb-badges {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .ohb-badges {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.ohb-badge {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-card);
+  background: linear-gradient(
+    155deg,
+    var(--color-mid-navy) 0%,
+    color-mix(in srgb, var(--color-navy) 70%, var(--color-deep-navy)) 100%
+  );
+  border: 1px solid color-mix(in srgb, var(--color-gold) 22%, transparent);
+  box-shadow: var(--shadow-md);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.ohb-badge:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--color-gold) 45%, transparent);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ohb-badge:hover {
+    transform: none;
+  }
+}
+
+.ohb-badge__icon {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--color-gold) 22%, var(--color-navy));
+  color: var(--color-gold);
+  font-size: 1rem;
+}
+
+.ohb-badge__title {
+  margin: 0 0 var(--space-2);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text-on-dark);
+  letter-spacing: -0.02em;
+}
+
+.ohb-badge__text {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--color-warm-white) 82%, transparent);
+}

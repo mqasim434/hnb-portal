@@ -1,30 +1,11 @@
-/* Contact — H&B Service Group (theme tokens only) */
+/* Contact — H&B Service Group (navy / gold hero + sidebar) */
 
-.contact {
+.contact-page {
   overflow-x: clip;
 }
 
-.contact-hero {
-  padding-block: clamp(2.75rem, 7vw, 4rem);
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--surface2) 35%, var(--background)) 0%,
-    var(--background) 100%
-  );
-  border-bottom: 1px solid var(--border);
-}
-
-.contact-hero__title {
-  margin: 0;
-  font-size: var(--font-section-size);
-  font-weight: var(--font-section-weight);
-  letter-spacing: -0.02em;
-  line-height: 1.12;
-  color: var(--text);
-}
-
-.contact-hero__accent {
-  color: var(--primary);
+.contact-page__hero-accent {
+  color: var(--color-gold);
 }
 
 .contact-body {
@@ -39,9 +20,13 @@
 
 @media (min-width: 900px) {
   .contact-layout {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 18rem);
-    gap: 3rem;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 22rem);
+    gap: 3.25rem;
   }
+}
+
+.contact-layout__main {
+  min-width: 0;
 }
 
 .contact-aside {
@@ -50,6 +35,50 @@
   border: 1px solid var(--border);
   background-color: var(--surface);
   box-shadow: var(--shadow-sm);
+}
+
+.contact-aside--brand {
+  background: linear-gradient(165deg, var(--color-navy) 0%, var(--color-mid-navy) 100%);
+  border: 1px solid color-mix(in srgb, var(--color-warm-white) 14%, transparent);
+  box-shadow: var(--shadow-lg);
+  color: var(--text-on-dark);
+}
+
+.contact-aside--brand .contact-aside__title {
+  color: var(--color-gold);
+}
+
+.contact-aside--brand .contact-aside__label {
+  color: color-mix(in srgb, var(--color-warm-white) 72%, transparent);
+}
+
+.contact-aside--brand .contact-aside__value {
+  color: var(--text-on-dark);
+}
+
+.contact-aside--brand a.contact-aside__value:hover {
+  color: var(--color-gold);
+}
+
+.contact-aside--brand .contact-hours__title {
+  color: var(--color-gold);
+}
+
+.contact-aside--brand .contact-hours__day {
+  color: color-mix(in srgb, var(--color-warm-white) 88%, transparent);
+}
+
+.contact-aside--brand .contact-hours__time {
+  color: var(--text-on-dark);
+}
+
+.contact-aside--brand .contact-aside__footnote {
+  margin: var(--space-5) 0 0;
+  padding-top: var(--space-4);
+  border-top: 1px solid color-mix(in srgb, var(--color-warm-white) 12%, transparent);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--color-warm-white) 78%, transparent);
 }
 
 @media (min-width: 900px) {
@@ -100,6 +129,51 @@
 
 a.contact-aside__value:hover {
   color: var(--primary);
+}
+
+.contact-hours {
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid color-mix(in srgb, var(--color-warm-white) 12%, transparent);
+}
+
+.contact-aside:not(.contact-aside--brand) .contact-hours {
+  border-top-color: var(--border);
+}
+
+.contact-hours__title {
+  margin: 0 0 var(--space-3);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.contact-hours__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.contact-hours__row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.contact-hours__day {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.contact-hours__time {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
 }
 
 .contact-success {
@@ -197,8 +271,8 @@ a.contact-aside__value:hover {
 .contact-form__input:focus,
 .contact-form__textarea:focus {
   outline: none;
-  border-color: color-mix(in srgb, var(--primary) 55%, var(--border));
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 18%, transparent);
+  border-color: color-mix(in srgb, var(--color-gold) 55%, var(--border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-gold) 16%, transparent);
 }
 
 .contact-form__input--error,
@@ -225,4 +299,10 @@ a.contact-aside__value:hover {
 
 .contact-form__submit {
   align-self: flex-start;
+}
+
+.contact-form__submit:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+  transform: none;
 }

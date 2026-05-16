@@ -1,0 +1,33 @@
+.ohb-map {
+  margin: 0;
+  max-width: 22rem;
+}
+
+.ohb-map__svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.2));
+}
+
+.ohb-map__land {
+  vector-effect: non-scaling-stroke;
+}
+
+.ohb-map__dot {
+  fill: var(--color-gold);
+  stroke: var(--color-navy);
+  stroke-width: 0.8;
+}
+
+.ohb-map__label {
+  font-family: var(--font-sans);
+  font-weight: 700;
+}
+
+.ohb-map__caption {
+  margin: var(--space-3) 0 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--color-warm-white) 78%, transparent);
+}

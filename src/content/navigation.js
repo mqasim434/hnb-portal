@@ -6,11 +6,12 @@ export const NAV_GROUPS = [
     label: 'Freelancers',
     pathPrefix: '/freelancers',
     items: [
+      { to: '/freelancers', label: 'Overzicht' },
       { to: '/freelancers/openstaande-opdrachten', label: 'Openstaande opdrachten' },
       { to: '/freelancers/hoe-het-werkt', label: 'Hoe het werkt' },
       { to: '/freelancers/inkomsten-betalingen', label: 'Inkomsten & betalingen' },
       { to: '/freelancers/jouw-certificering', label: 'Jouw certificering' },
-      { to: '/register', label: 'Direct aanmelden' },
+      { to: '/freelancers/direct-aanmelden', label: 'Direct aanmelden' },
     ],
   },
   {
@@ -28,7 +29,9 @@ export const NAV_GROUPS = [
   },
   {
     id: 'over-hb',
-    label: 'Over H&B Service Group',
+    label: 'Over H&B',
+    /** Volledige naam voor tooltip (desktop nav ruimte) */
+    groupTitle: 'Over H&B Service Group',
     pathPrefix: '/over-hb',
     items: [
       { to: '/over-hb/ons-verhaal', label: 'Ons verhaal' },
@@ -57,7 +60,7 @@ export const MOBILE_MENU_PRIMARY_CTA = {
 }
 
 export const MOBILE_MENU_SECONDARY_CTA = {
-  to: '/register',
+  to: '/freelancers/direct-aanmelden',
   label: 'Direct aanmelden',
 }
 

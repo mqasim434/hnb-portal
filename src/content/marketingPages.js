@@ -136,7 +136,7 @@ export const MARKETING_PAGES = {
         ],
       },
     ],
-    ctas: [{ to: '/register', label: 'Nu registreren', primary: true }],
+    ctas: [{ to: '/freelancers/direct-aanmelden', label: 'Nu registreren', primary: true }],
   },
 
   'bv-vergelijk-professionals': {
@@ -170,7 +170,7 @@ export const MARKETING_PAGES = {
       {
         heading: 'Offerte op maat',
         paragraphs: [
-          'Voor een concreet voorstel hebben we inzicht in data, bezetting, type rol (hospitality, security, podium ondersteuning), locatie en eventuele nacht- of feestdagentoeslagen. Vraag vrijblijvend capaciteit aan via het formulier op Vind talent.',
+          'Voor een concreet voorstel hebben we inzicht in data, bezetting, type rol (hospitality, security, podiumondersteuning), locatie en eventuele nacht- of feestdagentoeslagen. Vraag vrijblijvend capaciteit aan via het formulier voor personeelsaanvraag.',
         ],
       },
       {
@@ -368,7 +368,7 @@ export const MARKETING_PAGES = {
         ],
       },
     ],
-    ctas: [{ to: '/register', label: 'Word onderdeel van het netwerk' }],
+    ctas: [{ to: '/freelancers/direct-aanmelden', label: 'Word onderdeel van het netwerk' }],
   },
 
   'hb-beleid': {

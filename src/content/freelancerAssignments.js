@@ -1,0 +1,81 @@
+/**
+ * Voorbeelddata voor openstaande opdrachten (later vervangen door API).
+ * @typedef {'Hospitality' | 'Beveiliging' | 'Algemeen'} AssignmentRole
+ * @typedef {'open' | 'bijna_vol' | 'gesloten'} AssignmentStatus
+ */
+
+/** @type {{ id: string, typeLabel: string, dateLabel: string, city: string, hoursLabel: string, role: AssignmentRole, roleLabel: string, certification: string, status: AssignmentStatus, statusLabel: string }[]} */
+export const FREELANCER_ASSIGNMENTS_SAMPLE = [
+  {
+    id: '1',
+    typeLabel: 'Festival · podiumteam',
+    dateLabel: 'Za 14 juni 2026',
+    city: 'Amsterdam',
+    hoursLabel: '11:00 – 01:00 (incl. pauze)',
+    role: 'Hospitality',
+    roleLabel: 'Barondersteuning',
+    certification: 'Sociale hygiëne (SVH)',
+    status: 'open',
+    statusLabel: 'Open',
+  },
+  {
+    id: '2',
+    typeLabel: 'Corporate receptie',
+    dateLabel: 'Do 19 juni 2026',
+    city: 'Utrecht',
+    hoursLabel: '16:00 – 00:00',
+    role: 'Hospitality',
+    roleLabel: 'Host / hostess',
+    certification: 'Geen verplicht certificaat · representatief profiel',
+    status: 'open',
+    statusLabel: 'Open',
+  },
+  {
+    id: '3',
+    typeLabel: 'Clubavond · deurteam',
+    dateLabel: 'Vr 20 juni 2026',
+    city: 'Amsterdam',
+    hoursLabel: '21:00 – 04:00',
+    role: 'Beveiliging',
+    roleLabel: 'Portier / eventbeveiliging',
+    certification: 'Diploma Beveiliger 2 · geldige POV',
+    status: 'bijna_vol',
+    statusLabel: 'Bijna vol',
+  },
+  {
+    id: '4',
+    typeLabel: 'Buitenfestival · perimeter',
+    dateLabel: 'Zo 22 juni 2026',
+    city: 'Haarlem',
+    hoursLabel: '09:00 – 20:00',
+    role: 'Beveiliging',
+    roleLabel: 'Eventbeveiliging',
+    certification: 'Diploma Beveiliger 2 · BHV aanbevolen',
+    status: 'open',
+    statusLabel: 'Open',
+  },
+  {
+    id: '5',
+    typeLabel: 'Concert · backstage',
+    dateLabel: 'Wo 25 juni 2026',
+    city: 'Rotterdam',
+    hoursLabel: '14:00 – 23:30',
+    role: 'Algemeen',
+    roleLabel: 'Runner / productie',
+    certification: 'Geen wettelijke eisen · ervaring is een pré',
+    status: 'gesloten',
+    statusLabel: 'Gesloten',
+  },
+  {
+    id: '6',
+    typeLabel: 'Zakelijke bijeenkomst',
+    dateLabel: 'Di 1 juli 2026',
+    city: 'Amsterdam',
+    hoursLabel: '07:30 – 15:00',
+    role: 'Hospitality',
+    roleLabel: 'Ontbijt & registratie',
+    certification: 'HACCP basis indien food-service',
+    status: 'open',
+    statusLabel: 'Open',
+  },
+]

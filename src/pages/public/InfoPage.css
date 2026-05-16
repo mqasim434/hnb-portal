@@ -75,6 +75,12 @@
   border-bottom: 1px solid var(--border);
 }
 
+.info-page__article > article {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
 .info-page__article:last-child {
   border-bottom: 0;
   padding-bottom: 0;

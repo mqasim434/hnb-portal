@@ -26,11 +26,13 @@ export default function InfoPage({ eyebrow, title, lead, sections = [], articles
           <ul className="info-page__articles">
             {articles.map((a) => (
               <li key={a.title} className="info-page__article">
-                {a.date ? (
-                  <span className="info-page__article-date">{a.date}</span>
-                ) : null}
-                <h2 className="info-page__article-title">{a.title}</h2>
-                <p className="info-page__article-excerpt">{a.excerpt}</p>
+                <article>
+                  {a.date ? (
+                    <span className="info-page__article-date">{a.date}</span>
+                  ) : null}
+                  <h2 className="info-page__article-title">{a.title}</h2>
+                  <p className="info-page__article-excerpt">{a.excerpt}</p>
+                </article>
               </li>
             ))}
           </ul>

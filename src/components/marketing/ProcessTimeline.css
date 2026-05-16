@@ -1,0 +1,172 @@
+/* Gedeelde verticale proces-tijdlijn (licht + donker oppervlak) */
+
+.hnb-process-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 40rem;
+}
+
+.hnb-process-timeline__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-4) var(--space-5);
+  padding-bottom: var(--space-6);
+}
+
+.hnb-process-timeline__item:last-child {
+  padding-bottom: 0;
+}
+
+.hnb-process-timeline__rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1.5rem;
+}
+
+.hnb-process-timeline__dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: var(--color-gold);
+  flex-shrink: 0;
+}
+
+.hnb-process-timeline--surface .hnb-process-timeline__dot {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-gold) 35%, transparent);
+}
+
+.hnb-process-timeline--navy .hnb-process-timeline__dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  box-shadow:
+    0 0 0 2px var(--color-navy),
+    0 0 0 5px color-mix(in srgb, var(--color-gold) 40%, transparent);
+}
+
+.hnb-process-timeline__line {
+  flex: 1;
+  width: 2px;
+  margin-top: var(--space-2);
+  min-height: 1.5rem;
+  border-radius: 1px;
+}
+
+.hnb-process-timeline--surface .hnb-process-timeline__line {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-gold) 55%, var(--border)) 0%,
+    var(--border) 100%
+  );
+}
+
+.hnb-process-timeline--navy .hnb-process-timeline__line {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-gold) 45%, var(--color-mid-navy)) 0%,
+    var(--color-mid-navy) 100%
+  );
+}
+
+.hnb-process-timeline__body {
+  border-radius: var(--radius-card);
+  padding: var(--space-4) var(--space-5);
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.hnb-process-timeline--surface .hnb-process-timeline__body {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-xs);
+}
+
+.hnb-process-timeline--surface
+  .hnb-process-timeline__item:hover
+  .hnb-process-timeline__body {
+  box-shadow: var(--shadow-sm);
+  border-color: color-mix(in srgb, var(--color-gold) 22%, var(--border));
+}
+
+.hnb-process-timeline--navy .hnb-process-timeline__body {
+  padding: var(--space-5);
+  background: color-mix(in srgb, var(--color-mid-navy) 92%, var(--color-deep-navy));
+  border: 1px solid color-mix(in srgb, var(--color-warm-white) 12%, transparent);
+}
+
+.hnb-process-timeline--navy
+  .hnb-process-timeline__item:hover
+  .hnb-process-timeline__body {
+  border-color: color-mix(in srgb, var(--color-gold) 35%, transparent);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hnb-process-timeline--surface
+    .hnb-process-timeline__item:hover
+    .hnb-process-timeline__body {
+    box-shadow: var(--shadow-xs);
+  }
+}
+
+.hnb-process-timeline--surface .hnb-process-timeline__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.hnb-process-timeline--navy .hnb-process-timeline__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-on-dark);
+  letter-spacing: -0.02em;
+}
+
+.hnb-process-timeline--surface .hnb-process-timeline__text {
+  margin: var(--space-2) 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.hnb-process-timeline--navy .hnb-process-timeline__text {
+  margin: var(--space-2) 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--color-warm-white) 86%, transparent);
+}
+
+.hnb-process-timeline--surface .hnb-process-timeline__detail {
+  margin: var(--space-3) 0 0;
+  padding-top: var(--space-3);
+  border-top: 1px dashed var(--border);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--text-subtle);
+}
+
+.hnb-process-timeline--navy .hnb-process-timeline__detail {
+  margin: var(--space-3) 0 0;
+  padding-top: var(--space-3);
+  border-top: 1px dashed color-mix(in srgb, var(--color-warm-white) 20%, transparent);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--color-gold) 75%, var(--color-warm-white));
+}
+
+@media (min-width: 640px) {
+  .hnb-process-timeline--surface {
+    max-width: 48rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .hnb-process-timeline--navy {
+    max-width: 48rem;
+  }
+}

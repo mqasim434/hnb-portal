@@ -1,0 +1,57 @@
+/* Over H&B — layout helpers (PageHero + b2b-section used for rhythm) */
+
+.ohb-page {
+  overflow-x: clip;
+}
+
+.ohb-team-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-5);
+}
+
+@media (min-width: 640px) {
+  .ohb-team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.ohb-werkgebied-split {
+  display: grid;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .ohb-werkgebied-split {
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 340px);
+  }
+}
+
+.ohb-werkgebied-split > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.ohb-aanpak-grid {
+  display: grid;
+  gap: var(--space-10);
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  .ohb-aanpak-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: var(--space-12);
+  }
+}
+
+.ohb-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}

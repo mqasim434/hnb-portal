@@ -1,0 +1,23 @@
+.hnb-trust-blurb {
+  padding-block: var(--space-6);
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--color-navy) 4%, var(--background));
+}
+
+.hnb-trust-blurb__inner {
+  margin: 0;
+  max-width: 52rem;
+  font-size: var(--font-subhead-size);
+  line-height: var(--font-subhead-line);
+  color: var(--text-muted);
+  text-align: left;
+}
+
+.hnb-trust-blurb__inner p {
+  margin: 0;
+}
+
+.hnb-trust-blurb strong {
+  font-weight: 700;
+  color: var(--text);
+}

@@ -14,11 +14,13 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  scroll-padding-top: var(--header-sticky-offset);
 }
 
 body {
   margin: 0;
   min-height: 100svh;
+  overflow-x: clip;
   font-family: var(--font-sans);
   font-size: var(--font-body-size);
   font-weight: var(--font-body-weight);
@@ -81,12 +83,16 @@ p {
 
 #root {
   min-height: 100svh;
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 .site-shell {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 .site-shell__main {
@@ -367,13 +373,14 @@ p {
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  min-height: 3rem;
+  min-height: var(--touch-target-min);
   padding: 0.75rem 1.75rem;
   font-weight: 600;
   font-size: var(--font-subhead-size);
   line-height: 1.2;
   border-radius: var(--radius-button);
   border: 1px solid transparent;
+  touch-action: manipulation;
   transition:
     transform var(--transition-fast),
     box-shadow var(--transition-fast),
@@ -777,5 +784,77 @@ p {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Mobile-first: ≤640px — volle-breedte CTA’s, formulieren, geen horizontale scroll */
+/* -------------------------------------------------------------------------- */
+
+button:not(:disabled),
+.site-header__menu-toggle,
+.site-header__accordion-trigger,
+.site-header__btn {
+  touch-action: manipulation;
+}
+
+@media (max-width: 39.99875rem) {
+  .page-hero__slot {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .page-hero__slot .hnb-btn {
+    width: 100%;
+    justify-content: center;
+    min-height: var(--touch-target-min);
+  }
+
+  .hnb-cta-group > .hnb-btn,
+  .hnb-cta-strip__actions .hnb-btn,
+  .site-footer__ctas .hnb-btn,
+  .b2b-success__actions .hnb-btn,
+  .fl-form__actions .hnb-btn,
+  .fl-alert .hnb-btn,
+  .contact-success__btn,
+  .login-card__btn,
+  .not-found__btn {
+    width: 100%;
+    justify-content: center;
+    min-height: var(--touch-target-min);
+  }
+
+  .site-footer__ctas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .b2b-form__submit {
+    width: 100%;
+    min-height: var(--touch-target-min);
+  }
+
+  .contact-form__submit {
+    width: 100%;
+    min-height: var(--touch-target-min);
+  }
+
+  .fl-form__submit {
+    width: 100%;
+    min-height: var(--touch-target-min);
+  }
+
+  .b2b-form__input,
+  .b2b-form__select,
+  .contact-form__input,
+  .fl-form__field input:not([type='checkbox']),
+  .fl-form__field select {
+    min-height: var(--touch-target-min);
+  }
+
+  .hnb-input,
+  .hnb-select {
+    min-height: var(--touch-target-min);
   }
 }

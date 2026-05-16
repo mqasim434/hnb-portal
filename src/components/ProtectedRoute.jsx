@@ -1,5 +1,7 @@
+import { Suspense } from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
+import PageRouteSkeleton from './performance/PageRouteSkeleton'
 
 /**
  * Requires a signed-in Firebase user (mirrored in Redux) and a matching `role` claim.
@@ -30,5 +32,9 @@ export default function ProtectedRoute({ allowedRole }) {
     return <Navigate to="/" replace />
   }
 
-  return <Outlet />
+  return (
+    <Suspense fallback={<PageRouteSkeleton />}>
+      <Outlet />
+    </Suspense>
+  )
 }
