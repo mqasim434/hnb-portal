@@ -3,25 +3,25 @@ export const COMPANY_SEO = {
   personeel: {
     title: 'Personeel aanvragen voor uw event',
     description:
-      'Vraag gescreend hospitality- en beveiligingspersoneel aan bij H&B Service Group. Eén coördinator, duidelijke briefing, roster naar akkoord.',
+      'Vraag gescreend hospitality- en beveiligingspersoneel aan bij H&B Service Group. Eén coördinator, duidelijke briefing, rooster naar akkoord.',
     path: '/bedrijven/personeel-aanvragen',
   },
   aanbod: {
     title: 'Ons aanbod — hospitality en beveiliging',
     description:
-      'Hosts, bar, portiers en eventpersoneel uit één hand. H&B Service Group levert briefing, roster en nazorg voor live events.',
+      'Hosts, bar, portiers en eventpersoneel uit één hand. H&B Service Group levert briefing, rooster en nazorg voor live events.',
     path: '/bedrijven/ons-aanbod',
   },
   tarieven: {
     title: 'Tarieven op aanvraag',
     description:
-      'Rate cards en offertes afgestemd op rol, risico en doorlooptijd. Vraag een vrijblijvende personeelsaanvraag aan bij H&B Service Group.',
+      'Tariefkaarten en offertes afgestemd op rol, risico en doorlooptijd. Vraag een vrijblijvende personeelsaanvraag aan bij H&B Service Group.',
     path: '/bedrijven/tarieven',
   },
   sectoren: {
     title: 'Onze sectoren',
     description:
-      'Festivals, corporate, nachtleven en theaters: H&B stemt teams af op tempo, risico en venue-compliance.',
+      'Festivals, corporate, nachtleven en theaters: H&B stemt teams af op tempo, risico en wat de locatie voorschrijft.',
     path: '/bedrijven/sectoren',
   },
   functies: {

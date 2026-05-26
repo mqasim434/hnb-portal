@@ -4,35 +4,10 @@
 
 export const MARKETING_PAGES = {
   'fl-zo-werkt-het': {
-    eyebrow: 'Freelancers',
+    eyebrow: 'FREELANCERS',
     title: 'Hoe het werkt',
     lead: 'Van aanmelding tot definitieve bevestiging op de planning: heldere stappen en vaste afspraken, zodat u weet wat u kunt verwachten.',
-    sections: [
-      {
-        heading: 'Aanmelden en profiel',
-        paragraphs: [
-          'U vult het registratieformulier in met uw beschikbaarheid, ervaring en documenten (zoals werkvergunning en certificaten waar van toepassing). Hoe completer uw profiel, hoe gerichte de uitnodigingen voor shifts.',
-        ],
-      },
-      {
-        heading: 'Screening en goedkeuring',
-        paragraphs: [
-          'Ons team controleert rechtsgeldigheid, certificering en aansluiting op de rollen die wij inplannen. Ontbreekt er iets, dan krijgt u een concreet verzoek — geen zwarte doos.',
-        ],
-      },
-      {
-        heading: 'Shifts accepteren en briefen',
-        paragraphs: [
-          'Zodra u live staat op het rooster, ziet u opdrachten die bij uw profiel passen. Na acceptatie ontvangt u briefings: locatie, aankomsttijd, dresscode, contact op locatie en relevante veiligheidsinformatie.',
-        ],
-      },
-      {
-        heading: 'Na afloop',
-        paragraphs: [
-          'Uren en goedkeuring worden volgens de afspraak verwerkt. Bij vragen over uitbetaling of een shift staat uw coördinator voor u klaar.',
-        ],
-      },
-    ],
+    sections: [],
   },
 
   'fl-inkomsten-betalingen': {
@@ -49,8 +24,21 @@ export const MARKETING_PAGES = {
       {
         heading: 'Uren en facturatie',
         paragraphs: [
-          'Gewerkte uren worden vastgelegd volgens het mutatieproces van de opdrachtgever en H&B. ZZP’ers factureren volgens de geldende richtlijn; loondienst of payrolling verloopt via het voorgeschreven kanaal. Alle stappen vindt u terug in het portaal.',
+          "Gewerkte uren worden vastgelegd volgens het mutatieproces van de opdrachtgever en H&B. Werkt u in loondienst of via payroll, dan verloopt de afhandeling via het voorgeschreven kanaal. Werkt u als zzp'er, dan factureert u volgens de geldende richtlijn en de modelovereenkomst die wij met u afsluiten. Alle stappen vindt u terug in het portaal.",
         ],
+      },
+      {
+        heading: 'Welk contract krijgt u?',
+        paragraphs: [
+          'Wij werken vanuit drie kanalen: loondienst (oproep- of min-max-contract), payroll via een gespecialiseerde partner, of zzp via een door de Belastingdienst geaccepteerde modelovereenkomst. Welk kanaal voor u geldt, hangt af van uw situatie en het type opdracht.',
+        ],
+        bullets: [
+          'Loondienst: voor structurele inzet, met opbouw van vakantiegeld en pensioenrechten waar van toepassing.',
+          'Payroll: voor flexibele inzet zonder eigen administratie — uw werkgeverschap loopt via onze payrollpartner.',
+          'zzp: alleen mogelijk wanneer u aantoonbaar voor meerdere opdrachtgevers werkt en de modelovereenkomst Wet DBA is ondertekend.',
+        ],
+        closing:
+          'Twijfelt u welk kanaal bij u past? Uw coördinator denkt mee — dat voorkomt problemen achteraf voor u én voor de opdrachtgever.',
       },
       {
         heading: 'Betaaltermijn',
@@ -65,7 +53,7 @@ export const MARKETING_PAGES = {
   'fl-veiligheid-certificering': {
     eyebrow: 'Freelancers',
     title: 'Jouw certificering',
-    lead: 'We rosteren alleen mensen die passen bij de risico’s en compliance-eisen van de locatie — voor uw veiligheid, die van collega’s en bezoekers.',
+    lead: 'We roosteren alleen mensen die passen bij de risico’s en compliance-eisen van de locatie — voor uw veiligheid, die van collega’s en bezoekers.',
     sections: [
       {
         heading: 'Certificaten en vergunningen',
@@ -109,7 +97,7 @@ export const MARKETING_PAGES = {
       {
         heading: 'Representativiteit',
         bullets: [
-          'Professioneel gedrag, juiste uniform of dresscode, respectvolle omgang met gasten en collega’s.',
+          'Professioneel gedrag, juiste uniformen of dresscode, respectvolle omgang met gasten en collega’s.',
           'Alcohol- en drugsbeleid: nul tolerantie op locatie tenzij uitdrukkelijk anders afgestemd voor een functie.',
         ],
       },
@@ -147,7 +135,7 @@ export const MARKETING_PAGES = {
       {
         heading: 'Profielen',
         paragraphs: [
-          'U ziet per voorgestelde professional de relevante werkervaring, rolhistorie en actuele diploma’s. Waar mogelijk tonen we ook terugkerende inzet bij vergelijkbare events of venues.',
+          'U ziet per voorgestelde professional de relevante werkervaring, rolhistorie en actuele diploma’s. Waar mogelijk tonen we ook terugkerende inzet bij vergelijkbare events of locaties.',
         ],
       },
       {
@@ -165,23 +153,23 @@ export const MARKETING_PAGES = {
   'bv-tarieven': {
     eyebrow: 'Bedrijven',
     title: 'Tarieven',
-    lead: 'Heldere scopes en rate cards per type inzet — afgestemd op duur, risicoklasse en doorlooptijd van het project.',
-    sections: [
-      {
-        heading: 'Offerte op maat',
-        paragraphs: [
-          'Voor een concreet voorstel hebben we inzicht in data, bezetting, type rol (hospitality, security, podiumondersteuning), locatie en eventuele nacht- of feestdagentoeslagen. Vraag vrijblijvend capaciteit aan via het formulier voor personeelsaanvraag.',
-        ],
-      },
-      {
-        heading: 'Wat is inbegrepen',
-        bullets: [
-          'Voorselectie, onboarding-check en planning via één coördinator.',
-          'Standaard briefingpakket voor teams op locatie.',
-          'Structurele nazorg en urenregistratie volgens afspraak.',
-        ],
-      },
+    lead: 'Heldere scopes en tariefkaarten per type inzet — afgestemd op duur, risicoklasse en doorlooptijd van het project.',
+    indicativeEyebrow: 'INDICATIE',
+    indicativeTitle: 'Indicatieve tarieven per rol',
+    indicativeIntro:
+      'Onderstaande bedragen zijn richtprijzen voor reguliere inzet (dagdienst, doordeweeks). Definitieve tarieven volgen in de offerte en zijn afhankelijk van duur, risicoklasse, doorlooptijd en eventuele toeslagen.',
+    indicativeRates: [
+      'Host / hostess — vanaf €29 per uur',
+      'Bar & service — vanaf €29 per uur',
+      'Portier / eventbeveiliging — vanaf €35 per uur',
+      'Runner / productie — vanaf €27 per uur',
     ],
+    indicativeSurcharge:
+      'Toeslagen kunnen gelden voor nachturen, weekenddiensten, feestdagen, hoog-risico-events en spoedinzet binnen 72 uur.',
+    quoteHeading: 'Offerte op maat',
+    quoteBody:
+      'Voor een concreet voorstel hebben wij inzicht nodig in data, bezetting, type rol (hospitality, beveiliging, podiumondersteuning), locatie en eventuele nacht- of feestdagentoeslagen. Vraag vrijblijvend capaciteit aan via het formulier voor personeelsaanvragen.',
+    quoteCta: { to: '/bedrijven/personeel-aanvragen', label: 'Personeelsaanvraag indienen' },
     ctas: [{ to: '/bedrijven/personeel-aanvragen', label: 'Personeelsaanvraag indienen', primary: true }],
   },
 
@@ -193,7 +181,7 @@ export const MARKETING_PAGES = {
       {
         heading: 'Beschikbare filterdimensies',
         bullets: [
-          'Rol en senioriteit (host, bar, security, algemeen event).',
+          'Rol en senioriteit (host, bar, beveiliging, algemeen event).',
           'Taal en gastgerichtheid.',
           'Certificering (SGHV, BHV, beveiliging, etc.).',
           'Beschikbaarheid en reisbereidheid binnen regio’s.',
@@ -214,18 +202,9 @@ export const MARKETING_PAGES = {
     lead: 'Van festivalterrein tot zakelijke receptie: wij kennen het tempo en de risico’s van verschillende sectoren.',
     sections: [
       {
-        heading: 'Waar we sterk in zijn',
-        bullets: [
-          'Festivals en buitenprogramma’s — schaalbaar personeel en duidelijke perimeterbriefings.',
-          'Corporate en private events — representatieve teams en discrete beveiliging.',
-          'Nachtleven en venues — piekbezetting en ervaring met dynamische ruimtes.',
-          "Theaters, arena's en multi-use locaties — herhalingsprogramma's met vaste gezichten waar gewenst.",
-        ],
-      },
-      {
         heading: 'Sectorspecifieke compliance',
         paragraphs: [
-          'Licensing en venue-policy verschillen per locatie. We stemmen roosters af op lokale eisen en de RI&E van uw productie, zodat vergunningen en verzekeringen niet onder druk komen.',
+          'Vergunningseisen en huisregels van de locatie verschillen per locatie. We stemmen roosters af op lokale eisen en de RI&E van uw productie, zodat vergunningen en verzekeringen niet onder druk komen.',
         ],
       },
     ],
@@ -234,20 +213,22 @@ export const MARKETING_PAGES = {
   'bv-flexpools': {
     eyebrow: 'Bedrijven',
     title: 'Flexpools',
-    lead: 'Een vaste pool flexibele professionals die uw huisstijl en werkwijze kennen — klaar voor pieken zonder dagelijks opnieuw te briefen.',
+    lead: 'Een vaste pool flexibele professionals die uw huisstijl en werkwijze kennen — klaar voor pieken, zonder dat u dagelijks opnieuw hoeft te briefen.',
     sections: [
       {
         heading: 'Opbouw van een pool',
         paragraphs: [
-          'Samen definiëren we het profiel (skills, uniforms, voorkeursplanning). Wij werven en screenen kandidaten; u keurt de kern goed. Daarna plannen we vanuit die pool met voorrang op familiariteit en performance.',
+          'Samen definiëren we het profiel (skills, uniformen, voorkeursplanning). Wij werven en screenen kandidaten; u keurt de kern goed. Daarna plannen we vanuit die pool met voorrang op vertrouwdheid en prestaties.',
         ],
       },
       {
         heading: 'Voordelen',
         bullets: [
-          'Snellere inzet bij last-minute wijzigingen.',
-          'Minder uitleg op locatie doordat teams uw locatie kennen.',
-          'Betere voorspelbaarheid van kwaliteit en gedrag op de vloer.',
+          'Snellere inzet bij last-minute wijzigingen — bekende mensen reageren sneller op spoedoproepen.',
+          'Minder uitleg op locatie doordat teams uw locatie, huisregels en publiek kennen.',
+          'Consistente service en herkenbaarheid voor terugkerende bezoekers.',
+          'Lagere uitval doordat planners en medewerkers elkaar persoonlijk kennen.',
+          'Voorspelbare kostenstructuur door langetermijnafspraken op tarief en bandbreedte.',
         ],
       },
     ],
@@ -257,21 +238,7 @@ export const MARKETING_PAGES = {
   'hb-wie-wij-zijn': {
     eyebrow: 'Over H&B Service Group',
     title: 'Wie wij zijn',
-    lead: 'Een team van planners en coördinatoren die het vak van live events serieus neemt — mensen die zelf weten hoe laat de change-over begint.',
-    sections: [
-      {
-        heading: 'Cultuur',
-        paragraphs: [
-          'We geloven dat respect voor podium-, hospitality- en securityteams de kwaliteit van elk event verhoogt. Open communicatie, voorspelbare processen en geen romance over “gewoon even regelen” — alleen afspraken die kloppen onder tijdsdruk.',
-        ],
-      },
-      {
-        heading: 'Samenwerking',
-        paragraphs: [
-          'Onze coördinatoren werken nauw samen met locatie-managers en productieleiders. We willen onderdeel van uw operatie voelen, niet een externe lijst namen.',
-        ],
-      },
-    ],
+    lead: 'Planners en coördinatoren die het vak van live events serieus nemen — mensen die weten hoe laat de omschakeling begint en wat er op de vloer nodig is.',
     ctas: [{ to: '/over-hb/ons-verhaal', label: 'Lees meer over ons' }],
   },
 
@@ -281,18 +248,14 @@ export const MARKETING_PAGES = {
     lead: 'Wij verbinden organisatoren van live events met gescreend hospitality- en beveiligingspersoneel — van eerste brief tot uitloop.',
     sections: [
       {
-        heading: 'Kernactiviteiten',
+        heading: 'Wat wij voor u regelen',
         bullets: [
-          'Roosters en staffingplannen voor events, clubs, festivals en zakelijke programma’s.',
-          'Compliance-checks op werkvergunningen, certificaten en rol-match.',
-          'Briefing en dispatch: één pakket met locatie-informatie en escalatiepad.',
-          'Nazorg: uren, evaluaties en bijsturing voor terugkerende boekingen.',
-        ],
-      },
-      {
-        heading: 'Voor wie',
-        paragraphs: [
-          'Voor opdrachtgevers die schaal en betrouwbaarheid nodig hebben, en voor professionals die flexibel willen werken met duidelijke afspraken. H&B faciliteert de brug — technisch waar nodig via portal en persoonlijk waar het telt.',
+          'Werving, screening en onboarding van nieuwe mensen voor uw programma.',
+          'Controle op diploma’s, geldigheid van passen en certificeringen.',
+          'Roosterwijzigingen en vervanging bij uitval, ook in het weekend en in de avond.',
+          'Mutatie- en urenadministratie volgens afspraak met uw financiële afdeling.',
+          'Communicatie met dienstdoende managers en productie tijdens het event.',
+          'Naleving van WPBR, Waadi, Wet DBA en AVG vanuit onze kant — gedocumenteerd.',
         ],
       },
     ],
@@ -303,29 +266,9 @@ export const MARKETING_PAGES = {
   },
 
   'hb-nieuws': {
-    eyebrow: 'Over H&B Service Group',
+    eyebrow: 'OVER H&B SERVICE GROUP',
     title: 'Nieuws',
-    lead: 'Updates over samenwerkingen, platformverbeteringen en kijken achter de schermen.',
-    articles: [
-      {
-        title: 'Nieuwe freelancerportal in gebruik',
-        date: 'april 2026',
-        excerpt:
-          'Freelancers kunnen uren en facturatie onderdelen straks volledig digitaal volgen. We rollen stapsgewijs uit en begeleiden bestaande teams bij de overstap.',
-      },
-      {
-        title: 'Verscherpte screening beveiliging',
-        date: 'maart 2026',
-        excerpt:
-          'In lijn met wijzigende vergunningsplicht hebben we onze controle op diploma’s en actuele registraties aangescherpt — transparanter voor opdrachtgevers én professionals.',
-      },
-      {
-        title: 'Partnerschap met Amsterdamse venuegroep',
-        date: 'februari 2026',
-        excerpt:
-          'Vaste flexpool voor hospitality en deurbeveiliging op meerdere locaties; kortere instaptijd voor teams en consistente gastbeleving.',
-      },
-    ],
+    lead: 'Updates over samenwerkingen, platformverbeteringen en kijk achter de schermen bij H&B.',
   },
 
   'hb-chat': {
@@ -353,7 +296,7 @@ export const MARKETING_PAGES = {
   'hb-netwerk': {
     eyebrow: 'Over H&B Service Group',
     title: 'Netwerk',
-    lead: 'H&B is verbonden met venues, producers en een groot freelancerbestand in Nederland — gebouwd op herhaalde samenwerking, niet op eenmalige transacties.',
+    lead: 'H&B is verbonden met locaties, producers en een groot freelancerbestand in Nederland — gebouwd op herhaalde samenwerking, niet op eenmalige transacties.',
     sections: [
       {
         heading: 'Professionals',
@@ -404,17 +347,9 @@ export const MARKETING_PAGES = {
     lead: 'Hospitality en beveiliging uit één hand: van korte piek tot vaste pool — altijd met voorgecontroleerde professionals en één coördinator.',
     sections: [
       {
-        heading: 'Wat u kunt inzetten',
-        bullets: [
-          'Hosts, barteams en service-ondersteuning voor hoge drukte.',
-          'Bevoegde portiers en eventbeveiliging, afgestemd op locatiebeleid.',
-          'Algemeen eventpersoneel: runners, accreditatie, logistiek.',
-        ],
-      },
-      {
         heading: 'Hoe we leveren',
         paragraphs: [
-          'We combineren briefing, roster en nazorg. U kiest het profiel; wij leveren namen die passen bij uw merk, vergunningen en planning — transparant tot aan uitbetaling.',
+          'We combineren briefing, rooster en nazorg. U kiest het profiel; wij leveren namen die passen bij uw merk, vergunningen en planning — transparant tot aan uitbetaling.',
         ],
       },
     ],
@@ -424,39 +359,17 @@ export const MARKETING_PAGES = {
     ],
   },
 
-  'hb-werkgebied': {
-    eyebrow: 'Over H&B Service Group',
-    title: 'Werkgebied',
-    lead: 'We zijn sterk vertegenwoordigd in de Randstad en ondersteunen landelijke programma’s waar orchestratie vanuit één bureau nodig is.',
-    sections: [
-      {
-        heading: 'Focusregio',
-        paragraphs: [
-          'Amsterdam en omgeving vormen onze thuisbasis — korte lijnen met vaste venues en terugkerende producties. Voor uitwaarts schakelen we met partners die dezelfde kwaliteitsnorm hanteren.',
-        ],
-      },
-      {
-        heading: 'Nationaal',
-        bullets: [
-          'Festivals en tours met meerdere stops.',
-          'Zakelijke reeksen in verschillende steden.',
-          'Logistiek en planning afgestemd op reis- en hotelschema’s waar nodig.',
-        ],
-      },
-    ],
-  },
-
   'hb-vergunningen': {
-    eyebrow: 'Over H&B Service Group',
+    eyebrow: 'OVER H&B SERVICE GROUP',
     title: 'Vergunningen & compliance',
-    lead: 'We rosteren volgens geldende wet- en locatie-eisen — met traceerbare documentatie voor uw verzekeraar en vergunningverlener.',
+    lead: 'We roosteren volgens geldende wet- en locatie-eisen — met traceerbare documentatie voor uw verzekeraar en vergunningverlener.',
     sections: [
       {
-        heading: 'Wat we controleren',
+        heading: 'Waar we op sturen naast het wettelijke kader',
         bullets: [
           'Recht om te werken en identiteit.',
           'Diploma’s en registraties voor beveiligingsrollen.',
-          'Aanvullende certificaten (BHV, sociale hygiëne) die uw venue voorschrijft.',
+          'Aanvullende certificaten (BHV, sociale hygiëne) die uw locatie voorschrijft.',
         ],
       },
       {

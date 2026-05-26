@@ -1,5 +1,11 @@
 import { Link } from 'react-router-dom'
-import { FOOTER_LEGAL_LINKS, FOOTER_TAGLINE, NAV_GROUPS } from '../content/navigation'
+import {
+  FOOTER_LEGAL_LINKS,
+  FOOTER_PHONE_PLACEHOLDER,
+  FOOTER_REGISTRATION_LINE,
+  FOOTER_TAGLINE,
+  NAV_GROUPS,
+} from '../content/navigation'
 import './Footer.css'
 
 export default function Footer() {
@@ -50,12 +56,9 @@ export default function Footer() {
               </li>
               <li className="site-footer__contact-item">
                 <span className="site-footer__contact-label">Telefoon</span>
-                <a
-                  className="site-footer__contact-value"
-                  href="tel:+31200000000"
-                >
-                  +31 (0) 20 000 0000
-                </a>
+                <span className="site-footer__contact-value site-footer__contact-value--placeholder">
+                  {FOOTER_PHONE_PLACEHOLDER}
+                </span>
               </li>
               <li className="site-footer__contact-item">
                 <span className="site-footer__contact-label">Locatie</span>
@@ -73,7 +76,7 @@ export default function Footer() {
               <Link to="/bedrijven/personeel-aanvragen" className="hnb-btn hnb-btn--primary">
                 Personeel aanvragen
               </Link>
-              <Link to="/freelancers/direct-aanmelden" className="hnb-btn hnb-btn--outline">
+              <Link to="/freelancers/direct-aanmelden" className="hnb-btn hnb-btn--freelancer">
                 Direct aanmelden
               </Link>
             </div>
@@ -82,21 +85,21 @@ export default function Footer() {
 
         <div className="site-footer__bar">
           <div className="site-footer__bar-inner">
-            <div className="site-footer__legal" aria-label="Juridische informatie">
-              <ul className="site-footer__legal-links">
+            <div className="site-footer__bar-main">
+              <p className="site-footer__copyright">
+                © {year} H&amp;B Service Group. Alle rechten voorbehouden.
+              </p>
+              <p className="site-footer__registration">{FOOTER_REGISTRATION_LINE}</p>
+              <ul className="site-footer__policy-links" aria-label="Juridisch">
                 {FOOTER_LEGAL_LINKS.map(({ to, label }) => (
-                  <li key={to}>
-                    <Link to={to} className="site-footer__legal-link">
+                  <li key={to} className="site-footer__policy-links-item">
+                    <Link to={to} className="site-footer__policy-link">
                       {label}
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="site-footer__meta">
-            <p className="site-footer__copyright">
-              © {year} H&amp;B Service Group. Alle rechten voorbehouden.
-            </p>
             <p className="site-footer__credit">
               Gebouwd door{' '}
               <a
@@ -107,7 +110,6 @@ export default function Footer() {
                 Devtanics
               </a>
             </p>
-            </div>
           </div>
         </div>
       </div>

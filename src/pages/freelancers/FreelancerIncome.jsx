@@ -19,7 +19,7 @@ export default function FreelancerIncome() {
   return (
     <main className="fl-page">
       <PageHero variant="light" eyebrow={COPY.eyebrow} title={COPY.title} lead={COPY.lead} stackCtasOnMobile>
-        <Link to="/freelancers/direct-aanmelden" className="hnb-btn hnb-btn--primary">
+        <Link to="/freelancers/direct-aanmelden" className="hnb-btn hnb-btn--freelancer">
           Freelancer worden
         </Link>
         <Link to="/login" className="hnb-btn hnb-btn--outline">
@@ -34,13 +34,14 @@ export default function FreelancerIncome() {
             {section.paragraphs?.map((p) => (
               <p key={p.slice(0, 40)}>{p}</p>
             ))}
-            {section.bullets?.length ? (
-              <ul>
-                {section.bullets.map((b) => (
-                  <li key={b}>{b}</li>
-                ))}
-              </ul>
-            ) : null}
+        {section.bullets?.length ? (
+          <ul>
+            {section.bullets.map((b) => (
+              <li key={b}>{b}</li>
+            ))}
+          </ul>
+        ) : null}
+        {section.closing ? <p key={section.closing.slice(0, 40)}>{section.closing}</p> : null}
           </div>
         ))}
       </section>
@@ -48,7 +49,7 @@ export default function FreelancerIncome() {
       <MarketingCtaStrip
         headingId="fl-income-cta-heading"
         title="Vragen over uw constructie?"
-        lead="We denken mee over ZZP, loon of payrolling — afhankelijk van uw opdracht en afspraak."
+        lead="We denken mee over zzp, loon of payrolling — afhankelijk van uw opdracht en afspraak."
         primaryTo="/contact"
         primaryLabel="Neem contact op"
         secondaryTo="/freelancers/hoe-het-werkt"

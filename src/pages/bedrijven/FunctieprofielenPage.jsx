@@ -10,6 +10,7 @@ import {
 import PageHero from '../../components/marketing/PageHero'
 import BedrijvenTrustBadges from '../../components/bedrijven/BedrijvenTrustBadges'
 import BedrijvenCtaStrip from '../../components/bedrijven/BedrijvenCtaStrip'
+import { B2B_INCLUDED_PACKAGE } from '../../content/bedrijvenIncludedPackage'
 import { B2B_ROLE_PROFILES } from '../../content/bedrijvenRoleProfiles'
 import { COMPANY_SEO } from '../../content/companySeo'
 import { usePageSeo } from '../../hooks/usePageSeo'
@@ -30,7 +31,7 @@ export default function FunctieprofielenPage() {
         variant="light"
         eyebrow="Bedrijven"
         title="Functieprofielen"
-        lead="H&amp;B Service Group levert hospitality en beveiliging voor live events — van briefing en roster tot coördinatie op locatie — zodat uw productieleiding zich op de gast kan richten, niet op gaten in de planning."
+        lead="H&amp;B Service Group levert hospitality en beveiliging voor live events — van briefing en rooster tot coördinatie op locatie — zodat uw productieleiding zich op de gast kan richten, niet op gaten in de planning."
         stackCtasOnMobile
       >
         <Link to="/bedrijven/personeel-aanvragen" className="hnb-btn hnb-btn--primary">
@@ -73,7 +74,7 @@ export default function FunctieprofielenPage() {
               Hospitality en beveiliging gezamenlijk ingekocht
             </h2>
             <p className="svc-section__lead">
-              Twee disciplines, één briefing — hosts, bartenders en beveiliging delen dezelfde call times,
+              Twee disciplines, één briefing — hosts, bartenders en beveiliging delen dezelfde aanmeldmomenten,
               toegangsregels en escalatielijn op de avond.
             </p>
           </header>
@@ -98,8 +99,8 @@ export default function FunctieprofielenPage() {
               <ul className="svc-card__list">
                 <li>Bevoegde portiers en eventbeveiliging</li>
                 <li>Toegang, perimeter en overzicht in de menigte</li>
-                <li>Portofoondiscipline met duty manager en productie</li>
-                <li>Alleen rosteren waar vergunning en locatiebeleid matchen</li>
+                <li>Portofoondiscipline met dienstdoende manager en productie</li>
+                <li>Alleen inroosteren waar vergunning en locatiebeleid matchen</li>
               </ul>
             </article>
           </div>
@@ -111,7 +112,7 @@ export default function FunctieprofielenPage() {
           <header className="svc-section__head">
             <span className="svc-section__eyebrow">Profielen</span>
             <h2 id="svc-roles-title" className="svc-section__title">
-              Typische rollen op het roster
+              Typische rollen op het rooster
             </h2>
             <p className="svc-section__lead">
               Elk profiel wordt gematcht op certificaten, ervaring en uw merk — onderstaande snapshots zijn het
@@ -151,21 +152,21 @@ export default function FunctieprofielenPage() {
               <span className="svc-step__num">1</span>
               <h3 className="svc-step__title">Verkenning &amp; scope</h3>
               <p className="svc-step__text">
-                We vastleggen data, bezettingsbandbreedte, plattegrond, vergunning-notities en uniform — daarna
+                We vastleggen data, bezettingsbandbreedte, plattegrond, vergunningsnotities en uniformen — daarna
                 bevestigen we haalbaarheid en planning.
               </p>
             </li>
             <li className="svc-step">
               <span className="svc-step__num">2</span>
-              <h3 className="svc-step__title">Roster &amp; akkoord</h3>
+              <h3 className="svc-step__title">Rooster &amp; akkoord</h3>
               <p className="svc-step__text">
-                U ontvangt een voorstel met rollen en call times. Niets is definitief zonder uw akkoord op namen en
+                U ontvangt een voorstel met rollen en aanmeldmomenten. Niets is definitief zonder uw akkoord op namen en
                 verdeling.
               </p>
             </li>
             <li className="svc-step">
               <span className="svc-step__num">3</span>
-              <h3 className="svc-step__title">Brief &amp; dispatch</h3>
+              <h3 className="svc-step__title">Brief &amp; inzet</h3>
               <p className="svc-step__text">
                 Teams krijgen één pakket: ingangen, escalatie, bedieningsvensters en locatieregels.
               </p>
@@ -174,7 +175,7 @@ export default function FunctieprofielenPage() {
               <span className="svc-step__num">4</span>
               <h3 className="svc-step__title">Op locatie &amp; evaluatie</h3>
               <p className="svc-step__text">
-                Uw coördinator blijft bereikbaar tijdens de run. Na afbouw bespreken we uren, incidenten en learnings
+                Uw coördinator blijft bereikbaar tijdens het event. Na afbouw bespreken we uren, incidenten en leerpunten
                 voor de volgende boeking.
               </p>
             </li>
@@ -193,7 +194,7 @@ export default function FunctieprofielenPage() {
               Waar we vooral actief zijn
             </h2>
             <p className="svc-section__lead">
-              Programma&apos;s verschillen in risico en tempo — we tunen verhoudingen en diensten op de omgeving in
+              Programma&apos;s verschillen in risico en tempo — we stemmen verhoudingen en diensten af op de omgeving.
               plaats van generieke “eventpakketten”.
             </p>
           </header>
@@ -201,7 +202,7 @@ export default function FunctieprofielenPage() {
             {[
               'Festivals & outdoor',
               'Corporate & besloten',
-              'Nachtleven & venues',
+              'Nachtleven & locaties',
               'Theater & arena’s',
             ].map((label) => (
               <li key={label} className="svc-sector">
@@ -215,51 +216,24 @@ export default function FunctieprofielenPage() {
       <section className="svc-section svc-section--surface" aria-labelledby="svc-includes-title">
         <div className="hnb-container">
           <header className="svc-section__head">
-            <span className="svc-section__eyebrow">Inbegrepen</span>
+            <span className="svc-section__eyebrow">{B2B_INCLUDED_PACKAGE.eyebrow}</span>
             <h2 id="svc-includes-title" className="svc-section__title">
-              Wat u in elk pakket mag verwachten
+              {B2B_INCLUDED_PACKAGE.title}
             </h2>
           </header>
           <div className="svc-grid-2">
-            <article className="svc-card">
-              <div className="svc-card__icon" aria-hidden="true">
-                <FiCheckSquare />
-              </div>
-              <h3 className="svc-card__title">Compliance-klaar rosteren</h3>
-              <p className="svc-card__copy">
-                Arbeidsrecht en vergunningen vóór bevestiging; documentatie geordend voor locatiebeveiliging en finance.
-              </p>
-            </article>
-            <article className="svc-card">
-              <div className="svc-card__icon" aria-hidden="true">
-                <FiHeadphones />
-              </div>
-              <h3 className="svc-card__title">Vaste coördinatie</h3>
-              <p className="svc-card__copy">
-                Eén aanspreekpunt voor wijzigingen, vervanging en vragen op locatie — minder overdracht en sneller
-                beslissen als het programma schuift.
-              </p>
-            </article>
-            <article className="svc-card">
-              <div className="svc-card__icon" aria-hidden="true">
-                <FiLayers />
-              </div>
-              <h3 className="svc-card__title">Flexibele schaal</h3>
-              <p className="svc-card__copy">
-                Opschalen voor piek of meerdaagse opbouw; kleinere kernteams met bekende gezichten voor terugkerende
-                programma&apos;s.
-              </p>
-            </article>
-            <article className="svc-card">
-              <div className="svc-card__icon" aria-hidden="true">
-                <FiBriefcase />
-              </div>
-              <h3 className="svc-card__title">Commerciële helderheid</h3>
-              <p className="svc-card__copy">
-                Heldere scopes, tariefkaarten waar van toepassing en gestructureerde mutaties — zodat finance en
-                operatie vóór open gekend zijn.
-              </p>
-            </article>
+            {[FiCheckSquare, FiHeadphones, FiLayers, FiBriefcase].map((Icon, i) => {
+              const tile = B2B_INCLUDED_PACKAGE.tiles[i]
+              return (
+                <article key={tile.title} className="svc-card">
+                  <div className="svc-card__icon" aria-hidden="true">
+                    <Icon />
+                  </div>
+                  <h3 className="svc-card__title">{tile.title}</h3>
+                  <p className="svc-card__copy">{tile.body}</p>
+                </article>
+              )
+            })}
           </div>
         </div>
       </section>

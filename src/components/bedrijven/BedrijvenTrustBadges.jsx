@@ -6,7 +6,7 @@ export default function BedrijvenTrustBadges() {
     {
       icon: FiCheckCircle,
       label: 'Voorgecontroleerde professionals',
-      sub: 'Certificaten en recht om te werken vóór bevestiging op het roster.',
+      sub: 'Certificaten en recht om te werken vóór bevestiging op het rooster.',
     },
     {
       icon: FiUsers,
@@ -16,7 +16,7 @@ export default function BedrijvenTrustBadges() {
     {
       icon: FiShield,
       label: 'Compliance-first',
-      sub: 'Roosters afgestemd op venue, RI&E en vergunningen.',
+      sub: 'Roosters afgestemd op locatie, RI&E en vergunningen.',
     },
   ]
 

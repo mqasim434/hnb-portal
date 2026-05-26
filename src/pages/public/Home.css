@@ -7,16 +7,24 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/* 1. Hero — menigte + navy overlay 55% */
+/* 1. Hero — daglicht, zakelijke sfeer; frame 4:5 mobiel / 16:9 desktop; scrim + subject links */
 /* -------------------------------------------------------------------------- */
 
 .home-hero {
   position: relative;
   display: flex;
   align-items: center;
-  min-height: min(92svh, 52rem);
+  /* 4:5 t.o.v. viewportbreedte */
+  min-height: min(calc(100vw * 5 / 4), 92svh);
   padding-block: var(--home-y);
   background-color: var(--color-deep-navy);
+}
+
+@media (min-width: 640px) {
+  .home-hero {
+    /* 16:9 t.o.v. viewportbreedte, minimum voor copy-onderdek */
+    min-height: max(min(calc(100vw * 9 / 16), 85svh), 22rem);
+  }
 }
 
 .home-hero__media {
@@ -37,14 +45,23 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 40%;
+  /* Verticaal midden; horizontaal iets naar links voor 4:5 mobiele crop */
+  object-position: 32% center;
+}
+
+@media (min-width: 640px) {
+  .home-hero__media .home-hero__img-el,
+  .home-hero__media img {
+    /* Focale zone in linker derde bureau/desktop */
+    object-position: 28% center;
+  }
 }
 
 .home-hero__overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background-color: rgba(13, 27, 42, 0.55);
+  background-image: var(--hero-image-scrim);
 }
 
 .home-hero__grain {
@@ -80,9 +97,16 @@
   display: block;
 }
 
+.home-hero__title-line--secondary {
+  font-size: clamp(1.15rem, 3.75vw + 0.35rem, 2.05rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
 .home-hero__lead {
   margin: clamp(1.25rem, 4vw, 1.75rem) 0 0;
-  max-width: 36rem;
+  max-width: 40rem;
   font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
   line-height: 1.65;
   color: color-mix(in srgb, var(--color-warm-white) 92%, transparent);
@@ -106,17 +130,11 @@
   }
 }
 
-/* Hero: outline knop op donker */
-.home-hero__btn--outline {
-  border-color: color-mix(in srgb, var(--color-gold) 85%, transparent);
-  color: var(--color-warm-white);
-  background-color: transparent;
-}
-
-.home-hero__btn--outline:hover {
-  background-color: var(--color-gold);
-  color: var(--color-navy);
-  border-color: var(--color-gold);
+/* Navy hero: freelancerknop licht omrand voor contrast tegen donker scrim */
+.home-hero .hnb-btn--freelancer {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-warm-white) 26%, transparent),
+    var(--shadow-soft);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -234,17 +252,6 @@
   }
 }
 
-/* Why section: 2x2 from tablet */
-.home-card-grid--why {
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 768px) {
-  .home-card-grid--why {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 /* -------------------------------------------------------------------------- */
 /* Cards — licht = wit/paper; donker = mid navy */
 /* -------------------------------------------------------------------------- */
@@ -351,4 +358,156 @@
   .home-card--mid:hover {
     transform: none;
   }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Sectorentegels — 4 kolommen desktop, onder bandheader */
+/* -------------------------------------------------------------------------- */
+
+.home-sector-grid {
+  display: grid;
+  gap: var(--home-gap);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .home-sector-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1000px) {
+  .home-sector-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.home-sector-grid__item {
+  margin: 0;
+}
+
+.home-sector-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100%;
+  padding: clamp(1.35rem, 4vw, 1.85rem);
+  border-radius: var(--radius-card);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  color: var(--text);
+  background-color: var(--color-paper);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid color-mix(in srgb, var(--color-navy) 8%, transparent);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.home-sector-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: color-mix(in srgb, var(--color-gold) 35%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-sector-tile:hover {
+    transform: none;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Zo werkt het — genummerde stappen */
+/* -------------------------------------------------------------------------- */
+
+.home-how__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: clamp(1.25rem, 4vw, 1.75rem);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .home-how__steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1000px) {
+  .home-how__steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: start;
+    gap: var(--home-gap);
+  }
+}
+
+.home-how__step {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin: 0;
+}
+
+.home-how__step-num {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-navy);
+  background-color: color-mix(in srgb, var(--color-gold) 26%, var(--color-warm-white));
+  border: 1px solid color-mix(in srgb, var(--color-gold) 45%, transparent);
+}
+
+.home-how__step-copy {
+  min-width: 0;
+}
+
+.home-how__step-title {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--text);
+}
+
+.home-how__step-text {
+  margin: 0.4rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.home-how__cta-wrap {
+  margin-top: clamp(2rem, 5vw, 2.75rem);
+}
+
+.home-how__cta {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-gold-muted);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color var(--transition-fast);
+}
+
+.home-how__cta:hover {
+  color: var(--color-navy);
 }

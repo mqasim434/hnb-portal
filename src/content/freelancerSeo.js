@@ -27,7 +27,7 @@ export const FREELANCER_SEO = {
   certificering: {
     title: 'Jouw certificering — hospitality en beveiliging',
     description:
-      'Welke diploma’s en vergunningen gelden voor hospitality en beveiliging bij H&B Service Group? Overzicht per domein en venue-eisen.',
+      'Welke diploma’s en vergunningen gelden voor hospitality en beveiliging bij H&B Service Group? Overzicht per domein en locatie-eisen.',
     path: '/freelancers/jouw-certificering',
   },
   aanmelden: {

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import MarketingCtaStrip from '../../components/marketing/MarketingCtaStrip'
 import MarketingFeatureCard from '../../components/marketing/MarketingFeatureCard'
 import PageHero from '../../components/marketing/PageHero'
 import { FREELANCER_SEO } from '../../content/freelancerSeo'
@@ -11,7 +10,7 @@ const CARDS = [
     to: '/freelancers/openstaande-opdrachten',
     label: 'Opdrachten',
     title: 'Openstaande opdrachten',
-    text: 'Zie actuele shifts met rol, stad, uren en certificeringseisen — transparant vóór u zich aanmeldt.',
+    text: 'Bekijk actuele shifts met rol, stad, uren en certificeringseisen — transparant voordat u zich aanmeldt.',
   },
   {
     to: '/freelancers/hoe-het-werkt',
@@ -21,9 +20,9 @@ const CARDS = [
   },
   {
     to: '/freelancers/inkomsten-betalingen',
-    label: 'Finance',
+    label: 'Financiën',
     title: 'Inkomsten & betalingen',
-    text: 'Hoe tarieven, mutaties en betaaltermijnen in elkaar zitten — géén verrassingen na uw dienst.',
+    text: 'Hoe tarieven, mutaties en betaaltermijnen in elkaar zitten — geen verrassingen na uw dienst.',
   },
   {
     to: '/freelancers/jouw-certificering',
@@ -35,7 +34,14 @@ const CARDS = [
     to: '/freelancers/direct-aanmelden',
     label: 'Aanmelden',
     title: 'Direct aanmelden',
-    text: 'Start uw profiel: voorkeurrollen, beschikbaarheid en contact — wij nemen opvolging persoonlijk op.',
+    text: 'Start uw profiel: voorkeursrollen, beschikbaarheid en contactgegevens. Wij nemen persoonlijk contact op.',
+  },
+  {
+    to: '/contact',
+    label: 'Contact',
+    title: 'Vragen vóór u zich aanmeldt?',
+    text: 'Ons team helpt met certificering, beschikbaarheid en praktische verwachtingen op locatie.',
+    linkText: 'Contact opnemen →',
   },
 ]
 
@@ -56,10 +62,10 @@ export default function FreelancersHub() {
         lead="H&B Service Group verbindt u aan hospitality- en beveiligingsopdrachten met duidelijke afspraken, vaste communicatielijnen en ondersteuning vanuit Amsterdam."
         stackCtasOnMobile
       >
-        <Link to="/freelancers/openstaande-opdrachten" className="hnb-btn hnb-btn--primary">
+        <Link to="/freelancers/openstaande-opdrachten" className="hnb-btn hnb-btn--freelancer">
           Bekijk opdrachten
         </Link>
-        <Link to="/freelancers/direct-aanmelden" className="hnb-btn hnb-btn--outline">
+        <Link to="/freelancers/direct-aanmelden" className="hnb-btn hnb-btn--freelancer">
           Direct aanmelden
         </Link>
       </PageHero>
@@ -69,8 +75,9 @@ export default function FreelancersHub() {
           <span className="fl-section__eyebrow">Navigatie</span>
           <h2 className="fl-section__title">Alles voor uw traject bij H&amp;B</h2>
           <p className="fl-section__lead">
-            Kies een onderwerp — elke pagina is mobiel geoptimaliseerd en sluit aan op het portal zodra u live
-            bent.
+            Kies een onderwerp hieronder. Elk thema is gericht op wat u nodig heeft: openstaande shifts, de
+            procesuitleg, uw certificering, of direct aanmelden. Zodra u live staat in het systeem, vindt u dezelfde
+            informatie ook in het portaal.
           </p>
         </header>
         <div className="fl-hub-grid">
@@ -82,21 +89,11 @@ export default function FreelancersHub() {
               title={c.title}
               text={c.text}
               linkTo={c.to}
-              linkText={`Naar ${c.title.toLowerCase()} →`}
+              linkText={c.linkText ?? `Naar ${c.title.toLowerCase()} →`}
             />
           ))}
         </div>
       </section>
-
-      <MarketingCtaStrip
-        headingId="fl-hub-cta-heading"
-        title="Vragen vóór u zich aanmeldt?"
-        lead="Ons team helpt met certificering, beschikbaarheid en praktische verwachtingen op locatie."
-        primaryTo="/contact"
-        primaryLabel="Contact opnemen"
-        secondaryTo="/freelancers/hoe-het-werkt"
-        secondaryLabel="Lees het proces"
-      />
     </main>
   )
 }

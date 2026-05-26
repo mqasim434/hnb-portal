@@ -227,9 +227,10 @@
   align-items: center;
   justify-content: center;
   min-height: 52px;
-  padding: 0 var(--space-6);
+  padding: 14px 28px;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 14px;
+  line-height: 1.2;
   border-radius: var(--radius-button);
   text-decoration: none;
   text-align: center;
@@ -245,25 +246,39 @@
 }
 
 .site-header__btn--primary {
-  background-color: var(--color-gold);
-  color: var(--color-navy);
+  background-color: var(--color-cta-b2b);
+  color: var(--text-on-cta-solid);
   border: 1px solid transparent;
   box-shadow: var(--shadow-soft);
 }
 
 .site-header__btn--primary:hover {
-  background-color: var(--primary-hover);
-  color: var(--color-navy);
+  background-color: var(--color-cta-b2b-hover);
+  color: var(--text-on-cta-solid);
+}
+
+.site-header__btn--freelancer {
+  background-color: var(--color-cta-freelancer);
+  color: var(--text-on-cta-solid);
+  border: 1px solid transparent;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-warm-white) 22%, transparent),
+    var(--shadow-soft);
+}
+
+.site-header__btn--freelancer:hover {
+  background-color: var(--color-cta-freelancer-hover);
+  color: var(--text-on-cta-solid);
 }
 
 .site-header__btn--outline {
   background: transparent;
-  color: var(--color-gold);
-  border: 2px solid var(--color-gold);
+  color: var(--color-warm-white);
+  border: 1px solid color-mix(in srgb, var(--color-warm-white) 45%, transparent);
 }
 
 .site-header__btn--outline:hover {
-  background-color: color-mix(in srgb, var(--color-gold) 15%, transparent);
+  background-color: color-mix(in srgb, var(--color-warm-white) 10%, transparent);
   color: var(--color-warm-white);
 }
 
@@ -322,6 +337,15 @@
 
 .site-header__drawer-contact-muted {
   font-size: 0.9375rem;
+  color: var(--color-footer-grey);
+}
+
+.site-header__drawer-contact-phone-placeholder {
+  display: inline-block;
+  max-width: 100%;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  font-style: italic;
   color: var(--color-footer-grey);
 }
 

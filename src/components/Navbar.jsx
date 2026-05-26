@@ -2,6 +2,7 @@ import { useCallback, useEffect, useId, useState } from 'react'
 import { FiChevronDown, FiMenu, FiX } from 'react-icons/fi'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import {
+  FOOTER_PHONE_PLACEHOLDER,
   HEADER_CTAS,
   MOBILE_MENU_PRIMARY_CTA,
   MOBILE_MENU_SECONDARY_CTA,
@@ -132,7 +133,9 @@ export default function Navbar() {
               className={
                 variant === 'primary'
                   ? 'site-header__btn site-header__btn--primary'
-                  : 'site-header__btn site-header__btn--outline'
+                  : variant === 'freelancer'
+                    ? 'site-header__btn site-header__btn--freelancer'
+                    : 'site-header__btn site-header__btn--outline'
               }
             >
               {label}
@@ -218,7 +221,7 @@ export default function Navbar() {
             </Link>
             <Link
               to={MOBILE_MENU_SECONDARY_CTA.to}
-              className="site-header__btn site-header__btn--outline site-header__btn--block"
+              className="site-header__btn site-header__btn--freelancer site-header__btn--block"
               onClick={closeMenu}
             >
               {MOBILE_MENU_SECONDARY_CTA.label}
@@ -243,7 +246,9 @@ export default function Navbar() {
                 </a>
               </li>
               <li>
-                <a href="tel:+31200000000">+31 (0) 20 000 0000</a>
+                <span className="site-header__drawer-contact-phone-placeholder">
+                  {FOOTER_PHONE_PLACEHOLDER}
+                </span>
               </li>
               <li>
                 <span className="site-header__drawer-contact-muted">

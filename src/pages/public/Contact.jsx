@@ -5,6 +5,7 @@ import { FormField, FormRow } from '../../components/forms/FormPrimitives'
 import PageHero from '../../components/marketing/PageHero'
 import TrustBlurb from '../../components/marketing/TrustBlurb'
 import { CONTACT_SEO } from '../../content/contactSeo'
+import { FOOTER_PHONE_PLACEHOLDER } from '../../content/navigation'
 import { useContactFormSubmit } from '../../hooks/useContactFormSubmit'
 import { usePageSeo } from '../../hooks/usePageSeo'
 import { isSubmissionInProgressError } from '../../lib/submissionErrors'
@@ -104,7 +105,7 @@ export default function Contact() {
 
       <TrustBlurb ariaLabel="Waarom opdrachtgevers ons vertrouwen">
         <p>
-          <strong>Compliance-first rosteren:</strong> werkrecht, diplomering en locatie-eisen vóór
+          <strong>Compliance-first roosteren:</strong> werkrecht, diplomering en locatie-eisen vóór
           definitieve plaatsing. Geen improvisatie achteraf bij uw vergunningverlener of verzekeraar.
         </p>
       </TrustBlurb>
@@ -270,9 +271,9 @@ export default function Contact() {
                 </li>
                 <li className="contact-aside__item">
                   <span className="contact-aside__label">Telefoon</span>
-                  <a className="contact-aside__value" href="tel:+31200000000">
-                    +31 (0) 20 000 0000
-                  </a>
+                  <span className="contact-aside__value contact-aside__value--phone-placeholder">
+                    {FOOTER_PHONE_PLACEHOLDER}
+                  </span>
                 </li>
                 <li className="contact-aside__item">
                   <span className="contact-aside__label">Locatie</span>

@@ -73,7 +73,7 @@ export const router = createBrowserRouter([
       },
 
       /* Over H&B */
-      { path: 'over-hb/ons-verhaal', lazy: page(() => import('../pages/public/About')) },
+      { path: 'over-hb/ons-verhaal', lazy: page(() => import('../pages/overhb/OnsVerhaalPage')) },
       { path: 'over-hb/het-team', lazy: page(() => import('../pages/overhb/HetTeamPage')) },
       {
         path: 'over-hb/werkgebied',
@@ -88,6 +88,10 @@ export const router = createBrowserRouter([
         lazy: page(() => import('../pages/overhb/VergunningenCompliancePage')),
       },
       { path: 'over-hb/nieuws', lazy: page(() => import('../pages/overhb/NieuwsPage')) },
+      {
+        path: 'over-hb/nieuws/:slug',
+        lazy: page(() => import('../pages/overhb/NieuwsArticlePage')),
+      },
 
       /* Juridisch (footer) */
       {

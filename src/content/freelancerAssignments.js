@@ -1,81 +1,124 @@
 /**
- * Voorbeelddata voor openstaande opdrachten (later vervangen door API).
- * @typedef {'Hospitality' | 'Beveiliging' | 'Algemeen'} AssignmentRole
+ * Demodata voor openstaande opdrachten (`/freelancers/openstaande-opdrachten`).
+ * Later te vervangen door API-inhoud.
+ * @typedef {'Hospitality' | 'Beveiliging' | 'Algemeen'} AssignmentDomain
  * @typedef {'open' | 'bijna_vol' | 'gesloten'} AssignmentStatus
  */
 
-/** @type {{ id: string, typeLabel: string, dateLabel: string, city: string, hoursLabel: string, role: AssignmentRole, roleLabel: string, certification: string, status: AssignmentStatus, statusLabel: string }[]} */
+/**
+ * @type {{
+ *   id: string
+ *   eventType: string
+ *   domain: AssignmentDomain
+ *   roleLabel: string
+ *   dateISO: string
+ *   dateLabel: string
+ *   locationLine: string
+ *   cityFilter: string
+ *   hoursLabel: string
+ *   crewLine: string
+ *   rateLabel: string
+ *   certification: string
+ *   status: AssignmentStatus
+ *   statusLabel: string
+ * }[]}
+ */
 export const FREELANCER_ASSIGNMENTS_SAMPLE = [
   {
-    id: '1',
-    typeLabel: 'Festival · podiumteam',
-    dateLabel: 'Za 14 juni 2026',
-    city: 'Amsterdam',
-    hoursLabel: '11:00 – 01:00 (incl. pauze)',
-    role: 'Hospitality',
+    id: 'a',
+    eventType: 'Festival podiumteam',
+    domain: 'Hospitality',
     roleLabel: 'Barondersteuning',
+    dateISO: '2026-06-14',
+    dateLabel: 'Za 14 juni 2026',
+    locationLine: 'Amsterdam, Westerpark',
+    cityFilter: 'Amsterdam',
+    hoursLabel: '11:00–01:00 (incl. 60 min pauze)',
+    crewLine: '4 plekken open van 12 in team',
+    rateLabel: 'Tarief: volgens functieprofiel — definitief in de briefing',
     certification: 'Sociale hygiëne (SVH)',
     status: 'open',
-    statusLabel: 'Open',
+    statusLabel: 'OPEN',
   },
   {
-    id: '2',
-    typeLabel: 'Corporate receptie',
+    id: 'b',
+    eventType: 'Corporate receptie',
+    domain: 'Hospitality',
+    roleLabel: 'Host/hostess',
+    dateISO: '2026-06-19',
     dateLabel: 'Do 19 juni 2026',
-    city: 'Utrecht',
-    hoursLabel: '16:00 – 00:00',
-    role: 'Hospitality',
-    roleLabel: 'Host / hostess',
-    certification: 'Geen verplicht certificaat · representatief profiel',
+    locationLine: 'Utrecht, Jaarbeurs',
+    cityFilter: 'Utrecht',
+    hoursLabel: '16:00–00:00 (incl. 30 min pauze)',
+    crewLine: '6 plekken open van 8 in team',
+    rateLabel: 'Tarief: volgens functieprofiel — definitief in de briefing',
+    certification: 'Geen verplicht certificaat — representatief profiel',
     status: 'open',
-    statusLabel: 'Open',
+    statusLabel: 'OPEN',
   },
   {
-    id: '3',
-    typeLabel: 'Clubavond · deurteam',
+    id: 'c',
+    eventType: 'Clubavond deurteam',
+    domain: 'Beveiliging',
+    roleLabel: 'Portier/eventbeveiliging',
+    dateISO: '2026-06-20',
     dateLabel: 'Vr 20 juni 2026',
-    city: 'Amsterdam',
-    hoursLabel: '21:00 – 04:00',
-    role: 'Beveiliging',
-    roleLabel: 'Portier / eventbeveiliging',
-    certification: 'Diploma Beveiliger 2 · geldige POV',
+    locationLine: 'Amsterdam, Centrum',
+    cityFilter: 'Amsterdam',
+    hoursLabel: '21:00–04:00 (incl. 30 min pauze)',
+    crewLine: '1 plek open van 6 in team',
+    rateLabel: 'Tarief: volgens functieprofiel — definitief in de briefing',
+    certification:
+      'Diploma Beveiliger 2 + geldige grijze pas (WPBR-legitimatie)',
     status: 'bijna_vol',
-    statusLabel: 'Bijna vol',
+    statusLabel: 'BIJNA VOL',
   },
   {
-    id: '4',
-    typeLabel: 'Buitenfestival · perimeter',
-    dateLabel: 'Zo 22 juni 2026',
-    city: 'Haarlem',
-    hoursLabel: '09:00 – 20:00',
-    role: 'Beveiliging',
+    id: 'd',
+    eventType: 'Buitenfestival perimeter',
+    domain: 'Beveiliging',
     roleLabel: 'Eventbeveiliging',
-    certification: 'Diploma Beveiliger 2 · BHV aanbevolen',
+    dateISO: '2026-06-22',
+    dateLabel: 'Zo 22 juni 2026',
+    locationLine: 'Haarlem, Stadshart',
+    cityFilter: 'Haarlem',
+    hoursLabel: '09:00–20:00 (incl. 60 min pauze)',
+    crewLine: '8 plekken open van 14 in team',
+    rateLabel: 'Tarief: volgens functieprofiel — definitief in de briefing',
+    certification: 'Diploma Beveiliger 2 + grijze pas — BHV aanbevolen',
     status: 'open',
-    statusLabel: 'Open',
+    statusLabel: 'OPEN',
   },
   {
-    id: '5',
-    typeLabel: 'Concert · backstage',
+    id: 'e',
+    eventType: 'Concert backstage',
+    domain: 'Algemeen',
+    roleLabel: 'Runner/productie',
+    dateISO: '2026-06-25',
     dateLabel: 'Wo 25 juni 2026',
-    city: 'Rotterdam',
-    hoursLabel: '14:00 – 23:30',
-    role: 'Algemeen',
-    roleLabel: 'Runner / productie',
+    locationLine: 'Rotterdam, Ahoy',
+    cityFilter: 'Rotterdam',
+    hoursLabel: '14:00–23:30 (incl. 45 min pauze)',
+    crewLine: 'Bezetting: vervuld',
+    rateLabel: 'Tarief: volgens functieprofiel — definitief in de briefing',
     certification: 'Geen wettelijke eisen · ervaring is een pré',
     status: 'gesloten',
-    statusLabel: 'Gesloten',
+    statusLabel: 'GESLOTEN',
   },
   {
-    id: '6',
-    typeLabel: 'Zakelijke bijeenkomst',
-    dateLabel: 'Di 1 juli 2026',
-    city: 'Amsterdam',
-    hoursLabel: '07:30 – 15:00',
-    role: 'Hospitality',
+    id: 'f',
+    eventType: 'Zakelijke bijeenkomst',
+    domain: 'Hospitality',
     roleLabel: 'Ontbijt & registratie',
-    certification: 'HACCP basis indien food-service',
+    dateISO: '2026-07-01',
+    dateLabel: 'Di 01 juli 2026',
+    locationLine: 'Amsterdam, Zuidas',
+    cityFilter: 'Amsterdam',
+    hoursLabel: '07:30–15:00 (incl. 30 min pauze)',
+    crewLine: '3 plekken open van 5 in team',
+    rateLabel: 'Tarief: volgens functieprofiel — definitief in de briefing',
+    certification: 'HACCP-basis indien food-contactrollen',
     status: 'open',
-    statusLabel: 'Open',
+    statusLabel: 'OPEN',
   },
 ]

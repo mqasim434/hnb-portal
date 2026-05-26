@@ -3,7 +3,7 @@ export const COMPLIANCE_BADGES = [
   {
     id: 'id-work',
     title: 'Identiteit & recht om te werken',
-    text: 'Controle op legitimatie en arbeidsrechtelijke basis vóór definitieve plaatsing op het roster.',
+    text: 'Controle op legitimatie en arbeidsrechtelijke basis vóór definitieve plaatsing op het rooster.',
   },
   {
     id: 'security-certs',
@@ -12,8 +12,8 @@ export const COMPLIANCE_BADGES = [
   },
   {
     id: 'extra-certs',
-    title: 'Venue-certificaten',
-    text: 'BHV, sociale hygiëne en overige venue-eisen worden gekoppeld aan de juiste shift en briefing.',
+    title: 'Locatiecertificaten',
+    text: 'BHV, sociale hygiëne en overige locatie-eisen worden gekoppeld aan de juiste shift en briefing.',
   },
   {
     id: 'rie',

@@ -21,7 +21,7 @@ export default function PersoneelAanvragenPage() {
         variant="navy"
         eyebrow="Bedrijven"
         title="Personeel dat past bij uw productie"
-        lead="Vraag hospitality- en beveiligingsteams aan met voorgecontroleerde professionals, één coördinator en een roster dat u eerst goedkeurt — pas daarna definitief."
+        lead="Vul de gegevens zo compleet mogelijk in. Wij reageren met capaciteit, een tariefindicatie waar mogelijk en concrete vervolgstappen. Geen verplichting vóór uw akkoord op het rooster."
         stackCtasOnMobile
       >
         <a href="#b2b-form-anchor" className="hnb-btn hnb-btn--primary">
@@ -40,8 +40,7 @@ export default function PersoneelAanvragenPage() {
             Plan uw volgende event met H&amp;B
           </h2>
           <p className="b2b-section__lead">
-            Vul de gegevens zo compleet mogelijk in — wij reageren met capaciteit, tariefindicatie waar mogelijk en
-            concrete vervolgstappen. Geen verplichting vóór uw akkoord op het roster.
+            Start hieronder uw vrijblijvende aanvraag — geen betalingsgegevens nodig.
           </p>
         </header>
 
@@ -54,26 +53,23 @@ export default function PersoneelAanvragenPage() {
             <p className="b2b-sidebar__title">Waarom teams ons blijven boeken</p>
             <ul>
               <li>
-                <span className="b2b-sidebar__strong">Reactie binnen één werkdag</span>
-                op complete aanvragen — sneller bij start binnen 72 uur.
+                Reactie binnen één werkdag op complete aanvragen — sneller wanneer de inzet binnen 72 uur start.
               </li>
               <li>
-                <span className="b2b-sidebar__strong">Transparant roster</span>
-                met rollen, namen (na screening) en call times vóór definitieve bevestiging.
+                Transparant rooster met rollen, namen (na screening) en call times vóór definitieve bevestiging.
               </li>
               <li>
-                <span className="b2b-sidebar__strong">Compliance-check</span>
-                op vergunningen en certificaten passend bij uw locatiebeleid.
+                Compliance-check op vergunningen en certificaten, passend bij het beleid van uw locatie.
               </li>
+              <li>Eén aanspreekpunt dat uw briefing kent — minder gedoe tijdens opbouw en show.</li>
               <li>
-                <span className="b2b-sidebar__strong">Eén aanspreekpunt</span>
-                die uw briefing kent — minder geregel tijdens opbouw en show.
+                Voor spoed of afwijkende vergunningscontext:{' '}
+                <Link className="b2b-sidebar__inline-link" to="/contact">
+                  neem direct contact op
+                </Link>{' '}
+                — wij schakelen door naar uw coördinator.
               </li>
             </ul>
-            <p className="b2b-sidebar__footnote">
-              Voor spoed of afwijkende vergunningscontext:{' '}
-              <Link to="/contact">neem contact op</Link> — wij schakelen door naar uw coördinator.
-            </p>
           </aside>
         </div>
       </section>

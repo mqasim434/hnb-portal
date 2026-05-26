@@ -50,7 +50,7 @@ export const HEADER_CTAS = [
   {
     to: '/freelancers/openstaande-opdrachten',
     label: 'Openstaande opdrachten',
-    variant: 'outline',
+    variant: 'freelancer',
   },
 ]
 
@@ -60,16 +60,24 @@ export const MOBILE_MENU_PRIMARY_CTA = {
 }
 
 export const MOBILE_MENU_SECONDARY_CTA = {
-  to: '/freelancers/direct-aanmelden',
-  label: 'Direct aanmelden',
+  to: '/freelancers/openstaande-opdrachten',
+  label: 'Openstaande opdrachten',
 }
 
 export const FOOTER_TAGLINE =
   'Betrouwbaar eventpersoneel. Wanneer u het nodig heeft.'
 
-/** Juridische pagina’s (footer, niet in hoofdnavigatie). */
+/** Tot de opdrachtgever een definitief nummer levert — geen werkende bellink. */
+export const FOOTER_PHONE_PLACEHOLDER =
+  '[PLACEHOLDER — client to provide real number]'
+
+/** Handels- en btw-registratie · WPBR (placeholder teksten voor livegang). */
+export const FOOTER_REGISTRATION_LINE =
+  'KvK [PLACEHOLDER] · BTW [PLACEHOLDER] · WPBR-vergunning [PLACEHOLDER]'
+
+/** Juridische pagina’s (footer onderste strip onder copyright). */
 export const FOOTER_LEGAL_LINKS = [
-  { to: '/juridisch/privacy', label: 'Privacy' },
-  { to: '/juridisch/cookies', label: 'Cookies' },
+  { to: '/juridisch/privacy', label: 'Privacyverklaring' },
   { to: '/juridisch/algemene-voorwaarden', label: 'Algemene voorwaarden' },
+  { to: '/juridisch/cookies', label: 'Cookiebeleid' },
 ]

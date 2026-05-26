@@ -102,6 +102,12 @@
 
 .not-found .hnb-btn--outline:hover {
   background: color-mix(in srgb, var(--color-warm-white) 10%, transparent);
-  border-color: var(--color-gold);
+  border-color: var(--color-warm-white);
   color: var(--color-warm-white);
+}
+
+.not-found .hnb-btn--freelancer {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-warm-white) 26%, transparent),
+    var(--shadow-soft);
 }

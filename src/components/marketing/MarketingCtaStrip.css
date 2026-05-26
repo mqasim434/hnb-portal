@@ -115,25 +115,21 @@
   }
 }
 
+/* Donkere strook: outline = ghost wit (geen oranje vul-hover) */
 .hnb-cta-strip .hnb-btn--outline {
   border-color: color-mix(in srgb, var(--color-warm-white) 55%, transparent);
   color: var(--text-on-dark);
+  background-color: transparent;
 }
 
 .hnb-cta-strip .hnb-btn--outline:hover {
-  background: color-mix(in srgb, var(--color-warm-white) 12%, transparent);
-  border-color: var(--color-gold);
+  background-color: color-mix(in srgb, var(--color-warm-white) 12%, transparent);
+  border-color: var(--color-warm-white);
   color: var(--color-warm-white);
 }
 
-.hnb-cta-strip--prominent .hnb-btn--outline {
-  border-color: color-mix(in srgb, var(--color-gold) 80%, transparent);
-  color: var(--color-warm-white);
-  background: transparent;
-}
-
-.hnb-cta-strip--prominent .hnb-btn--outline:hover {
-  background-color: var(--color-gold);
-  color: var(--color-navy);
-  border-color: var(--color-gold);
+.hnb-cta-strip .hnb-btn--freelancer {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-warm-white) 22%, transparent),
+    var(--shadow-soft);
 }

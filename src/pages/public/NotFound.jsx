@@ -34,7 +34,7 @@ export default function NotFound() {
           <Link className="hnb-btn hnb-btn--outline not-found__btn" to="/bedrijven/personeel-aanvragen">
             Personeel aanvragen
           </Link>
-          <Link className="hnb-btn hnb-btn--outline not-found__btn" to="/freelancers/direct-aanmelden">
+          <Link className="hnb-btn hnb-btn--freelancer not-found__btn" to="/freelancers/direct-aanmelden">
             Direct aanmelden
           </Link>
           <Link className="hnb-btn hnb-btn--outline not-found__btn" to="/contact">

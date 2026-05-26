@@ -199,6 +199,14 @@
   margin-top: var(--space-2);
 }
 
+.b2b-split__panel-text {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
 /* Sector tiles */
 .b2b-sector-grid {
   display: grid;
@@ -228,15 +236,27 @@
   min-height: 8rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.95rem;
-  line-height: 1.35;
-  color: var(--text);
+  justify-content: flex-start;
   transition:
     transform 0.2s ease,
     border-color 0.2s ease,
     box-shadow 0.2s ease;
+}
+
+.b2b-sector-card__title {
+  margin: 0 0 var(--space-2);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text);
+}
+
+.b2b-sector-card__body {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--text-muted);
 }
 
 .b2b-sector-card:hover {
@@ -380,15 +400,137 @@
   margin-bottom: 0.15rem;
 }
 
-.b2b-sidebar__footnote a {
+.b2b-sidebar__footnote a,
+.b2b-sidebar__inline-link {
   color: var(--color-gold);
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
-.b2b-sidebar__footnote a:hover {
+.b2b-sidebar__footnote a:hover,
+.b2b-sidebar__inline-link:hover {
   color: var(--color-warm-white);
+}
+
+.b2b-form__req {
+  color: var(--primary);
+  font-weight: 700;
+  margin-inline-start: 0.15em;
+}
+
+.b2b-form__daterow {
+  display: grid;
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .b2b-form__daterow {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.b2b-included-grid {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .b2b-included-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.b2b-included-card {
+  padding: var(--space-5);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-xs);
+}
+
+.b2b-included-card h3 {
+  margin: 0 0 var(--space-3);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.b2b-included-card p {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.b2b-indicative {
+  max-width: 44rem;
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.b2b-indicative .b2b-section__eyebrow,
+.b2b-indicative__eyebrow {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 0.65rem;
+}
+
+.b2b-indicative__title {
+  margin: 0 0 var(--space-3);
+  font-size: clamp(1.35rem, 2.8vw, 1.65rem);
+  font-weight: 700;
+}
+
+.b2b-indicative__intro {
+  margin: 0 0 var(--space-4);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.b2b-rate-list {
+  margin: 0 0 var(--space-4);
+  padding: 0 0 0 1.25rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.b2b-rate-list li + li {
+  margin-top: var(--space-2);
+}
+
+.b2b-indicative__surcharge {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.b2b-quote-block {
+  max-width: 44rem;
+  padding-top: clamp(1.75rem, 4vw, 2.5rem);
+  border-top: 1px solid var(--border);
+}
+
+.b2b-quote-block h2 {
+  margin: 0 0 var(--space-3);
+  font-size: clamp(1.25rem, 2.5vw, 1.45rem);
+  font-weight: 700;
+}
+
+.b2b-quote-block p {
+  margin: 0 0 var(--space-4);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-muted);
 }
 
 .b2b-form__select {

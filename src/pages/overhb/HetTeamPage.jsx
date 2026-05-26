@@ -11,6 +11,9 @@ import './overhb-pages.css'
 
 const copy = MARKETING_PAGES['hb-wie-wij-zijn']
 
+const CULTURE_TEXT =
+  'Wij geloven dat respect voor podium-, hospitality- en beveiligingsteams de kwaliteit van elk event verhoogt. Open communicatie, voorspelbare processen en geen romantiek over \'gewoon even regelen\' — alleen afspraken die kloppen onder tijdsdruk. Wij behandelen mensen die voor ons werken als professionals, en daarom houden zij seizoen na seizoen vol.'
+
 export default function HetTeamPage() {
   const seo = ABOUT_SEO.team
   usePageSeo({
@@ -38,50 +41,33 @@ export default function HetTeamPage() {
 
       <BedrijvenTrustBadges />
 
-      {copy.sections.map((section, index) => (
-        <section
-          key={section.heading || `team-sec-${index}`}
-          className={`b2b-section${index % 2 === 1 ? ' b2b-section--surface' : ''}`}
-        >
-          <div className="hnb-container">
-            <div className="b2b-prose">
-              {section.heading ? <h2>{section.heading}</h2> : null}
-              {section.paragraphs?.map((p) => (
-                <p key={p.slice(0, 48)}>{p}</p>
-              ))}
-              {section.bullets?.length ? (
-                <ul>
-                  {section.bullets.map((b) => (
-                    <li key={b}>{b}</li>
-                  ))}
-                </ul>
-              ) : null}
-            </div>
-          </div>
-        </section>
-      ))}
+      <section className="b2b-section" aria-labelledby="team-culture-heading">
+        <div className="hnb-container">
+          <header className="b2b-section__head">
+            <h2 id="team-culture-heading" className="b2b-section__title">
+              Cultuur
+            </h2>
+            <p className="b2b-section__lead ohb-culture-lead">{CULTURE_TEXT}</p>
+          </header>
+        </div>
+      </section>
 
       <section className="b2b-section b2b-section--paper" aria-labelledby="team-profiles-heading">
         <div className="hnb-container">
           <div className="b2b-section__head">
-            <span className="b2b-section__eyebrow">Mensen op de vloer &amp; achter schermen</span>
+            <span className="b2b-section__eyebrow">Kern van het team</span>
             <h2 id="team-profiles-heading" className="b2b-section__title">
-              Kern van het coördinatieteam
+              Mensen op de vloer &amp; achter de schermen
             </h2>
             <p className="b2b-section__lead">
-              Ervaren planners en dispatchers die uw productie begrijpen — met focus op
-              voorspelbare communicatie en compliance op het roster.
+              Ervaren planners en inzetcoördinatoren die uw productie begrijpen — tot er echte foto&apos;s en namen
+              definitief zijn, werken we met dit kernbeeld.
             </p>
           </div>
           <ul className="ohb-team-grid">
             {TEAM_PROFILES.map((p) => (
               <li key={p.id}>
-                <TeamProfileCard
-                  name={p.name}
-                  role={p.role}
-                  bio={p.bio}
-                  initials={p.initials}
-                />
+                <TeamProfileCard name={p.name} role={p.role} bio={p.bio} initials={p.initials} />
               </li>
             ))}
           </ul>

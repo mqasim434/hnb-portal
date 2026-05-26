@@ -55,3 +55,174 @@
   gap: var(--space-4);
   margin-top: var(--space-6);
 }
+
+/* Cultuur (het team): volle breedte */
+.ohb-culture-lead {
+  max-width: 48rem;
+  margin-bottom: 0 !important;
+}
+
+/* Werkgebied */
+.ohb-region-block {
+  max-width: 44rem;
+}
+
+.ohb-region-block--wide {
+  max-width: 48rem;
+}
+
+.ohb-region-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.ohb-region-list li + li {
+  margin-top: var(--space-2);
+}
+
+.ohb-map-wrap {
+  justify-self: center;
+}
+
+@media (min-width: 900px) {
+  .ohb-map-wrap {
+    justify-self: end;
+  }
+}
+
+/* Vergunningen: wettelijk kader */
+.ohb-legal-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+@media (min-width: 720px) {
+  .ohb-legal-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.ohb-legal-card {
+  padding: var(--space-5) var(--space-6);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-xs);
+}
+
+.ohb-legal-card__title {
+  margin: 0 0 var(--space-3);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--text);
+}
+
+.ohb-legal-card__body {
+  margin: 0 0 var(--space-3);
+  font-size: 0.9425rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.ohb-legal-card__body:last-child {
+  margin-bottom: 0;
+}
+
+.ohb-legal-card__meta {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.ohb-legal-card__meta-label {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.ohb-prose-muted {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.72;
+  color: var(--text-muted);
+}
+
+/* Nieuws artikel detail */
+.ohb-news-detail__crumb-wrap {
+  padding-block: var(--space-4) var(--space-2);
+}
+
+.ohb-news-breadcrumb {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.ohb-news-breadcrumb a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.ohb-news-breadcrumb a:hover {
+  color: var(--text);
+}
+
+.ohb-news-breadcrumb__current {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.ohb-news-detail__inner {
+  max-width: 46rem;
+  padding-block: var(--space-6) clamp(2.5rem, 6vw, 4rem);
+}
+
+.ohb-news-detail__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-6);
+  align-items: center;
+  margin-bottom: var(--space-6);
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+}
+
+.ohb-news-detail__meta time {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--primary);
+}
+
+.ohb-news-detail__section {
+  margin-bottom: var(--space-8);
+}
+
+.ohb-news-detail__section:last-child {
+  margin-bottom: 0;
+}
+
+.ohb-news-detail__section h2 {
+  margin: 0 0 var(--space-3);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ohb-news-detail__section p {
+  margin: 0 0 var(--space-4);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+}
+
+.ohb-news-detail__section p:last-child {
+  margin-bottom: 0;
+}

@@ -3,6 +3,7 @@ import PageHero from '../../components/marketing/PageHero'
 import BedrijvenTrustBadges from '../../components/bedrijven/BedrijvenTrustBadges'
 import BedrijvenCtaStrip from '../../components/bedrijven/BedrijvenCtaStrip'
 import BedrijvenHospitalitySecuritySplit from '../../components/bedrijven/BedrijvenHospitalitySecuritySplit'
+import { B2B_INCLUDED_PACKAGE } from '../../content/bedrijvenIncludedPackage'
 import { MARKETING_PAGES } from '../../content/marketingPages'
 import { COMPANY_SEO } from '../../content/companySeo'
 import { usePageSeo } from '../../hooks/usePageSeo'
@@ -36,9 +37,27 @@ export default function OnsAanbodPage() {
       </PageHero>
       <BedrijvenTrustBadges />
       <BedrijvenHospitalitySecuritySplit />
-      <section className="b2b-section b2b-section--surface">
+      <section className="b2b-section b2b-section--surface" aria-labelledby="b2b-aanbod-included">
         <div className="hnb-container">
-          {data.sections.slice(1).map((section, i) => (
+          <header className="b2b-section__head">
+            <span className="b2b-section__eyebrow">{B2B_INCLUDED_PACKAGE.eyebrow}</span>
+            <h2 id="b2b-aanbod-included" className="b2b-section__title">
+              {B2B_INCLUDED_PACKAGE.title}
+            </h2>
+          </header>
+          <div className="b2b-included-grid">
+            {B2B_INCLUDED_PACKAGE.tiles.map((tile) => (
+              <article key={tile.title} className="b2b-included-card">
+                <h3>{tile.title}</h3>
+                <p>{tile.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="b2b-section">
+        <div className="hnb-container">
+          {data.sections.map((section, i) => (
             <div key={section.heading || `sec-${i}`} className="b2b-prose">
               {section.heading ? <h2>{section.heading}</h2> : null}
               {section.paragraphs?.map((p) => (
@@ -57,7 +76,7 @@ export default function OnsAanbodPage() {
       </section>
       <BedrijvenCtaStrip
         title="Capaciteit reserveren zonder verrassingen"
-        lead="Vraag een voorstel aan — roster en afspraken pas na uw akkoord."
+        lead="Vraag een voorstel aan — rooster en afspraken pas na uw akkoord."
         primaryTo="/bedrijven/personeel-aanvragen"
         primaryLabel="Start uw aanvraag"
         secondaryTo="/contact"

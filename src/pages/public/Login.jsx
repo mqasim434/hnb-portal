@@ -40,7 +40,7 @@ export default function Login() {
             <div className="login-card__actions">
               {freelancerPortal ? (
                 <a
-                  className="hnb-btn hnb-btn--primary login-card__btn"
+                  className="hnb-btn hnb-btn--freelancer login-card__btn"
                   href={freelancerPortal}
                   target="_blank"
                   rel="noopener noreferrer"

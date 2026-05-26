@@ -3,14 +3,13 @@ import PageHero from '../../components/marketing/PageHero'
 import BedrijvenTrustBadges from '../../components/bedrijven/BedrijvenTrustBadges'
 import BedrijvenCtaStrip from '../../components/bedrijven/BedrijvenCtaStrip'
 import BedrijvenHospitalitySecuritySplit from '../../components/bedrijven/BedrijvenHospitalitySecuritySplit'
+import { B2B_SECTOR_CARDS } from '../../content/bedrijvenSectorCards'
 import { MARKETING_PAGES } from '../../content/marketingPages'
 import { COMPANY_SEO } from '../../content/companySeo'
 import { usePageSeo } from '../../hooks/usePageSeo'
 import './bedrijven-pages.css'
 
 const data = MARKETING_PAGES['bv-sectoren']
-const sectorLabels =
-  data.sections[0]?.bullets?.map((b, i) => ({ id: i, text: b })) ?? []
 
 export default function SectorenPage() {
   const seo = COMPANY_SEO.sectoren
@@ -43,14 +42,15 @@ export default function SectorenPage() {
             <span className="b2b-section__eyebrow">Focus</span>
             <h2 className="b2b-section__title">Waar we sterk in zijn</h2>
             <p className="b2b-section__lead">
-              Elk segment vraagt andere verhoudingen tussen hospitality en beveiliging — wij tunen roosters op uw
+              Elk segment vraagt andere verhoudingen tussen hospitality en beveiliging — wij stemmen roosters af op uw
               productie, niet op een standaardpakket.
             </p>
           </header>
           <ul className="b2b-sector-grid">
-            {sectorLabels.map(({ id, text }) => (
-              <li key={id} className="b2b-sector-card">
-                {text}
+            {B2B_SECTOR_CARDS.map((card) => (
+              <li key={card.title} className="b2b-sector-card">
+                <h3 className="b2b-sector-card__title">{card.title}</h3>
+                <p className="b2b-sector-card__body">{card.body}</p>
               </li>
             ))}
           </ul>
@@ -59,7 +59,7 @@ export default function SectorenPage() {
       <BedrijvenHospitalitySecuritySplit />
       <section className="b2b-section b2b-section--surface">
         <div className="hnb-container">
-          {data.sections.slice(1).map((section, i) => (
+          {data.sections.map((section, i) => (
             <div key={section.heading || `s-${i}`} className="b2b-prose">
               {section.heading ? <h2>{section.heading}</h2> : null}
               {section.paragraphs?.map((p) => (

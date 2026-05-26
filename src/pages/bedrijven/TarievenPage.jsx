@@ -36,25 +36,29 @@ export default function TarievenPage() {
       <BedrijvenTrustBadges />
       <section className="b2b-section">
         <div className="hnb-container">
-          {data.sections.map((section, i) => (
-            <div key={section.heading || `t-${i}`} className="b2b-prose">
-              {section.heading ? <h2>{section.heading}</h2> : null}
-              {section.paragraphs?.map((p) => (
-                <p key={p.slice(0, 48)}>{p}</p>
+          <div className="b2b-indicative">
+            <span className="b2b-indicative__eyebrow">{data.indicativeEyebrow}</span>
+            <h2 className="b2b-indicative__title">{data.indicativeTitle}</h2>
+            <p className="b2b-indicative__intro">{data.indicativeIntro}</p>
+            <ul className="b2b-rate-list">
+              {data.indicativeRates.map((line) => (
+                <li key={line}>{line}</li>
               ))}
-              {section.bullets?.length ? (
-                <ul>
-                  {section.bullets.map((b) => (
-                    <li key={b}>{b}</li>
-                  ))}
-                </ul>
-              ) : null}
-            </div>
-          ))}
+            </ul>
+            <p className="b2b-indicative__surcharge">{data.indicativeSurcharge}</p>
+          </div>
+
+          <div className="b2b-quote-block">
+            <h2>{data.quoteHeading}</h2>
+            <p>{data.quoteBody}</p>
+            <Link to={data.quoteCta.to} className="hnb-btn hnb-btn--primary">
+              {data.quoteCta.label}
+            </Link>
+          </div>
         </div>
       </section>
       <BedrijvenCtaStrip
-        title="Concrete rate card nodig?"
+        title="Concrete tariefkaart nodig?"
         lead="Deel uw data en bezetting — wij leveren een voorstel passend bij rol, risico en doorlooptijd."
         primaryTo="/bedrijven/personeel-aanvragen"
         primaryLabel="Vraag offerte aan"

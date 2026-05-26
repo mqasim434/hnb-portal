@@ -54,7 +54,7 @@ export default function VasteSamenwerkingPage() {
         </div>
       </section>
       <BedrijvenCtaStrip
-        title="Een vaste kern voor uw venue of reeks?"
+        title="Een vaste kern voor uw locatie of reeks?"
         lead="We bouwen een pool die uw huisstijl kent — sneller inzetbaar bij pieken en rustiger op de vloer."
         primaryTo="/bedrijven/personeel-aanvragen"
         primaryLabel="Personeel aanvragen"

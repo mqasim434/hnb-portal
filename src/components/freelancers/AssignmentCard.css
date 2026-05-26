@@ -31,6 +31,10 @@
   opacity: 0.72;
 }
 
+.assignment-card--status-gesloten:hover {
+  transform: none;
+}
+
 .assignment-card__head {
   display: flex;
   flex-wrap: wrap;
@@ -44,7 +48,8 @@
   font-size: 1.0625rem;
   letter-spacing: -0.02em;
   color: var(--text);
-  max-width: 16rem;
+  flex: 1 1 12rem;
+  min-width: 0;
   line-height: 1.25;
 }
 
@@ -64,8 +69,8 @@
 }
 
 .assignment-card__badge--bijna_vol {
-  background: color-mix(in srgb, var(--color-warning) 18%, var(--surface));
-  color: var(--color-warning);
+  background: var(--color-badge-nearly-full);
+  color: #ffffff;
 }
 
 .assignment-card__badge--gesloten {
@@ -110,13 +115,7 @@
   color: var(--secondary);
 }
 
-.assignment-card__icon--gold {
-  color: var(--color-gold);
-}
-
 .assignment-card__cert {
-  display: flex;
-  gap: var(--space-3);
   padding: var(--space-3);
   border-radius: var(--radius-button);
   background: color-mix(in srgb, var(--surface) 70%, var(--color-light-gold));
@@ -128,9 +127,9 @@
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   color: var(--text-subtle);
-  margin-bottom: 0.15rem;
+  margin-bottom: 0.35rem;
 }
 
 .assignment-card__cert-text {
@@ -140,23 +139,40 @@
   color: var(--text);
 }
 
-.assignment-card__hint {
+.assignment-card__apply {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding-top: var(--space-1);
+}
+
+.assignment-card__apply-btn.hnb-btn {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+}
+
+.assignment-card__apply-hint {
   margin: 0;
   font-size: 0.8125rem;
   line-height: 1.5;
   color: var(--text-subtle);
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-2);
 }
 
-.assignment-card__link {
-  color: var(--primary-muted);
+.assignment-card__closed {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.assignment-card__closed-link {
   font-weight: 600;
+  color: var(--primary-muted);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
-.assignment-card__link:hover {
+.assignment-card__closed-link:hover {
   color: var(--primary);
 }

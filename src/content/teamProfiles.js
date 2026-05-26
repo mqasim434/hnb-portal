@@ -1,31 +1,31 @@
-/** Teamprofielen (voorbeelddata — vervang door echte namen/foto’s). */
+/** Kern van het team (FIX 51) — vervang foto’s wanneer beschikbaar. */
 export const TEAM_PROFILES = [
   {
-    id: '1',
+    id: 'elena',
     name: 'Elena van Dijk',
-    role: 'Hoofd planning',
-    bio: 'Rust onder druk: van meerdaagse opbouwen tot last-minute roosterwijzigingen op de showdag.',
+    role: 'Hoofd Planning',
+    bio: 'Rust onder druk. Van meerdaagse opbouwen tot last-minute roosterwijzigingen op de show-dag — Elena bewaakt de planning waar anderen al lang door de bocht zouden vliegen.',
     initials: 'ED',
   },
   {
-    id: '2',
+    id: 'marc',
     name: 'Marc Janssen',
-    role: 'Lead coördinatie venues',
-    bio: 'Verbindt locatiebeleid met teambriefings — ervaring in nachtprogramma’s en high-trust corporate.',
+    role: 'Hoofd Locatiecoördinatie',
+    bio: 'Verbindt locatiebeleid met teambriefings. Ervaring in nachtprogramma\'s en vertrouwelijke zakelijke events — kent het verschil tussen \'mag dit\' en \'werkt dit\'.',
     initials: 'MJ',
   },
   {
-    id: '3',
+    id: 'sofia',
     name: 'Sofia El Mansouri',
-    role: 'Compliance & onboarding',
-    bio: 'Waakt over diploma’s, vergunningen en onboarding zodat elk roster aantoonbaar klopt.',
+    role: 'Compliance & Onboarding',
+    bio: 'Bewaakt diploma\'s, vergunningen en onboarding zodat elk rooster aantoonbaar klopt. Belt liever vier keer dan dat er één papiertje ontbreekt.',
     initials: 'SE',
   },
   {
-    id: '4',
+    id: 'thomas',
     name: 'Thomas de Vries',
-    role: 'Event dispatch',
-    bio: 'Lijn naar vloer tijdens run: escalaties, vervanging en communicatie met duty managers.',
+    role: 'Inzet & Eventcoördinatie',
+    bio: 'De lijn naar de vloer tijdens het event. Escalaties, vervanging en communicatie met dienstdoende managers — Thomas houdt de avond op de rails.',
     initials: 'TV',
   },
 ]

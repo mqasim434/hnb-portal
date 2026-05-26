@@ -7,7 +7,7 @@ export const B2B_ROLE_PROFILES = [
     bullets: [
       'Ontvangst, routing en representatie volgens uw merkstandaard.',
       'Ervaring met hoge drukte en VIP-programma’s.',
-      'Dresscode en tone-of-voice afgestemd in de briefing.',
+      'Dresscode en aanspreektoon afgestemd in de briefing.',
     ],
   },
   {
@@ -16,8 +16,8 @@ export const B2B_ROLE_PROFILES = [
     tag: 'Hospitality',
     bullets: [
       'Bediening en barondersteuning tijdens pieken.',
-      'Sociale hygiëne waar alcohol wordt geschonken.',
-      'Samenwerking met locatie op taps en voorraad.',
+      'Sociale hygiëne (SVH) waar alcohol wordt geschonken.',
+      'Samenwerking met de locatie op taps en voorraad.',
     ],
   },
   {
@@ -27,7 +27,7 @@ export const B2B_ROLE_PROFILES = [
     bullets: [
       'Bevoegd conform vergunning en locatiebeleid.',
       'Toegangscontrole en rustige menigte-aansturing.',
-      'Heldere lijn met duty manager en productie.',
+      'Heldere lijn met dienstdoende manager en productie.',
     ],
   },
   {

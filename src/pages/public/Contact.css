@@ -131,6 +131,16 @@ a.contact-aside__value:hover {
   color: var(--primary);
 }
 
+.contact-aside__value--phone-placeholder {
+  font-size: 0.8125rem;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.contact-aside--brand .contact-aside__value--phone-placeholder {
+  color: color-mix(in srgb, var(--color-warm-white) 74%, transparent);
+}
+
 .contact-hours {
   margin-top: var(--space-6);
   padding-top: var(--space-5);

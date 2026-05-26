@@ -9,10 +9,13 @@ import SiteJsonLd from '../components/seo/SiteJsonLd'
 export default function RootLayout() {
   return (
     <div className="site-shell">
+      <a href="#main-content" className="skip-link">
+        Ga naar hoofdinhoud
+      </a>
       <SiteJsonLd />
       <FirebaseAuthSync />
       <Navbar />
-      <div className="site-shell__main">
+      <div id="main-content" className="site-shell__main" tabIndex={-1}>
         <Suspense fallback={<PageRouteSkeleton />}>
           <Outlet />
         </Suspense>

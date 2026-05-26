@@ -2,6 +2,20 @@ import { useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useForm, useWatch } from 'react-hook-form'
 import PageHero from '../../components/marketing/PageHero'
+import {
+  FL_REG_BESCHIKBAARHEID_OPTS,
+  FL_REG_CONTRACT_OPTS,
+  FL_REG_DOMEIN_OPTS,
+  FL_REG_ERVARING_OPTS,
+  FL_REG_HACCP_OPTS,
+  FL_REG_JA_NEE,
+  FL_REG_JA_NEE_AANVRAAG,
+  FL_REG_JA_NEE_OPLEIDING,
+  FL_REG_REIS_OPTS,
+  FL_REG_ROLLEN_BY_DOMEIN,
+  FL_REG_SVH_OPTS,
+  FL_REG_VOG_OPTS,
+} from '../../content/freelancerRegistrationFormConfig'
 import { FREELANCER_SEO } from '../../content/freelancerSeo'
 import { useFreelancerRegistrationSubmit } from '../../hooks/useFreelancerRegistrationSubmit'
 import { usePageSeo } from '../../hooks/usePageSeo'
@@ -10,22 +24,76 @@ import { createSubmitErrorHandler, rhfRules } from '../../lib/validation'
 import { normalizeDutchPhoneInput } from '../../utils/dutchPhone'
 import './freelancers-pages.css'
 
+/** @param {unknown} v */
+function asArray(v) {
+  if (Array.isArray(v)) return v
+  if (v) return [v]
+  return []
+}
+
+function ReqMarker() {
+  return (
+    <span className="fl-form__req" aria-hidden="true">
+      *
+    </span>
+  )
+}
+
 /** Validatievolgorde = scroll naar eerste fout */
 const FIELD_ORDER = [
   'voornaam',
   'achternaam',
   'email',
   'telefoonnummer',
+  'geboortedatum',
   'woonplaats',
-  'functievoorkeur',
+  'domeinen',
+  'voorkeursrollen',
+  'ervaringsniveau',
   'beschikbaarheid',
-  'beveiligingsdiploma',
-  'overJezelf',
+  'reisbereidheid',
+  'beveilig_diploma',
+  'beveilig_grijze_pas',
+  'beveilig_bhv',
+  'beveilig_vog',
+  'hosp_svh',
+  'hosp_bhv',
+  'hosp_haccp',
+  'contractvoorkeur',
+  'aanvullendeInfo',
   'privacyConsent',
 ]
 
+/** @param {string} name */
 function flFieldElementId(name) {
-  return name === 'functievoorkeur' ? 'fl-field-functievoorkeur' : `fl-field-${name}`
+  return `fl-field-${name}`
+}
+
+/** @param {string} value */
+function validateGeboortedatum18(value) {
+  if (!value || String(value).trim() === '') {
+    return 'Vul uw geboortedatum in.'
+  }
+  const parts = String(value).split('-')
+  if (parts.length !== 3) {
+    return 'Ongeldige datum.'
+  }
+  const y = Number(parts[0])
+  const m = Number(parts[1])
+  const d = Number(parts[2])
+  if (!y || !m || !d) return 'Ongeldige datum.'
+  const birth = new Date(y, m - 1, d)
+  if (Number.isNaN(birth.getTime())) return 'Ongeldige datum.'
+  const today = new Date()
+  let age = today.getFullYear() - birth.getFullYear()
+  const monthDiff = today.getMonth() - birth.getMonth()
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+    age -= 1
+  }
+  if (age < 18) {
+    return 'U moet 18 jaar of ouder zijn.'
+  }
+  return true
 }
 
 const defaultValues = {
@@ -33,17 +101,42 @@ const defaultValues = {
   achternaam: '',
   email: '',
   telefoonnummer: '',
+  geboortedatum: '',
   woonplaats: '',
-  functievoorkeur: [],
-  beschikbaarheid: '',
-  beveiligingsdiploma: '',
-  overJezelf: '',
+  domeinen: [],
+  voorkeursrollen: [],
+  ervaringsniveau: '',
+  beschikbaarheid: [],
+  reisbereidheid: '',
+  beveilig_diploma: '',
+  beveilig_grijze_pas: '',
+  beveilig_bhv: '',
+  beveilig_vog: '',
+  hosp_svh: '',
+  hosp_bhv: '',
+  hosp_haccp: '',
+  contractvoorkeur: '',
+  aanvullendeInfo: '',
   privacyConsent: false,
 }
 
-function hasFunctievoorkeur(value) {
-  if (Array.isArray(value)) return value.length > 0
-  return Boolean(value)
+/** @param {unknown} v */
+function validateMinOne(v, message) {
+  return asArray(v).length > 0 ? true : message
+}
+
+const domeinenCheckboxRules = {
+  validate: (v) => validateMinOne(v, 'Selecteer minstens één domein.'),
+}
+
+const voorkeursrollenRules = {
+  validate: (v) =>
+    validateMinOne(v, 'Selecteer minstens één voorkeursrol.'),
+}
+
+const beschikbaarheidRules = {
+  validate: (v) =>
+    validateMinOne(v, 'Selecteer minstens één beschikbaarheidsoptie.'),
 }
 
 export default function FreelancerDirectRegister() {
@@ -66,10 +159,28 @@ export default function FreelancerDirectRegister() {
     mode: 'onBlur',
     reValidateMode: 'onBlur',
     criteriaMode: 'firstError',
+    shouldUnregister: true,
   })
 
-  const overJezelfValue = useWatch({ control, name: 'overJezelf', defaultValue: '' })
-  const overLen = (overJezelfValue ?? '').length
+  const domeinenWatch = useWatch({ control, name: 'domeinen', defaultValue: [] })
+  const domeinen = asArray(domeinenWatch)
+  const showBeveiliging = domeinen.includes('beveiliging')
+  const showHospitality = domeinen.includes('hospitality')
+
+  const beschikbareRollen = useMemo(() => {
+    if (domeinen.length === 0) return []
+    const seen = new Set()
+    const out = []
+    for (const dom of domeinen) {
+      const opts = FL_REG_ROLLEN_BY_DOMEIN[dom] || []
+      for (const o of opts) {
+        if (seen.has(o.value)) continue
+        seen.add(o.value)
+        out.push(o)
+      }
+    }
+    return out
+  }, [domeinen])
 
   const { status, errorMessage, submit, reset: resetRemote } = useFreelancerRegistrationSubmit()
 
@@ -80,22 +191,27 @@ export default function FreelancerDirectRegister() {
 
   const onValid = async (data) => {
     try {
-      const voorkeuren = Array.isArray(data.functievoorkeur)
-        ? data.functievoorkeur
-        : data.functievoorkeur
-          ? [data.functievoorkeur]
-          : []
-
       await submit({
         voornaam: data.voornaam.trim(),
         achternaam: data.achternaam.trim(),
         email: data.email.trim(),
         telefoonnummer: normalizeDutchPhoneInput(data.telefoonnummer),
+        geboortedatum: data.geboortedatum,
         woonplaats: data.woonplaats.trim(),
-        functievoorkeur: voorkeuren,
-        beschikbaarheid: data.beschikbaarheid.trim(),
-        beveiligingsdiploma: data.beveiligingsdiploma,
-        overJezelf: data.overJezelf.trim(),
+        domeinen: asArray(data.domeinen),
+        voorkeursrollen: asArray(data.voorkeursrollen),
+        ervaringsniveau: data.ervaringsniveau,
+        beschikbaarheid: asArray(data.beschikbaarheid),
+        reisbereidheid: data.reisbereidheid,
+        beveilig_diploma: data.beveilig_diploma ?? '',
+        beveilig_grijze_pas: data.beveilig_grijze_pas ?? '',
+        beveilig_bhv: data.beveilig_bhv ?? '',
+        beveilig_vog: data.beveilig_vog ?? '',
+        hosp_svh: data.hosp_svh ?? '',
+        hosp_bhv: data.hosp_bhv ?? '',
+        hosp_haccp: data.hosp_haccp ?? '',
+        contractvoorkeur: data.contractvoorkeur,
+        aanvullendeInfo: data.aanvullendeInfo?.trim() ?? '',
         privacyConsent: data.privacyConsent,
       })
       reset(defaultValues)
@@ -114,11 +230,6 @@ export default function FreelancerDirectRegister() {
   const onResetForm = () => {
     resetRemote()
     reset(defaultValues)
-  }
-
-  const functievoorkeurRules = {
-    validate: (v) =>
-      hasFunctievoorkeur(v) || 'Selecteer minstens één functievoorkeur.',
   }
 
   return (
@@ -143,16 +254,22 @@ export default function FreelancerDirectRegister() {
             aria-live="polite"
             id="fl-aanmelding-succes"
           >
-            <h2>Aanmelding succesvol ontvangen</h2>
+            <h2>Bedankt voor uw aanmelding.</h2>
             <p>
-              Bedankt — uw gegevens zijn binnen. U ontvangt zo snel mogelijk een bevestiging per e-mail; zo nodig
-              neemt ons team persoonlijk contact met u op voor documenten of aanvullende vragen.
+              Wij hebben uw gegevens ontvangen en nemen binnen één werkdag persoonlijk contact met u op.
             </p>
+            <h3 className="fl-alert__subheading">Wat gebeurt er nu?</h3>
+            <ul className="fl-alert__list">
+              <li>U ontvangt een bevestiging per e-mail met de vervolgstappen.</li>
+              <li>Een coördinator neemt telefonisch of per e-mail contact op voor een korte kennismaking.</li>
+              <li>Daarna nodigen wij u uit om documenten te uploaden in het portaal.</li>
+              <li>Zodra screening is afgerond, staat u live en kunt u shifts accepteren.</li>
+            </ul>
             <div className="fl-form__actions" style={{ marginTop: 'var(--space-4)', marginBottom: 0 }}>
               <button type="button" className="hnb-btn hnb-btn--outline" onClick={onResetForm}>
                 Nieuwe aanmelding
               </button>
-              <Link to="/freelancers/openstaande-opdrachten" className="hnb-btn hnb-btn--primary">
+              <Link to="/freelancers/openstaande-opdrachten" className="hnb-btn hnb-btn--freelancer">
                 Bekijk opdrachten
               </Link>
             </div>
@@ -186,225 +303,506 @@ export default function FreelancerDirectRegister() {
             aria-describedby={status === 'error' ? undefined : 'fl-form-beschrijving'}
           >
             <p id="fl-form-beschrijving" className="visually-hidden">
-              Verplichte velden zijn gemarkeerd; validatie gebeurt na het verlaten van een veld.
+              Verplichte velden zijn gemarkeerd met een sterretje; validatie gebeurt na het verlaten van een veld.
             </p>
+            <div className="fl-form__section" aria-labelledby="fl-reg-sect-1-title">
+              <h3 id="fl-reg-sect-1-title" className="fl-form__section-title">
+                Persoonlijke gegevens
+              </h3>
 
-            <div className="fl-form__row--2">
+              <div className="fl-form__row--2">
+                <div className="fl-form__field">
+                  <label htmlFor={flFieldElementId('voornaam')}>
+                    Voornaam <ReqMarker /> <span className="visually-hidden">verplicht</span>
+                  </label>
+                  <input
+                    id={flFieldElementId('voornaam')}
+                    type="text"
+                    autoComplete="given-name"
+                    aria-invalid={errors.voornaam ? 'true' : 'false'}
+                    disabled={isSubmitting}
+                    {...register('voornaam', { required: 'Vul uw voornaam in.' })}
+                  />
+                  {errors.voornaam ? (
+                    <p className="fl-form__error" id="err-voornaam">
+                      {errors.voornaam.message}
+                    </p>
+                  ) : null}
+                </div>
+                <div className="fl-form__field">
+                  <label htmlFor={flFieldElementId('achternaam')}>
+                    Achternaam <ReqMarker /> <span className="visually-hidden">verplicht</span>
+                  </label>
+                  <input
+                    id={flFieldElementId('achternaam')}
+                    type="text"
+                    autoComplete="family-name"
+                    aria-invalid={errors.achternaam ? 'true' : 'false'}
+                    disabled={isSubmitting}
+                    {...register('achternaam', { required: 'Vul uw achternaam in.' })}
+                  />
+                  {errors.achternaam ? (
+                    <p className="fl-form__error">{errors.achternaam.message}</p>
+                  ) : null}
+                </div>
+              </div>
+
               <div className="fl-form__field">
-                <label htmlFor="fl-field-voornaam">Voornaam</label>
+                <label htmlFor={flFieldElementId('email')}>
+                  E-mailadres <ReqMarker /> <span className="visually-hidden">verplicht</span>
+                </label>
                 <input
-                  id="fl-field-voornaam"
-                  type="text"
-                  autoComplete="given-name"
-                  aria-invalid={errors.voornaam ? 'true' : 'false'}
+                  id={flFieldElementId('email')}
+                  type="email"
+                  autoComplete="email"
+                  aria-invalid={errors.email ? 'true' : 'false'}
                   disabled={isSubmitting}
-                  {...register('voornaam', { required: 'Vul uw voornaam in.' })}
+                  {...register('email', rhfRules.emailRequiredFreelancer)}
                 />
-                {errors.voornaam ? (
-                  <p className="fl-form__error" id="err-voornaam">
-                    {errors.voornaam.message}
+                {errors.email ? <p className="fl-form__error">{errors.email.message}</p> : null}
+              </div>
+
+              <div className="fl-form__field">
+                <label htmlFor={flFieldElementId('telefoonnummer')}>
+                  Telefoonnummer <ReqMarker /> <span className="visually-hidden">verplicht</span>
+                </label>
+                <input
+                  id={flFieldElementId('telefoonnummer')}
+                  type="tel"
+                  autoComplete="tel"
+                  placeholder="Bijv. 0612345678 of +31612345678"
+                  aria-invalid={errors.telefoonnummer ? 'true' : 'false'}
+                  disabled={isSubmitting}
+                  {...register('telefoonnummer', rhfRules.phoneNLRequired)}
+                />
+                <p className="fl-form__hint">Landcode +31 of 0, daarna 9 cijfers.</p>
+                {errors.telefoonnummer ? (
+                  <p className="fl-form__error">{errors.telefoonnummer.message}</p>
+                ) : null}
+              </div>
+
+              <div className="fl-form__field">
+                <label htmlFor={flFieldElementId('geboortedatum')}>
+                  Geboortedatum <ReqMarker /> <span className="visually-hidden">verplicht</span>
+                </label>
+                <input
+                  id={flFieldElementId('geboortedatum')}
+                  type="date"
+                  autoComplete="bday"
+                  aria-invalid={errors.geboortedatum ? 'true' : 'false'}
+                  disabled={isSubmitting}
+                  {...register('geboortedatum', { validate: validateGeboortedatum18 })}
+                />
+                <p className="fl-form__hint">U moet 18 jaar of ouder zijn.</p>
+                {errors.geboortedatum ? (
+                  <p className="fl-form__error">{errors.geboortedatum.message}</p>
+                ) : null}
+              </div>
+
+              <div className="fl-form__field">
+                <label htmlFor={flFieldElementId('woonplaats')}>
+                  Woonplaats <ReqMarker /> <span className="visually-hidden">verplicht</span>
+                </label>
+                <input
+                  id={flFieldElementId('woonplaats')}
+                  type="text"
+                  autoComplete="address-level2"
+                  aria-invalid={errors.woonplaats ? 'true' : 'false'}
+                  disabled={isSubmitting}
+                  {...register('woonplaats', { required: 'Vul uw woonplaats in.' })}
+                />
+                {errors.woonplaats ? <p className="fl-form__error">{errors.woonplaats.message}</p> : null}
+              </div>
+            </div>
+
+            <div className="fl-form__section" aria-labelledby="fl-reg-sect-2-title">
+              <h3 id="fl-reg-sect-2-title" className="fl-form__section-title">
+                Voorkeuren en ervaring
+              </h3>
+
+              <fieldset
+                className="fl-form__fieldset"
+                id={flFieldElementId('domeinen')}
+                disabled={isSubmitting}
+                aria-invalid={errors.domeinen ? 'true' : 'false'}
+                aria-describedby={errors.domeinen ? 'err-domeinen' : 'hint-domeinen'}
+              >
+                <legend className="fl-form__legend">
+                  Voor welk domein meldt u zich aan? <ReqMarker />
+                </legend>
+                <p className="fl-form__hint" id="hint-domeinen">
+                  Selecteer alles wat op u van toepassing is.
+                </p>
+                <div className="fl-form__checks">
+                  {FL_REG_DOMEIN_OPTS.map((o) => (
+                    <label key={o.value} className="fl-form__check">
+                      <input type="checkbox" value={o.value} {...register('domeinen', domeinenCheckboxRules)} />
+                      <span>{o.label}</span>
+                    </label>
+                  ))}
+                </div>
+                {errors.domeinen ? (
+                  <p className="fl-form__error" id="err-domeinen">
+                    {errors.domeinen.message}
                   </p>
                 ) : null}
-              </div>
-              <div className="fl-form__field">
-                <label htmlFor="fl-field-achternaam">Achternaam</label>
-                <input
-                  id="fl-field-achternaam"
-                  type="text"
-                  autoComplete="family-name"
-                  aria-invalid={errors.achternaam ? 'true' : 'false'}
+              </fieldset>
+
+              {beschikbareRollen.length > 0 ? (
+                <fieldset
+                  className="fl-form__fieldset"
+                  id={flFieldElementId('voorkeursrollen')}
                   disabled={isSubmitting}
-                  {...register('achternaam', { required: 'Vul uw achternaam in.' })}
+                  aria-invalid={errors.voorkeursrollen ? 'true' : 'false'}
+                  aria-describedby={errors.voorkeursrollen ? 'err-rollen' : 'hint-rollen'}
+                >
+                  <legend className="fl-form__legend">
+                    Voorkeursrollen <ReqMarker />
+                  </legend>
+                  <p className="fl-form__hint" id="hint-rollen">
+                    Gebaseerd op uw domein(keuze).
+                  </p>
+                  <div className="fl-form__checks">
+                    {beschikbareRollen.map((o) => (
+                      <label key={o.value} className="fl-form__check">
+                        <input
+                          type="checkbox"
+                          value={o.value}
+                          {...register('voorkeursrollen', voorkeursrollenRules)}
+                        />
+                        <span>{o.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                  {errors.voorkeursrollen ? (
+                    <p className="fl-form__error" id="err-rollen">
+                      {errors.voorkeursrollen.message}
+                    </p>
+                  ) : null}
+                </fieldset>
+              ) : null}
+
+              <fieldset
+                className="fl-form__fieldset"
+                id={flFieldElementId('ervaringsniveau')}
+                disabled={isSubmitting}
+                aria-invalid={errors.ervaringsniveau ? 'true' : 'false'}
+              >
+                <legend className="fl-form__legend">
+                  Ervaringsniveau <ReqMarker />
+                </legend>
+                <div className="fl-form__checks">
+                  {FL_REG_ERVARING_OPTS.map((o) => (
+                    <label key={o.value} className="fl-form__check">
+                      <input
+                        type="radio"
+                        value={o.value}
+                        {...register('ervaringsniveau', { required: 'Kies uw ervaringsniveau.' })}
+                      />
+                      <span>{o.label}</span>
+                    </label>
+                  ))}
+                </div>
+                {errors.ervaringsniveau ? (
+                  <p className="fl-form__error">{errors.ervaringsniveau.message}</p>
+                ) : null}
+              </fieldset>
+
+              <fieldset
+                className="fl-form__fieldset"
+                id={flFieldElementId('beschikbaarheid')}
+                disabled={isSubmitting}
+                aria-invalid={errors.beschikbaarheid ? 'true' : 'false'}
+              >
+                <legend className="fl-form__legend">
+                  Beschikbaarheid <ReqMarker />
+                </legend>
+                <div className="fl-form__checks">
+                  {FL_REG_BESCHIKBAARHEID_OPTS.map((o) => (
+                    <label key={o.value} className="fl-form__check">
+                      <input
+                        type="checkbox"
+                        value={o.value}
+                        {...register('beschikbaarheid', beschikbaarheidRules)}
+                      />
+                      <span>{o.label}</span>
+                    </label>
+                  ))}
+                </div>
+                {errors.beschikbaarheid ? (
+                  <p className="fl-form__error">{errors.beschikbaarheid.message}</p>
+                ) : null}
+              </fieldset>
+
+              <fieldset
+                className="fl-form__fieldset"
+                id={flFieldElementId('reisbereidheid')}
+                disabled={isSubmitting}
+                aria-invalid={errors.reisbereidheid ? 'true' : 'false'}
+              >
+                <legend className="fl-form__legend">
+                  Reisbereidheid <ReqMarker />
+                </legend>
+                <div className="fl-form__checks">
+                  {FL_REG_REIS_OPTS.map((o) => (
+                    <label key={o.value} className="fl-form__check">
+                      <input
+                        type="radio"
+                        value={o.value}
+                        {...register('reisbereidheid', { required: 'Kies uw reisbereidheid.' })}
+                      />
+                      <span>{o.label}</span>
+                    </label>
+                  ))}
+                </div>
+                {errors.reisbereidheid ? (
+                  <p className="fl-form__error">{errors.reisbereidheid.message}</p>
+                ) : null}
+              </fieldset>
+            </div>
+
+            {showBeveiliging ? (
+              <div className="fl-form__section" aria-labelledby="fl-reg-sect-3-beveiliging-title">
+                <h3 id="fl-reg-sect-3-beveiliging-title" className="fl-form__section-title">
+                  Certificering — beveiliging
+                </h3>
+
+                <div className="fl-form__field">
+                  <label htmlFor={flFieldElementId('beveilig_diploma')}>
+                    Diploma Beveiliger 2 of hoger? <ReqMarker />{' '}
+                    <span className="visually-hidden">verplicht</span>
+                  </label>
+                  <select
+                    id={flFieldElementId('beveilig_diploma')}
+                    aria-invalid={errors.beveilig_diploma ? 'true' : 'false'}
+                    disabled={isSubmitting}
+                    {...register('beveilig_diploma', { required: 'Maak een keuze.' })}
+                  >
+                    <option value="" disabled>
+                      Maak een keuze…
+                    </option>
+                    {FL_REG_JA_NEE_OPLEIDING.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.beveilig_diploma ? (
+                    <p className="fl-form__error">{errors.beveilig_diploma.message}</p>
+                  ) : null}
+                </div>
+
+                <div className="fl-form__field">
+                  <label htmlFor={flFieldElementId('beveilig_grijze_pas')}>
+                    Geldige grijze pas (WPBR-legitimatie)? <ReqMarker />{' '}
+                    <span className="visually-hidden">verplicht</span>
+                  </label>
+                  <select
+                    id={flFieldElementId('beveilig_grijze_pas')}
+                    aria-invalid={errors.beveilig_grijze_pas ? 'true' : 'false'}
+                    disabled={isSubmitting}
+                    {...register('beveilig_grijze_pas', { required: 'Maak een keuze.' })}
+                  >
+                    <option value="" disabled>
+                      Maak een keuze…
+                    </option>
+                    {FL_REG_JA_NEE_AANVRAAG.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.beveilig_grijze_pas ? (
+                    <p className="fl-form__error">{errors.beveilig_grijze_pas.message}</p>
+                  ) : null}
+                </div>
+
+                <div className="fl-form__field">
+                  <label htmlFor={flFieldElementId('beveilig_bhv')}>BHV-certificering?</label>
+                  <select
+                    id={flFieldElementId('beveilig_bhv')}
+                    aria-invalid={errors.beveilig_bhv ? 'true' : 'false'}
+                    disabled={isSubmitting}
+                    {...register('beveilig_bhv')}
+                  >
+                    <option value="">Maak een keuze… (optioneel)</option>
+                    {FL_REG_JA_NEE.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.beveilig_bhv ? (
+                    <p className="fl-form__error">{errors.beveilig_bhv.message}</p>
+                  ) : null}
+                </div>
+
+                <div className="fl-form__field">
+                  <label htmlFor={flFieldElementId('beveilig_vog')}>Geldige VOG?</label>
+                  <select
+                    id={flFieldElementId('beveilig_vog')}
+                    aria-invalid={errors.beveilig_vog ? 'true' : 'false'}
+                    disabled={isSubmitting}
+                    {...register('beveilig_vog')}
+                  >
+                    <option value="">Maak een keuze… (optioneel)</option>
+                    {FL_REG_VOG_OPTS.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.beveilig_vog ? (
+                    <p className="fl-form__error">{errors.beveilig_vog.message}</p>
+                  ) : null}
+                </div>
+              </div>
+            ) : null}
+
+            {showHospitality ? (
+              <div className="fl-form__section" aria-labelledby="fl-reg-sect-3-hosp-title">
+                <h3 id="fl-reg-sect-3-hosp-title" className="fl-form__section-title">
+                  Certificering — hospitality
+                </h3>
+
+                <div className="fl-form__field">
+                  <label htmlFor={flFieldElementId('hosp_svh')}>SVH Sociale Hygiëne?</label>
+                  <select
+                    id={flFieldElementId('hosp_svh')}
+                    aria-invalid={errors.hosp_svh ? 'true' : 'false'}
+                    disabled={isSubmitting}
+                    {...register('hosp_svh')}
+                  >
+                    <option value="">Maak een keuze… (optioneel)</option>
+                    {FL_REG_SVH_OPTS.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.hosp_svh ? <p className="fl-form__error">{errors.hosp_svh.message}</p> : null}
+                </div>
+
+                <div className="fl-form__field">
+                  <label htmlFor={flFieldElementId('hosp_bhv')}>BHV-certificering?</label>
+                  <select
+                    id={flFieldElementId('hosp_bhv')}
+                    aria-invalid={errors.hosp_bhv ? 'true' : 'false'}
+                    disabled={isSubmitting}
+                    {...register('hosp_bhv')}
+                  >
+                    <option value="">Maak een keuze… (optioneel)</option>
+                    {FL_REG_JA_NEE.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.hosp_bhv ? <p className="fl-form__error">{errors.hosp_bhv.message}</p> : null}
+                </div>
+
+                <div className="fl-form__field">
+                  <label htmlFor={flFieldElementId('hosp_haccp')}>HACCP-basis?</label>
+                  <select
+                    id={flFieldElementId('hosp_haccp')}
+                    aria-invalid={errors.hosp_haccp ? 'true' : 'false'}
+                    disabled={isSubmitting}
+                    {...register('hosp_haccp')}
+                  >
+                    <option value="">Maak een keuze… (optioneel)</option>
+                    {FL_REG_HACCP_OPTS.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.hosp_haccp ? (
+                    <p className="fl-form__error">{errors.hosp_haccp.message}</p>
+                  ) : null}
+                </div>
+              </div>
+            ) : null}
+
+            <div className="fl-form__section" aria-labelledby="fl-reg-sect-4-title">
+              <h3 id="fl-reg-sect-4-title" className="fl-form__section-title">
+                Contract en afsluiten
+              </h3>
+
+              <fieldset
+                className="fl-form__fieldset"
+                id={flFieldElementId('contractvoorkeur')}
+                disabled={isSubmitting}
+                aria-invalid={errors.contractvoorkeur ? 'true' : 'false'}
+              >
+                <legend className="fl-form__legend">
+                  Voorkeur contractvorm <ReqMarker />
+                </legend>
+                <div className="fl-form__checks">
+                  {FL_REG_CONTRACT_OPTS.map((o) => (
+                    <label key={o.value} className="fl-form__check">
+                      <input
+                        type="radio"
+                        value={o.value}
+                        {...register('contractvoorkeur', { required: 'Kies uw voorkeur contractvorm.' })}
+                      />
+                      <span>{o.label}</span>
+                    </label>
+                  ))}
+                </div>
+                {errors.contractvoorkeur ? (
+                  <p className="fl-form__error">{errors.contractvoorkeur.message}</p>
+                ) : null}
+              </fieldset>
+
+              <div className="fl-form__field">
+                <label htmlFor={flFieldElementId('aanvullendeInfo')}>Aanvullende informatie</label>
+                <textarea
+                  id={flFieldElementId('aanvullendeInfo')}
+                  rows={5}
+                  maxLength={2000}
+                  placeholder="Talenkennis, eerdere events, beschikbare data deze maand, of vragen aan uw coördinator."
+                  aria-invalid={errors.aanvullendeInfo ? 'true' : 'false'}
+                  disabled={isSubmitting}
+                  {...register('aanvullendeInfo', {
+                    maxLength: { value: 2000, message: 'Maximaal 2000 tekens toegestaan.' },
+                  })}
                 />
-                {errors.achternaam ? (
-                  <p className="fl-form__error">{errors.achternaam.message}</p>
+                {errors.aanvullendeInfo ? (
+                  <p className="fl-form__error">{errors.aanvullendeInfo.message}</p>
                 ) : null}
               </div>
-            </div>
 
-            <div className="fl-form__field">
-              <label htmlFor="fl-field-email">E-mailadres</label>
-              <input
-                id="fl-field-email"
-                type="email"
-                autoComplete="email"
-                aria-invalid={errors.email ? 'true' : 'false'}
-                disabled={isSubmitting}
-                {...register('email', rhfRules.emailRequiredFreelancer)}
-              />
-              {errors.email ? <p className="fl-form__error">{errors.email.message}</p> : null}
-            </div>
-
-            <div className="fl-form__field">
-              <label htmlFor="fl-field-telefoonnummer">Telefoonnummer</label>
-              <input
-                id="fl-field-telefoonnummer"
-                type="tel"
-                autoComplete="tel"
-                placeholder="Bijv. 0612345678 of +31612345678"
-                aria-invalid={errors.telefoonnummer ? 'true' : 'false'}
-                disabled={isSubmitting}
-                {...register('telefoonnummer', rhfRules.phoneNLRequired)}
-              />
-              <p className="fl-form__hint">Landcode +31 of 0, daarna 9 cijfers.</p>
-              {errors.telefoonnummer ? (
-                <p className="fl-form__error">{errors.telefoonnummer.message}</p>
-              ) : null}
-            </div>
-
-            <div className="fl-form__field">
-              <label htmlFor="fl-field-woonplaats">Woonplaats</label>
-              <input
-                id="fl-field-woonplaats"
-                type="text"
-                autoComplete="address-level2"
-                aria-invalid={errors.woonplaats ? 'true' : 'false'}
-                disabled={isSubmitting}
-                {...register('woonplaats', { required: 'Vul uw woonplaats in.' })}
-              />
-              {errors.woonplaats ? <p className="fl-form__error">{errors.woonplaats.message}</p> : null}
-            </div>
-
-            <fieldset
-              className="fl-form__fieldset"
-              id="fl-field-functievoorkeur"
-              disabled={isSubmitting}
-              aria-invalid={errors.functievoorkeur ? 'true' : 'false'}
-              aria-describedby={
-                errors.functievoorkeur ? 'err-functievoorkeur' : 'fl-functievoorkeur-hint'
-              }
-            >
-              <legend className="fl-form__legend">Functievoorkeur</legend>
-              <p className="fl-form__hint" id="fl-functievoorkeur-hint">
-                Selecteer alles wat op u van toepassing is.
-              </p>
-              <div className="fl-form__checks">
-                <label className="fl-form__check">
+              <div className="fl-form__field">
+                <label className="fl-form__check" htmlFor={flFieldElementId('privacyConsent')}>
                   <input
+                    id={flFieldElementId('privacyConsent')}
                     type="checkbox"
-                    value="hospitality"
-                    {...register('functievoorkeur', functievoorkeurRules)}
+                    aria-invalid={errors.privacyConsent ? 'true' : 'false'}
+                    disabled={isSubmitting}
+                    {...register('privacyConsent', rhfRules.gdprConsent)}
                   />
-                  <span>Hospitality (host, bar, bediening)</span>
+                  <span>
+                    Ik ga akkoord met de verwerking van mijn gegevens volgens de{' '}
+                    <Link to="/juridisch/privacy">privacyverklaring</Link>.
+                  </span>
                 </label>
-                <label className="fl-form__check">
-                  <input
-                    type="checkbox"
-                    value="beveiliging"
-                    {...register('functievoorkeur', functievoorkeurRules)}
-                  />
-                  <span>Beveiliging (portier, event)</span>
-                </label>
-                <label className="fl-form__check">
-                  <input
-                    type="checkbox"
-                    value="algemeen"
-                    {...register('functievoorkeur', functievoorkeurRules)}
-                  />
-                  <span>Algemeen eventpersoneel (runner, productie)</span>
-                </label>
+                {errors.privacyConsent ? (
+                  <p className="fl-form__error">{errors.privacyConsent.message}</p>
+                ) : null}
               </div>
-              {errors.functievoorkeur ? (
-                <p className="fl-form__error" id="err-functievoorkeur">
-                  {errors.functievoorkeur.message}
-                </p>
-              ) : null}
-            </fieldset>
 
-            <div className="fl-form__field">
-              <label htmlFor="fl-field-beschikbaarheid">Beschikbaarheid</label>
-              <textarea
-                id="fl-field-beschikbaarheid"
-                placeholder="Bijv. weekenden, vaste dagen, reisafstand…"
-                aria-invalid={errors.beschikbaarheid ? 'true' : 'false'}
-                disabled={isSubmitting}
-                {...register('beschikbaarheid', {
-                  required: 'Beschrijf kort uw beschikbaarheid.',
-                })}
-              />
-              {errors.beschikbaarheid ? (
-                <p className="fl-form__error">{errors.beschikbaarheid.message}</p>
-              ) : null}
-            </div>
-
-            <div className="fl-form__field">
-              <label htmlFor="fl-field-beveiligingsdiploma">Beveiligingsdiploma</label>
-              <select
-                id="fl-field-beveiligingsdiploma"
-                aria-invalid={errors.beveiligingsdiploma ? 'true' : 'false'}
-                disabled={isSubmitting}
-                {...register('beveiligingsdiploma', {
-                  required: 'Geef aan welke situatie op u van toepassing is.',
-                })}
-              >
-                <option value="" disabled>
-                  Maak een keuze…
-                </option>
-                <option value="niet_van_toepassing">Niet van toepassing (geen beveiligingswerk)</option>
-                <option value="diploma_beveiliger_2">Diploma Beveiliger 2</option>
-                <option value="diploma_beveiliger_3">Diploma Beveiliger 3 of hoger</option>
-                <option value="opleiding_loopt">Opleiding loopt / diploma in behandeling</option>
-              </select>
-              {errors.beveiligingsdiploma ? (
-                <p className="fl-form__error">{errors.beveiligingsdiploma.message}</p>
-              ) : null}
-            </div>
-
-            <div className="fl-form__field">
-              <label htmlFor="fl-field-overJezelf">Over jezelf</label>
-              <textarea
-                id="fl-field-overJezelf"
-                maxLength={500}
-                aria-invalid={errors.overJezelf ? 'true' : 'false'}
-                disabled={isSubmitting}
-                {...register('overJezelf', {
-                  required: 'Vul dit veld in (maximaal 500 tekens).',
-                  maxLength: {
-                    value: 500,
-                    message: 'Maximaal 500 tekens toegestaan.',
-                  },
-                })}
-                aria-describedby="fl-overJezelf-count"
-              />
-              <p
-                id="fl-overJezelf-count"
-                className={`fl-form__charcount${overLen >= 500 ? ' fl-form__charcount--max' : ''}`}
-              >
-                {overLen} / 500 tekens
-              </p>
-              {errors.overJezelf ? <p className="fl-form__error">{errors.overJezelf.message}</p> : null}
-            </div>
-
-            <div className="fl-form__field">
-              <label className="fl-form__check" htmlFor="fl-field-privacyConsent">
-                <input
-                  id="fl-field-privacyConsent"
-                  type="checkbox"
-                  aria-invalid={errors.privacyConsent ? 'true' : 'false'}
+              <div className="fl-form__actions">
+                <button
+                  type="submit"
+                  className="hnb-btn hnb-btn--freelancer fl-form__submit"
                   disabled={isSubmitting}
-                  {...register('privacyConsent', rhfRules.gdprConsent)}
-                />
-                <span>
-                  Ik ga akkoord met verwerking van mijn gegevens volgens de{' '}
-                  <Link to="/juridisch/privacy">privacyverklaring</Link> (verplicht).
-                </span>
-              </label>
-              {errors.privacyConsent ? (
-                <p className="fl-form__error">{errors.privacyConsent.message}</p>
-              ) : null}
-            </div>
-
-            <div className="fl-form__actions">
-              <button
-                type="submit"
-                className="hnb-btn hnb-btn--primary fl-form__submit"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Bezig met versturen…' : 'Aanmelding versturen'}
-              </button>
-              <Link to="/contact" className="fl-form__secondary-link">
-                Liever eerst contact opnemen
-              </Link>
+                >
+                  {isSubmitting ? 'Bezig met versturen…' : 'Aanmelding versturen'}
+                </button>
+                <Link to="/contact" className="fl-form__secondary-link">
+                  Liever eerst contact opnemen
+                </Link>
+              </div>
             </div>
           </form>
         ) : null}

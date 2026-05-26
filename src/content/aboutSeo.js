@@ -9,13 +9,13 @@ export const ABOUT_SEO = {
   team: {
     title: 'Het team van H&B Service Group',
     description:
-      'Planners en coördinatoren die live events begrijpen. Maak kennis met de mensen achter het roster.',
+      'Planners en coördinatoren die live events begrijpen. Maak kennis met de mensen achter het rooster.',
     path: '/over-hb/het-team',
   },
   werkgebied: {
     title: 'Werkgebied — Randstad en landelijk',
     description:
-      'H&B is sterk in de Randstad met Amsterdam als thuisbasis. Ook landelijke tours en multi-city programma’s.',
+      'Live events door heel Nederland, met kerngebied in de Randstad: flexpools, opvolging op locatie en duidelijke afspraken over reis en verblijf.',
     path: '/over-hb/werkgebied',
   },
   aanpak: {
@@ -27,7 +27,7 @@ export const ABOUT_SEO = {
   compliance: {
     title: 'Vergunningen en compliance',
     description:
-      'Rosteren volgens wet- en locatie-eisen. Documentatie voor vergunningverlener en verzekeraar.',
+      'Roosteren volgens wet- en locatie-eisen. Documentatie voor vergunningverlener en verzekeraar.',
     path: '/over-hb/vergunningen-compliance',
   },
   nieuws: {

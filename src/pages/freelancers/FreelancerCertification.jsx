@@ -24,10 +24,10 @@ export default function FreelancerCertification() {
   return (
     <main className="fl-page">
       <PageHero variant="light" eyebrow={COPY.eyebrow} title={COPY.title} lead={COPY.lead} stackCtasOnMobile>
-        <Link to="/freelancers/direct-aanmelden" className="hnb-btn hnb-btn--primary">
+        <Link to="/freelancers/direct-aanmelden" className="hnb-btn hnb-btn--freelancer">
           Documenten aanleveren
         </Link>
-        <Link to="/freelancers/openstaande-opdrachten" className="hnb-btn hnb-btn--outline">
+        <Link to="/freelancers/openstaande-opdrachten" className="hnb-btn hnb-btn--freelancer">
           Bekijk opdrachten
         </Link>
       </PageHero>
@@ -39,7 +39,7 @@ export default function FreelancerCertification() {
             Hospitality en beveiliging
           </h2>
           <p className="fl-section__lead">
-            Locaties kunnen aanvullende eisen stellen. Onderstaande lijsten vormen het uitgangspunt voor rostering
+            Locaties kunnen aanvullende eisen stellen. Onderstaande lijsten vormen het uitgangspunt voor inroostering
             bij H&amp;B Service Group.
           </p>
         </header>
@@ -90,7 +90,7 @@ export default function FreelancerCertification() {
       <MarketingCtaStrip
         headingId="fl-cert-cta-heading"
         title="Twijfelt u over een diploma?"
-        lead="We denken mee over actualiteit, herbesteding en venue-specifieke uitzonderingen."
+        lead="We denken mee over actualiteit, herbesteding en locatiespecifieke uitzonderingen."
         primaryTo="/contact"
         primaryLabel="Vraag het ons"
         secondaryTo="/freelancers/hoe-het-werkt"

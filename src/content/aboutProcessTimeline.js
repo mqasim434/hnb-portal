@@ -1,28 +1,23 @@
-/** Procestijdlijn voor /over-hb/onze-aanpak (Nederlandse copy). */
+/** Procestijdlijn voor /over-hb/onze-aanpak (FIX 53) — één alinea per stap. */
 export const ABOUT_PROCESS_STEPS = [
   {
     title: 'Intake & scope',
-    body: 'We verzamelen data, risicoklasse, locatie-eisen en gewenste verhouding hospitality versus beveiliging — één dossier voor uw coördinator.',
-    detail: 'Zo voorkomen we mismatches vóór de eerste namen op het roster.',
+    body: 'Wij verzamelen data, risicoklasse, locatie-eisen en de gewenste verhouding tussen hospitality en beveiliging — alles in één dossier voor uw coördinator. Zo voorkomen wij mismatches vóór de eerste namen op het rooster staan.',
   },
   {
     title: 'Screening & match',
-    body: 'Profielen en documenten worden gecontroleerd op werkrecht, certificaten en rol-ervaring. Alleen geschikte professionals worden voorgesteld.',
-    detail: 'Transparant: u ziet waarom iemand wel of niet past bij uw venue.',
+    body: 'Profielen en documenten worden gecontroleerd op werkrecht, certificaten en rol-ervaring. Alleen geschikte professionals worden voorgesteld. Transparant: u ziet waarom iemand wel of niet past bij uw locatie.',
   },
   {
-    title: 'Roster & akkoord',
-    body: 'U ontvangt call times, functiemix en briefingstructuur. Niets is definitief zonder uw schriftelijke of procesmatige akkoord.',
-    detail: 'Geen verrassing bij de deur op de avond zelf.',
+    title: 'Rooster & akkoord',
+    body: 'U ontvangt een voorstel met rollen, call times en namen na screening. Niets is definitief zonder uw akkoord op verdeling en bezetting.',
   },
   {
-    title: 'Briefing & dispatch',
-    body: 'Teams ontvangen één pakket: entree, escalatie, uniform en locatiespecifieke regels — afgestemd met uw production.',
-    detail: 'Laatste wijzigingen lopen via vaste lijnen, niet via losse apps.',
+    title: 'Briefing & inzet',
+    body: 'Teams krijgen één briefingpakket: locatie, ingangen, dresscode, contacten op locatie en relevante veiligheidsinformatie. Wijzigingen tijdens het event lopen via vaste lijnen — uw coördinator blijft bereikbaar.',
   },
   {
-    title: 'Live support & nazorg',
-    body: 'Tijdens het event blijft uw coördinator bereikbaar volgens afspraak. Na afloop: uren, incidenten en learnings voor de volgende boeking.',
-    detail: 'Continue verbetering i.p.v. eenmalige transactie.',
+    title: 'Op locatie & nazorg',
+    body: 'Na afbouw bespreken wij uren, incidenten en leerpunten voor de volgende boeking. Mutaties worden tijdig verwerkt, facturatie volgt afspraak, evaluatie wordt gedocumenteerd.',
   },
 ]
