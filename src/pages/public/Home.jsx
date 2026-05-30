@@ -13,7 +13,7 @@ import {
 } from 'react-icons/fi'
 import { getCanonicalOrigin, getCanonicalUrl } from '../../config/site'
 import { HOME_SEO } from '../../content/homeSeo'
-import { CORPORATE_DAYLIGHT_EVENT_HERO } from '../../content/marketingHeroImages'
+import { HOME_PAGE_HERO } from '../../content/marketingHeroImages'
 import ResponsivePicture from '../../components/performance/ResponsivePicture'
 import MarketingBand from '../../components/marketing/MarketingBand'
 import MarketingCtaStrip from '../../components/marketing/MarketingCtaStrip'
@@ -21,8 +21,7 @@ import MarketingFeatureCard from '../../components/marketing/MarketingFeatureCar
 import { usePageSeo } from '../../hooks/usePageSeo'
 import './Home.css'
 
-const { src: heroImage, width: heroWidth, height: heroHeight, alt: heroAlt } =
-  CORPORATE_DAYLIGHT_EVENT_HERO
+const { src: heroImage, width: heroWidth, height: heroHeight, alt: heroAlt } = HOME_PAGE_HERO
 
 const HERO_SIZES =
   '(max-width: 640px) 100vw, (max-width: 1200px) 100vw, min(2400px, 100vw)'
@@ -70,16 +69,15 @@ export default function Home() {
         <div className="home-hero__inner hnb-container">
           <h1 id="home-hero-heading" className="home-hero__title">
             <span className="home-hero__title-line">
-              Hospitality én beveiliging voor live events.
+              Hospitality en beveiliging voor live events.
             </span>
             <span className="home-hero__title-line home-hero__title-line--secondary">
-              Eén briefing. Eén coördinator. Compliance op orde.
+              Één contactpersoon. Alles onder controle.
             </span>
           </h1>
           <p className="home-hero__lead">
-            H&amp;B Service Group levert vooraf gescreend hospitality- en beveiligingspersoneel
-            voor festivals, venues en zakelijke events — met één vaste coördinator van boeking tot
-            afbouw.
+            Gescreend personeel voor festivals, venues en zakelijke events. Vaste begeleiding van
+            boeking tot afbouw.
           </p>
           <div className="home-hero__actions">
             <Link to="/bedrijven/personeel-aanvragen" className="hnb-btn hnb-btn--primary home-hero__btn">
@@ -137,28 +135,28 @@ export default function Home() {
             variant="mid"
             icon={<FiMusic />}
             title="Festivals"
-            text="Opbouw, perimeter en backstage — teams die pieken aankunnen als het programma versnelt."
+            text="Opbouw, afscherming, backstage. Teams die meegroeien met je festival."
           />
           <MarketingFeatureCard
             as="li"
             variant="mid"
             icon={<FiBriefcase />}
             title="Zakelijke events"
-            text="Galas en launches met discrete uniformen en beveiliging die op de achtergrond blijft."
+            text="Gala&apos;s en launches met discreet beveiligingspersoneel dat de elegantie bewaart."
           />
           <MarketingFeatureCard
             as="li"
             variant="mid"
             icon={<FiMoon />}
             title="Nachtleven"
-            text="Clubs en late locaties: ID, zaal en bar met het juiste ritme."
+            text="Clubs en nachtlocaties. Volledig verzorgde security en bar-service."
           />
           <MarketingFeatureCard
             as="li"
             variant="mid"
             icon={<FiMapPin />}
             title="Locaties"
-            text="Arena&apos;s en theaters met terugkerende bezetting en vaste gezichten waar u dat wilt."
+            text="Arena&apos;s en theaters. Dezelfde betrouwbare teams elke keer."
           />
         </ul>
       </MarketingBand>
@@ -169,7 +167,7 @@ export default function Home() {
         titleId="home-waarom-heading"
         eyebrow="Waarom H&amp;B"
         title="Een partner op de vloer, geen lijst met namen"
-        intro="Operators blijven bij ons omdat we ruis wegnemen: voorspelbare processen, minder verrassingen op locatie en teams die uw merk dragen."
+        intro="Operators kiezen voor ons omdat we zekerheid bieden: heldere processen, betrouwbare teams en personeel dat jouw merk begrijpt."
       >
         <ul className="home-card-grid home-card-grid--3">
           <MarketingFeatureCard
@@ -271,7 +269,7 @@ export default function Home() {
             <div className="home-how__step-copy">
               <h3 className="home-how__step-title">Verkenning &amp; scope</h3>
               <p className="home-how__step-text">
-                Wij brengen data, bezetting en risicoprofiel in kaart.
+                We inventariseren bezetting, locatie en risico&apos;s.
               </p>
             </div>
           </li>
@@ -282,7 +280,7 @@ export default function Home() {
             <div className="home-how__step-copy">
               <h3 className="home-how__step-title">Rooster &amp; akkoord</h3>
               <p className="home-how__step-text">
-                Voorstel met rollen en call times, definitief na uw goedkeuring.
+                Rooster met functies en incheckijden, bevestigd na jouw goedkeuring.
               </p>
             </div>
           </li>
@@ -293,7 +291,7 @@ export default function Home() {
             <div className="home-how__step-copy">
               <h3 className="home-how__step-title">Briefing &amp; inzet</h3>
               <p className="home-how__step-text">
-                Één pakket: locatie, dresscode, escalatie, contacten.
+                Compleet: locatie, dresscode, contacten en protocol.
               </p>
             </div>
           </li>
@@ -304,7 +302,7 @@ export default function Home() {
             <div className="home-how__step-copy">
               <h3 className="home-how__step-title">Op locatie &amp; evaluatie</h3>
               <p className="home-how__step-text">
-                Coördinator bereikbaar tijdens het event, nabespreking na afloop.
+                Volledige ondersteuning ter plaatse en evaluatie achteraf.
               </p>
             </div>
           </li>
@@ -320,12 +318,12 @@ export default function Home() {
       <MarketingCtaStrip
         prominent
         headingId="home-final-heading"
-        title="Klaar voor uw volgende event?"
-        lead="Vertel ons over programma, locatie en bezetting — wij reageren binnen één werkdag met capaciteit en vervolgstappen."
+        title="Klaar voor je volgende event?"
+        lead="Deel de details van je event. Wij reageren binnen 24 uur met capaciteit en offerte."
         primaryTo="/bedrijven/personeel-aanvragen"
         primaryLabel="Personeel aanvragen"
-        secondaryTo="/freelancers/direct-aanmelden"
-        secondaryLabel="Freelancer worden"
+        secondaryTo="/freelancers/openstaande-opdrachten"
+        secondaryLabel="Openstaande opdrachten"
       />
     </main>
   )

@@ -9,11 +9,11 @@
   --color-deep-navy: #0a1520;
   --color-mid-navy: #132336;
 
-  /* CTA & brand accent — één orange (bedrijven) + één navy (freelancers), witte tekst op gevulde knoppen */
-  --color-cta-b2b: #e07a2c;
-  --color-cta-b2b-hover: #c5681f;
-  --color-cta-freelancer: #1e3a5f;
-  --color-cta-freelancer-hover: #162b47;
+  /* CTA & brand accent — B2B oranje + freelancer blauw, witte tekst op gevulde knoppen */
+  --color-cta-b2b: #d35400;
+  --color-cta-b2b-hover: #b84300;
+  --color-cta-freelancer: #2c5aa0;
+  --color-cta-freelancer-hover: #234880;
 
   /** Status: bijna vol (geen rood/waarschuwing-stijl) */
   --color-badge-nearly-full: #d9772e;
@@ -80,7 +80,7 @@
   --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.12);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.14);
   --shadow-glow: 0 0 0 1px color-mix(in srgb, var(--color-cta-b2b) 40%, transparent),
-    0 12px 36px rgba(224, 122, 44, 0.22);
+    0 12px 36px rgba(211, 84, 0, 0.28);
 
   /* Hero foto’s (homepage + PageHero dark + image): leesbare navy scrim op daglichtbeeld */
   --hero-image-scrim: linear-gradient(

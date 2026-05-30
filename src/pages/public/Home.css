@@ -45,7 +45,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Verticaal midden; horizontaal iets naar links voor 4:5 mobiele crop */
+  /* Lichter beeld: +~17% helderheid, minder contrast/verzadiging */
+  filter: brightness(1.17) contrast(0.9) saturate(0.95);
   object-position: 32% center;
 }
 
@@ -61,7 +62,11 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  background-image: var(--hero-image-scrim);
+  /* Iets lichtere scrim zodat tekst leesbaar blijft zonder zware overlay */
+  background-image: linear-gradient(
+    rgba(15, 27, 45, 0.28),
+    rgba(15, 27, 45, 0.48)
+  );
 }
 
 .home-hero__grain {

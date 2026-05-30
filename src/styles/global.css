@@ -459,7 +459,7 @@ p {
 .hnb-btn--freelancer:hover {
   background-color: var(--color-cta-freelancer-hover);
   transform: scale(1.02);
-  box-shadow: 0 4px 20px rgba(30, 58, 95, 0.35);
+  box-shadow: 0 4px 20px rgba(44, 90, 160, 0.38);
   color: var(--text-on-cta-solid);
 }
 
