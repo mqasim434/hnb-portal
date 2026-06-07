@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useId, useState } from 'react'
 import { FiChevronDown, FiMenu, FiX } from 'react-icons/fi'
 import { Link, NavLink, useLocation } from 'react-router-dom'
+import { COMPANY, companyPhoneDisplay, companyPhoneHref } from '../content/company'
 import {
-  FOOTER_PHONE_PLACEHOLDER,
   HEADER_CTAS,
   MOBILE_MENU_PRIMARY_CTA,
   MOBILE_MENU_SECONDARY_CTA,
@@ -241,19 +241,19 @@ export default function Navbar() {
             <p className="site-header__drawer-contact-title">Contact</p>
             <ul className="site-header__drawer-contact-list">
               <li>
-                <a href="mailto:bookings@hbservicegroup.com">
-                  bookings@hbservicegroup.com
-                </a>
+                <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>
               </li>
               <li>
-                <span className="site-header__drawer-contact-phone-placeholder">
-                  {FOOTER_PHONE_PLACEHOLDER}
-                </span>
+                {companyPhoneHref() ? (
+                  <a href={companyPhoneHref()}>{companyPhoneDisplay()}</a>
+                ) : (
+                  <span className="site-header__drawer-contact-phone-placeholder">
+                    {companyPhoneDisplay()}
+                  </span>
+                )}
               </li>
               <li>
-                <span className="site-header__drawer-contact-muted">
-                  Amsterdam, Nederland
-                </span>
+                <span className="site-header__drawer-contact-muted">{COMPANY.location}</span>
               </li>
             </ul>
           </div>

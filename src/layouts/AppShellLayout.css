@@ -1,0 +1,110 @@
+.app-shell {
+  min-height: 100vh;
+  background: var(--surface-page, #f6f7f9);
+}
+
+.app-shell__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-6);
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-raised);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.app-shell--admin .app-shell__header {
+  background: linear-gradient(90deg, var(--color-navy), var(--color-mid-navy));
+  color: var(--text-on-dark);
+  border-bottom-color: color-mix(in srgb, var(--color-warm-white) 12%, transparent);
+}
+
+.app-shell__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 10rem;
+}
+
+.app-shell__eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.app-shell__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.app-shell__nav-link {
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.app-shell--admin .app-shell__nav-link {
+  color: color-mix(in srgb, var(--color-warm-white) 82%, transparent);
+}
+
+.app-shell__nav-link--active,
+.app-shell__nav-link:hover {
+  background: color-mix(in srgb, var(--color-gold) 16%, transparent);
+  color: var(--color-navy);
+}
+
+.app-shell--admin .app-shell__nav-link--active,
+.app-shell--admin .app-shell__nav-link:hover {
+  background: color-mix(in srgb, var(--color-warm-white) 14%, transparent);
+  color: var(--color-warm-white);
+}
+
+.app-shell__user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-left: auto;
+}
+
+.app-shell__email {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  max-width: 14rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-shell__logout {
+  padding-inline: 0.9rem;
+  min-height: 2.25rem;
+}
+
+.app-shell--admin .app-shell__logout {
+  border-color: color-mix(in srgb, var(--color-warm-white) 45%, transparent);
+  color: var(--text-on-dark);
+}
+
+.app-shell__body {
+  padding: var(--space-6) 0 var(--space-10);
+}
+
+@media (max-width: 720px) {
+  .app-shell__header {
+    padding: var(--space-4);
+  }
+
+  .app-shell__user {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

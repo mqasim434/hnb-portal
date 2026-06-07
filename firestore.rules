@@ -1,0 +1,152 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function userData(uid) {
+      return get(/databases/$(database)/documents/users/$(uid)).data;
+    }
+
+    function isAdmin() {
+      return isSignedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && userData(request.auth.uid).role == 'admin'
+        && userData(request.auth.uid).accountStatus == 'active';
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function validOnboardingCreate() {
+      return request.resource.data.status == 'pending'
+        && request.resource.data.source == 'direct_aanmelden'
+        && request.resource.data.privacyConsent == true
+        && request.resource.data.email is string
+        && request.resource.data.email.size() > 3
+        && request.resource.data.voornaam is string
+        && request.resource.data.achternaam is string
+        && request.resource.data.adminNotes == ''
+        && (!('userId' in request.resource.data) || request.resource.data.userId == null
+            || (isSignedIn() && request.resource.data.userId == request.auth.uid));
+    }
+
+    function validStaffRequestCreate() {
+      return request.resource.data.status == 'new'
+        && request.resource.data.privacyConsent == true
+        && request.resource.data.companyName is string
+        && request.resource.data.contactPerson is string
+        && request.resource.data.email is string
+        && request.resource.data.email.size() > 3
+        && request.resource.data.phone is string
+        && request.resource.data.staffType is string
+        && request.resource.data.eventType is string
+        && request.resource.data.location is string
+        && request.resource.data.adminNotes == '';
+    }
+
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+
+      allow create: if isOwner(userId)
+        && request.resource.data.keys().hasAll(['email', 'displayName', 'role', 'accountStatus', 'createdAt'])
+        && request.resource.data.role == null
+        && request.resource.data.accountStatus == 'pending'
+        && request.resource.data.email == request.auth.token.email;
+
+      allow update: if isAdmin()
+        || (isOwner(userId)
+            && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'accountStatus', 'approvedAt', 'approvedBy']));
+
+      allow delete: if isAdmin();
+    }
+
+    match /users/{userId}/documents/{docId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create, update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    match /users/{userId}/compliance/{complianceId} {
+      allow read: if isOwner(userId) || isAdmin();
+
+      allow create: if isOwner(userId)
+        && request.resource.data.status == 'pending'
+        && request.resource.data.type is string
+        && request.resource.data.fileUrl is string;
+
+      allow update: if isAdmin()
+        || (isOwner(userId)
+            && request.resource.data.status == 'pending'
+            && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['reviewedAt', 'reviewedBy', 'adminNotes']));
+
+      allow delete: if isAdmin();
+    }
+
+    match /onboardingApplications/{applicationId} {
+      allow read: if isAdmin()
+        || (isSignedIn() && resource.data.userId == request.auth.uid);
+
+      allow create: if validOnboardingCreate();
+
+      allow update: if isAdmin()
+        || (isSignedIn()
+            && resource.data.userId == null
+            && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.email == resource.data.email
+            && request.resource.data.userId == request.auth.uid
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['userId', 'updatedAt']));
+
+      allow delete: if isAdmin();
+    }
+
+    match /staffRequests/{requestId} {
+      allow read: if isAdmin();
+      allow create: if validStaffRequestCreate();
+      allow update, delete: if isAdmin();
+    }
+
+    match /assignments/{assignmentId} {
+      allow read: if isAdmin()
+        || (isSignedIn() && request.auth.uid in resource.data.assignedFreelancerIds);
+
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /timeEntries/{entryId} {
+      allow read: if isAdmin()
+        || (isSignedIn() && resource.data.freelancerId == request.auth.uid);
+
+      allow create: if isSignedIn()
+        && request.resource.data.freelancerId == request.auth.uid
+        && request.resource.data.status == 'draft'
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && userData(request.auth.uid).role == 'freelancer'
+        && userData(request.auth.uid).accountStatus == 'active';
+
+      allow update: if isAdmin()
+        || (isSignedIn()
+            && resource.data.freelancerId == request.auth.uid
+            && resource.data.status in ['draft', 'rejected']
+            && request.resource.data.status in ['draft', 'submitted']
+            && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['reviewedAt', 'reviewedBy', 'adminNotes', 'freelancerId', 'invoiceId']));
+
+      allow delete: if isAdmin()
+        || (isSignedIn()
+            && resource.data.freelancerId == request.auth.uid
+            && resource.data.status == 'draft');
+    }
+
+    match /invoices/{invoiceId} {
+      allow read: if isAdmin()
+        || (isSignedIn()
+            && resource.data.freelancerId == request.auth.uid
+            && resource.data.status in ['approved', 'paid']);
+
+      allow create, update, delete: if isAdmin();
+    }
+  }
+}

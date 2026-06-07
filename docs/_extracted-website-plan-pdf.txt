@@ -1,0 +1,192 @@
+=== Website plan 2.0.pdf ===
+H&B  Service  Group  –  Product  &  Platform  
+Build
+ 
+Plan
+ 
+1.  Project  Overview  
+H&B  Service  Group  is  building  a  digital  staffing  platform  focused  on  hospitality  and  security  
+personnel
+ 
+for
+ 
+events
+ 
+(festivals,
+ 
+venues,
+ 
+corporate
+ 
+events).
+ 
+The  platform  serves  two  primary  user  groups:  
+1.  Clients  (B2B)  →  companies  looking  for  staff  2.  Freelancers  (ZZP  /  independent  contractors)  →  workers  providing  services  
+The  goal  is  to  create  a  scalable  MVP  platform  that  supports:  
+●  Client  acquisition  ●  Freelancer  onboarding  ●  Operational  execution  (time  tracking)  ●  Internal  control  (approval  &  payments)  
+Important:  
+ 
+This
+ 
+is
+ 
+not
+ 
+a
+ 
+simple
+ 
+marketing
+ 
+website.
+ 
+ 
+It
+ 
+is
+ 
+a
+ 
+workflow-driven
+ 
+operational
+ 
+system
+.
+ 
+ 
+2.  Product  Goals  (Phase  1  –  MVP)  
+The  platform  must  enable:  
+For  Clients:  
+●  Request  staff  easily  ●  Understand  services  and  value  proposition  
+For  Freelancers:  
+●  Apply  and  get  onboarded  ●  Track  and  submit  working  hours  ●  Generate  invoices  (concept  level)  
+For  H&B  (Admin):  
+●  Manage  users  and  assignments  ●  Approve  hours  ●  Control  payments  and  operations  
+ 
+3.  Design  Direction  
+Inspiration:  
+●  Temper  →  UX,  structure,  simplicity  ●  Westaffing  →  B2B  positioning  ●  Melrose  Security  →  hybrid  hospitality/security  positioning  
+Design  Principles:  
+●  Minimal  and  clean  UI  ●  Strong  call-to-actions  ●  Mobile-first  ●  High  trust  &  professional  look  ●  Fast  navigation  ●  Visual  (event  imagery,  teams,  real-life  context)  
+ 
+4.  System  Architecture  (High-Level)  
+Frontend:  
+●  Marketing  website  (CMS-driven)  
+Backend:  
+●  Application  logic  (portal  +  workflows)  ●  Database  (users,  assignments,  hours,  invoices)  
+Recommended  Stack:  
+●  Website:  WordPress  (or  similar  CMS)  ●  Platform:  Zoho  Creator  (low-code  application  layer)  ●  CRM:  Zoho  CRM  
+●  Finance:  Zoho  Books  
+Key  requirement:  
+●  Integration  capability  between  all  components  
+ 
+5.  Website  Structure  (Frontend)  
+Main  Navigation:  
+●  Home  ●  Hire  Staff  ●  Find  Work  ●  Services  ●  About  ●  Contact  ●  Login  
+Primary  CTAs:  
+●  “Hire  Staff”  ●  “Find  Work”  
+ 
+6.  Page  Specifications   
+6.1  Home  Page  
+Goal:  
+ 
+Clearly
+ 
+communicate
+ 
+value
+ 
+and
+ 
+convert
+ 
+both
+ 
+audiences
+ 
+Sections:  
+●  Hero:  ○  “Reliable  Event  Staff.  On  Demand.”  ○  CTA  buttons  (Hire  Staff  /  Find  Work)  ●  Services  overview  (hospitality  +  security)  ●  Target  markets  (events,  festivals,  venues)  ●  Value  proposition:  
+○  pre-screened  staff  ○  fast  deployment  ○  flexible  workforce  ○  single  point  of  contact  ●  Social  proof  (future)  ●  CTA  repetition  
+ 
+6.2  Hire  Staff  Page  (Critical)  
+Goal:  Generate  qualified  B2B  leads  
+Content:  
+●  Service  explanation  ●  Staff  categories:  ○  hosts  /  hostesses  ○  security  personnel  ○  event  staff  ●  Use  cases:  ○  festivals  ○  corporate  events  ○  nightlife  ○  venues  ●  Value  proposition  
+ 
+Form  Requirements:  
+●  Company  name  ●  Contact  person  ●  Email  /  phone  ●  Staff  type  ●  Location  ●  Dates  ●  Number  of  workers  ●  Additional  notes  
+ 
+6.3  Find  Work  Page  
+Goal:  Attract  freelancers  
+Content:  
+●  Why  work  with  H&B  ●  Types  of  roles  ●  Benefits:  ○  flexible  work  ○  fast  payments  ○  structured  communication  
+CTA:  
+●  Apply  Now  
+ 
+7.  Registration  &  Onboarding  Flow  
+Step  1  –  Basic  Info:  
+●  Name  ●  Email  ●  Phone  ●  Location  
+Step  2  –  Work  Type:  
+●  Hospitality  ●  Security  
+ 
+Step  3  –  Security-specific  flow:  
+User  selects:  
+●  “I  have  a  license”  ●  “I  want  to  apply  for  a  license”  
+ 
+8.  Security  Compliance  Module  
+Required  for  security  personnel:  
+●  Upload  license/certificate  ●  License  number  ●  Expiry  date  
+Status:  
+●  Pending  ●  Approved  ●  Expired  
+ 
+License  Request  Flow:  
+If  no  license:  
+●  Show  information  page  ●  Allow  user  to  register  interest  ●  Track  internally  
+ 
+9.  Freelancer  Portal  (Core  System)  
+Dashboard:  
+●  Assigned  jobs  ●  Submitted  hours  ●  Invoice  overview  ●  Status  tracking  
+ 
+Time  Tracking  Module:  
+Fields:  
+●  Assignment  ●  Date  ●  Start  time  ●  End  time  ●  Break  ●  Total  hours  ●  Notes  
+ 
+Status  Flow:  
+●  Draft  ●  Submitted  ●  Approved  ●  Rejected  
+ 
+Invoice  Module:  
+●  Auto-generated  based  on  approved  hours  ●  PDF  output  ●  Status:  ○  Draft  ○  Approved  ○  Paid  
+ 
+10.  Admin  Panel  (Internal  Operations)  
+Core  Features:  
+●  User  management  ●  Onboarding  validation  ●  Assignment  creation  ●  Freelancer  assignment  ●  Time  approval  ●  Invoice  generation  ●  Data  export  (Excel/CSV)  
+ 
+Compliance  Controls:  
+●  ID  verification  ●  Chamber  of  Commerce  (KvK)  ●  VAT  number  ●  Security  license  validation  
+ 
+11.  Core  Workflow  
+1.  Freelancer  applies  2.  H&B  approves  account  3.  (Security:  license  verified)  4.  H&B  assigns  freelancer  to  job  5.  Freelancer  submits  hours  6.  H&B  reviews  &  approves  7.  System  generates  invoice  8.  H&B  processes  payment  manually  
+ 
+12.  Phase  Plan  
+Phase  1  (MVP):  
+●  Website  ●  Client  acquisition  page  ●  Freelancer  onboarding  ●  Portal  access  ●  Time  tracking  ●  Admin  approval  ●  Concept  invoices  ●  Security  compliance  upload  
+ 
+Phase  2:  
+●  Scheduling  &  shifts  ●  Notifications  ●  Automation  ●  Payment  integrations  
+ 
+Phase  3:  
+●  Client  portal  ●  Analytics  ●  Freelancer  performance  tracking  
+ 
+13.  Key  Risks  &  Considerations  
+●  Misclassification  of  freelancers  (legal  risk)  ●  Time  fraud  /  disputes  ●  No-shows  ●  Cashflow  pressure  ●  Data  quality  issues  
+System  must  support  control  over  these  risks.  
+ 
+14.  Success  Criteria  
+The  MVP  is  successful  if:  
+●  Freelancers  can  easily  register  and  submit  hours  ●  Admin  can  control  and  approve  operations  efficiently  ●  Clients  can  submit  requests  ●  Payments  can  be  tracked  clearly  ●  System  is  scalable  and  stable  
+ 
+15.  Final  Notes  for  Development  Team  
+●  Do  not  overengineer  Phase  1  ●  Prioritize  usability  over  complexity  ●  Focus  on  core  workflows:  ○  onboarding  ○  time  tracking  ○  approval  ○  invoicing  
+Goal:  fast  launch  →  real  usage  →  iteration  
+ 

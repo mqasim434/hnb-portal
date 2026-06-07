@@ -65,15 +65,13 @@ export const MOBILE_MENU_SECONDARY_CTA = {
 }
 
 export const FOOTER_TAGLINE =
-  'Betrouwbaar eventpersoneel. Wanneer u het nodig heeft.'
+  'Betrouwbaar eventpersoneel. Wanneer je het nodig hebt.'
 
-/** Tot de opdrachtgever een definitief nummer levert — geen werkende bellink. */
-export const FOOTER_PHONE_PLACEHOLDER =
-  '[PLACEHOLDER — client to provide real number]'
+/** @deprecated Use `companyPhoneDisplay()` from `src/content/company.js` */
+export { companyPhoneDisplay as FOOTER_PHONE_PLACEHOLDER } from './company'
 
-/** Handels- en btw-registratie · WPBR (placeholder teksten voor livegang). */
-export const FOOTER_REGISTRATION_LINE =
-  'KvK [PLACEHOLDER] · BTW [PLACEHOLDER] · WPBR-vergunning [PLACEHOLDER]'
+/** @deprecated Use `companyRegistrationLine()` from `src/content/company.js` */
+export { companyRegistrationLine as FOOTER_REGISTRATION_LINE } from './company'
 
 /** Juridische pagina’s (footer onderste strip onder copyright). */
 export const FOOTER_LEGAL_LINKS = [

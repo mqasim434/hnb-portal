@@ -1,0 +1,1575 @@
+=== Developmen Plan.docx ===
+H&B Development Plan
+System Name: H&B Service Group – Product & Platform
+Here's a modular summary of the build plan:
+Module 1 — Marketing Website
+A CMS-driven public-facing site with the following pages and navigation: Home, Hire Staff, Find Work, Services, About, Contact, and Login. Two primary CTAs drive the entire site — "Hire Staff" and "Find Work".
+Key pages include the Home Page (hero section, services overview, value proposition, social proof) and the Hire Staff Page (B2B lead generation form capturing company name, contact, staff type, location, dates, headcount, and notes). The Find Work Page targets freelancers with role types, benefits, and an Apply Now CTA.
+Module 2 — Freelancer Registration & Onboarding
+A 3-step flow: basic info (name, email, phone, location) → work type selection (Hospitality or Security) → security-specific compliance branch. Freelancers either upload an existing license or register interest in obtaining one.
+Module 3 — Security Compliance
+Handles license upload, license number, and expiry date. Statuses: Pending / Approved / Expired. Includes a separate flow for applicants without a license to register interest and be tracked internally.
+Module 4 — Freelancer Portal
+The core operational interface for workers, consisting of three sub-modules:
+Dashboard — assigned jobs, submitted hours, invoice overview, status tracking
+Time Tracking — per-assignment entries with start/end time, break, total hours, and notes. Status flow: Draft → Submitted → Approved → Rejected
+Invoice Module — auto-generated from approved hours, PDF output, statuses: Draft / Approved / Paid
+Module 5 — Admin Panel
+Internal operations control center with: user management, onboarding validation, assignment creation & freelancer assignment, time approval, invoice generation, and data export (Excel/CSV). Also handles compliance controls — ID verification, KvK, VAT number, and security license validation.
+Module 6 — Core Workflow Engine
+The end-to-end operational process:
+Freelancer applies → 2. H&B approves account → 3. License verified (if security) → 4. Freelancer assigned to job → 5. Hours submitted → 6. H&B approves hours → 7. Invoice auto-generated → 8. Manual payment processed
+Module 7 — Phase Roadmap
+Phase
+Scope
+Phase 1 (MVP)
+Website, client acquisition, onboarding, portal, time tracking, admin approval, invoicing, security compliance
+Phase 2
+Scheduling, notifications, automation, payment integrations
+Phase 3
+Client portal, analytics, freelancer performance tracking
+Tech Stack (as specified)
+Since you're going with React + Firebase, note that the document originally recommended WordPress + Zoho Creator + Zoho CRM + Zoho Books — your stack replaces all of that with a custom build, which gives you more flexibility for the portal and workflow logic.
+Pages:
+Public Routes (Marketing):
+/                  → Home (marketing)
+/hire-staff        → Hire Staff page
+/find-work         → Find Work page
+/login             → Login
+/portal/dashboard  → Freelancer portal
+/admin/dashboard   → Admin panel
+Onboarding Routes
+/register                → Step 1 – Basic Info
+/register/work-type      → Step 2 – Work Type
+/register/compliance     → Step 3 – Security Compliance
+Freelancer Portal (Protected)
+/portal/dashboard        → Dashboard
+/portal/jobs             → Assigned Jobs
+/portal/hours            → Time Tracking
+/portal/hours/new        → Submit Hours
+/portal/invoices         → Invoice Overview
+Admin Panel (Protected)
+/admin/dashboard         → Admin Home
+/admin/users             → User Management
+/admin/onboarding        → Onboarding Validation
+/admin/assignments       → Assignments
+/admin/hours             → Hour Approvals
+/admin/invoices          → Invoice Management
+/admin/compliance        → License Verification
+
+=== HnB Website Revisiedocument v3.docx ===
+H&B  Service Group
+Website Revision Document — Version 3.0
+Complete content, copy, UX and developer specification  |  May 2025
+How to read this document
+This document is the single source of truth for all website revisions.
+All website COPY (text visible to visitors) is written in DUTCH — this is the brand language.
+All DEVELOPER NOTES are written in ENGLISH and are marked with ⚙ DEVELOPER: in blue.
+All NEW copy marked in green must be implemented exactly as written. Do not paraphrase.
+All OLD copy marked in red must be removed.
+All colour values are provided as precise hex codes. Implement exactly.
+Questions or ambiguities: contact the project owner before making assumptions.
+Table of Contents
+1.   Navigation Structure — Final
+2.   Spelling & Grammar Corrections
+3.   Colour Usage & Psychology
+4.   CTA Strategy
+5.   Homepage — Complete Copy
+6.   Freelancers — All Subpages
+7.   Bedrijven (Companies) — All Subpages
+8.   Over H&B (About) — All Subpages
+9.   Contact Page
+10. Login / Portal Entry Page
+11. 404 Error Page
+12. Mobile-First Implementation Guide
+13. Form Validation & Error Messages
+14. SEO — Page Titles, Meta Descriptions & Alt Text
+15. Photo & Video Guidelines
+16. Footer — Structure & Content
+17. Performance & Technical Guidelines
+18. Developer Priority Checklist
+1. Navigation Structure — Final
+⚙ DEVELOPER: Implement the navigation exactly as specified below. This is a dropdown/accordion mobile menu. On desktop: horizontal top nav with dropdowns. On mobile: full-screen slide-in menu with accordions per category. Remove Chat, Netwerk, and Beleid from navigation entirely — these move to the footer.
+Three main categories — unchanged
+FREELANCERS  |  BEDRIJVEN  |  OVER H&B SERVICE GROUP
+These three top-level labels are correct and stay unchanged.
+Each opens a dropdown on desktop, an accordion on mobile.
+1.1 Freelancers — Subcategories
+Current (OLD) — Dutch
+New (NEW) — Dutch
+Reason / Developer Note
+Ontdek mogelijkheden
+Openstaande opdrachten
+Vague and passive. New label is concrete and action-driven.
+Zo werkt het
+Hoe het werkt
+More natural Dutch phrasing. Same meaning, shorter.
+Inkomsten & betalingen
+Inkomsten & betalingen
+KEEP — correct and clear. No change.
+Veiligheid & certificering
+Jouw certificering
+More personal and direct. Visitor-centric language.
+Werkwijze
+REMOVE — merge into 'Hoe het werkt'
+Duplicate of 'Hoe het werkt'. Remove entirely.
+Aan de slag
+Direct aanmelden
+Clear call to action. Removes ambiguity.
+1.2 Bedrijven — Subcategories
+Current (OLD) — Dutch
+New (NEW) — Dutch
+Reason / Developer Note
+Vind talent
+Personeel aanvragen
+B2B language. Professional and concrete.
+Vergelijk professionals
+Ons aanbod
+Less marketplace feel. More partner-oriented.
+Tarieven
+Tarieven op aanvraag
+Sets correct expectation — no public prices. Honest communication.
+Filters
+REMOVE from navigation
+This is a UI filter feature, not a standalone page.
+Sectoren
+Onze sectoren
+Adds ownership and warmth to the label.
+Functies
+Functieprofielen
+Correct Dutch plural spelling. 'Functies' alone is too vague.
+Flexpools
+Vaste samenwerking
+Explains value immediately. 'Flexpools' means nothing to a new visitor.
+1.3 Over H&B Service Group — Subcategories
+⚙ DEVELOPER: Currently 'Over ons', 'Wie wij zijn', and 'Wat wij doen' all convey the same meaning. Merge into one page. Add the new trust-building subpages listed below.
+Current (OLD) — Dutch
+New (NEW) — Dutch
+Reason / Developer Note
+Over ons + Wie wij zijn + Wat wij doen
+Ons verhaal
+Merge all three into one strong trust page.
+— (new page)
+Het team
+Faces behind H&B. Critical for trust. Even placeholder content is better than nothing.
+— (new page)
+Werkgebied
+Where H&B operates. Geographic clarity builds trust.
+— (new page)
+Onze aanpak
+Our process. Shows professionalism and structure.
+— (new page)
+Vergunningen & compliance
+WPBR licence as a USP. Many competitors lack this — use it.
+Nieuws
+Nieuws
+KEEP — no change needed.
+Chat
+MOVE TO FOOTER
+Not a navigation item.
+Netwerk
+REMOVE or move to footer
+Unclear to visitors. Does not belong in main nav.
+Beleid
+MOVE TO FOOTER
+Legal/policy page — footer only.
+2. Spelling & Grammar Corrections
+⚙ DEVELOPER: Fix every error in the table below immediately on the live site. These are visible to every visitor and directly undermine brand credibility. Each row shows the current wrong text (red) and the exact correct replacement (green).
+Wrong — currently live on site
+Correct replacement
+Piebbezetting voor clubs en late locaties
+Piekbezetting voor clubs en late locaties
+strakke portofoondiscipline
+strakke radiodiscipline
+zonder de gastbeleving bij de deur te schaden
+zonder dat gasten er iets van merken
+servicewindows
+servicemomenten
+roster-voorstellen
+roostervoorstel
+dispatch-ritme
+vaste werkwijze
+staffing-gaten
+personeelstekorten
+vendorlijst
+leverancierslijst
+meebeweegt met de zaal
+past bij het tempo van de zaal
+Wanneer u het nodig heeft
+Wanneer je het nodig hebt
+Functies (navigation label)
+Functieprofielen  — note the 'e' before the 'n'
+dispatchproces
+coördinatieproces
+Functieprofielen (misspelled as Functieprofilen anywhere)
+Functieprofielen — always with 'e'
+Voorgecontroleerd personeel
+Gescreend personeel
+Snelle inzet
+Snelheid met structuur
+Tone of voice — choose one register and stick to it
+The site currently mixes 'u' (formal Dutch) and 'je/jij' (informal Dutch). This inconsistency looks unprofessional.
+DECISION: Use 'je/jij' throughout the entire website.
+Reason: The target audience — event professionals and freelancers — expects a professional but approachable tone.
+'U' feels distant and old-fashioned in this sector.
+EXCEPTION: Only use 'u' in formal quotes, contracts, and legal documents.
+Developer action: Do a global search-replace for all instances of ' u ' (with spaces), 'uw', 'u het', 'u een'
+and replace with the correct 'je/jij/jouw' equivalent in context.
+3. Colour Usage & Psychology
+⚙ DEVELOPER: Every colour decision below is intentional. The psychology column explains WHY each colour is used — not just what it looks like. Implement precisely. Do not substitute colours based on personal preference.
+3.1 Full colour palette
+Colour
+Hex
+Usage (Dutch copy context)
+Psychology & rationale (English)
+Navy
+#0D1B2A
+Page background, headers, navigation, cards
+Authority, reliability, control. Dark navy is the colour of security and professionalism. In the event security sector, visitors associate it with trust and competence. Primary brand colour.
+Gold
+#D4A017
+Primary CTA button, accent labels, icon backgrounds, section dividers
+Premium quality, performance, distinction. Gold against navy creates maximum contrast and draws the eye directly to CTAs. Activates the visitor. Use SPARINGLY — overuse kills impact. The rarity of gold on the page is what makes it work.
+Gold (muted)
+#B8972E
+Decorative accents, hover states only
+DO NOT use for CTA buttons — too flat, no click energy. Use only for decorative elements and subtle hover state darkening of the primary gold button.
+Warm white
+#F5F1EA
+Section background (alternating), information blocks, card backgrounds on dark sections
+Creates visual breathing room without feeling cold or clinical. Maintains the premium feel of the brand. Warmer than pure white — easier on the eyes, especially on mobile. Use to break up long stretches of navy.
+Light gold
+#F5EDD6
+Highlight boxes, USP cards, info blocks, table alternating rows
+Subtle gold tint that signals importance without shouting. Ideal for trust-building information blocks where you want soft emphasis. Pairs with navy text.
+Deep navy
+#0A1520
+Footer background only
+Slightly darker than main navy — creates a visual signal that the page has ended. Psychologically tells the visitor they have reached the bottom.
+Mid navy
+#132336
+Card backgrounds, icon backgrounds, subtle section variants
+Adds visual depth to dark-themed cards without using a completely different colour. Creates a sense of layering and dimension.
+Pure white
+#FFFFFF
+Text on dark backgrounds only
+NEVER use as a page background — too cold and clinical for this brand. Use only as text or icon colour on navy or dark backgrounds.
+Subtle grey
+#AAAAAA
+Footer text, fine print, secondary labels on dark
+Readable but not dominant. Used where information is present but should not compete for attention with primary content.
+3.2 Colour rules per element
+⚙ DEVELOPER: Implement colour assignments exactly as shown. Consistency across all pages is critical for brand recognition and professional appearance.
+Element
+Colour
+Hex
+Implementation note
+Page background (main sections)
+Navy
+#0D1B2A
+Default background for all primary sections
+Page background (alternating sections)
+Warm white
+#F5F1EA
+Every second section on the homepage
+Footer background
+Deep navy
+#0A1520
+Footer only — slightly darker than main bg
+Primary CTA button (filled)
+Gold
+#D4A017
+Always use navy or black text on this button — NEVER white
+Primary CTA button text
+Navy
+#0D1B2A
+Maximum contrast on gold background
+Primary CTA hover state
+Muted gold
+#B8972E
+Slight darkening on hover. No animation needed.
+Secondary CTA (outline)
+Transparent
+—
+White 2px border, white text on dark bg. Gold 2px border, gold text on light bg.
+Secondary CTA hover
+Light gold fill
+#F5EDD6
+Subtle fill on hover for outline button on dark background
+Navigation background
+Navy
+#0D1B2A
+Consistent with page background
+Navigation text
+White
+#FFFFFF
+Maximum legibility on dark background
+Active navigation item
+Gold
+#D4A017
+Shows current section. Bold weight also acceptable.
+H1 headings (on light background)
+Navy
+#0D1B2A
+Strong authority on light sections
+H1 headings (on dark background)
+White
+#FFFFFF
+Clean and legible on navy
+H2 subheadings
+Gold
+#D4A017
+Gold accent for section subheadings — hierarchy signal
+H3 card headings
+Navy / White
+context
+Navy on light cards, white on dark cards
+Section labels (e.g. WAT WE LEVEREN)
+Gold
+#D4A017
+Always ALL CAPS, letter-spacing: 2px, font-size: 12–13px
+Body text (on dark/navy background)
+Light grey
+#CCCCCC
+NOT pure white — too harsh. Light grey is significantly more readable
+Body text (on light background)
+Dark grey
+#1A1A1A
+Soft black — gentler than pure black, equally legible
+Icon backgrounds
+Mid navy
+#132336
+Slightly lighter than page bg — creates subtle depth on dark sections
+Icons
+Gold
+#D4A017
+Consistent with accent colour system
+Card background (dark section)
+Mid navy
+#132336
+Lifts cards off the page background with minimal contrast
+Card background (light section)
+White
+#FFFFFF
+Clean cards on warm white section bg
+Card border
+None / subtle
+—
+Rely on box-shadow instead of hard borders: 0 4px 20px rgba(0,0,0,0.15)
+Divider lines
+Gold
+#D4A017
+1px, opacity 0.3 — subtle structural separators
+Footer text
+Subtle grey
+#AAAAAA
+Readable but not dominant
+Footer links
+Gold
+#D4A017
+Consistent with accent colour system
+Error messages (forms)
+Red
+#CC0000
+Standard error red — universally understood
+Success messages (forms)
+Green
+#006600
+Standard success green
+3.3 What NOT to do — colour errors
+⚙ DEVELOPER: Brief this list to yourself before implementing. These are the most common mistakes that will break the brand.
+NEVER use white text on the gold CTA button — insufficient contrast ratio. Always use navy (#0D1B2A) text on gold.
+NEVER use the muted gold (#B8972E) as a CTA button fill — too flat, no click energy.
+NEVER use pure white (#FFFFFF) as a page or section background — too cold for this brand. Use warm white (#F5F1EA).
+NEVER add green, red, or blue as accent colours — they destroy the palette completely.
+NEVER use gold (#D4A017) as a large section background — too heavy and overpowering.
+NEVER use more than three colours in a single section — navy, gold, and one neutral.
+NEVER use grey body text (#888888 or similar) on navy backgrounds — not enough contrast. Use #CCCCCC minimum.
+4. CTA Strategy  (Call-To-Action)
+⚙ DEVELOPER: CTA = the clickable buttons that direct visitors to take action. The current site has too many CTAs that look identical and say the same thing, causing decision paralysis and reducing conversions. The fix is simple: maximum two CTAs per section, always visually differentiated.
+Core CTA rule — enforce everywhere
+Maximum TWO CTAs per section. Always one filled (primary) and one outline (secondary).
+NEVER three identical buttons side by side — this is currently happening and must be fixed.
+NEVER use the same CTA label twice on the same page unless it is intentional repetition at the end of a long page.
+Primary CTA = the main conversion action for that page's audience.
+Secondary CTA = an alternative for visitors who are not yet ready to convert.
+4.1 Button styling specification
+⚙ DEVELOPER: Implement button styles exactly as below. Use consistent border-radius: 8px for all buttons. Padding: 14px 28px. Font: Arial bold, 15px. No text transform except on section labels.
+Type
+Background
+Text colour
+Border
+Hover state
+Border-radius
+Primary
+#D4A017
+#0D1B2A  (navy)
+None
+Background → #B8972E. No animation.
+8px
+Secondary
+Transparent
+Context-dependent
+2px solid. White on dark. Gold on light.
+Light gold fill (#F5EDD6) on dark bg. Light navy fill on light bg.
+8px
+4.2 CTA per page
+Page (Dutch URL)
+Primary CTA — filled gold button
+Secondary CTA — outline button
+/  (Homepage)
+Personeel aanvragen
+Bekijk openstaande opdrachten
+/ (Homepage bottom)
+Personeel aanvragen
+Direct aanmelden
+/freelancers
+Direct aanmelden
+Bekijk openstaande opdrachten
+/freelancers/openstaande-opdrachten
+Ik ben beschikbaar
+Aanmelden voor standby pool
+/freelancers/hoe-het-werkt
+Direct aanmelden
+Bekijk openstaande opdrachten
+/freelancers/inkomsten-betalingen
+Direct aanmelden
+Neem contact op
+/freelancers/jouw-certificering
+Direct aanmelden
+Aanmelden zonder diploma
+/freelancers/direct-aanmelden
+Verstuur aanmelding
+— (no second CTA on form pages)
+/bedrijven
+Personeel aanvragen
+Bekijk ons aanbod
+/bedrijven/personeel-aanvragen
+Verstuur aanvraag
+— (no second CTA on form pages)
+/bedrijven/ons-aanbod
+Personeel aanvragen
+Bekijk tarieven op aanvraag
+/bedrijven/tarieven
+Vraag een vrijblijvend voorstel aan
+Neem contact op
+/bedrijven/onze-sectoren
+Personeel aanvragen
+Bekijk ons aanbod
+/bedrijven/functieprofielen
+Personeel aanvragen
+Neem contact op
+/bedrijven/vaste-samenwerking
+Bespreek een samenwerking
+Neem contact op
+/over-hnb/ons-verhaal
+Neem contact op
+Bekijk onze aanpak
+/over-hnb/het-team
+Neem contact op
+—
+/over-hnb/werkgebied
+Personeel aanvragen
+Neem contact op
+/over-hnb/onze-aanpak
+Personeel aanvragen
+Neem contact op
+/over-hnb/vergunningen
+Personeel aanvragen
+Meer over onze aanpak
+/contact
+Verstuur bericht
+—
+5. Homepage — Complete Copy
+⚙ DEVELOPER: The homepage is the single most important page on the site. It must immediately communicate what H&B does, for whom, and why they are the right choice — for BOTH target audiences simultaneously: companies and freelancers. Every word below has been written deliberately. Do not change the copy.
+5.1 Hero Section
+⚙ DEVELOPER: First section every visitor sees. Must work for both audiences. Background: dark event crowd photo with navy overlay (opacity 0.55). On mobile: photo is cropped to portrait, text is centred.
+HUIDIGE KOPTEKST — VERWIJDEREN  /  CURRENT HEADLINE — REMOVE
+Betrouwbaar eventpersoneel. Wanneer u het nodig heeft.
+Reden: passief, generiek, fout register ('u'), geen urgentie, geen onderscheid.
+NIEUWE KOPTEKST — OPTIE A (AANBEVOLEN)  /  NEW HEADLINE — OPTION A (RECOMMENDED)
+Het juiste team.
+Op het juiste moment.
+NIEUWE KOPTEKST — OPTIE B  /  NEW HEADLINE — OPTION B
+Geen uitval. Geen gedoe.
+Gewoon het juiste team op de vloer.
+SUBTEKST  /  SUBTEXT — MAX 2 SENTENCES
+H&B Service Group levert gescreend hospitality- en beveiligingspersoneel voor live-evenementen, locaties en zakelijke programma's. Één coördinator, van de eerste briefing tot de laatste dienst.
+CTA KNOPPEN  /  CTA BUTTONS
+Button 1 — filled gold:  PERSONEEL AANVRAGEN  → links to /bedrijven/personeel-aanvragen
+Button 2 — outline:  BEKIJK OPENSTAANDE OPDRACHTEN  → links to /freelancers/openstaande-opdrachten
+⚙ DEVELOPER: Buttons are stacked vertically on mobile, side by side on desktop. Minimum touch target size: 48px height on mobile.
+5.2 Section — Wat wij leveren  (What We Deliver)
+⚙ DEVELOPER: Section background: Navy #0D1B2A. Two card layout below the intro text. Cards use mid-navy (#132336) background, rounded corners (12px), no hard border — use box-shadow: 0 4px 20px rgba(0,0,0,0.2).
+SUPERLABEL
+WAT WE LEVEREN
+KOPTEKST
+Hospitality en beveiliging in één roster
+SUBTEKST
+Van professioneel gastheerschap tot gecontroleerde toegang — wij matchen de juiste mensen aan het tempo, de compliance en de uitstraling van jouw evenement.
+Kaart 1 — Hospitality
+ICOON
+Coffee cup icon — gold on mid-navy background (#132336). Icon size: 32px in a 64x64px rounded square.
+TITEL
+Hospitality
+TEKST
+Hosts, barteams, foodrunners en gastgericht personeel dat uitstraling, tempo en verantwoorde uitgifte begrijpt. Volledig afgestemd op jouw merkstandaarden en servicemomenten.
+LINK
+Ontdek hospitality →   (gold text, links to /bedrijven/ons-aanbod)
+Kaart 2 — Beveiliging
+ICOON
+Shield icon — gold on mid-navy background. Same size as above.
+TITEL
+Beveiliging
+TEKST
+Bevoegde portiers en gecertificeerde eventbeveiliging met focus op toegangscontrole, de-escalatie en heldere communicatie met jouw productieleiding.
+LINK
+Ontdek beveiliging →   (gold text, links to /bedrijven/ons-aanbod)
+5.3 Section — Waar wij actief zijn  (Where We Operate)
+⚙ DEVELOPER: Section background: Warm white #F5F1EA — alternating from the previous dark section. This alternation is intentional and must be maintained throughout the homepage. Cards on this section: white (#FFFFFF) background with subtle shadow.
+SUPERLABEL
+WAAR WE ACTIEF ZIJN
+KOPTEKST
+Gemaakt voor veeleisende eventomgevingen
+SUBTEKST
+Korte doorlooptijden, wisselende bezetting en late pieken zijn voor ons normaal. Wij schalen teams op of af zonder kwaliteitsverlies.
+⚙ DEVELOPER: Sector cards: 2-column grid on desktop, 1 column on mobile. Each card: white bg, navy H3 title, mid-grey body text, gold sector icon.
+FESTIVALS
+Meerdaagse opbouw, perimeter- en backstagebeveiliging, en barteams die de rij doorlaten wanneer de headliner begint.
+ZAKELIJKE EVENTS
+Representatief en punctueel personeel voor congressen, beurzen, productlanceringen en gala-avonden. Merkbewust en discreet.
+NACHTLEVEN
+Piekbezetting voor clubs en late locaties — ID-checks, vloerbeheer en barondersteuning die past bij het tempo van de zaal.
+SPORTEVENEMENTEN
+Crowdmanagement, VIP-begeleiding en toegangscontrole bij stadions, wielerwedstrijden en marathons.
+LOCATIES
+Arena's, schouwburgen en multifunctionele ruimtes met terugkerende programma's — vaste gezichten, minder overdracht.
+5.4 Section — Waarom H&B  (Why Choose H&B)
+⚙ DEVELOPER: Section background: Navy #0D1B2A — back to dark after the light section. USP cards: 2x2 grid on desktop, stacked on mobile. Card bg: #132336. Icon: gold. Title: white bold. Body: #CCCCCC.
+SUPERLABEL
+WAAROM ORGANISATOREN VOOR ONS KIEZEN
+KOPTEKST
+Geen namenlijst.
+Een echte partner.
+SUBTEKST
+Opdrachtgevers kiezen voor H&B en blijven omdat wij operationele ruis verminderen — minder verrassingen op locatie, minder no-shows en minder hectiek vlak voor de opening.
+USP 1 — GESCREEND PERSONEEL
+Werkrecht, vergunningen en referenties worden gecontroleerd vóór elk roostervoorstel. Jouw siteleider hoeft minder te improviseren.
+USP 2 — SNELHEID MET STRUCTUUR
+Krappe deadlines en last-minute wijzigingen worden opgevangen met een vaste coördinatiewerkwijze — bevestigingen, call sheets en vervanging waar nodig.
+USP 3 — ÉÉN AANSPREEKPUNT
+Eén coördinator bewaakt jouw briefing, roster en aanpassingen op locatie. Minder overdracht, snellere beslissingen, duidelijke rapportage achteraf.
+USP 4 — FLEXIBELE SCHIL
+Schaal van intieme recepties tot piekbezetting zonder kwaliteitsverlies — hospitality en beveiliging in één gecoördineerd plan.
+5.5 Section — Vertrouwen  (Social Proof)
+⚙ DEVELOPER: Section background: Warm white #F5F1EA. This section is a placeholder until real testimonials or client logos become available. Implement the interim content below now — do NOT leave this section empty.
+SUPERLABEL
+VERTROUWD DOOR EVENTORGANISATOREN
+KOPTEKST
+Al actief bij vaste opdrachtgevers in de festivalbranche
+TEKST
+H&B werkt samen met een vaste groep opdrachtgevers in de evenementenbranche. Wil je weten wie wij zijn? Neem direct contact op — we vertellen je graag meer.
+CTA
+Neem contact op →
+⚙ DEVELOPER: Once client logos or testimonials are available: replace the body text with a logo row (max 5 logos, greyscale on warm white bg) OR 1–2 quote cards (navy bg, italic white quote text, gold quotation marks, name + company below in gold). Quote card format: border-radius 12px, padding 32px.
+5.6 Section — Einde pagina CTA  (End of Page CTA)
+⚙ DEVELOPER: Section background: Navy #0D1B2A. This closing CTA section is mandatory on every main page. It is the last chance to convert a visitor who has scrolled to the bottom.
+KOPTEKST
+Klaar voor jouw volgende event?
+SUBTEKST
+Vertel ons wat je nodig hebt. We sturen je binnen één werkdag een voorstel.
+CTA
+Button 1 — filled gold:  Personeel aanvragen
+Button 2 — outline:  Direct aanmelden  (for freelancers)
+6. Freelancers — All Subpages
+⚙ DEVELOPER: Each subpage has its own URL, full copy, meta description, and CTA specification. The Freelancers landing page (/freelancers) must include a brief intro and navigation cards linking to all subpages.
+6.0 Freelancers — Landing Page
+URL
+/freelancers
+PAGE TITLE (SEO)
+Werk als freelancer bij H&B Service Group — hospitality en beveiliging
+META DESCRIPTION
+Bekijk openstaande opdrachten bij H&B Service Group. Flexibel werk als host, barteam of gecertificeerd beveiliger bij festivals, corporate events en nachtleven.
+HERO KOPTEKST
+Werk mee bij de mooiste events van Nederland
+HERO SUBTEKST
+H&B heeft doorlopend opdrachten voor hospitality-medewerkers en gecertificeerde beveiligers. Flexibel, goed georganiseerd en snel uitbetaald.
+CTA
+Primary: Direct aanmelden
+Secondary: Bekijk openstaande opdrachten
+SUBPAGINALINKS OP LANDINGSPAGINA  /  SUBPAGE NAVIGATION CARDS
+⚙ DEVELOPER: Display as a grid of cards — same card component used for USPs. Each links to its subpage. Gold arrow icon on each card.
+Openstaande opdrachten  —  Bekijk wat er nu beschikbaar is
+Hoe het werkt  —  Van aanmelding tot uitbetaling in vijf stappen
+Inkomsten & betalingen  —  Wat je verdient en hoe je betaald wordt
+Jouw certificering  —  Wat je nodig hebt om aan de slag te gaan
+Direct aanmelden  —  Meld je aan als H&B freelancer
+6.1 Openstaande Opdrachten  (Available Assignments)
+URL
+/freelancers/openstaande-opdrachten
+PAGE TITLE (SEO)
+Openstaande opdrachten — werk bij H&B Service Group
+META DESCRIPTION
+Bekijk actuele opdrachten bij H&B Service Group. Hospitality en beveiligingswerk bij festivals, corporate events en nachtleven in Nederland.
+KOPTEKST
+Actuele opdrachten — bekijk wat er nu beschikbaar is
+SUBTEKST
+Wij plaatsen doorlopend nieuwe opdrachten. Vind een opdracht die past bij jouw beschikbaarheid en ervaring.
+⚙ DEVELOPER: Each assignment is displayed as a card with the following data fields:
+Type opdracht  (e.g. Barteam festival / Portier nachtclub)
+Datum of datumrange
+Locatie — stad
+Geschat aantal uren
+Functie — label: Hospitality (gold badge) or Beveiliging (navy badge)
+Vereiste certificering — indien van toepassing
+Status badge — Open (green) / Bijna vol (amber) / Vol (grey)
+CTA per opdracht: 'Ik ben beschikbaar'  → links to /freelancers/direct-aanmelden with assignment pre-filled
+ONDERAAN PAGINA  /  BOTTOM OF PAGE
+Geen passende opdracht gevonden? Meld je aan voor onze standby pool — we nemen contact op zodra er een opdracht beschikbaar komt die bij je past.
+CTA
+Aanmelden voor standby pool →
+6.2 Hoe het werkt  (How It Works)
+URL
+/freelancers/hoe-het-werkt
+PAGE TITLE (SEO)
+Hoe werkt het — freelancen bij H&B Service Group
+META DESCRIPTION
+Ontdek hoe je als freelancer aan de slag gaat bij H&B. Van aanmelding tot uitbetaling in vijf eenvoudige stappen.
+KOPTEKST
+Van aanmelding tot betaling — zo eenvoudig werkt het
+SUBTEKST
+We hebben het proces zo ingericht dat jij je kunt concentreren op het werk. Wij regelen de rest.
+⚙ DEVELOPER: Display as a numbered vertical step timeline on mobile, horizontal steps on desktop. Each step: gold circle with step number, bold navy title, body text in dark grey. Steps do NOT use bullet points — use a step component.
+STAP 1 — AANMELDEN
+Vul het aanmeldformulier in met je naam, contactgegevens, functiekeuze en beschikbaarheid. Het duurt minder dan drie minuten.
+STAP 2 — SCREENING
+We controleren je documenten — identiteitsbewijs, eventueel diploma en VOG. We plannen ook een kort kennismakingsgesprek in, telefonisch of digitaal. Gemiddeld binnen twee werkdagen.
+STAP 3 — AAN DE SLAG
+Zodra je bent goedgekeurd, ontvang je opdrachten via ons platform. Je geeft jouw beschikbaarheid aan en wordt ingepland op opdrachten die passen bij jouw profiel.
+STAP 4 — WERKEN EN UREN REGISTREREN
+Na elke opdracht registreer je jouw gewerkte uren eenvoudig digitaal via het freelancersportaal. Geen papieren formulieren, geen handmatige processen.
+STAP 5 — UITBETALING
+Goedgekeurde uren worden snel uitbetaald. Je ziet de status van elke indiening in real-time in jouw persoonlijk dashboard.
+CTA
+Primary: Direct aanmelden  |  Secondary: Bekijk openstaande opdrachten
+6.3 Inkomsten & betalingen  (Earnings & Payments)
+URL
+/freelancers/inkomsten-betalingen
+PAGE TITLE (SEO)
+Inkomsten en betalingen — wat verdien je bij H&B Service Group
+META DESCRIPTION
+Transparante informatie over verdiensten, uurtarieven, toeslagen en uitbetaling als freelancer bij H&B Service Group.
+KOPTEKST
+Wat je verdient bij H&B
+SUBTEKST
+Transparantie is voor ons vanzelfsprekend. Jij weet altijd precies wat je gaat verdienen — vooraf, niet achteraf.
+Concurrerende uurtarieven, afhankelijk van functie, ervaring en type opdracht
+Toeslagen voor nacht-, weekend- en feestdagdiensten — altijd vermeld in de opdrachtbevestiging
+Snelle uitbetaling na goedkeuring van uren — geen lange wachttijden
+Automatische factuurmodule in het freelancersportaal — facturen worden gegenereerd op basis van goedgekeurde uren
+Real-time inzicht in jouw uren, betalingsstatus en opdrachtenhistorie via het portaal
+Geen verborgen kosten of inhoudingen die niet vooraf zijn gecommuniceerd
+INFO BLOK
+Bij H&B weet je waar je aan toe bent
+We communiceren tarieven en toeslagen altijd vooraf in de opdrachtbevestiging.
+Na goedkeuring van jouw uren zorgen wij voor een correcte en tijdige verwerking.
+Vragen over jouw tarief? Neem direct contact op — we bespreken het graag.
+CTA
+Primary: Direct aanmelden  |  Secondary: Neem contact op
+6.4 Jouw certificering  (Your Certification)
+URL
+/freelancers/jouw-certificering
+PAGE TITLE (SEO)
+Welke certificaten heb je nodig — freelancen bij H&B
+META DESCRIPTION
+Lees welke documenten en certificaten vereist zijn voor hospitality en beveiliging bij H&B Service Group. Ook zonder diploma kun je aan de slag.
+KOPTEKST
+Wat heb je nodig om aan de slag te gaan?
+SUBTEKST
+De eisen zijn afhankelijk van de functie die je wil uitoefenen. Hieronder zie je precies wat we vragen.
+Route A — Hospitality
+⚙ DEVELOPER: Display as a green checkmark list. Positive framing — show how accessible this route is. No scary requirements.
+Minimaal 18 jaar
+Goede communicatieve vaardigheden in het Nederlands
+Beschikbaar voor avond- en weekenddiensten
+VOG (Verklaring Omtrent Gedrag) — wij helpen je bij de aanvraag indien nodig
+Geen diploma vereist — wel een positieve instelling en representatieve uitstraling
+Route B — Beveiliging
+⚙ DEVELOPER: Same checkmark style. Add a note that the grey pas is mandatory at every deployment — no exceptions.
+MBO-diploma Beveiliging niveau 2 (of erkend gelijkwaardig diploma)
+Geldige legitimatiepas voor beveiligers (grijze pas) — verplicht bij elke inzet, geen uitzonderingen
+VOG — verplicht, niet ouder dan drie maanden bij aanvang opdracht
+Minimaal 18 jaar
+Aantoonbare ervaring in eventbeveiliging is een pré, maar geen harde vereiste
+Nog geen beveiligingsdiploma? Geen probleem.
+Heb je interesse in beveiliging maar nog geen diploma? Meld je aan.
+We informeren je over erkende opleidingstrajecten en hoe je daarna bij H&B aan de slag kunt.
+Je kunt je alvast registreren als geïnteresseerde — we nemen contact op zodra er ruimte is.
+CTA
+Primary: Direct aanmelden  |  Secondary: Aanmelden zonder diploma
+6.5 Direct aanmelden  (Register Now)
+URL
+/freelancers/direct-aanmelden
+PAGE TITLE (SEO)
+Direct aanmelden als freelancer bij H&B Service Group
+META DESCRIPTION
+Meld je aan als freelancer bij H&B Service Group. Binnen 48 uur nemen we contact op voor een kennismakingsgesprek.
+KOPTEKST
+Doe mee — meld je aan als H&B freelancer
+SUBTEKST
+Vul het formulier in. Binnen 48 uur nemen we contact op voor een kort kennismakingsgesprek.
+⚙ DEVELOPER: All fields are required unless marked [optional]. Use placeholder text as shown. Form should be single-column on mobile, two-column on desktop for name fields. Submit button: full-width primary gold button.
+FORMULIERVELDEN  /  FORM FIELDS
+Voornaam  (First name)  — text input
+Achternaam  (Last name)  — text input
+E-mailadres  (Email address)  — email input, validate format
+Telefoonnummer  (Phone number)  — tel input, Dutch format +31
+Woonplaats  (City)  — text input
+Functievoorkeur  (Role preference)  — radio buttons: Hospitality / Beveiliging / Beide
+Beschikbaarheid  (Availability)  — checkboxes: Weekenden / Doordeweeks / Beide
+Beveiligingsdiploma?  (Security licence?)  — radio: Ja / Nee / In aanvraag
+Vertel over jezelf  (Tell us about yourself)  — textarea, max 500 characters  [optioneel / optional]
+Akkoord met privacyverklaring  (Privacy policy consent)  — required checkbox with link
+BEVESTIGINGSBERICHT NA INZENDING  /  POST-SUBMIT MESSAGE
+Bedankt voor je aanmelding! We nemen binnen 48 uur contact met je op voor een kort gesprek. Controleer ook je spammap als je niets hebt ontvangen.
+⚙ DEVELOPER: Send an automatic confirmation email immediately after submission. Subject line: 'Jouw aanmelding bij H&B Service Group is ontvangen'. Body: confirm receipt, list submitted name and role preference, state we will contact within 48 hours. Sign off: H&B Service Group team.
+7. Bedrijven — All Subpages  (Companies)
+⚙ DEVELOPER: Target audience for this section: B2B clients — festival organisers, venue managers, corporate event planners, nightlife operators. Every page must project professionalism, reliability, and the ease of working with H&B. Trust signals are critical throughout.
+7.0 Bedrijven — Landing Page
+URL
+/bedrijven
+PAGE TITLE (SEO)
+Eventpersoneel inhuren — H&B Service Group
+META DESCRIPTION
+H&B Service Group levert gescreend hospitality- en beveiligingspersoneel voor evenementen in Nederland. Één aanspreekpunt, van briefing tot afbouw.
+HERO KOPTEKST
+Betrouwbaar eventpersoneel voor organisatoren die geen risico's nemen
+HERO SUBTEKST
+H&B levert gescreend hospitality- en beveiligingspersoneel voor live-evenementen. Één aanspreekpunt — van briefing tot afbouw.
+CTA
+Primary: Personeel aanvragen
+Secondary: Bekijk ons aanbod
+VERTROUWENSSIGNALEN DIRECT ONDER DE HERO  /  TRUST SIGNALS BELOW HERO
+⚙ DEVELOPER: Display as a horizontal bar of small icon+text badges. Navy background, gold icons, white text. This bar reduces hesitation immediately after the hero.
+✓  WPBR-vergund
+✓  KvK-geregistreerd
+✓  VOG-gescreend personeel
+✓  Eén aanspreekpunt
+✓  Actief bij vaste opdrachtgevers
+7.1 Personeel aanvragen  (Request Staff)
+URL
+/bedrijven/personeel-aanvragen
+PAGE TITLE (SEO)
+Personeel aanvragen — eventpersoneel inhuren via H&B Service Group
+META DESCRIPTION
+Vraag eventpersoneel aan via H&B. Ontvang binnen één werkdag een voorstel op maat voor hospitality of beveiligingspersoneel.
+KOPTEKST
+Vertel ons wat je nodig hebt
+SUBTEKST
+Wij sturen je binnen één werkdag een voorstel op maat. Geen verplichtingen, geen kleine lettertjes.
+⚙ DEVELOPER: Two-column layout on desktop: form on the left (60%), trust signals on the right (40%). Single column on mobile with trust signals below the form.
+FORMULIERVELDEN  /  FORM FIELDS
+Bedrijfsnaam  (Company name)  — text input
+Contactpersoon  (Contact person)  — text input
+E-mailadres  (Email)  — email input
+Telefoonnummer  (Phone)  — tel input
+Type personeel  (Staff type)  — radio: Hospitality / Beveiliging / Beide
+Type evenement  (Event type)  — dropdown: Festival / Corporate / Nachtleven / Locatie / Sportevenement / Anders
+Locatie evenement  (Event location)  — text input
+Datum of datumrange  (Date)  — date picker or text input
+Geschat aantal personen  (Estimated headcount)  — number input
+Aanvullende informatie  (Additional details)  — textarea  [optioneel / optional]
+Akkoord met privacyverklaring  — required checkbox
+VERTROUWENSSIGNALEN NAAST FORMULIER  /  TRUST SIGNALS BESIDE FORM
+✓  WPBR-vergunning aanwezig
+✓  Volledig gescreend personeel — werkrecht, VOG en diploma's gecontroleerd
+✓  Altijd één coördinator als jouw aanspreekpunt
+✓  Transparant voorstel binnen één werkdag
+✓  Tarieven op aanvraag — altijd maatwerk, geen verborgen kosten
+BEVESTIGING NA INZENDING
+Bedankt voor je aanvraag. We nemen binnen één werkdag contact op met een voorstel op maat. Heb je een spoedeisende vraag? Bel ons direct.
+⚙ DEVELOPER: Auto-confirmation email: Subject: 'Jouw aanvraag bij H&B Service Group is ontvangen'. Body: confirm receipt, state we will respond within one business day, include direct phone number for urgent requests.
+7.2 Ons aanbod  (Our Offering)
+URL
+/bedrijven/ons-aanbod
+PAGE TITLE (SEO)
+Ons personeelsaanbod — hosts, beveiligers en meer via H&B
+META DESCRIPTION
+Van hosts en barteams tot gecertificeerde portiers en crowdmanagers — bekijk het volledige personeelsaanbod van H&B Service Group.
+KOPTEKST
+Wie wij leveren
+SUBTEKST
+Wij zijn de enige partij die je hospitality en beveiliging in één roster levert — afgestemd op elkaar, aangestuurd door één coördinator.
+Hospitality
+Hosts en hostesses — gastontvangst, begeleiding en informatieverstrekking
+Barteams — snelle en verantwoorde drankenuitgifte bij hoge drukte
+Barbacks — ondersteuning van het barteam, aanvullen en opruimen
+Foodrunners — efficiënte uitgifte van gerechten op grote evenementen
+Gastgerichte vloerteams — crowd flow management met een gastvrije aanpak
+VIP-begeleiders — discreet en representatief voor premium gasten
+Beveiliging
+Gecertificeerde portiers — MBO-2, grijze pas, VOG — toegangscontrole en de-escalatie
+Eventbeveiligers — gecertificeerd, ervaren met grote publieksgroepen
+Toegangscontroleteams — efficiënte verwerking van bezoekers bij ingang
+Backstage- en VIP-security — discreet en professioneel in gevoelige zones
+Crowdmanagementspecialisten — perimeterbeheer en veiligheidscommunicatie
+Hospitality én beveiliging — in één roster
+Wij zijn de enige partner die jouw hospitality- en beveiligingsteam in één gecombineerd roster levert.
+Één briefing. Één coördinator. Één factuur.
+CTA
+Personeel aanvragen →
+7.3 Tarieven op aanvraag  (Rates on Request)
+URL
+/bedrijven/tarieven
+PAGE TITLE (SEO)
+Tarieven op aanvraag — eventpersoneel via H&B Service Group
+META DESCRIPTION
+H&B hanteert tarieven op maat per evenement. Vraag een vrijblijvend voorstel aan en ontvang binnen één werkdag een transparante offerte.
+KOPTEKST
+Tarieven op maat voor elk evenement
+SUBTEKST
+Elk evenement is anders. Onze tarieven zijn afhankelijk van het type personeel, de duur, het tijdstip en de omvang van de opdracht. Je ontvangt altijd een helder voorstel — zonder verborgen kosten.
+Altijd een transparante offerte vooraf — geen verrassingen achteraf
+Toeslagen voor nacht-, weekend- en feestdagdiensten worden altijd vooraf vermeld
+Kortingen mogelijk bij structurele samenwerking en langlopende contracten
+Eén factuur per evenement — overzichtelijk en efficiënt
+CTA
+Vraag een vrijblijvend voorstel aan →
+7.4 Onze sectoren  (Our Sectors)
+URL
+/bedrijven/onze-sectoren
+PAGE TITLE (SEO)
+Eventpersoneel per sector — festivals, corporate, nachtleven en meer
+META DESCRIPTION
+H&B Service Group levert personeel voor festivals, corporate events, nachtleven, sport en vaste locaties door heel Nederland.
+KOPTEKST
+Wij kennen jouw wereld
+SUBTEKST
+Of je nu een meerdaags festival organiseert of een besloten gala — wij kennen de specifieke eisen, het tempo en de verwachtingen van jouw sector.
+Festivals
+Meerdaagse evenementen vragen een team dat meegroeit met het programma. Van opbouw en perimeterbeheer op dag één tot barteams die de rij doorlaten wanneer de headliner begint en beveiliging die de aftocht soepel laat verlopen. Wij kennen het ritme van een meerdaags festival.
+Corporate events
+Congressen, beurzen, productlanceringen en gala-avonden vragen representatief en punctueel personeel dat jouw merk uitstraalt. Discreet, professioneel en merkbewust in elk detail.
+Nachtleven
+Clubs en poppodia werken met piekbezetting, late tijden en een publiek met energie. Wij leveren ID-check teams, vloerbeheer en barondersteuning die past bij het tempo en de identiteit van jouw locatie.
+Sportevenementen
+Stadions, wielerwedstrijden en marathons vragen teams die grote publieksstromen begeleiden. Crowdmanagement, VIP-begeleiding en toegangscontrole in open omgevingen met wisselende bezetting.
+Vaste locaties
+Arena's, theaters en multifunctionele ruimtes met terugkerende programma's profiteren van vaste gezichten op de vloer. Personeel dat jouw locatie kent, vermindert de introductietijd en verhoogt de servicekwaliteit bij elk volgend evenement.
+CTA
+Personeel aanvragen →
+7.5 Functieprofielen  (Role Profiles)
+⚙ DEVELOPER: IMPORTANT: The correct Dutch spelling is 'Functieprofielen' — with an 'e' before the 'n'. NOT 'Functieprofilen'. Verify this is correct everywhere in the codebase, navigation, and page headings.
+URL
+/bedrijven/functieprofielen
+PAGE TITLE (SEO)
+Functieprofielen — wie je inhuurt via H&B Service Group
+META DESCRIPTION
+Bekijk alle functieprofielen van H&B — van host en barteam tot gecertificeerd portier en crowdmanagementspecialist.
+KOPTEKST
+Elk profiel, helder omschreven
+SUBTEKST
+Zodat je precies weet wie je inhuurt en welke competenties je kunt verwachten.
+Host / Hostess
+TAKEN
+Verwelkomt bezoekers bij ingang of registratiebalie
+Begeleidt gasten naar de juiste zones of stoelen
+Verstrekt informatie over het evenement, het programma en de locatie
+Bewaakt de gastbeleving en signaleert onregelmatigheden proactief
+PROFIEL
+Representatief, communicatief en stressbestendig. Ervaring in hospitality of klantenservice is een pré. Spreekt Nederlands en bij voorkeur ook Engels.
+VEREISTEN
+Minimaal 18 jaar  |  VOG aanwezig of aan te vragen  |  Beschikbaar voor avond- en weekenddiensten
+Barteam
+TAKEN
+Verantwoordelijk voor snelle en verantwoorde drankenuitgifte
+Werkt efficiënt in drukke omstandigheden met hoge bezoekersdichtheid
+HACCP-bewust en vertrouwd met kassasystemen
+Past verantwoorde alcoholverstrekking toe — weigert bij twijfel
+PROFIEL
+Ervaren achter de bar, snel en accuraat. Gewend aan grote aantallen en hoge werkdruk. Sterke teamspeler.
+VEREISTEN
+Minimaal 18 jaar  |  VOG  |  Horecaervaring aanbevolen
+Beveiliger / Portier
+TAKEN
+Toegangscontrole — ID-checks, ticketcontrole en verbodsbeheer
+De-escalatie van conflictsituaties — vroegtijdig en professioneel
+Publieksstromen begeleiden bij in- en uitgang
+Communicatie met productieleiding via portofoon
+Rapportage van incidenten na afloop
+PROFIEL
+Gecertificeerd, ervaren in eventomgevingen, kalm onder druk. Duidelijk communicerend en beslissingsbevoegd op de vloer.
+VEREISTEN
+MBO-diploma Beveiliging niveau 2  |  Geldige grijze pas (verplicht bij elke inzet)  |  VOG max. 3 maanden oud  |  18+
+Crowdmanagementspecialist
+TAKEN
+Perimeterbeheer bij grote evenementen
+Begeleiden van publieksstromen om opstoppingen en veiligheidsrisico's te voorkomen
+Samenwerking met veiligheidscoördinator en productieteam
+Communicatie met hulpdiensten indien nodig
+PROFIEL
+Gespecialiseerd in publieksgedrag en veiligheidscommunicatie bij grote evenementen. Aantoonbare ervaring bij festivals of grote sportlocaties.
+CTA
+Personeel aanvragen →
+7.6 Vaste samenwerking  (Structural Partnership)
+URL
+/bedrijven/vaste-samenwerking
+PAGE TITLE (SEO)
+Vaste samenwerking — structureel eventpersoneel via H&B
+META DESCRIPTION
+Profiteer van een vaste personeelspool die jouw locatie en merk kent. Vraag naar een structureel partnerschap met H&B Service Group.
+KOPTEKST
+Altijd dezelfde gezichten op de vloer
+SUBTEKST
+Vaste opdrachtgevers profiteren van een dedicated personeelspool die jouw event, jouw merk en jouw publiek kent. Minder overdracht, minder introductietijd, betere service bij elk volgend evenement.
+Eigen vaste contactpersoon bij H&B — bereikbaar en beslissingsbevoegd
+Voorrang bij schaarse capaciteit en piekmomenten in het seizoen
+Vaste pool medewerkers die jouw locatie, jouw publiek en jouw standaarden kennen
+Maandelijkse evaluatie en actieve bijsturing op kwaliteit
+Tariefafspraken op maat bij structurele samenwerking
+Eén factuur per periode — minder administratieve lasten voor jou
+TEKST BLOK
+H&B is geen uitzendbureau waar je een naam bestelt en een onbekend gezicht ontvangt. Wij bouwen langetermijnrelaties op — met jou als opdrachtgever en met de medewerkers die voor jou werken. Die continuïteit is wat onze vaste opdrachtgevers het meest waarderen.
+CTA
+Primary: Bespreek een samenwerking  |  Secondary: Neem contact op
+8. Over H&B Service Group — All Subpages  (About)
+⚙ DEVELOPER: The About section is where trust is built. Visitors who reach these pages are seriously evaluating H&B. Every page must project credibility, professionalism, and humanity. Keep copy concise — these visitors are already interested. Don't oversell.
+8.1 Ons verhaal  (Our Story)
+URL
+/over-hnb/ons-verhaal
+PAGE TITLE (SEO)
+Ons verhaal — wie is H&B Service Group
+META DESCRIPTION
+Leer H&B Service Group kennen. Wie we zijn, waarom we bestaan en wat ons drijft. Betrouwbaar eventpersoneel met een missie.
+KOPTEKST
+Wij geloven dat de mensen op de vloer het event maken
+ALINEA 1
+H&B Service Group is opgericht door twee mensen met jarenlange ervaring in eventoperaties en beveiligingsmanagement. We zagen te vaak hoe last-minute personeelsproblemen events onder druk zetten — terwijl de oplossing simpel is: de juiste mensen, goed gescreend, goed gebrieft, op tijd aanwezig.
+ALINEA 2
+We leveren geen namen op een lijst. We leveren professionals die jouw event behandelen als hun eigen verantwoordelijkheid. Van de eerste briefing tot de laatste dienst. Eén coördinator die het overzicht houdt, snel beslist en altijd bereikbaar is.
+Onze missie
+Betrouwbaar eventpersoneel toegankelijk maken voor elke organisator — groot of klein, festival of corporate.
+CTA
+Neem contact op →
+8.2 Het team  (The Team)
+URL
+/over-hnb/het-team
+⚙ URGENT — Remove the placeholder immediately
+The current placeholder 'Maak kennis met het team — binnenkort' with a dashed border MUST BE REMOVED immediately.
+It signals an unfinished website to every visitor. Replace with the interim content below right now.
+Once real photos are available, expand to full profile cards as specified at the bottom of this section.
+TIJDELIJKE CONTENT — NU IMPLEMENTEREN  /  INTERIM CONTENT — IMPLEMENT NOW
+Het team achter H&B
+H&B wordt geleid door mensen met jarenlange ervaring in eventoperaties, hospitality en beveiligingsmanagement. Onze coördinatoren zijn het eerste aanspreekpunt op locatie — bereikbaar, beslissingsbevoegd en volledig op de hoogte van jouw briefing.
+Wil je weten met wie je werkt? Neem direct contact op — we stellen ons graag voor.
+CTA
+Neem contact op →
+ZODRA FOTO'S BESCHIKBAAR ZIJN — UITBREIDEN MET  /  ONCE PHOTOS AVAILABLE — EXPAND WITH
+⚙ DEVELOPER: Profile card format: navy background (#132336), circular photo (120x120px), name in white bold, title in gold, one-line quote in light grey italic. Two columns on desktop, one on mobile.
+Profielfoto + naam + functietitel van elke coördinator en oprichter
+Korte persoonlijke quote of specialisatie — max 1 zin
+8.3 Werkgebied  (Service Area)
+URL
+/over-hnb/werkgebied
+PAGE TITLE (SEO)
+Werkgebied — waar is H&B Service Group actief
+META DESCRIPTION
+H&B Service Group is actief bij evenementen door heel Nederland. Gevestigd in Amsterdam, landelijk inzetbaar.
+KOPTEKST
+Actief door heel Nederland
+SUBTEKST
+H&B is gevestigd in Amsterdam en levert eventpersoneel bij evenementen door heel Nederland — van de Randstad tot Brabant, Gelderland en verder.
+Actief in de Randstad — Amsterdam, Rotterdam, Den Haag, Utrecht
+Regelmatig ingezet in Noord-Brabant, Gelderland en Overijssel
+Landelijke inzetbaarheid op aanvraag — ook buiten de vaste regio's
+Personeel wordt lokaal geworven om reistijden te beperken en kwaliteit te waarborgen
+⚙ DEVELOPER: Visual: Custom SVG map of the Netherlands with active regions highlighted in gold (#D4A017) on a navy (#0D1B2A) background. Do NOT use Google Maps embed — too generic for the brand. Keep it a simple illustrated regional map in brand colours.
+8.4 Onze aanpak  (Our Approach)
+URL
+/over-hnb/onze-aanpak
+PAGE TITLE (SEO)
+Onze aanpak — hoe werkt H&B Service Group
+META DESCRIPTION
+Van aanvraag tot evaluatie — ontdek hoe H&B Service Group elke opdracht aanpakt. Transparant, gestructureerd en altijd één aanspreekpunt.
+KOPTEKST
+Zo werken wij
+SUBTEKST
+Een gestructureerd proces zorgt voor voorspelbare kwaliteit. Dit is hoe wij elke opdracht aanpakken.
+⚙ DEVELOPER: Display as a numbered step timeline. Gold circle with step number, bold navy title, body text. Vertical on mobile, horizontal on desktop if 5 steps fit.
+STAP 1 — AANVRAAG
+Je stuurt een aanvraag in via het formulier of neemt direct contact op. We bespreken jouw behoefte, het type event en de gewenste functies.
+STAP 2 — VOORSTEL
+Binnen één werkdag ontvang je een voorstel op maat met functieprofiel, aantallen en een transparant tariefoverzicht.
+STAP 3 — BEVESTIGING EN BRIEFING
+Na akkoord stellen we het roster samen en brieeven we het team uitgebreid over jouw event, locatie, dresscode, protocollen en jouw verwachtingen.
+STAP 4 — UITVOERING
+Onze coördinator is aanwezig op de dag zelf of direct bereikbaar voor vragen en bijsturing. Jij hebt één aanspreekpunt — niet tien.
+STAP 5 — EVALUATIE
+Na afloop bespreken we hoe het is gegaan. Wat ging goed? Wat kan beter? Die feedback verwerken we direct in onze samenwerking.
+KWALITEITSCONTROLE BLOK
+Alle medewerkers worden gescreend op identiteit, diploma's en gedrag. We werken met een vaste pool van bekende krachten die onze aanpak kennen en uitdragen. Nieuwe medewerkers worden altijd begeleid door een ervaren collega bij hun eerste inzet.
+CTA
+Personeel aanvragen →
+8.5 Vergunningen & compliance  (Licences & Compliance)
+URL
+/over-hnb/vergunningen
+PAGE TITLE (SEO)
+Vergunningen en compliance — H&B Service Group volledig gecertificeerd
+META DESCRIPTION
+H&B beschikt over de WPBR-vergunning en alle vereiste registraties voor particuliere beveiliging en arbeidsbemiddeling in Nederland.
+⚙ DEVELOPER: This page is a major competitive differentiator. Many smaller competitors operate without proper licences. H&B has everything in order. Make this page feel like a badge of honour. Use large, visually prominent badge-style cards. Gold icon, white bold title, light grey description on navy background.
+KOPTEKST
+Volledig vergund en compliant
+SUBTEKST
+H&B Service Group beschikt over alle vereiste vergunningen en certificeringen voor de evenementen- en beveiligingsbranche in Nederland.
+VERGUNNINGEN LIJST  /  LICENCE CARDS — DISPLAY AS PROMINENT BADGE CARDS
+WPBR-vergunning — verleend door het Ministerie van Justitie en Veiligheid. Vereist voor elk bedrijf dat particuliere beveiligingsdiensten aanbiedt. Zonder deze vergunning mag een bedrijf geen beveiligers inzetten.
+WAADI-registratie — geregistreerd bij de Kamer van Koophandel als arbeidsbemiddelaar conform de Wet Allocatie Arbeidskrachten door Intermediairs.
+AVG-compliant — persoonsgegevens van medewerkers en opdrachtgevers worden verwerkt conform de Algemene Verordening Gegevensbescherming (GDPR).
+VOG-screening — alle medewerkers beschikken over een geldige Verklaring Omtrent Gedrag.
+Wet DBA-compliant — ons personeelsmodel voldoet aan de eisen van de Wet Deregulering Beoordeling Arbeidsrelaties.
+Wat dit voor jou betekent als opdrachtgever
+Geen boetes vanwege niet-gecertificeerd personeel.
+Geen aansprakelijkheid door vergunningsproblemen.
+Geen last-minute problemen door juridische tekortkomingen.
+Wij regelen dat.
+CTA
+Personeel aanvragen →
+8.6 Nieuws  (News)
+URL
+/over-hnb/nieuws
+PAGE TITLE (SEO)
+Nieuws — H&B Service Group
+META DESCRIPTION
+Nieuws en updates van H&B Service Group — terugblikken, tips voor organisatoren en ontwikkelingen in de evenementenbranche.
+KOPTEKST
+Nieuws en updates
+⚙ DEVELOPER: Content marketing strategy for the news section. Publish at minimum one article per month. Each article card: featured image (16:9), gold category label, bold title, excerpt (2 lines), date, and 'Lees meer' link in gold.
+CONTENT STRATEGIE  /  SUGGESTED CONTENT TYPES
+Terugblikken op events — 'Zo verzorgden wij de beveiliging bij [type event]'
+Tips voor organisatoren — 'Hoeveel beveiligers heb je nodig per 1.000 bezoekers?'
+Brancheontwikkelingen — wet- en regelgeving, cao-wijzigingen, vergunningseisen
+Medewerkersverhalen — 'Een avond als barteam bij een festival'
+Aankondigingen — nieuwe functies in het portaal, uitbreidingen, nieuws
+9. Contact Page
+⚙ DEVELOPER: The contact page was completely missing from the previous revision. This is a standalone page — not just a form elsewhere. It must be clean, professional, and easy to use on mobile.
+URL
+/contact
+PAGE TITLE (SEO)
+Contact — H&B Service Group
+META DESCRIPTION
+Neem contact op met H&B Service Group. Voor personeelsaanvragen, samenwerking of vragen — wij reageren binnen één werkdag.
+KOPTEKST
+Neem contact op
+SUBTEKST
+Heb je een vraag, wil je personeel aanvragen of een samenwerking bespreken? Wij reageren binnen één werkdag.
+⚙ DEVELOPER: Layout: two columns on desktop. Left (55%): contact form. Right (45%): contact details, opening hours, and a trust signal. Single column on mobile with details below the form.
+Contactformulier — velden  /  Contact form fields
+Naam  (Name)  — text input
+E-mailadres  (Email)  — email input
+Telefoonnummer  (Phone)  — tel input  [optioneel / optional]
+Onderwerp  (Subject)  — dropdown: Personeel aanvragen / Samenwerking bespreken / Aanmelden als freelancer / Overige vraag
+Bericht  (Message)  — textarea, min 3 rows
+Akkoord met privacyverklaring  — required checkbox
+Verstuur bericht  — full-width primary gold button
+Contactgegevens naast formulier  /  Contact details
+E-MAIL
+bookings@hbservicegroup.com
+TELEFOON
++31 (0)20 000 0000
+LOCATIE
+Amsterdam, Nederland
+REACTIETIJD
+Wij reageren binnen één werkdag
+OPENINGSTIJDEN
+Maandag t/m vrijdag: 09:00 – 18:00
+Zaterdag: op afspraak
+Zondag: gesloten
+Tijdens evenementen altijd bereikbaar via de coördinator op locatie
+BEVESTIGING NA INZENDEN
+Bedankt voor je bericht. We nemen binnen één werkdag contact op. Dringend? Bel ons direct.
+⚙ DEVELOPER: Auto-confirmation email after contact form submission. Subject: 'Jouw bericht aan H&B Service Group is ontvangen'. Same format as other confirmation emails.
+10. Login / Portal Entry Page
+⚙ DEVELOPER: The login page is linked from the navigation ('Inloggen'). It must clearly communicate that there are TWO separate portals: one for freelancers (to see assignments, submit hours, view payouts) and one for companies (to submit requests and track assignments). Make it obvious which button is for whom — do not combine into one login form.
+URL
+/inloggen
+PAGE TITLE (SEO)
+Inloggen — H&B Service Group portaal
+META DESCRIPTION
+Log in op het H&B Service Group portaal. Freelancers beheren opdrachten en uren. Bedrijven volgen personeelsaanvragen.
+KOPTEKST
+Welkom terug
+SUBTEKST
+Log in op jouw portaal
+⚙ DEVELOPER: Display two large, clearly differentiated login cards side by side on desktop, stacked on mobile. Do NOT use a single generic login form — visitors must immediately understand which portal is theirs.
+Kaart 1 — Freelancers
+ICOON
+Person with check icon — gold on mid-navy
+TITEL
+Ik ben freelancer
+TEKST
+Bekijk jouw opdrachten, dien uren in en beheer jouw profiel.
+KNOP
+Inloggen als freelancer  (primary gold button)
+LINK
+Nog geen account? Direct aanmelden →  (gold text, links to /freelancers/direct-aanmelden)
+Kaart 2 — Bedrijven
+ICOON
+Building/company icon — gold on mid-navy
+TITEL
+Ik ben opdrachtgever
+TEKST
+Beheer jouw personeelsaanvragen en bekijk de status van lopende inzetten.
+KNOP
+Inloggen als opdrachtgever  (secondary outline button)
+LINK
+Nog geen account? Personeel aanvragen →  (gold text, links to /bedrijven/personeel-aanvragen)
+ONDERAAN DE PAGINA
+Problemen met inloggen? Neem contact op met ons team.
+⚙ DEVELOPER: Both login buttons link to the respective portal login screens (Zoho Creator portals as specified in the build plan). The freelancer registration link goes to the public registration form. The company link goes to the staff request form.
+11. 404 Error Page
+⚙ DEVELOPER: A professional 404 page prevents visitors from leaving the site entirely. Keep it on-brand, friendly, and give clear navigation options. Do not use a generic server error page.
+URL
+/404  (or server-level 404 handler)
+KOPTEKST
+Oeps — deze pagina bestaat niet
+SUBTEKST
+De pagina die je zocht, is verplaatst of bestaat niet meer. Geen probleem — ga terug naar een van de hoofdpagina's.
+NAVIGATIEKNOPPEN OP DE 404 PAGINA  /  NAVIGATION BUTTONS
+Knop 1 — filled gold:  Terug naar home  →  /
+Knop 2 — outline:  Personeel aanvragen  →  /bedrijven/personeel-aanvragen
+Knop 3 — outline:  Direct aanmelden  →  /freelancers/direct-aanmelden
+Knop 4 — text link:  Contact  →  /contact
+⚙ DEVELOPER: Background: navy #0D1B2A. Display a large subtle gold '404' number in the background (opacity 0.05, very large font — decorative only). Heading and buttons centred on the page. Do not show a sad face emoji or cartoon — keep it on-brand and professional.
+12. Mobile-First Implementation Guide
+⚙ DEVELOPER: H&B's target audiences — both freelancers and event company staff — primarily use mobile devices. Every layout decision must start with mobile and scale up to desktop. The following rules are mandatory.
+12.1 Navigation on mobile
+Top nav bar: H&B logo left, hamburger menu icon right. Height: 60px. Background: navy.
+Hamburger menu opens a full-screen slide-in panel from the right. Background: navy.
+Each main category (Freelancers, Bedrijven, Over H&B) is an accordion item — tap to expand subcategories.
+Two CTA buttons at the bottom of the mobile menu: 'Personeel aanvragen' (filled gold) and 'Direct aanmelden' (outline).
+'Inloggen' text link below the CTA buttons.
+Contact details (email, phone) visible at the bottom of the mobile menu without scrolling.
+12.2 Layout breakpoints
+⚙ DEVELOPER: Use these breakpoints. Mobile-first means write CSS for mobile first, then override for larger screens.
+Breakpoint
+Width
+Layout behaviour
+Mobile
+< 768px
+Single column. All grids stack vertically. Navigation is hamburger. Buttons full-width. Font sizes reduced by ~10%.
+Tablet
+768–1024px
+Two columns for card grids. Navigation may still be hamburger. Forms switch to two-column for name fields.
+Desktop
+> 1024px
+Full horizontal navigation. 2x2 or 3-column card grids. Two-column form+sidebar layouts. Max content width: 1200px centred.
+Wide desktop
+> 1440px
+Max content width stays at 1200px. Increase padding on sides. No further layout changes.
+12.3 Typography on mobile
+Element
+Desktop size
+Mobile size
+Notes
+H1 heading
+40px
+30px
+Reduce to avoid overflow on small screens
+H2 subheading
+28px
+22px
+H3 card heading
+23px
+20px
+Body text
+20px (10pt)
+18px
+Minimum 18px for readability on small screens
+Section labels
+13px caps
+12px caps
+Letter-spacing: 2px on both
+CTA button text
+15px bold
+15px bold
+Keep button text the same size — do not reduce
+Navigation items
+16px
+18px
+Slightly larger on mobile for touch targets
+Footer text
+16px
+14px
+Smaller in footer is acceptable
+12.4 Touch targets
+All buttons: minimum height 48px on mobile. Minimum width 120px.
+Navigation items in mobile menu: minimum height 52px per item — comfortable tap target.
+All form inputs: minimum height 48px. Font size minimum 16px to prevent iOS auto-zoom.
+Card tap areas: the entire card must be tappable, not just the text link inside it.
+Spacing between tappable elements: minimum 8px gap to prevent accidental taps.
+13. Form Validation & Error Messages
+⚙ DEVELOPER: Professional form validation is critical for conversion and user experience. The following rules apply to ALL forms on the site: freelancer registration, staff request, and contact form. Validate on blur (when the user leaves a field) AND on submit. Do not wait until submit to show all errors.
+13.1 General validation rules
+Required fields: show a red asterisk (*) next to the label. Do not use 'Verplicht veld' text — the asterisk is universally understood.
+Error state: red border (2px solid #CC0000) on the input field. Red error message below the field.
+Success state: no special styling needed on valid fields — keep it clean.
+On submit with errors: scroll to the first error field. Show a summary message at the top of the form.
+Do not disable the submit button while the form is empty — only validate on interaction.
+13.2 Error messages — Dutch copy
+⚙ DEVELOPER: Use these exact Dutch error messages. They are friendly and action-oriented, not technical.
+Field
+Trigger
+Dutch error message (use exactly)
+All required fields
+Field left empty
+Dit veld is verplicht.
+E-mailadres
+Invalid format
+Vul een geldig e-mailadres in, zoals naam@bedrijf.nl
+Telefoonnummer
+Non-numeric or too short
+Vul een geldig telefoonnummer in.
+Naam / Voornaam
+Less than 2 characters
+Vul je volledige naam in.
+Textarea (bericht)
+Less than 10 characters
+Je bericht is te kort. Geef wat meer informatie zodat we je goed kunnen helpen.
+Privacy checkbox
+Not checked on submit
+Je dient akkoord te gaan met onze privacyverklaring om verder te gaan.
+Datum (event date)
+Date in the past
+Kies een datum in de toekomst.
+Form submit (general error)
+Server error
+Er is iets misgegaan. Probeer het opnieuw of neem direct contact op via bookings@hbservicegroup.com
+13.3 Success messages — Dutch copy
+⚙ DEVELOPER: Display success messages as a full-width green banner at the top of the page after successful submission, OR replace the form with the success message if the page does not scroll further.
+Form
+Dutch success message
+Freelancer aanmelding
+Bedankt voor je aanmelding! We nemen binnen 48 uur contact met je op voor een kort gesprek. Controleer ook je spammap.
+Personeel aanvragen
+Bedankt voor je aanvraag. We sturen je binnen één werkdag een voorstel op maat. Heb je een spoedeisende vraag? Bel ons direct.
+Contactformulier
+Bedankt voor je bericht. We nemen binnen één werkdag contact op.
+Standby pool aanmelding
+Je bent toegevoegd aan onze standby pool. We nemen contact op zodra er een passende opdracht beschikbaar is.
+14. SEO — Page Titles, Meta Descriptions & Alt Text
+⚙ DEVELOPER: SEO is missing from the previous version of this document. Every page needs a unique, keyword-rich page title and meta description. These are provided below. Implement them exactly. Also implement alt text on all images as specified.
+14.1 Page titles & meta descriptions — complete list
+⚙ DEVELOPER: Page title format: [Page-specific title] — H&B Service Group. Max 60 characters for the title, max 160 characters for the description.
+URL
+Page title (60 chars max)
+Meta description (160 chars max)
+/
+Het juiste eventpersoneel — H&B Service Group
+H&B levert gescreend hospitality- en beveiligingspersoneel voor evenementen. Één coördinator, van briefing tot afbouw. Personeel aanvragen of direct aanmelden.
+/freelancers
+Werk als freelancer bij H&B — hospitality en beveiliging
+Bekijk openstaande opdrachten bij H&B Service Group. Flexibel werk als host, barteam of gecertificeerd beveiliger. Direct aanmelden.
+/freelancers/openstaande-opdrachten
+Openstaande opdrachten — H&B Service Group
+Actuele opdrachten voor hospitality-medewerkers en beveiligers bij festivals, corporate events en nachtleven in Nederland.
+/freelancers/hoe-het-werkt
+Hoe het werkt — freelancen bij H&B
+Van aanmelding tot uitbetaling in vijf stappen. Ontdek hoe je als freelancer aan de slag gaat bij H&B Service Group.
+/freelancers/inkomsten-betalingen
+Inkomsten en betalingen — H&B freelancers
+Transparante informatie over tarieven, toeslagen en uitbetaling als freelancer bij H&B Service Group.
+/freelancers/jouw-certificering
+Certificering vereisten — H&B freelancers
+Welke documenten heb je nodig voor hospitality of beveiliging bij H&B? Ook zonder diploma kun je aan de slag.
+/freelancers/direct-aanmelden
+Direct aanmelden als freelancer — H&B
+Meld je aan als freelancer bij H&B Service Group. Binnen 48 uur nemen we contact op voor een kennismakingsgesprek.
+/bedrijven
+Eventpersoneel inhuren — H&B Service Group
+Huur gescreend hospitality- en beveiligingspersoneel in via H&B. WPBR-vergund, één aanspreekpunt, actief bij vaste opdrachtgevers.
+/bedrijven/personeel-aanvragen
+Personeel aanvragen — H&B Service Group
+Vraag eventpersoneel aan via H&B. Ontvang binnen één werkdag een voorstel op maat voor hospitality of beveiliging.
+/bedrijven/ons-aanbod
+Ons personeelsaanbod — H&B Service Group
+Van hosts en barteams tot gecertificeerde portiers en crowdmanagers. Bekijk het volledige aanbod van H&B Service Group.
+/bedrijven/tarieven
+Tarieven op aanvraag — H&B Service Group
+H&B hanteert maatwerkprijzen. Vraag een vrijblijvend voorstel aan en ontvang binnen één werkdag een transparante offerte.
+/bedrijven/onze-sectoren
+Eventpersoneel per sector — H&B
+Festivals, corporate events, nachtleven, sport en locaties. H&B levert personeel voor elke sector in Nederland.
+/bedrijven/functieprofielen
+Functieprofielen — H&B Service Group
+Van host tot crowdmanager — bekijk alle functieprofielen van H&B. Weet precies wie je inhuurt.
+/bedrijven/vaste-samenwerking
+Vaste samenwerking — H&B Service Group
+Profiteer van een vaste personeelspool die jouw locatie kent. Vraag naar structurele samenwerking met H&B.
+/over-hnb/ons-verhaal
+Ons verhaal — H&B Service Group
+Wie zijn we, waarom we bestaan en wat ons drijft. H&B Service Group — betrouwbaar eventpersoneel met een missie.
+/over-hnb/het-team
+Het team — H&B Service Group
+Maak kennis met het team achter H&B. Ervaren coördinatoren in eventoperaties, hospitality en beveiliging.
+/over-hnb/werkgebied
+Werkgebied — H&B Service Group
+H&B is actief bij evenementen door heel Nederland. Gevestigd in Amsterdam, landelijk inzetbaar.
+/over-hnb/onze-aanpak
+Onze aanpak — H&B Service Group
+Van aanvraag tot evaluatie — ontdek hoe H&B elke opdracht aanpakt. Gestructureerd, transparant, altijd één aanspreekpunt.
+/over-hnb/vergunningen
+Vergunningen & compliance — H&B
+H&B beschikt over de WPBR-vergunning en alle vereiste registraties voor beveiliging en arbeidsbemiddeling in Nederland.
+/over-hnb/nieuws
+Nieuws — H&B Service Group
+Updates, terugblikken en tips van H&B Service Group. Actueel nieuws over eventpersoneel en de branche.
+/contact
+Contact — H&B Service Group
+Neem contact op met H&B Service Group. Personeel aanvragen, samenwerking bespreken of een vraag stellen. Reactie binnen één werkdag.
+/inloggen
+Inloggen — H&B portaal
+Log in op het freelancer- of opdrachtgeversportaal van H&B Service Group.
+14.2 Alt text for images
+⚙ DEVELOPER: Every image on the site must have a descriptive alt text in Dutch. This is required for accessibility (WCAG 2.1 AA) and SEO. Use the examples below as a format guide.
+Image
+Alt text — Dutch
+Homepage hero background
+Eventpersoneel van H&B Service Group bij een live evenement in Nederland
+Hospitality service card image
+Host verwelkomt gasten bij een evenement — H&B Service Group
+Security service card image
+Gecertificeerde beveiliger bij toegangscontrole — H&B Service Group
+Founder photo (About page)
+Oprichters van H&B Service Group op locatie bij een evenement
+Team coordinator photo
+Coördinator van H&B Service Group briefing aan een team
+Netherlands map (werkgebied)
+Werkgebied van H&B Service Group — actief door heel Nederland
+H&B logo
+H&B Service Group — betrouwbaar eventpersoneel
+WPBR licence badge
+WPBR-vergunning — H&B Service Group gecertificeerd beveiligingsbedrijf
+Festival event photo
+H&B personeel bij een meerdaags festival in Nederland
+15. Photo & Video Guidelines
+⚙ DEVELOPER: Professional, authentic photography is the single biggest visual upgrade available to this site. Stock photos immediately undermine trust. Real photos of real H&B staff at real events build credibility instantly. Prioritise getting a photographer on-site at the next available event.
+15.1 Brand video — highest priority
+Brand film — produce this as soon as possible
+Duration: 30–60 seconds  |  No voiceover needed  |  Music: instrumental, energetic but professional
+Shot sequence:
+1. Festival or event site during setup — activity, preparation, sense of scale
+2. H&B team in uniform receiving a briefing from a coordinator
+3. Guests arriving — warm, professional welcome from hosts
+4. Beveiliger (security) at the entrance — calm, professional, alert
+5. Bar team in action — fast, energetic, high-pressure environment
+6. Coordinator with headset or radio — communicating clearly
+7. Close-up of H&B logo on clothing or badge
+8. End card: H&B Service Group — Het juiste team. Op het juiste moment.
+Placement: directly in or immediately below the hero section on the homepage.
+Format: MP4, max 10MB for web, autoplay muted with play button for sound.
+15.2 Photo requirements per page
+Page
+Photo needed
+Technical specification
+Homepage — hero
+Dark event crowd photo with atmosphere. Current photo may stay but add team photo as soon as available.
+Overlay: navy #0D1B2A at 55% opacity. Min resolution: 1920x1080px. WebP format preferred.
+Homepage — services
+Two photos: (1) host welcoming guests, (2) security officer at entrance.
+16:9 ratio. Avoid stock photos. Own material when available.
+Homepage — USP section
+Coordinator with tablet or radio — in conversation with team member on location.
+Dark environment or navy overlay. Person prominent. Not posed.
+Freelancers — landing
+Freelancer actively working at an event — bar team or host in motion.
+H&B branded clothing visible. Energetic, positive, professional.
+Freelancers — how it works
+Coordinator giving a briefing to a small team.
+Shows the onboarding process. Human and approachable.
+Companies — landing
+Full H&B team on location, professionally positioned.
+Shows scale and professionalism to B2B visitor.
+About — our story
+Photo of both founders — on an event or in conversation.
+Authentic. No studio. No white background. No suits.
+About — team
+Profile photos of coordinators.
+Circular crop, 120x120px minimum. Navy bg or neutral. Not passport photo style.
+About — service area
+Custom SVG map of Netherlands with gold region markers.
+Not Google Maps. Brand colours: navy bg, gold markers.
+About — licences
+No large photo needed — trust via text and badges.
+Optional: subtle shield or certificate illustration as watermark.
+16. Footer — Structure & Content
+⚙ DEVELOPER: The current footer is too sparse. It must serve three purposes: (1) quick navigation, (2) contact information, (3) trust signals. Implement the full three-column structure below.
+16.1 Footer technical specification
+Background: #0A1520 — slightly darker than main navy to signal end of page
+Padding top: 60px  |  Padding bottom: 40px
+Max content width: 1200px, centred
+Three equal columns on desktop, stacked single column on mobile (Bedrijven column first on mobile)
+Thin gold divider line above footer: 1px, #D4A017, opacity 0.25
+All footer links: #AAAAAA default, #D4A017 on hover
+16.2 Footer content — three columns
+Kolom 1 — H&B Service Group
+H&B  Service Group  (logo text, gold H&B, white Service Group)
+Betrouwbaar eventpersoneel voor hospitality en beveiliging bij live-evenementen in Nederland.
+bookings@hbservicegroup.com
++31 (0)20 000 0000
+Amsterdam, Nederland
+WPBR-vergund  |  KvK-geregistreerd
+Social media
+LinkedIn  (link to company LinkedIn)
+Instagram  (link to company Instagram)
+Kolom 2 — Freelancers
+Openstaande opdrachten
+Hoe het werkt
+Inkomsten & betalingen
+Jouw certificering
+Direct aanmelden
+Kolom 3 — Bedrijven
+Personeel aanvragen
+Ons aanbod
+Onze sectoren
+Functieprofielen
+Vaste samenwerking
+Tarieven op aanvraag
+16.3 Footer bottom bar
+⚙ DEVELOPER: Thin gold divider line (1px, opacity 0.2) above this bar. Text: #777777. Font size: 13px.
+© 2025 H&B Service Group  |  Beleid  |  Privacyverklaring  |  Algemene voorwaarden  |  Inloggen
+17. Performance & Technical Guidelines
+⚙ DEVELOPER: This section was missing from the previous revision. Performance directly affects SEO rankings and user experience — especially on mobile. Follow all guidelines below.
+17.1 Image optimisation
+Format: Use WebP for all photos. Provide JPEG fallback for older browsers. Use SVG for icons and illustrations.
+Homepage hero: max file size 200KB. All other page images: max 150KB. Card thumbnails: max 60KB.
+Resolution: serve at 2x resolution for retina screens using srcset. Do not serve 4K images at any size.
+Lazy loading: apply loading='lazy' to all images below the fold. The hero image must load immediately (loading='eager').
+Always specify width and height attributes on all img elements to prevent layout shift (CLS).
+17.2 Video
+Format: MP4 (H.264). Also provide WebM for browsers that support it.
+Homepage brand video: max file size 8MB for web delivery. Compress aggressively — quality difference is imperceptible at this size.
+Autoplay: muted, loop=false, controls visible. Do NOT autoplay with sound — browsers block it.
+Poster image: always provide a poster attribute pointing to a key frame from the video.
+17.3 Core Web Vitals targets
+Metric
+Target
+Why it matters
+LCP (Largest Contentful Paint)
+< 2.5 seconds
+Time until the main content is visible. Slow LCP causes visitors to leave.
+CLS (Cumulative Layout Shift)
+< 0.1
+Elements must not jump around during loading. Specify image dimensions to prevent this.
+FID / INP (Interactivity)
+< 200ms
+Time until the page responds to a click. Keep JavaScript minimal and deferred.
+Page speed score (mobile)
+≥ 80 / 100
+Google PageSpeed Insights score on mobile. This directly affects SEO ranking.
+Page speed score (desktop)
+≥ 90 / 100
+Desktop score — easier to achieve. No excuse for low score on desktop.
+17.4 Accessibility (WCAG 2.1 AA)
+All images must have descriptive alt text (see Section 14.2).
+Colour contrast ratio: minimum 4.5:1 for normal text, 3:1 for large text. Navy text on white = compliant. White text on gold (#D4A017) = FAILS — use navy text on gold.
+All form inputs must have visible label elements. Do not use placeholder text as the only label.
+All interactive elements (buttons, links, inputs) must be keyboard navigable with visible focus states.
+Focus styles: gold outline (2px solid #D4A017) on all focusable elements. Do not remove outline:none without providing an alternative.
+Language attribute: set lang='nl' on the html element for the Dutch site.
+17.5 Technical checklist
+SSL certificate: must be active. All pages must be served over HTTPS.
+Canonical tags: add rel=canonical to all pages to prevent duplicate content issues.
+Robots.txt: ensure it is not blocking any public pages from search engines.
+Sitemap.xml: generate and submit to Google Search Console after go-live.
+Google Analytics or equivalent: implement before go-live to track traffic from day one.
+Cookie consent: implement a GDPR-compliant cookie consent banner before go-live.
+Favicon: provide H&B favicon in multiple sizes (16x16, 32x32, 180x180 for Apple).
+Open Graph tags: add og:title, og:description, og:image to all pages for social sharing previews.
+18. Developer Priority Checklist
+⚙ DEVELOPER: Implement in this exact order. Items 1–6 are CRITICAL — the site should not be shown to any client or potential employee before these are done. Items 7–12 are HIGH priority — complete within the first sprint. Items 13–18 are MEDIUM priority — complete before full launch.
+CRITICAL — Do before showing the site to anyone
+#
+Action (implement in this order)
+Details for developer
+1
+Fix all spelling errors NOW
+Global search-and-replace all errors from Section 2. Especially: Piebbezetting → Piekbezetting, portofoondiscipline → radiodiscipline, Functieprofielen everywhere.
+2
+Remove the team placeholder
+Delete the dashed-border 'binnenkort' box. Replace with interim text from Section 8.2.
+3
+Replace hero headline
+Remove current headline. Implement Option A or B from Section 5.1.
+4
+Rename all CTA buttons
+'Vind talent' → 'Personeel aanvragen'. 'Ontdek mogelijkheden' → context-specific per Section 4.2. Remove all third duplicate buttons.
+5
+Unify tone of voice to 'je/jij'
+Global replace: 'u het' → 'je het', 'uw' → 'jouw', 'u bent' → 'je bent'. See Section 2 for full guidance.
+6
+Restructure navigation
+Implement new subcategory names from Section 1. Move Chat/Netwerk/Beleid to footer.
+HIGH PRIORITY — Complete in first sprint
+#
+Action (implement in this order)
+Details for developer
+7
+Update primary button colour
+Replace #B8972E with #D4A017 for all primary CTA buttons. More vibrant, higher click energy.
+8
+Fix outline button styling
+Replace gold border on dark background with white border + white text. Light gold fill on hover.
+9
+Implement section alternation
+Homepage sections must alternate: navy → warm white (#F5F1EA) → navy → warm white. See Section 5.
+10
+Add contact page
+Create /contact with form, contact details, and opening hours. Full spec in Section 9.
+11
+Add login page
+Create /inloggen with two clearly separated portal entry cards. Full spec in Section 10.
+12
+Add 404 page
+Create on-brand 404 with navigation options. Full spec in Section 11.
+MEDIUM PRIORITY — Complete before full launch
+#
+Action (implement in this order)
+Details for developer
+13
+Add vergunningen page
+Create /over-hnb/vergunningen. WPBR licence as a prominent USP. Full content in Section 8.5.
+14
+Expand footer
+Implement three-column footer with trust signals. Full spec in Section 16.
+15
+Add all meta descriptions and page titles
+Implement all SEO tags from Section 14. Required for search engine visibility.
+16
+Add form validation
+Implement Dutch error and success messages from Section 13. Validate on blur + submit.
+17
+Implement mobile-first layout
+Verify all breakpoints, touch targets, and typography from Section 12.
+18
+Performance optimisation
+Compress images to WebP, implement lazy loading, verify Core Web Vitals targets from Section 17.
+WHEN AVAILABLE — As soon as assets are ready
+#
+Action (implement in this order)
+Details for developer
+19
+Add brand video
+Place on homepage in or below hero. Spec in Section 15.1.
+20
+Add team photos
+Expand /over-hnb/het-team with profile cards. Spec in Section 8.2 and 15.2.
+21
+Add founder photo
+Replace placeholder on /over-hnb/ons-verhaal with authentic photo of founders.
+22
+Add client testimonials / logos
+Replace social proof placeholder on homepage with real quotes or logo row. Spec in Section 5.5.
+H&B Service Group — Website Revision Document  |  Version 3.0  |  May 2025  |  Confidential
+All Dutch copy is final and must be implemented exactly as written. All developer notes are in English.
+

@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom'
 import {
+  COMPANY,
+  companyPhoneDisplay,
+  companyPhoneHref,
+  companyRegistrationLine,
+} from '../content/company'
+import {
   FOOTER_LEGAL_LINKS,
-  FOOTER_PHONE_PLACEHOLDER,
-  FOOTER_REGISTRATION_LINE,
   FOOTER_TAGLINE,
   NAV_GROUPS,
 } from '../content/navigation'
@@ -47,24 +51,25 @@ export default function Footer() {
             <ul className="site-footer__contact-list">
               <li className="site-footer__contact-item">
                 <span className="site-footer__contact-label">E-mail</span>
-                <a
-                  className="site-footer__contact-value"
-                  href="mailto:bookings@hbservicegroup.com"
-                >
-                  bookings@hbservicegroup.com
+                <a className="site-footer__contact-value" href={`mailto:${COMPANY.email}`}>
+                  {COMPANY.email}
                 </a>
               </li>
               <li className="site-footer__contact-item">
                 <span className="site-footer__contact-label">Telefoon</span>
-                <span className="site-footer__contact-value site-footer__contact-value--placeholder">
-                  {FOOTER_PHONE_PLACEHOLDER}
-                </span>
+                {companyPhoneHref() ? (
+                  <a className="site-footer__contact-value" href={companyPhoneHref()}>
+                    {companyPhoneDisplay()}
+                  </a>
+                ) : (
+                  <span className="site-footer__contact-value site-footer__contact-value--placeholder">
+                    {companyPhoneDisplay()}
+                  </span>
+                )}
               </li>
               <li className="site-footer__contact-item">
                 <span className="site-footer__contact-label">Locatie</span>
-                <span className="site-footer__contact-value">
-                  Amsterdam, Nederland
-                </span>
+                <span className="site-footer__contact-value">{COMPANY.location}</span>
               </li>
               <li className="site-footer__contact-item">
                 <Link to="/contact" className="site-footer__link">
@@ -89,7 +94,7 @@ export default function Footer() {
               <p className="site-footer__copyright">
                 © {year} H&amp;B Service Group. Alle rechten voorbehouden.
               </p>
-              <p className="site-footer__registration">{FOOTER_REGISTRATION_LINE}</p>
+              <p className="site-footer__registration">{companyRegistrationLine()}</p>
               <ul className="site-footer__policy-links" aria-label="Juridisch">
                 {FOOTER_LEGAL_LINKS.map(({ to, label }) => (
                   <li key={to} className="site-footer__policy-links-item">

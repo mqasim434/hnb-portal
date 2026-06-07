@@ -4,6 +4,7 @@ import {
   buildCompanyInternalPayload,
   triggerCompanyStaffRequestEmails,
 } from '../lib/companyStaffRequestEmail'
+import { createStaffRequest } from '../lib/staffRequests/requests'
 import { createSubmissionInProgressError } from '../lib/submissionErrors'
 
 /** @typedef {'idle' | 'submitting' | 'success' | 'error'} CompanyRequestStatus */
@@ -28,6 +29,7 @@ export function useCompanyStaffRequestSubmit() {
     setStatus('submitting')
     setErrorMessage('')
     try {
+      await createStaffRequest(formData)
       await triggerCompanyStaffRequestEmails({
         applicant: buildCompanyApplicantPayload(formData),
         internal: buildCompanyInternalPayload(formData),

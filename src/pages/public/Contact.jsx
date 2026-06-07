@@ -5,7 +5,7 @@ import { FormField, FormRow } from '../../components/forms/FormPrimitives'
 import PageHero from '../../components/marketing/PageHero'
 import TrustBlurb from '../../components/marketing/TrustBlurb'
 import { CONTACT_SEO } from '../../content/contactSeo'
-import { FOOTER_PHONE_PLACEHOLDER } from '../../content/navigation'
+import { COMPANY, companyPhoneDisplay, companyPhoneHref } from '../../content/company'
 import { useContactFormSubmit } from '../../hooks/useContactFormSubmit'
 import { usePageSeo } from '../../hooks/usePageSeo'
 import { isSubmissionInProgressError } from '../../lib/submissionErrors'
@@ -262,24 +262,25 @@ export default function Contact() {
               <ul className="contact-aside__list">
                 <li className="contact-aside__item">
                   <span className="contact-aside__label">E-mail</span>
-                  <a
-                    className="contact-aside__value"
-                    href="mailto:bookings@hbservicegroup.com"
-                  >
-                    bookings@hbservicegroup.com
+                  <a className="contact-aside__value" href={`mailto:${COMPANY.email}`}>
+                    {COMPANY.email}
                   </a>
                 </li>
                 <li className="contact-aside__item">
                   <span className="contact-aside__label">Telefoon</span>
-                  <span className="contact-aside__value contact-aside__value--phone-placeholder">
-                    {FOOTER_PHONE_PLACEHOLDER}
-                  </span>
+                  {companyPhoneHref() ? (
+                    <a className="contact-aside__value" href={companyPhoneHref()}>
+                      {companyPhoneDisplay()}
+                    </a>
+                  ) : (
+                    <span className="contact-aside__value contact-aside__value--phone-placeholder">
+                      {companyPhoneDisplay()}
+                    </span>
+                  )}
                 </li>
                 <li className="contact-aside__item">
                   <span className="contact-aside__label">Locatie</span>
-                  <span className="contact-aside__value">
-                    Amsterdam, Nederland
-                  </span>
+                  <span className="contact-aside__value">{COMPANY.location}</span>
                 </li>
               </ul>
 

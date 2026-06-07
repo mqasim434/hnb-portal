@@ -1,9 +1,11 @@
 import { useCallback, useRef, useState } from 'react'
+import { auth } from '../firebase/config'
 import {
   buildApplicantEmailPayload,
   buildInternalNotifyPayload,
   triggerFreelancerRegistrationEmails,
 } from '../lib/freelancerRegistrationEmail'
+import { createOnboardingApplication } from '../lib/onboarding/applications'
 import { createSubmissionInProgressError } from '../lib/submissionErrors'
 /**
  * @typedef {'idle' | 'submitting' | 'success' | 'error'} RegistrationStatus
@@ -31,6 +33,9 @@ export function useFreelancerRegistrationSubmit() {
     setStatus('submitting')
     setErrorMessage('')
     try {
+      await createOnboardingApplication(formData, {
+        userId: auth?.currentUser?.uid ?? null,
+      })
       await triggerFreelancerRegistrationEmails({
         applicant: buildApplicantEmailPayload(formData),
         internal: buildInternalNotifyPayload(formData),

@@ -408,12 +408,12 @@ export const MARKETING_PAGES = {
   'legal-cookies': {
     eyebrow: 'Juridisch',
     title: 'Cookiebeleid',
-    lead: 'Deze site gebruikt functionele cookies die nodig zijn voor gebruik en beveiliging. Analytische of marketingcookies worden alleen geplaatst met uw toestemming.',
+    lead: 'Deze site gebruikt functionele cookies die nodig zijn voor gebruik en beveiliging. Analytische cookies worden alleen geplaatst met jouw toestemming via de cookiebalk.',
     sections: [
       {
         heading: 'Beheer',
         paragraphs: [
-          'Via uw browser kunt u cookies beheren of verwijderen. Zonder strikt noodzakelijke cookies kan deel van het portaal beperkt werken.',
+          'Via je browser kun je cookies beheren of verwijderen. Zonder strikt noodzakelijke cookies kan deel van het portaal beperkt werken. Je keuze in de cookiebalk kun je later wijzigen door je browsercookies voor deze site te wissen.',
         ],
       },
     ],

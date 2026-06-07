@@ -1,7 +1,9 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import ProtectedRoute from '../components/ProtectedRoute'
+import FreelancerComplianceRoute from '../components/FreelancerComplianceRoute'
 import RootLayout from './RootLayout'
 import Home from '../pages/public/Home'
+import LoginPage from '../pages/auth/LoginPage'
 
 const page = (importer) => async () => {
   const m = await importer()
@@ -108,7 +110,20 @@ export const router = createBrowserRouter([
       },
 
       { path: 'contact', lazy: page(() => import('../pages/public/Contact')) },
-      { path: 'login', lazy: page(() => import('../pages/public/Login')) },
+      { path: 'login', element: <LoginPage /> },
+      { path: 'auth/register', lazy: page(() => import('../pages/auth/RegisterPage')) },
+      {
+        path: 'auth/forgot-password',
+        lazy: page(() => import('../pages/auth/ForgotPasswordPage')),
+      },
+      { path: 'auth/pending', lazy: page(() => import('../pages/auth/PendingApprovalPage')) },
+      {
+        path: 'auth/compliance',
+        element: <FreelancerComplianceRoute />,
+        children: [
+          { index: true, lazy: page(() => import('../pages/compliance/ComplianceDocumentsPage')) },
+        ],
+      },
 
       /* Legacy URL’s */
       {
@@ -190,16 +205,19 @@ export const router = createBrowserRouter([
 
       {
         path: 'register',
-        element: <Navigate to="/freelancers/direct-aanmelden" replace />,
+        element: <Navigate to="/auth/register" replace />,
       },
-      { path: 'register/*', element: <Navigate to="/freelancers/direct-aanmelden" replace /> },
+      { path: 'register/*', element: <Navigate to="/auth/register" replace /> },
 
       {
         path: 'portal',
-        element: <ProtectedRoute allowedRole="freelancer" />,
+        element: <ProtectedRoute allowedRole="freelancer" layout="portal" />,
         children: [
+          { index: true, element: <Navigate to="/portal/dashboard" replace /> },
           { path: 'dashboard', lazy: page(() => import('../pages/portal/PortalDashboard')) },
+          { path: 'compliance', lazy: page(() => import('../pages/portal/PortalCompliance')) },
           { path: 'jobs', lazy: page(() => import('../pages/portal/PortalJobs')) },
+          { path: 'jobs/:assignmentId', lazy: page(() => import('../pages/portal/PortalJobDetail')) },
           { path: 'hours/new', lazy: page(() => import('../pages/portal/SubmitHours')) },
           { path: 'hours', lazy: page(() => import('../pages/portal/PortalHours')) },
           { path: 'invoices', lazy: page(() => import('../pages/portal/PortalInvoices')) },
@@ -208,9 +226,11 @@ export const router = createBrowserRouter([
 
       {
         path: 'admin',
-        element: <ProtectedRoute allowedRole="admin" />,
+        element: <ProtectedRoute allowedRole="admin" layout="admin" />,
         children: [
+          { index: true, element: <Navigate to="/admin/dashboard" replace /> },
           { path: 'dashboard', lazy: page(() => import('../pages/admin/AdminDashboard')) },
+          { path: 'staff-requests', lazy: page(() => import('../pages/admin/AdminStaffRequests')) },
           { path: 'users', lazy: page(() => import('../pages/admin/AdminUsers')) },
           { path: 'onboarding', lazy: page(() => import('../pages/admin/AdminOnboarding')) },
           {

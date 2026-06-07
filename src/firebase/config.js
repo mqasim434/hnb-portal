@@ -1,7 +1,6 @@
 import { initializeApp, getApps } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
-import { getStorage } from 'firebase/storage'
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -17,7 +16,6 @@ function hasRequiredConfig() {
     firebaseConfig.apiKey &&
       firebaseConfig.authDomain &&
       firebaseConfig.projectId &&
-      firebaseConfig.storageBucket &&
       firebaseConfig.messagingSenderId &&
       firebaseConfig.appId,
   )
@@ -42,6 +40,5 @@ try {
 /** Null when env is incomplete or init failed — UI should still render. */
 export const auth = app ? getAuth(app) : null
 export const firestore = app ? getFirestore(app) : null
-export const storage = app ? getStorage(app) : null
 
 export { app }
