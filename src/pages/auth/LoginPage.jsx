@@ -30,7 +30,7 @@ export default function Login() {
   const redirectPath = location.state?.from
 
   useEffect(() => {
-    if (loading || !user) return
+    if (loading || !user || accountStatus == null) return
 
     if (accountStatus !== ACCOUNT_STATUS.ACTIVE) {
       navigate('/auth/pending', { replace: true })

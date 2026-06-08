@@ -1,7 +1,8 @@
-import { Link, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import PageHero from '../../components/marketing/PageHero'
-import { ACCOUNT_STATUS } from '../../constants/roles'
+import { ACCOUNT_STATUS, getRoleHomePath } from '../../constants/roles'
 import { usePageSeo } from '../../hooks/usePageSeo'
 import { signOutUser } from '../../lib/auth/authService'
 import './Auth.css'
@@ -15,10 +16,17 @@ export default function PendingApprovalPage() {
   })
 
   const location = useLocation()
-  const { user, accountStatus } = useSelector((state) => state.auth)
+  const navigate = useNavigate()
+  const { user, role, accountStatus, loading } = useSelector((state) => state.auth)
   const blocked = location.state?.blocked
 
   const status = blocked ?? accountStatus ?? ACCOUNT_STATUS.PENDING
+
+  useEffect(() => {
+    if (loading || !user || accountStatus == null) return
+    if (accountStatus !== ACCOUNT_STATUS.ACTIVE) return
+    navigate(getRoleHomePath(role), { replace: true })
+  }, [loading, user, role, accountStatus, navigate])
 
   let title = 'Account in behandeling'
   let message =

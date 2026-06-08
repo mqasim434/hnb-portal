@@ -42,6 +42,7 @@ export default function FirebaseAuthSync() {
         return
       }
 
+      dispatch(setAuthLoading(true))
       dispatch(
         setUser({
           uid: firebaseUser.uid,
@@ -57,7 +58,7 @@ export default function FirebaseAuthSync() {
       }
 
       try {
-        const profile = await fetchUserProfile(firebaseUser.uid)
+        const profile = await fetchUserProfile(firebaseUser.uid, { preferServer: true })
         applyProfile(profile)
       } catch {
         applyProfile(null)

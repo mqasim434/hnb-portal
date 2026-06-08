@@ -5,7 +5,7 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth'
-import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore'
+import { doc, getDoc, getDocFromServer, serverTimestamp, setDoc } from 'firebase/firestore'
 import { ACCOUNT_STATUS, ROLES } from '../../constants/roles'
 import { auth, firestore } from '../../firebase/config'
 import { mapAuthError } from './authErrors'
@@ -74,11 +74,24 @@ export async function signOutUser() {
 
 /**
  * @param {string} uid
+ * @param {{ preferServer?: boolean }} [options]
  * @returns {Promise<import('../../store/slices/authSlice').UserProfile | null>}
  */
-export async function fetchUserProfile(uid) {
+export async function fetchUserProfile(uid, options = {}) {
   if (!firestore) return null
-  const snap = await getDoc(doc(firestore, 'users', uid))
+  const userRef = doc(firestore, 'users', uid)
+  let snap
+
+  if (options.preferServer) {
+    try {
+      snap = await getDocFromServer(userRef)
+    } catch {
+      snap = await getDoc(userRef)
+    }
+  } else {
+    snap = await getDoc(userRef)
+  }
+
   if (!snap.exists()) return null
   const d = snap.data()
   return {

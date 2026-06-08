@@ -90,7 +90,14 @@ export default function AdminDashboard() {
     try {
       setKpis(await fetchAdminKpis())
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Dashboard laden mislukt.')
+      const message = err instanceof Error ? err.message : 'Dashboard laden mislukt.'
+      if (message.includes('permission') || message.includes('Permission')) {
+        setError(
+          'Geen toegang tot dashboardgegevens. Controleer in Firebase Console → Firestore → users → uw account: role = "admin" en accountStatus = "active" (beide lowercase). Log daarna uit en opnieuw in.',
+        )
+      } else {
+        setError(message)
+      }
     } finally {
       setLoading(false)
     }

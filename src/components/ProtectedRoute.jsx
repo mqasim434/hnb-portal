@@ -13,7 +13,7 @@ export default function ProtectedRoute({ allowedRole, layout }) {
   const { user, role, accountStatus, loading } = useSelector((state) => state.auth)
   const location = useLocation()
 
-  if (loading) {
+  if (loading || (user && accountStatus == null)) {
     return (
       <div
         className="hnb-container"

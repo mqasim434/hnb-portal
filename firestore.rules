@@ -148,5 +148,10 @@ service cloud.firestore {
 
       allow create, update, delete: if isAdmin();
     }
+
+    // Active admins may read any document (collection group queries + future collections).
+    match /{path=**} {
+      allow read: if isAdmin();
+    }
   }
 }
