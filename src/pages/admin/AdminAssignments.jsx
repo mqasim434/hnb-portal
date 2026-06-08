@@ -6,6 +6,7 @@ import {
   assignmentStatusLabel,
   assignmentTypeLabel,
 } from '../../constants/assignments'
+import TimeField from '../../components/TimeField'
 import { usePageSeo } from '../../hooks/usePageSeo'
 import { fetchActiveFreelancers } from '../../lib/admin/users'
 import {
@@ -443,24 +444,18 @@ function AssignmentFields({ values, onChange, idPrefix = '' }) {
             onChange={(e) => onChange('dateEnd', e.target.value)}
           />
         </div>
-        <div className="auth-field">
-          <label htmlFor={id('assignment-shift-start')}>Dienst start</label>
-          <input
-            id={id('assignment-shift-start')}
-            type="time"
-            value={values.shiftStart}
-            onChange={(e) => onChange('shiftStart', e.target.value)}
-          />
-        </div>
-        <div className="auth-field">
-          <label htmlFor={id('assignment-shift-end')}>Dienst eind</label>
-          <input
-            id={id('assignment-shift-end')}
-            type="time"
-            value={values.shiftEnd}
-            onChange={(e) => onChange('shiftEnd', e.target.value)}
-          />
-        </div>
+        <TimeField
+          id={id('assignment-shift-start')}
+          label="Dienst start"
+          value={values.shiftStart}
+          onChange={(value) => onChange('shiftStart', value)}
+        />
+        <TimeField
+          id={id('assignment-shift-end')}
+          label="Dienst eind"
+          value={values.shiftEnd}
+          onChange={(value) => onChange('shiftEnd', value)}
+        />
       </div>
       <div className="auth-field">
         <label htmlFor={id('assignment-client')}>Opdrachtgever (optioneel)</label>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import TimeField from '../../components/TimeField'
 import { computeTotalHours, canFreelancerEditTimeEntry } from '../../constants/timeEntries'
 import { usePageSeo } from '../../hooks/usePageSeo'
 import { fetchAssignmentsForFreelancer } from '../../lib/assignments/assignments'
@@ -197,28 +198,22 @@ export default function SubmitHours() {
             </div>
 
             <div className="admin-onboarding-detail__grid">
-              <div className="auth-field">
-                <label htmlFor="hours-start">Starttijd</label>
-                <input
-                  id="hours-start"
-                  type="time"
-                  required
-                  value={form.startTime}
-                  onChange={(e) => updateField('startTime', e.target.value)}
-                  disabled={saving}
-                />
-              </div>
-              <div className="auth-field">
-                <label htmlFor="hours-end">Eindtijd</label>
-                <input
-                  id="hours-end"
-                  type="time"
-                  required
-                  value={form.endTime}
-                  onChange={(e) => updateField('endTime', e.target.value)}
-                  disabled={saving}
-                />
-              </div>
+              <TimeField
+                id="hours-start"
+                label="Starttijd"
+                required
+                value={form.startTime}
+                onChange={(value) => updateField('startTime', value)}
+                disabled={saving}
+              />
+              <TimeField
+                id="hours-end"
+                label="Eindtijd"
+                required
+                value={form.endTime}
+                onChange={(value) => updateField('endTime', value)}
+                disabled={saving}
+              />
             </div>
 
             <div className="auth-field">
@@ -234,15 +229,26 @@ export default function SubmitHours() {
               />
             </div>
 
-            {previewHours != null ? (
-              <p className="compliance-summary">
-                Totaal: <strong>{previewHours.toFixed(2)}</strong> uur
-              </p>
-            ) : form.startTime && form.endTime ? (
-              <p className="auth-alert auth-alert--error" role="alert">
-                Controleer starttijd, eindtijd en pauze.
-              </p>
-            ) : null}
+            <p
+              className={
+                previewHours != null
+                  ? 'compliance-summary hours-preview'
+                  : form.startTime && form.endTime
+                    ? 'auth-alert auth-alert--error hours-preview'
+                    : 'compliance-summary hours-preview hours-preview--empty'
+              }
+              role={previewHours == null && form.startTime && form.endTime ? 'alert' : 'status'}
+            >
+              {previewHours != null ? (
+                <>
+                  Totaal: <strong>{previewHours.toFixed(2)}</strong> uur
+                </>
+              ) : form.startTime && form.endTime ? (
+                'Controleer starttijd, eindtijd en pauze.'
+              ) : (
+                '\u00A0'
+              )}
+            </p>
 
             <div className="auth-field">
               <label htmlFor="hours-notes">Opmerkingen (optioneel)</label>
