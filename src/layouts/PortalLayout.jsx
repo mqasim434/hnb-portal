@@ -5,8 +5,9 @@ import './AppShellLayout.css'
 
 const PORTAL_LINKS = [
   { to: '/portal/dashboard', label: 'Dashboard' },
+  { to: '/portal/feed', label: 'Open opdrachten' },
   { to: '/portal/compliance', label: 'Compliance' },
-  { to: '/portal/jobs', label: 'Opdrachten' },
+  { to: '/portal/jobs', label: 'Mijn opdrachten' },
   { to: '/portal/hours', label: 'Uren' },
   { to: '/portal/invoices', label: 'Facturen' },
 ]

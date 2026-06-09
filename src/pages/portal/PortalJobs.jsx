@@ -37,8 +37,9 @@ export default function PortalJobs() {
     <main className="hnb-container" style={{ paddingBlock: 'var(--space-6)' }}>
       <h1 className="hnb-type-section">Mijn opdrachten</h1>
       <p className="hnb-type-subhead" style={{ marginTop: 'var(--space-3)', maxWidth: '42rem' }}>
-        Opdrachten die H&amp;B aan jou heeft toegewezen. Registreer uren via de opdrachtdetailpagina
-        of via <Link to="/portal/hours">Urenregistratie</Link>.
+        Opdrachten waarvoor je bent geselecteerd. Nieuwe opdrachten vind je in{' '}
+        <Link to="/portal/feed">Open opdrachten</Link>. Registreer uren via de detailpagina of via{' '}
+        <Link to="/portal/hours">Urenregistratie</Link>.
       </p>
 
       {error ? (
@@ -51,7 +52,8 @@ export default function PortalJobs() {
         <p style={{ marginTop: 'var(--space-5)' }}>Laden…</p>
       ) : assignments.length === 0 ? (
         <p style={{ marginTop: 'var(--space-5)' }}>
-          Er zijn nog geen opdrachten aan je toegewezen. Zodra H&amp;B je inplant, verschijnen ze hier.
+          Er zijn nog geen opdrachten aan je toegewezen. Solliciteer op{' '}
+          <Link to="/portal/feed">open opdrachten</Link> — na selectie verschijnen ze hier.
         </p>
       ) : (
         <div className="compliance-grid" style={{ marginTop: 'var(--space-5)' }}>

@@ -220,6 +220,7 @@ export const router = createBrowserRouter([
           { index: true, element: <Navigate to="/portal/dashboard" replace /> },
           { path: 'dashboard', lazy: page(() => import('../pages/portal/PortalDashboard')) },
           { path: 'compliance', lazy: page(() => import('../pages/portal/PortalCompliance')) },
+          { path: 'feed', lazy: page(() => import('../pages/portal/PortalAssignmentFeed')) },
           { path: 'jobs', lazy: page(() => import('../pages/portal/PortalJobs')) },
           { path: 'jobs/:assignmentId', lazy: page(() => import('../pages/portal/PortalJobDetail')) },
           { path: 'hours/new', lazy: page(() => import('../pages/portal/SubmitHours')) },

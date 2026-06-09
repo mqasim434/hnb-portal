@@ -44,7 +44,7 @@ export default function CompanyDashboard() {
         <h2 className="hnb-type-subhead">Hoe het werkt</h2>
         <ol style={{ marginTop: 'var(--space-3)', paddingLeft: '1.25rem', lineHeight: 1.7 }}>
           <li>Plaats een opdracht met status <strong>Open</strong></li>
-          <li>Freelancers zien open opdrachten in hun feed (Module 3)</li>
+          <li>Freelancers solliciteren via <strong>Open opdrachten</strong> in hun portaal</li>
           <li>Jij bekijkt sollicitaties en selecteert een freelancer (Module 4)</li>
         </ol>
       </section>

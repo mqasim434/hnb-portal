@@ -287,3 +287,18 @@ export async function fetchAssignmentById(assignmentId) {
   if (!snap.exists()) return null
   return mapAssignment(snap.id, snap.data())
 }
+
+/** Open opdrachten feed for freelancers (Module 3). */
+export async function fetchOpenAssignmentsForFeed() {
+  const db = assertFirestore()
+  const snap = await getDocs(
+    query(
+      collection(db, 'assignments'),
+      where('status', '==', ASSIGNMENT_STATUS.OPEN),
+      orderBy('dateStart', 'desc'),
+    ),
+  )
+  return snap.docs
+    .map((docSnap) => mapAssignment(docSnap.id, docSnap.data()))
+    .filter((row) => Boolean(row.companyId))
+}

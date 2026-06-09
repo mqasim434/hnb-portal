@@ -140,8 +140,8 @@ export default function CompanyAssignments() {
     <main className="hnb-container" style={{ paddingBlock: 'var(--space-6)' }}>
       <h1 className="hnb-type-section">Opdrachten</h1>
       <p className="hnb-type-subhead" style={{ marginTop: 'var(--space-3)', maxWidth: '48rem' }}>
-        Plaats opdrachten voor jouw evenementen. Zet de status op <strong>Open</strong> om ze zichtbaar
-        te maken voor freelancers (feed volgt in Module 3). Sollicitaties en selectie volgen in Module 4.
+        Plaats opdrachten voor jouw evenementen. Zet de status op <strong>Open</strong> zodat
+        freelancers ze zien in <strong>Open opdrachten</strong> en kunnen solliciteren.
       </p>
 
       <section

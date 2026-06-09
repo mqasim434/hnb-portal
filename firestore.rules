@@ -130,6 +130,19 @@ service cloud.firestore {
           && request.resource.data.assignmentType is string;
       }
 
+      function isAssignedFreelancerOnAssignment() {
+        return isSignedIn()
+          && resource.data.keys().hasAll(['assignedFreelancerIds'])
+          && request.auth.uid in resource.data.assignedFreelancerIds;
+      }
+
+      function assignmentApplicationCount() {
+        return resource.data.keys().hasAll(['applicationCount'])
+          && resource.data.applicationCount is number
+          ? resource.data.applicationCount
+          : 0;
+      }
+
       function validCompanyAssignmentCreate() {
         return isCompany()
           && request.resource.data.companyId == request.auth.uid
@@ -151,19 +164,71 @@ service cloud.firestore {
           && validAssignmentCore();
       }
 
+      function assignedFreelancerIdsUnchanged() {
+        let hadField = resource.data.keys().hasAll(['assignedFreelancerIds']);
+        let hasField = request.resource.data.keys().hasAll(['assignedFreelancerIds']);
+        return (hadField == hasField)
+          && (!hadField || request.resource.data.assignedFreelancerIds == resource.data.assignedFreelancerIds);
+      }
+
+      function validFreelancerApplicationCountBump() {
+        return isActiveFreelancer()
+          && resource.data.status == 'open'
+          && resource.data.keys().hasAll(['companyId'])
+          && resource.data.companyId is string
+          && resource.data.companyId.size() > 0
+          && request.resource.data.status == resource.data.status
+          && request.resource.data.companyId == resource.data.companyId
+          && assignedFreelancerIdsUnchanged()
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['applicationCount', 'updatedAt'])
+          && request.resource.data.applicationCount is number
+          && request.resource.data.applicationCount == assignmentApplicationCount() + 1;
+      }
+
       allow read: if isAdmin()
-        || (isCompany() && resource.data.companyId == request.auth.uid)
-        || (isSignedIn() && request.auth.uid in resource.data.assignedFreelancerIds);
+        || (isCompany()
+            && resource.data.keys().hasAll(['companyId'])
+            && resource.data.companyId == request.auth.uid)
+        || (isActiveFreelancer() && resource.data.status == 'open')
+        || isAssignedFreelancerOnAssignment();
 
       allow create: if isAdmin() || validCompanyAssignmentCreate();
 
-      allow update: if isAdmin() || validCompanyAssignmentUpdate();
+      allow update: if isAdmin()
+        || validCompanyAssignmentUpdate()
+        || validFreelancerApplicationCountBump();
 
       allow delete: if isAdmin()
         || (isCompany()
             && resource.data.companyId == request.auth.uid
             && resource.data.status != 'assigned'
             && resource.data.assignedFreelancerIds.size() == 0);
+    }
+
+    match /assignmentApplications/{applicationId} {
+      function validApplicationCreate() {
+        let assignmentDoc = get(/databases/$(database)/documents/assignments/$(request.resource.data.assignmentId));
+        return isActiveFreelancer()
+          && request.resource.data.freelancerId == request.auth.uid
+          && request.resource.data.status == 'pending'
+          && request.resource.data.assignmentId is string
+          && request.resource.data.companyId is string
+          && request.resource.data.companyId.size() > 0
+          && assignmentDoc.data.keys().hasAll(['companyId', 'status'])
+          && assignmentDoc.data.companyId is string
+          && assignmentDoc.data.companyId.size() > 0
+          && request.resource.data.companyId == assignmentDoc.data.companyId
+          && assignmentDoc.data.status == 'open';
+      }
+
+      allow read: if isAdmin()
+        || (isActiveFreelancer() && resource != null && resource.data.freelancerId == request.auth.uid)
+        || (isCompany() && resource != null && resource.data.companyId == request.auth.uid)
+        || (isActiveFreelancer() && resource == null);
+
+      allow create: if validApplicationCreate();
+
+      allow update, delete: if isAdmin();
     }
 
     match /timeEntries/{entryId} {

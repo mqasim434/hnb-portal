@@ -8,9 +8,14 @@ import '../auth/Auth.css'
 
 const QUICK_LINKS = [
   {
+    to: '/portal/feed',
+    title: 'Open opdrachten',
+    description: 'Solliciteer op opdrachten van opdrachtgevers.',
+  },
+  {
     to: '/portal/jobs',
-    title: 'Opdrachten',
-    description: 'Bekijk toegewezen shifts en opdrachtdetails.',
+    title: 'Mijn opdrachten',
+    description: 'Opdrachten waarvoor je bent geselecteerd.',
   },
   {
     to: '/portal/hours',
