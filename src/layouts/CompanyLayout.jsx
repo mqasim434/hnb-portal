@@ -1,5 +1,6 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import AppShellHeader from '../components/AppShellHeader'
 import { signOutUser } from '../lib/auth/authService'
 import './AppShellLayout.css'
 
@@ -20,35 +21,13 @@ export default function CompanyLayout({ children }) {
 
   return (
     <div className="app-shell app-shell--company">
-      <header className="app-shell__header">
-        <div className="app-shell__brand">
-          <span className="app-shell__eyebrow">Bedrijfsportaal</span>
-          <strong>H&amp;B Service Group</strong>
-        </div>
-        <nav className="app-shell__nav" aria-label="Bedrijfsnavigatie">
-          {COMPANY_LINKS.map(({ to, label }) => (
-            <NavLink
-              key={to}
-              to={to}
-              className={({ isActive }) =>
-                `app-shell__nav-link${isActive ? ' app-shell__nav-link--active' : ''}`
-              }
-            >
-              {label}
-            </NavLink>
-          ))}
-        </nav>
-        <div className="app-shell__user">
-          <span className="app-shell__email">{companyLabel}</span>
-          <button
-            type="button"
-            className="hnb-btn hnb-btn--outline app-shell__logout"
-            onClick={handleLogout}
-          >
-            Uitloggen
-          </button>
-        </div>
-      </header>
+      <AppShellHeader
+        eyebrow="Bedrijfsportaal"
+        links={COMPANY_LINKS}
+        userLabel={companyLabel}
+        onLogout={handleLogout}
+        navLabel="Bedrijfsnavigatie"
+      />
       <div className="app-shell__body">{children}</div>
     </div>
   )

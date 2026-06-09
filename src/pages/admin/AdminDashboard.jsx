@@ -151,7 +151,7 @@ export default function AdminDashboard() {
           style={{
             marginTop: 'var(--space-5)',
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(12rem, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 10rem), 1fr))',
             gap: 'var(--space-4)',
           }}
         >
