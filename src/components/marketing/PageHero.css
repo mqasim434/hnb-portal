@@ -141,7 +141,5 @@
 
 .page-hero--navy .hnb-btn--freelancer,
 .page-hero--dark .hnb-btn--freelancer {
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--color-warm-white) 26%, transparent),
-    var(--shadow-soft);
+  box-shadow: none;
 }

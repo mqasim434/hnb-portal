@@ -31,7 +31,7 @@ export default function CompanyDashboard() {
         }}
       >
         <Link to="/company/assignments" className="compliance-card" style={{ textDecoration: 'none', color: 'inherit', padding: 'var(--space-5)' }}>
-          <p style={{ margin: 0, fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent-b2b, #d35400)' }}>
+          <p style={{ margin: 0, fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent-b2b, #d4a018)' }}>
             Opdrachten
           </p>
           <p className="compliance-card__hint" style={{ marginTop: 'var(--space-2)' }}>

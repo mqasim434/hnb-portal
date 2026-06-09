@@ -23,7 +23,7 @@
 }
 
 .app-shell--company .app-shell__header {
-  background: linear-gradient(90deg, #8b3a00, var(--accent-b2b, #d35400));
+  background: linear-gradient(90deg, #8a6910, var(--accent-b2b, #d4a018));
   color: var(--text-on-dark);
   border-bottom-color: color-mix(in srgb, var(--color-warm-white) 12%, transparent);
 }

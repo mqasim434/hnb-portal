@@ -135,11 +135,9 @@
   }
 }
 
-/* Navy hero: freelancerknop licht omrand voor contrast tegen donker scrim */
+/* Navy hero: freelancerknop extra rand voor contrast tegen donker scrim */
 .home-hero .hnb-btn--freelancer {
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--color-warm-white) 26%, transparent),
-    var(--shadow-soft);
+  box-shadow: none;
 }
 
 /* -------------------------------------------------------------------------- */

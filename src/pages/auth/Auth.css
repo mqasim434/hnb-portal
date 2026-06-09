@@ -221,7 +221,7 @@
   margin-top: var(--space-1);
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--accent-b2b, #d35400);
+  color: var(--accent-b2b, #d4a018);
 }
 
 .admin-onboarding-detail-row td {
@@ -353,7 +353,7 @@
 .compliance-badge--rejected,
 .compliance-badge--expired {
   background: rgba(211, 84, 0, 0.12);
-  color: #d35400;
+  color: #d4a018;
 }
 
 .compliance-summary {

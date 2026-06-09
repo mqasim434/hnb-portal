@@ -9,9 +9,9 @@
   --color-deep-navy: #0a1520;
   --color-mid-navy: #132336;
 
-  /* CTA & brand accent — B2B oranje + freelancer blauw, witte tekst op gevulde knoppen */
-  --color-cta-b2b: #d35400;
-  --color-cta-b2b-hover: #b84300;
+  /* CTA & brand accent — goud (#D4A018) + freelancer blauw, witte tekst op gevulde knoppen */
+  --color-cta-b2b: #d4a018;
+  --color-cta-b2b-hover: #b88915;
   --color-cta-freelancer: #2c5aa0;
   --color-cta-freelancer-hover: #234880;
 
@@ -63,6 +63,7 @@
   --surface2: color-mix(in srgb, var(--color-light-gold) 55%, var(--color-warm-white));
   --on-primary: var(--text-on-primary);
   --accent: var(--color-cta-b2b-hover);
+  --accent-b2b: var(--color-cta-b2b);
   --success: var(--color-success);
   --error: var(--color-error);
   --warning: var(--color-warning);
@@ -80,7 +81,7 @@
   --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.12);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.14);
   --shadow-glow: 0 0 0 1px color-mix(in srgb, var(--color-cta-b2b) 40%, transparent),
-    0 12px 36px rgba(211, 84, 0, 0.28);
+    0 12px 36px rgba(212, 160, 24, 0.28);
 
   /* Hero foto’s (homepage + PageHero dark + image): leesbare navy scrim op daglichtbeeld */
   --hero-image-scrim: linear-gradient(
