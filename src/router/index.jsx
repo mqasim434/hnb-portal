@@ -234,6 +234,7 @@ export const router = createBrowserRouter([
         children: [
           { index: true, element: <Navigate to="/company/dashboard" replace /> },
           { path: 'dashboard', lazy: page(() => import('../pages/company/CompanyDashboard')) },
+          { path: 'assignments', lazy: page(() => import('../pages/company/CompanyAssignments')) },
         ],
       },
 

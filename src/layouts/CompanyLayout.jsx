@@ -3,7 +3,10 @@ import { useSelector } from 'react-redux'
 import { signOutUser } from '../lib/auth/authService'
 import './AppShellLayout.css'
 
-const COMPANY_LINKS = [{ to: '/company/dashboard', label: 'Dashboard' }]
+const COMPANY_LINKS = [
+  { to: '/company/dashboard', label: 'Dashboard' },
+  { to: '/company/assignments', label: 'Opdrachten' },
+]
 
 export default function CompanyLayout({ children }) {
   const navigate = useNavigate()

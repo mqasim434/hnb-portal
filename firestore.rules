@@ -124,10 +124,46 @@ service cloud.firestore {
     }
 
     match /assignments/{assignmentId} {
+      function validAssignmentCore() {
+        return request.resource.data.title is string
+          && request.resource.data.location is string
+          && request.resource.data.assignmentType is string;
+      }
+
+      function validCompanyAssignmentCreate() {
+        return isCompany()
+          && request.resource.data.companyId == request.auth.uid
+          && request.resource.data.companyName is string
+          && request.resource.data.createdBy == request.auth.uid
+          && request.resource.data.assignedFreelancerIds.size() == 0
+          && request.resource.data.status in ['draft', 'open']
+          && validAssignmentCore();
+      }
+
+      function validCompanyAssignmentUpdate() {
+        return isCompany()
+          && resource.data.companyId == request.auth.uid
+          && request.resource.data.companyId == resource.data.companyId
+          && request.resource.data.createdBy == resource.data.createdBy
+          && request.resource.data.assignedFreelancerIds == resource.data.assignedFreelancerIds
+          && request.resource.data.assignedFreelancers == resource.data.assignedFreelancers
+          && resource.data.status != 'assigned'
+          && validAssignmentCore();
+      }
+
       allow read: if isAdmin()
+        || (isCompany() && resource.data.companyId == request.auth.uid)
         || (isSignedIn() && request.auth.uid in resource.data.assignedFreelancerIds);
 
-      allow create, update, delete: if isAdmin();
+      allow create: if isAdmin() || validCompanyAssignmentCreate();
+
+      allow update: if isAdmin() || validCompanyAssignmentUpdate();
+
+      allow delete: if isAdmin()
+        || (isCompany()
+            && resource.data.companyId == request.auth.uid
+            && resource.data.status != 'assigned'
+            && resource.data.assignedFreelancerIds.size() == 0);
     }
 
     match /timeEntries/{entryId} {

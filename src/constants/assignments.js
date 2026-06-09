@@ -63,3 +63,11 @@ export const ASSIGNMENT_STATUS_OPTIONS = [
   { value: ASSIGNMENT_STATUS.COMPLETED, label: 'Afgerond' },
   { value: ASSIGNMENT_STATUS.CANCELLED, label: 'Geannuleerd' },
 ]
+
+/** Status options companies may set when posting (selection happens in Module 4). */
+export const COMPANY_ASSIGNMENT_STATUS_OPTIONS = [
+  { value: ASSIGNMENT_STATUS.DRAFT, label: 'Concept (nog niet zichtbaar)' },
+  { value: ASSIGNMENT_STATUS.OPEN, label: 'Open (zichtbaar voor freelancers)' },
+  { value: ASSIGNMENT_STATUS.COMPLETED, label: 'Afgerond' },
+  { value: ASSIGNMENT_STATUS.CANCELLED, label: 'Geannuleerd' },
+]
