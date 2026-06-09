@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { usePageSeo } from '../../hooks/usePageSeo'
+import { ROLES } from '../../constants/roles'
 import {
   approveUser,
   fetchPendingUsers,
@@ -36,11 +37,13 @@ export default function AdminUsers() {
     loadUsers()
   }, [loadUsers])
 
-  async function handleApprove(uid) {
-    setActionId(uid)
+  async function handleApprove(row) {
+    setActionId(row.id)
     setError(null)
     try {
-      await approveUser(uid)
+      const role =
+        row.intendedRole === ROLES.COMPANY ? ROLES.COMPANY : ROLES.FREELANCER
+      await approveUser(row.id, role)
       await loadUsers()
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Goedkeuren mislukt.')
@@ -66,8 +69,8 @@ export default function AdminUsers() {
     <main className="hnb-container" style={{ paddingBlock: 'var(--space-6)' }}>
       <h1 className="hnb-type-section">Gebruikers — wachtrij</h1>
       <p className="hnb-type-subhead" style={{ marginTop: 'var(--space-3)', maxWidth: '42rem' }}>
-        Accounts met status <strong>in behandeling</strong>. Na goedkeuring krijgt de freelancer
-        direct toegang (sessie wordt automatisch bijgewerkt).
+        Accounts met status <strong>in behandeling</strong>. Goedkeuring wijst de rol toe op basis van
+        bedoelde rol (freelancer of bedrijf).
       </p>
 
       {error ? (
@@ -85,7 +88,7 @@ export default function AdminUsers() {
           <table className="admin-users-table">
             <thead>
               <tr>
-                <th>Naam</th>
+                <th>Naam / bedrijf</th>
                 <th>E-mail</th>
                 <th>Bedoelde rol</th>
                 <th>Acties</th>
@@ -94,16 +97,29 @@ export default function AdminUsers() {
             <tbody>
               {users.map((row) => (
                 <tr key={row.id}>
-                  <td>{row.displayName || '—'}</td>
+                  <td>
+                    {row.companyName ? (
+                      <>
+                        <strong>{row.companyName}</strong>
+                        {row.displayName ? (
+                          <span style={{ display: 'block', fontSize: '0.85rem' }}>
+                            {row.displayName}
+                          </span>
+                        ) : null}
+                      </>
+                    ) : (
+                      row.displayName || '—'
+                    )}
+                  </td>
                   <td>{row.email}</td>
-                  <td>{row.intendedRole ?? row.role ?? 'freelancer'}</td>
+                  <td>{row.intendedRole ?? row.role ?? ROLES.FREELANCER}</td>
                   <td>
                     <div className="admin-users-actions">
                       <button
                         type="button"
                         className="hnb-btn hnb-btn--freelancer"
                         disabled={actionId === row.id}
-                        onClick={() => handleApprove(row.id)}
+                        onClick={() => handleApprove(row)}
                       >
                         Goedkeuren
                       </button>

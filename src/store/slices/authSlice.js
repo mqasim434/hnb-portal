@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-/** @typedef {{ uid: string, email: string | null, displayName: string | null, role: string | null, accountStatus: string, intendedRole?: string | null }} UserProfile */
+/** @typedef {{ uid: string, email: string | null, displayName: string | null, role: string | null, accountStatus: string, intendedRole?: string | null, companyName?: string | null }} UserProfile */
 
 const initialState = {
   user: null,

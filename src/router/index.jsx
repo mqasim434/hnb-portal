@@ -113,6 +113,10 @@ export const router = createBrowserRouter([
       { path: 'login', element: <LoginPage /> },
       { path: 'auth/register', lazy: page(() => import('../pages/auth/RegisterPage')) },
       {
+        path: 'auth/register/company',
+        lazy: page(() => import('../pages/auth/RegisterCompanyPage')),
+      },
+      {
         path: 'auth/forgot-password',
         lazy: page(() => import('../pages/auth/ForgotPasswordPage')),
       },
@@ -221,6 +225,15 @@ export const router = createBrowserRouter([
           { path: 'hours/new', lazy: page(() => import('../pages/portal/SubmitHours')) },
           { path: 'hours', lazy: page(() => import('../pages/portal/PortalHours')) },
           { path: 'invoices', lazy: page(() => import('../pages/portal/PortalInvoices')) },
+        ],
+      },
+
+      {
+        path: 'company',
+        element: <ProtectedRoute allowedRole="company" layout="company" />,
+        children: [
+          { index: true, element: <Navigate to="/company/dashboard" replace /> },
+          { path: 'dashboard', lazy: page(() => import('../pages/company/CompanyDashboard')) },
         ],
       },
 

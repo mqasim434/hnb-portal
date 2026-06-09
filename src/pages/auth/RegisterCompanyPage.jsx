@@ -3,20 +3,21 @@ import { Link } from 'react-router-dom'
 import PageHero from '../../components/marketing/PageHero'
 import { ROLES } from '../../constants/roles'
 import { usePageSeo } from '../../hooks/usePageSeo'
-import { mapAuthError, registerFreelancerAccount } from '../../lib/auth/authService'
+import { mapAuthError, registerCompanyAccount } from '../../lib/auth/authService'
 import { auth } from '../../firebase/config'
 import './Auth.css'
 
-export default function RegisterPage() {
+export default function RegisterCompanyPage() {
   usePageSeo({
-    title: 'Account aanmaken — H&B Service Group',
+    title: 'Bedrijfsaccount aanmaken — H&B Service Group',
     description:
-      'Maak een freelanceraccount aan voor het H&B-portaal. Na goedkeuring krijg je toegang tot opdrachten, uren en documenten.',
-    canonicalPath: '/auth/register',
+      'Registreer als opdrachtgever om opdrachten te plaatsen en freelancers te selecteren.',
+    canonicalPath: '/auth/register/company',
     noIndex: true,
   })
 
-  const [displayName, setDisplayName] = useState('')
+  const [companyName, setCompanyName] = useState('')
+  const [contactPerson, setContactPerson] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -28,6 +29,10 @@ export default function RegisterPage() {
     event.preventDefault()
     setError(null)
 
+    if (!companyName.trim()) {
+      setError('Vul een bedrijfsnaam in.')
+      return
+    }
     if (password.length < 8) {
       setError('Kies een wachtwoord van minimaal 8 tekens.')
       return
@@ -39,7 +44,7 @@ export default function RegisterPage() {
 
     setSubmitting(true)
     try {
-      await registerFreelancerAccount({ email, displayName, password })
+      await registerCompanyAccount({ email, companyName, contactPerson, password })
       setSuccess(true)
     } catch (err) {
       setError(mapAuthError(err))
@@ -51,7 +56,7 @@ export default function RegisterPage() {
   if (!auth) {
     return (
       <main className="auth-page">
-        <PageHero variant="navy" title="Account aanmaken" lead="Firebase is nog niet geconfigureerd." />
+        <PageHero variant="navy" title="Bedrijfsaccount aanmaken" lead="Firebase is nog niet geconfigureerd." />
         <section className="auth-panel hnb-container">
           <div className="auth-alert auth-alert--info auth-form-wrap">
             Vul <code>VITE_FIREBASE_*</code> in je <code>.env</code>-bestand in.
@@ -65,37 +70,32 @@ export default function RegisterPage() {
     <main className="auth-page">
       <PageHero
         variant="navy"
-        eyebrow="Freelancerportaal"
-        title="Account aanmaken"
-        lead="Registreer met e-mail en wachtwoord. H&B beoordeelt je aanmelding voordat je toegang krijgt tot het portaal."
+        eyebrow="Bedrijfsportaal"
+        title="Bedrijfsaccount aanmaken"
+        lead="Registreer als opdrachtgever. Na goedkeuring door H&B kun je opdrachten plaatsen waar freelancers op reageren."
       />
 
-      <section className="auth-panel hnb-container" aria-label="Registratieformulier">
+      <section className="auth-panel hnb-container" aria-label="Bedrijfsregistratie">
         {success ? (
           <div className="auth-status-card">
             <h1>Aanmelding ontvangen</h1>
             <p>
-              Je account is aangemaakt met status <strong>in behandeling</strong>. Zodra H&amp;B je
-              profiel heeft goedgekeurd als <strong>{ROLES.FREELANCER}</strong>, kun je inloggen.
-            </p>
-            <p>
-              Vul intussen het uitgebreide aanmeldformulier in voor snellere onboarding.
+              Je bedrijfsaccount is aangemaakt met status <strong>in behandeling</strong>. Zodra H&amp;B
+              je account heeft goedgekeurd als <strong>{ROLES.COMPANY}</strong>, kun je inloggen op het
+              bedrijfsportaal.
             </p>
             <div className="auth-form__actions">
-              <Link to="/login" className="hnb-btn hnb-btn--freelancer auth-form__submit">
+              <Link to="/login" className="hnb-btn hnb-btn--primary auth-form__submit">
                 Naar inloggen
-              </Link>
-              <Link to="/freelancers/direct-aanmelden" className="hnb-btn hnb-btn--outline auth-form__submit">
-                Direct aanmelden (volledig formulier)
               </Link>
             </div>
           </div>
         ) : (
           <form className="auth-form-wrap auth-form-wrap--wide" onSubmit={handleSubmit} noValidate>
-            <h2 className="auth-form__title">Freelancer registreren</h2>
+            <h2 className="auth-form__title">Opdrachtgever registreren</h2>
             <p className="auth-form__lead">
-              Al een account? <Link to="/login">Log in</Link>. Opdrachtgever?{' '}
-              <Link to="/auth/register/company">Bedrijfsaccount aanmaken</Link>.
+              Al een account? <Link to="/login">Log in</Link>. Freelancer?{' '}
+              <Link to="/auth/register">Freelancer registreren</Link>.
             </p>
 
             {error ? (
@@ -105,21 +105,33 @@ export default function RegisterPage() {
             ) : null}
 
             <div className="auth-field">
-              <label htmlFor="register-name">Volledige naam</label>
+              <label htmlFor="company-name">Bedrijfsnaam</label>
               <input
-                id="register-name"
+                id="company-name"
                 type="text"
-                autoComplete="name"
+                autoComplete="organization"
                 required
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
+                value={companyName}
+                onChange={(e) => setCompanyName(e.target.value)}
               />
             </div>
 
             <div className="auth-field">
-              <label htmlFor="register-email">E-mailadres</label>
+              <label htmlFor="company-contact">Contactpersoon</label>
               <input
-                id="register-email"
+                id="company-contact"
+                type="text"
+                autoComplete="name"
+                required
+                value={contactPerson}
+                onChange={(e) => setContactPerson(e.target.value)}
+              />
+            </div>
+
+            <div className="auth-field">
+              <label htmlFor="company-email">Zakelijk e-mailadres</label>
+              <input
+                id="company-email"
                 type="email"
                 autoComplete="email"
                 required
@@ -129,9 +141,9 @@ export default function RegisterPage() {
             </div>
 
             <div className="auth-field">
-              <label htmlFor="register-password">Wachtwoord</label>
+              <label htmlFor="company-password">Wachtwoord</label>
               <input
-                id="register-password"
+                id="company-password"
                 type="password"
                 autoComplete="new-password"
                 required
@@ -142,9 +154,9 @@ export default function RegisterPage() {
             </div>
 
             <div className="auth-field">
-              <label htmlFor="register-confirm">Bevestig wachtwoord</label>
+              <label htmlFor="company-confirm">Bevestig wachtwoord</label>
               <input
-                id="register-confirm"
+                id="company-confirm"
                 type="password"
                 autoComplete="new-password"
                 required
@@ -156,10 +168,10 @@ export default function RegisterPage() {
             <div className="auth-form__actions">
               <button
                 type="submit"
-                className="hnb-btn hnb-btn--freelancer auth-form__submit"
+                className="hnb-btn hnb-btn--primary auth-form__submit"
                 disabled={submitting}
               >
-                {submitting ? 'Account aanmaken…' : 'Account aanmaken'}
+                {submitting ? 'Account aanmaken…' : 'Bedrijfsaccount aanmaken'}
               </button>
             </div>
           </form>

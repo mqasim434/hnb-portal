@@ -5,7 +5,7 @@ import { firestore } from '../../firebase/config'
 export { approveUser, rejectUser, suspendUser } from './userStatus'
 
 /**
- * @returns {Promise<Array<{ id: string, email: string, displayName: string, accountStatus: string, role: string | null, intendedRole?: string | null }>>}
+ * @returns {Promise<Array<{ id: string, email: string, displayName: string, companyName?: string, accountStatus: string, role: string | null, intendedRole?: string | null }>>}
  */
 export async function fetchPendingUsers() {
   if (!firestore) return []
@@ -21,6 +21,7 @@ export async function fetchPendingUsers() {
       id: docSnap.id,
       email: data.email ?? '',
       displayName: data.displayName ?? '',
+      companyName: data.companyName ?? '',
       accountStatus: data.accountStatus ?? ACCOUNT_STATUS.PENDING,
       role: data.role ?? null,
       intendedRole: data.intendedRole ?? null,

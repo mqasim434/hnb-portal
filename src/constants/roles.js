@@ -21,7 +21,7 @@ export function getRoleHomePath(role) {
     case ROLES.FREELANCER:
       return '/portal/dashboard'
     case ROLES.COMPANY:
-      return '/portal/dashboard'
+      return '/company/dashboard'
     default:
       return '/auth/pending'
   }

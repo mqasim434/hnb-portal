@@ -22,6 +22,22 @@
   border-bottom-color: color-mix(in srgb, var(--color-warm-white) 12%, transparent);
 }
 
+.app-shell--company .app-shell__header {
+  background: linear-gradient(90deg, #8b3a00, var(--accent-b2b, #d35400));
+  color: var(--text-on-dark);
+  border-bottom-color: color-mix(in srgb, var(--color-warm-white) 12%, transparent);
+}
+
+.app-shell--company .app-shell__nav-link {
+  color: color-mix(in srgb, var(--color-warm-white) 82%, transparent);
+}
+
+.app-shell--company .app-shell__nav-link--active,
+.app-shell--company .app-shell__nav-link:hover {
+  background: color-mix(in srgb, var(--color-warm-white) 14%, transparent);
+  color: var(--color-warm-white);
+}
+
 .app-shell__brand {
   display: flex;
   flex-direction: column;

@@ -18,6 +18,20 @@ service cloud.firestore {
         && userData(request.auth.uid).accountStatus == 'active';
     }
 
+    function isCompany() {
+      return isSignedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && userData(request.auth.uid).role == 'company'
+        && userData(request.auth.uid).accountStatus == 'active';
+    }
+
+    function isActiveFreelancer() {
+      return isSignedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && userData(request.auth.uid).role == 'freelancer'
+        && userData(request.auth.uid).accountStatus == 'active';
+    }
+
     function isOwner(userId) {
       return isSignedIn() && request.auth.uid == userId;
     }
@@ -124,8 +138,7 @@ service cloud.firestore {
         && request.resource.data.freelancerId == request.auth.uid
         && request.resource.data.status == 'draft'
         && exists(/databases/$(database)/documents/users/$(request.auth.uid))
-        && userData(request.auth.uid).role == 'freelancer'
-        && userData(request.auth.uid).accountStatus == 'active';
+        && isActiveFreelancer();
 
       allow update: if isAdmin()
         || (isSignedIn()

@@ -172,33 +172,79 @@ export default function Login() {
                 Ik ben opdrachtgever
               </h2>
               <p className="login-card__text">
-                Beheer je personeelsaanvragen en bekijk de status van lopende inzetten. Toegang op
-                uitnodiging — neem contact op als je nog geen account hebt.
+                Plaats opdrachten, bekijk sollicitaties en selecteer freelancers voor jouw evenementen.
               </p>
             </div>
 
             <div className="login-card__body">
-              <div className="login-card__actions">
-                <Link
-                  className="hnb-btn hnb-btn--outline login-card__btn login-card__btn--secondary"
-                  to="/contact"
-                >
-                  Inloggen als opdrachtgever — contact
-                  <FiArrowRight className="login-card__btn-icon" aria-hidden />
-                </Link>
-                <Link
-                  className="hnb-btn hnb-btn--primary login-card__btn"
-                  to="/bedrijven/personeel-aanvragen"
-                >
-                  Personeel aanvragen
-                  <FiArrowRight className="login-card__btn-icon" aria-hidden />
-                </Link>
-              </div>
+              {!firebaseReady ? (
+                <div className="login-form">
+                  <div className="login-form__alert login-form__alert--info">
+                    Firebase is nog niet geconfigureerd. Vul <code>VITE_FIREBASE_*</code> in je{' '}
+                    <code>.env</code>-bestand in en herstart de dev-server.
+                  </div>
+                </div>
+              ) : (
+                <form className="login-form" onSubmit={handleSubmit} noValidate>
+                  {error ? (
+                    <div className="login-form__alert login-form__alert--error" role="alert">
+                      {error}
+                    </div>
+                  ) : null}
+
+                  <div className="login-form__field">
+                    <label htmlFor="company-login-email">E-mailadres</label>
+                    <input
+                      id="company-login-email"
+                      className="login-form__input"
+                      type="email"
+                      autoComplete="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="naam@bedrijf.nl"
+                    />
+                  </div>
+
+                  <div className="login-form__field">
+                    <label htmlFor="company-login-password">Wachtwoord</label>
+                    <input
+                      id="company-login-password"
+                      className="login-form__input"
+                      type="password"
+                      autoComplete="current-password"
+                      required
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="login-form__footer">
+                    <Link className="login-form__forgot" to="/auth/forgot-password">
+                      Wachtwoord vergeten?
+                    </Link>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="hnb-btn hnb-btn--primary login-card__btn"
+                    disabled={submitting}
+                  >
+                    {submitting ? 'Bezig met inloggen…' : 'Inloggen als opdrachtgever'}
+                    {!submitting ? (
+                      <FiArrowRight className="login-card__btn-icon" aria-hidden />
+                    ) : null}
+                  </button>
+                </form>
+              )}
             </div>
 
             <footer className="login-card__footer">
-              <Link className="login-card__link" to="/bedrijven/personeel-aanvragen">
-                Nog geen account? Personeel aanvragen →
+              <Link className="login-card__link" to="/auth/register/company">
+                Nog geen account? Bedrijfsaccount aanmaken →
+              </Link>
+              <Link className="login-card__link login-card__link--muted" to="/bedrijven/personeel-aanvragen">
+                Eerst personeel aanvragen zonder account
               </Link>
             </footer>
           </article>

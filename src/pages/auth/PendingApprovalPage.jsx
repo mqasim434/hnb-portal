@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import PageHero from '../../components/marketing/PageHero'
-import { ACCOUNT_STATUS, getRoleHomePath } from '../../constants/roles'
+import { ACCOUNT_STATUS, getRoleHomePath, ROLES } from '../../constants/roles'
 import { usePageSeo } from '../../hooks/usePageSeo'
 import { signOutUser } from '../../lib/auth/authService'
 import './Auth.css'
@@ -17,8 +17,9 @@ export default function PendingApprovalPage() {
 
   const location = useLocation()
   const navigate = useNavigate()
-  const { user, role, accountStatus, loading } = useSelector((state) => state.auth)
+  const { user, role, profile, accountStatus, loading } = useSelector((state) => state.auth)
   const blocked = location.state?.blocked
+  const intendedRole = profile?.intendedRole
 
   const status = blocked ?? accountStatus ?? ACCOUNT_STATUS.PENDING
 
@@ -30,7 +31,9 @@ export default function PendingApprovalPage() {
 
   let title = 'Account in behandeling'
   let message =
-    'Bedankt voor uw aanmelding. H&B beoordeelt uw profiel. Zodra uw account is goedgekeurd, krijgt u toegang tot het freelancerportaal.'
+    intendedRole === ROLES.COMPANY
+      ? 'Bedankt voor je aanmelding als opdrachtgever. H&B beoordeelt je bedrijfsaccount. Zodra je bent goedgekeurd, kun je inloggen op het bedrijfsportaal.'
+      : 'Bedankt voor je aanmelding. H&B beoordeelt je profiel. Zodra je account is goedgekeurd, krijg je toegang tot het freelancerportaal.'
 
   if (status === ACCOUNT_STATUS.REJECTED) {
     title = 'Aanmelding afgewezen'
@@ -60,7 +63,7 @@ export default function PendingApprovalPage() {
             </p>
           ) : null}
           <div className="auth-form__actions">
-            {user && status === ACCOUNT_STATUS.PENDING ? (
+            {user && status === ACCOUNT_STATUS.PENDING && intendedRole !== ROLES.COMPANY ? (
               <Link to="/auth/compliance" className="hnb-btn hnb-btn--freelancer">
                 Documenten uploaden
               </Link>
@@ -77,9 +80,11 @@ export default function PendingApprovalPage() {
             <Link to="/contact" className="hnb-btn hnb-btn--outline">
               Contact opnemen
             </Link>
-            <Link to="/freelancers/direct-aanmelden" className="auth-form__links">
-              Aanmeldformulier invullen
-            </Link>
+            {intendedRole !== ROLES.COMPANY ? (
+              <Link to="/freelancers/direct-aanmelden" className="auth-form__links">
+                Aanmeldformulier invullen
+              </Link>
+            ) : null}
           </div>
         </div>
       </section>

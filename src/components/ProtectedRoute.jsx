@@ -3,11 +3,12 @@ import { useSelector } from 'react-redux'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { ACCOUNT_STATUS, getRoleHomePath } from '../constants/roles'
 import AdminLayout from '../layouts/AdminLayout'
+import CompanyLayout from '../layouts/CompanyLayout'
 import PortalLayout from '../layouts/PortalLayout'
 import PageRouteSkeleton from './performance/PageRouteSkeleton'
 
 /**
- * @param {{ allowedRole: 'admin' | 'freelancer', layout?: 'portal' | 'admin' }} props
+ * @param {{ allowedRole: 'admin' | 'freelancer' | 'company', layout?: 'portal' | 'admin' | 'company' }} props
  */
 export default function ProtectedRoute({ allowedRole, layout }) {
   const { user, role, accountStatus, loading } = useSelector((state) => state.auth)
@@ -58,5 +59,6 @@ export default function ProtectedRoute({ allowedRole, layout }) {
 
   if (layout === 'portal') return <PortalLayout>{content}</PortalLayout>
   if (layout === 'admin') return <AdminLayout>{content}</AdminLayout>
+  if (layout === 'company') return <CompanyLayout>{content}</CompanyLayout>
   return content
 }

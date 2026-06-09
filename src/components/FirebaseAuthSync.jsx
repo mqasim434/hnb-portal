@@ -75,6 +75,7 @@ export default function FirebaseAuthSync() {
             role: d.role ?? null,
             accountStatus: d.accountStatus ?? ACCOUNT_STATUS.PENDING,
             intendedRole: d.intendedRole ?? null,
+            companyName: d.companyName ?? null,
           })
         })
       }

@@ -52,6 +52,33 @@ export async function registerFreelancerAccount({ email, displayName, password }
 }
 
 /**
+ * @param {{ email: string, password: string, companyName: string, contactPerson: string }} params
+ */
+export async function registerCompanyAccount({ email, companyName, contactPerson, password }) {
+  const { auth: a, firestore: db } = assertAuthReady()
+
+  const cred = await createUserWithEmailAndPassword(a, email.trim(), password)
+  const contact = contactPerson.trim()
+  if (contact) {
+    await updateProfile(cred.user, { displayName: contact })
+  }
+
+  await setDoc(doc(db, 'users', cred.user.uid), {
+    email: email.trim().toLowerCase(),
+    displayName: contact,
+    companyName: companyName.trim(),
+    role: null,
+    accountStatus: ACCOUNT_STATUS.PENDING,
+    intendedRole: ROLES.COMPANY,
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  })
+
+  await signOut(a)
+  return cred.user.uid
+}
+
+/**
  * @param {{ email: string, password: string }} params
  */
 export async function signInWithEmail({ email, password }) {
@@ -101,6 +128,7 @@ export async function fetchUserProfile(uid, options = {}) {
     role: d.role ?? null,
     accountStatus: d.accountStatus ?? ACCOUNT_STATUS.PENDING,
     intendedRole: d.intendedRole ?? null,
+    companyName: d.companyName ?? null,
   }
 }
 
