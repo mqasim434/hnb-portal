@@ -67,6 +67,7 @@ export default function CompanyAssignments() {
   const [applicationsByAssignment, setApplicationsByAssignment] = useState({})
   const [applicationsLoadingId, setApplicationsLoadingId] = useState(null)
   const [selectingApplicationId, setSelectingApplicationId] = useState(null)
+  const [showCreateForm, setShowCreateForm] = useState(false)
 
   const loadData = useCallback(async () => {
     if (!user?.uid) return
@@ -173,6 +174,7 @@ export default function CompanyAssignments() {
         email: user.email,
       })
       setCreateForm(EMPTY_FORM)
+      setShowCreateForm(false)
       await loadData()
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Opdracht aanmaken mislukt.')
@@ -196,46 +198,45 @@ export default function CompanyAssignments() {
         freelancers ze zien in <strong>Open opdrachten</strong> en kunnen solliciteren.
       </p>
 
-      <section
-        className="compliance-card"
-        style={{ marginTop: 'var(--space-6)', maxWidth: '48rem' }}
-        aria-labelledby="company-create-assignment-title"
+      <div
+        className="admin-onboarding-toolbar"
+        style={{
+          marginTop: 'var(--space-6)',
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 'var(--space-4)',
+        }}
       >
-        <h2 id="company-create-assignment-title" className="compliance-card__title">
-          Nieuwe opdracht plaatsen
-        </h2>
-        <form className="compliance-card__form" onSubmit={handleCreate} noValidate>
-          <AssignmentFields
-            variant="company"
-            values={createForm}
-            onChange={(field, value) => setCreateForm((prev) => ({ ...prev, [field]: value }))}
-          />
-          <button
-            type="submit"
-            className="hnb-btn hnb-btn--primary"
-            disabled={actionId === 'create'}
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 'var(--space-3)' }}>
+          <label className="admin-onboarding-filter" htmlFor="company-assignment-filter">
+            Status
+          </label>
+          <select
+            id="company-assignment-filter"
+            className="admin-onboarding-filter__select"
+            value={filter}
+            onChange={(event) => setFilter(event.target.value)}
           >
-            {actionId === 'create' ? 'Opslaan…' : 'Opdracht plaatsen'}
-          </button>
-        </form>
-      </section>
+            {FILTER_OPTIONS.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <div className="admin-onboarding-toolbar" style={{ marginTop: 'var(--space-6)' }}>
-        <label className="admin-onboarding-filter" htmlFor="company-assignment-filter">
-          Status
-        </label>
-        <select
-          id="company-assignment-filter"
-          className="admin-onboarding-filter__select"
-          value={filter}
-          onChange={(event) => setFilter(event.target.value)}
+        <button
+          type="button"
+          className="hnb-btn hnb-btn--primary"
+          onClick={() => {
+            setShowCreateForm((open) => !open)
+            setExpandedId(null)
+          }}
         >
-          {FILTER_OPTIONS.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
+          {showCreateForm ? 'Annuleren' : 'Nieuwe opdracht'}
+        </button>
       </div>
 
       {error ? (
@@ -244,11 +245,51 @@ export default function CompanyAssignments() {
         </div>
       ) : null}
 
+      {showCreateForm ? (
+        <section
+          className="compliance-card"
+          style={{ marginTop: 'var(--space-5)', maxWidth: '48rem' }}
+          aria-labelledby="company-create-assignment-title"
+        >
+          <h2 id="company-create-assignment-title" className="compliance-card__title">
+            Nieuwe opdracht plaatsen
+          </h2>
+          <form className="compliance-card__form" onSubmit={handleCreate} noValidate>
+            <AssignmentFields
+              variant="company"
+              values={createForm}
+              onChange={(field, value) => setCreateForm((prev) => ({ ...prev, [field]: value }))}
+            />
+            <div className="admin-users-actions">
+              <button
+                type="submit"
+                className="hnb-btn hnb-btn--primary"
+                disabled={actionId === 'create'}
+              >
+                {actionId === 'create' ? 'Opslaan…' : 'Opdracht plaatsen'}
+              </button>
+              <button
+                type="button"
+                className="hnb-btn hnb-btn--outline"
+                disabled={actionId === 'create'}
+                onClick={() => {
+                  setShowCreateForm(false)
+                  setCreateForm(EMPTY_FORM)
+                }}
+              >
+                Annuleren
+              </button>
+            </div>
+          </form>
+        </section>
+      ) : null}
+
       {loading ? (
         <p style={{ marginTop: 'var(--space-5)' }}>Laden…</p>
       ) : assignments.length === 0 ? (
         <p style={{ marginTop: 'var(--space-5)' }}>
-          Nog geen opdrachten. Maak hierboven je eerste opdracht aan.
+          Nog geen opdrachten. Klik op <strong>Nieuwe opdracht</strong> om je eerste opdracht te
+          plaatsen.
         </p>
       ) : (
         <div style={{ marginTop: 'var(--space-5)', overflowX: 'auto' }}>
