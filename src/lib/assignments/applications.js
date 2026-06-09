@@ -3,7 +3,9 @@ import {
   doc,
   getDoc,
   getDocs,
+  orderBy,
   query,
+  runTransaction,
   serverTimestamp,
   setDoc,
   updateDoc,
@@ -156,6 +158,105 @@ export async function applyToAssignment(assignment, freelancer, message = '') {
   }
 
   return { id: applicationId }
+}
+
+/**
+ * @param {string} assignmentId
+ * @param {string} companyId
+ */
+export async function fetchApplicationsForAssignment(assignmentId, companyId) {
+  const db = assertFirestore()
+  assertSignedIn()
+
+  const snap = await getDocs(
+    query(
+      collection(db, 'assignmentApplications'),
+      where('assignmentId', '==', assignmentId),
+      where('companyId', '==', companyId),
+      orderBy('createdAt', 'desc'),
+    ),
+  )
+
+  return snap.docs.map((docSnap) => mapApplication(docSnap.id, docSnap.data()))
+}
+
+/**
+ * Company selects one freelancer for an open opdracht (Module 4).
+ * @param {string} assignmentId
+ * @param {string} companyId
+ * @param {string} applicationId
+ */
+export async function selectFreelancerForAssignment(assignmentId, companyId, applicationId) {
+  const db = assertFirestore()
+  assertSignedIn()
+
+  await runTransaction(db, async (transaction) => {
+    const assignmentRef = doc(db, 'assignments', assignmentId)
+    const selectedRef = doc(db, 'assignmentApplications', applicationId)
+
+    const [assignmentSnap, selectedSnap] = await Promise.all([
+      transaction.get(assignmentRef),
+      transaction.get(selectedRef),
+    ])
+
+    if (!assignmentSnap.exists()) {
+      throw new Error('Opdracht niet gevonden.')
+    }
+
+    const assignmentData = assignmentSnap.data()
+    if (assignmentData.companyId !== companyId) {
+      throw new Error('Geen toegang tot deze opdracht.')
+    }
+    if (assignmentData.status !== ASSIGNMENT_STATUS.OPEN) {
+      throw new Error('Deze opdracht accepteert geen selecties meer.')
+    }
+
+    if (!selectedSnap.exists()) {
+      throw new Error('Sollicitatie niet gevonden.')
+    }
+
+    const selected = selectedSnap.data()
+    if (selected.assignmentId !== assignmentId || selected.companyId !== companyId) {
+      throw new Error('Sollicitatie hoort niet bij deze opdracht.')
+    }
+    if (selected.status !== APPLICATION_STATUS.PENDING) {
+      throw new Error('Deze sollicitatie kan niet meer worden geselecteerd.')
+    }
+
+    const applicationsSnap = await transaction.get(
+      query(collection(db, 'assignmentApplications'), where('assignmentId', '==', assignmentId)),
+    )
+
+    for (const applicationDoc of applicationsSnap.docs) {
+      const data = applicationDoc.data()
+      if (data.companyId !== companyId) continue
+
+      if (applicationDoc.id === applicationId) {
+        transaction.update(applicationDoc.ref, {
+          status: APPLICATION_STATUS.ACCEPTED,
+          updatedAt: serverTimestamp(),
+        })
+      } else if (data.status === APPLICATION_STATUS.PENDING) {
+        transaction.update(applicationDoc.ref, {
+          status: APPLICATION_STATUS.REJECTED,
+          updatedAt: serverTimestamp(),
+        })
+      }
+    }
+
+    transaction.update(assignmentRef, {
+      status: ASSIGNMENT_STATUS.ASSIGNED,
+      assignedFreelancerIds: [selected.freelancerId],
+      assignedFreelancers: [
+        {
+          uid: selected.freelancerId,
+          displayName: selected.freelancerName ?? '',
+          email: selected.freelancerEmail ?? '',
+        },
+      ],
+      updatedAt: serverTimestamp(),
+    })
+  })
 }
 
 export { mapApplication }

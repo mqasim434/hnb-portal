@@ -51,7 +51,7 @@ export default function AdminAssignments() {
       <h1 className="hnb-type-section">Opdrachten — overzicht</h1>
       <p className="hnb-type-subhead" style={{ marginTop: 'var(--space-3)', maxWidth: '48rem' }}>
         Bedrijven plaatsen opdrachten via het bedrijfsportaal. H&amp;B ziet hier alle opdrachten.
-        Freelancers solliciteren via de feed; bedrijven selecteren kandidaten (Module 4).
+        Freelancers solliciteren via de feed; bedrijven selecteren kandidaten in het bedrijfsportaal.
       </p>
 
       <div className="admin-onboarding-toolbar" style={{ marginTop: 'var(--space-6)' }}>

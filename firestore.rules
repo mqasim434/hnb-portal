@@ -164,6 +164,19 @@ service cloud.firestore {
           && validAssignmentCore();
       }
 
+      function validCompanySelectFreelancerUpdate() {
+        return isCompany()
+          && resource.data.companyId == request.auth.uid
+          && resource.data.status == 'open'
+          && request.resource.data.companyId == resource.data.companyId
+          && request.resource.data.createdBy == resource.data.createdBy
+          && request.resource.data.status == 'assigned'
+          && request.resource.data.assignedFreelancerIds.size() == 1
+          && request.resource.data.assignedFreelancers.size() == 1
+          && request.resource.data.assignedFreelancerIds[0] == request.resource.data.assignedFreelancers[0].uid
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'assignedFreelancerIds', 'assignedFreelancers', 'updatedAt']);
+      }
+
       function assignedFreelancerIdsUnchanged() {
         let hadField = resource.data.keys().hasAll(['assignedFreelancerIds']);
         let hasField = request.resource.data.keys().hasAll(['assignedFreelancerIds']);
@@ -196,6 +209,7 @@ service cloud.firestore {
 
       allow update: if isAdmin()
         || validCompanyAssignmentUpdate()
+        || validCompanySelectFreelancerUpdate()
         || validFreelancerApplicationCountBump();
 
       allow delete: if isAdmin()
@@ -226,9 +240,27 @@ service cloud.firestore {
         || (isCompany() && resource != null && resource.data.companyId == request.auth.uid)
         || (isActiveFreelancer() && resource == null);
 
+      function validCompanyApplicationStatusUpdate() {
+        let assignmentDoc = get(/databases/$(database)/documents/assignments/$(resource.data.assignmentId));
+        return isCompany()
+          && resource.data.companyId == request.auth.uid
+          && resource.data.status == 'pending'
+          && request.resource.data.companyId == resource.data.companyId
+          && request.resource.data.freelancerId == resource.data.freelancerId
+          && request.resource.data.assignmentId == resource.data.assignmentId
+          && request.resource.data.status in ['accepted', 'rejected']
+          && assignmentDoc.data.keys().hasAll(['companyId', 'status'])
+          && assignmentDoc.data.companyId == request.auth.uid
+          && (request.resource.data.status == 'rejected'
+              || assignmentDoc.data.status == 'open')
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt']);
+      }
+
       allow create: if validApplicationCreate();
 
-      allow update, delete: if isAdmin();
+      allow update: if isAdmin() || validCompanyApplicationStatusUpdate();
+
+      allow delete: if isAdmin();
     }
 
     match /timeEntries/{entryId} {

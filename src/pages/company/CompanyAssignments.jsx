@@ -2,6 +2,10 @@ import { useCallback, useEffect, useState, Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import AssignmentFields from '../../components/AssignmentFields'
 import {
+  applicationStatusLabel,
+  APPLICATION_STATUS,
+} from '../../constants/assignmentApplications'
+import {
   ASSIGNMENT_STATUS,
   ASSIGNMENT_STATUS_OPTIONS,
   assignmentStatusLabel,
@@ -14,6 +18,10 @@ import {
   fetchAssignmentsForCompany,
   updateAssignmentForCompany,
 } from '../../lib/assignments/assignments'
+import {
+  fetchApplicationsForAssignment,
+  selectFreelancerForAssignment,
+} from '../../lib/assignments/applications'
 import '../auth/Auth.css'
 
 const EMPTY_FORM = {
@@ -56,6 +64,9 @@ export default function CompanyAssignments() {
   const [expandedId, setExpandedId] = useState(null)
   const [createForm, setCreateForm] = useState(EMPTY_FORM)
   const [editForms, setEditForms] = useState({})
+  const [applicationsByAssignment, setApplicationsByAssignment] = useState({})
+  const [applicationsLoadingId, setApplicationsLoadingId] = useState(null)
+  const [selectingApplicationId, setSelectingApplicationId] = useState(null)
 
   const loadData = useCallback(async () => {
     if (!user?.uid) return
@@ -95,6 +106,47 @@ export default function CompanyAssignments() {
   useEffect(() => {
     loadData()
   }, [loadData])
+
+  useEffect(() => {
+    if (!expandedId || !user?.uid) return
+
+    let cancelled = false
+    setApplicationsLoadingId(expandedId)
+    fetchApplicationsForAssignment(expandedId, user.uid)
+      .then((rows) => {
+        if (!cancelled) {
+          setApplicationsByAssignment((prev) => ({ ...prev, [expandedId]: rows }))
+        }
+      })
+      .catch((err) => {
+        if (!cancelled) {
+          setError(err instanceof Error ? err.message : 'Sollicitaties laden mislukt.')
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setApplicationsLoadingId(null)
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [expandedId, user?.uid])
+
+  async function handleSelectFreelancer(assignmentId, applicationId) {
+    if (!user?.uid) return
+    setSelectingApplicationId(applicationId)
+    setError(null)
+    try {
+      await selectFreelancerForAssignment(assignmentId, user.uid, applicationId)
+      await loadData()
+      const rows = await fetchApplicationsForAssignment(assignmentId, user.uid)
+      setApplicationsByAssignment((prev) => ({ ...prev, [assignmentId]: rows }))
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Selectie mislukt.')
+    } finally {
+      setSelectingApplicationId(null)
+    }
+  }
 
   async function runAction(id, action) {
     setActionId(id)
@@ -257,7 +309,19 @@ export default function CompanyAssignments() {
                           <div className="admin-onboarding-detail">
                             {isAssigned ? (
                               <div className="auth-alert auth-alert--info" role="status">
-                                Deze opdracht is toegewezen. Bewerken is niet meer mogelijk.
+                                Deze opdracht is toegewezen
+                                {assignment.assignedFreelancers?.length > 0 ? (
+                                  <>
+                                    {' '}
+                                    aan{' '}
+                                    <strong>
+                                      {assignment.assignedFreelancers
+                                        .map((f) => f.displayName || f.email || f.uid)
+                                        .join(', ')}
+                                    </strong>
+                                  </>
+                                ) : null}
+                                . Bewerken is niet meer mogelijk.
                               </div>
                             ) : (
                               <form
@@ -306,6 +370,85 @@ export default function CompanyAssignments() {
                                 </div>
                               </form>
                             )}
+
+                            <section style={{ marginTop: 'var(--space-5)' }}>
+                              <h3 className="hnb-type-subhead">Sollicitaties</h3>
+                              {applicationsLoadingId === assignment.id ? (
+                                <p style={{ marginTop: 'var(--space-3)' }}>Sollicitaties laden…</p>
+                              ) : (applicationsByAssignment[assignment.id] ?? []).length === 0 ? (
+                                <p style={{ marginTop: 'var(--space-3)', color: 'var(--text-muted)' }}>
+                                  Nog geen sollicitaties ontvangen.
+                                </p>
+                              ) : (
+                                <div style={{ marginTop: 'var(--space-3)', overflowX: 'auto' }}>
+                                  <table className="admin-users-table admin-onboarding-table">
+                                    <thead>
+                                      <tr>
+                                        <th>Freelancer</th>
+                                        <th>Motivatie</th>
+                                        <th>Status</th>
+                                        <th>Datum</th>
+                                        {!isAssigned ? <th>Actie</th> : null}
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {(applicationsByAssignment[assignment.id] ?? []).map((application) => {
+                                        const isSelecting = selectingApplicationId === application.id
+                                        const canSelect =
+                                          !isAssigned && application.status === APPLICATION_STATUS.PENDING
+
+                                        return (
+                                          <tr key={application.id}>
+                                            <td>
+                                              <strong>
+                                                {application.freelancerName || 'Freelancer'}
+                                              </strong>
+                                              {application.freelancerEmail ? (
+                                                <>
+                                                  <br />
+                                                  <span
+                                                    style={{
+                                                      color: 'var(--text-muted)',
+                                                      fontSize: '0.85rem',
+                                                    }}
+                                                  >
+                                                    {application.freelancerEmail}
+                                                  </span>
+                                                </>
+                                              ) : null}
+                                            </td>
+                                            <td>{application.message || '—'}</td>
+                                            <td>{applicationStatusLabel(application.status)}</td>
+                                            <td>{formatTimestamp(application.createdAt)}</td>
+                                            {!isAssigned ? (
+                                              <td>
+                                                {canSelect ? (
+                                                  <button
+                                                    type="button"
+                                                    className="hnb-btn hnb-btn--primary"
+                                                    disabled={Boolean(selectingApplicationId)}
+                                                    onClick={() =>
+                                                      handleSelectFreelancer(
+                                                        assignment.id,
+                                                        application.id,
+                                                      )
+                                                    }
+                                                  >
+                                                    {isSelecting ? 'Bezig…' : 'Selecteren'}
+                                                  </button>
+                                                ) : (
+                                                  '—'
+                                                )}
+                                              </td>
+                                            ) : null}
+                                          </tr>
+                                        )
+                                      })}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              )}
+                            </section>
 
                             <p style={{ marginTop: 'var(--space-4)', color: 'var(--text-muted)' }}>
                               Geplaatst: {formatTimestamp(assignment.createdAt)}
