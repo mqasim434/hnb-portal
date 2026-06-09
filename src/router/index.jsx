@@ -241,22 +241,32 @@ export const router = createBrowserRouter([
 
       {
         path: 'admin',
-        element: <ProtectedRoute allowedRole="admin" layout="admin" />,
         children: [
-          { index: true, element: <Navigate to="/admin/dashboard" replace /> },
-          { path: 'dashboard', lazy: page(() => import('../pages/admin/AdminDashboard')) },
-          { path: 'staff-requests', lazy: page(() => import('../pages/admin/AdminStaffRequests')) },
-          { path: 'users', lazy: page(() => import('../pages/admin/AdminUsers')) },
-          { path: 'onboarding', lazy: page(() => import('../pages/admin/AdminOnboarding')) },
+          { path: 'login', lazy: page(() => import('../pages/auth/AdminLoginPage')) },
           {
-            path: 'assignments',
-            lazy: page(() => import('../pages/admin/AdminAssignments')),
-          },
-          { path: 'hours', lazy: page(() => import('../pages/admin/AdminHours')) },
-          { path: 'invoices', lazy: page(() => import('../pages/admin/AdminInvoices')) },
-          {
-            path: 'compliance',
-            lazy: page(() => import('../pages/admin/AdminCompliance')),
+            element: (
+              <ProtectedRoute allowedRole="admin" layout="admin" loginPath="/admin/login" />
+            ),
+            children: [
+              { index: true, element: <Navigate to="/admin/dashboard" replace /> },
+              { path: 'dashboard', lazy: page(() => import('../pages/admin/AdminDashboard')) },
+              {
+                path: 'staff-requests',
+                lazy: page(() => import('../pages/admin/AdminStaffRequests')),
+              },
+              { path: 'users', lazy: page(() => import('../pages/admin/AdminUsers')) },
+              { path: 'onboarding', lazy: page(() => import('../pages/admin/AdminOnboarding')) },
+              {
+                path: 'assignments',
+                lazy: page(() => import('../pages/admin/AdminAssignments')),
+              },
+              { path: 'hours', lazy: page(() => import('../pages/admin/AdminHours')) },
+              { path: 'invoices', lazy: page(() => import('../pages/admin/AdminInvoices')) },
+              {
+                path: 'compliance',
+                lazy: page(() => import('../pages/admin/AdminCompliance')),
+              },
+            ],
           },
         ],
       },

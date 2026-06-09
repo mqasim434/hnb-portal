@@ -8,9 +8,13 @@ import PortalLayout from '../layouts/PortalLayout'
 import PageRouteSkeleton from './performance/PageRouteSkeleton'
 
 /**
- * @param {{ allowedRole: 'admin' | 'freelancer' | 'company', layout?: 'portal' | 'admin' | 'company' }} props
+ * @param {{
+ *   allowedRole: 'admin' | 'freelancer' | 'company'
+ *   layout?: 'portal' | 'admin' | 'company'
+ *   loginPath?: string
+ * }} props
  */
-export default function ProtectedRoute({ allowedRole, layout }) {
+export default function ProtectedRoute({ allowedRole, layout, loginPath = '/login' }) {
   const { user, role, accountStatus, loading } = useSelector((state) => state.auth)
   const location = useLocation()
 
@@ -27,7 +31,7 @@ export default function ProtectedRoute({ allowedRole, layout }) {
   }
 
   if (!user) {
-    return <Navigate to="/login" replace state={{ from: location.pathname }} />
+    return <Navigate to={loginPath} replace state={{ from: location.pathname }} />
   }
 
   if (

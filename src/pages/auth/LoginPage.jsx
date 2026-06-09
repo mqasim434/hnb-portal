@@ -10,6 +10,91 @@ import { mapAuthError, signInWithEmail } from '../../lib/auth/authService'
 import { auth } from '../../firebase/config'
 import './LoginPage.css'
 
+/**
+ * @param {{
+ *   emailId: string
+ *   passwordId: string
+ *   emailPlaceholder: string
+ *   submitLabel: string
+ *   submittingLabel: string
+ *   buttonClassName: string
+ * }} props
+ */
+function PortalLoginForm({
+  emailId,
+  passwordId,
+  emailPlaceholder,
+  submitLabel,
+  submittingLabel,
+  buttonClassName,
+}) {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState(null)
+
+  async function handleSubmit(event) {
+    event.preventDefault()
+    setError(null)
+    setSubmitting(true)
+    try {
+      await signInWithEmail({ email, password })
+    } catch (err) {
+      setError(mapAuthError(err))
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  return (
+    <form className="login-form" onSubmit={handleSubmit} noValidate>
+      {error ? (
+        <div className="login-form__alert login-form__alert--error" role="alert">
+          {error}
+        </div>
+      ) : null}
+
+      <div className="login-form__field">
+        <label htmlFor={emailId}>E-mailadres</label>
+        <input
+          id={emailId}
+          className="login-form__input"
+          type="email"
+          autoComplete="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder={emailPlaceholder}
+        />
+      </div>
+
+      <div className="login-form__field">
+        <label htmlFor={passwordId}>Wachtwoord</label>
+        <input
+          id={passwordId}
+          className="login-form__input"
+          type="password"
+          autoComplete="current-password"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+
+      <div className="login-form__footer">
+        <Link className="login-form__forgot" to="/auth/forgot-password">
+          Wachtwoord vergeten?
+        </Link>
+      </div>
+
+      <button type="submit" className={buttonClassName} disabled={submitting}>
+        {submitting ? submittingLabel : submitLabel}
+        {!submitting ? <FiArrowRight className="login-card__btn-icon" aria-hidden /> : null}
+      </button>
+    </form>
+  )
+}
+
 export default function Login() {
   usePageSeo({
     title: LOGIN_SEO.title,
@@ -20,11 +105,6 @@ export default function Login() {
   const navigate = useNavigate()
   const location = useLocation()
   const { user, role, accountStatus, loading } = useSelector((state) => state.auth)
-
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [submitting, setSubmitting] = useState(false)
-  const [error, setError] = useState(null)
 
   const firebaseReady = Boolean(auth)
   const redirectPath = location.state?.from
@@ -46,19 +126,6 @@ export default function Login() {
       navigate(getRoleHomePath(role), { replace: true })
     }
   }, [user, role, accountStatus, loading, navigate, redirectPath])
-
-  async function handleSubmit(event) {
-    event.preventDefault()
-    setError(null)
-    setSubmitting(true)
-    try {
-      await signInWithEmail({ email, password })
-    } catch (err) {
-      setError(mapAuthError(err))
-    } finally {
-      setSubmitting(false)
-    }
-  }
 
   return (
     <main className="login-page">
@@ -96,57 +163,14 @@ export default function Login() {
                   </div>
                 </div>
               ) : (
-                <form className="login-form" onSubmit={handleSubmit} noValidate>
-                  {error ? (
-                    <div className="login-form__alert login-form__alert--error" role="alert">
-                      {error}
-                    </div>
-                  ) : null}
-
-                  <div className="login-form__field">
-                    <label htmlFor="login-email">E-mailadres</label>
-                    <input
-                      id="login-email"
-                      className="login-form__input"
-                      type="email"
-                      autoComplete="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="naam@voorbeeld.nl"
-                    />
-                  </div>
-
-                  <div className="login-form__field">
-                    <label htmlFor="login-password">Wachtwoord</label>
-                    <input
-                      id="login-password"
-                      className="login-form__input"
-                      type="password"
-                      autoComplete="current-password"
-                      required
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </div>
-
-                  <div className="login-form__footer">
-                    <Link className="login-form__forgot" to="/auth/forgot-password">
-                      Wachtwoord vergeten?
-                    </Link>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="hnb-btn hnb-btn--freelancer login-card__btn"
-                    disabled={submitting}
-                  >
-                    {submitting ? 'Bezig met inloggen…' : 'Inloggen als freelancer'}
-                    {!submitting ? (
-                      <FiArrowRight className="login-card__btn-icon" aria-hidden />
-                    ) : null}
-                  </button>
-                </form>
+                <PortalLoginForm
+                  emailId="login-freelancer-email"
+                  passwordId="login-freelancer-password"
+                  emailPlaceholder="naam@voorbeeld.nl"
+                  submitLabel="Inloggen als freelancer"
+                  submittingLabel="Bezig met inloggen…"
+                  buttonClassName="hnb-btn hnb-btn--freelancer login-card__btn"
+                />
               )}
             </div>
 
@@ -185,57 +209,14 @@ export default function Login() {
                   </div>
                 </div>
               ) : (
-                <form className="login-form" onSubmit={handleSubmit} noValidate>
-                  {error ? (
-                    <div className="login-form__alert login-form__alert--error" role="alert">
-                      {error}
-                    </div>
-                  ) : null}
-
-                  <div className="login-form__field">
-                    <label htmlFor="company-login-email">E-mailadres</label>
-                    <input
-                      id="company-login-email"
-                      className="login-form__input"
-                      type="email"
-                      autoComplete="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="naam@bedrijf.nl"
-                    />
-                  </div>
-
-                  <div className="login-form__field">
-                    <label htmlFor="company-login-password">Wachtwoord</label>
-                    <input
-                      id="company-login-password"
-                      className="login-form__input"
-                      type="password"
-                      autoComplete="current-password"
-                      required
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </div>
-
-                  <div className="login-form__footer">
-                    <Link className="login-form__forgot" to="/auth/forgot-password">
-                      Wachtwoord vergeten?
-                    </Link>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="hnb-btn hnb-btn--primary login-card__btn"
-                    disabled={submitting}
-                  >
-                    {submitting ? 'Bezig met inloggen…' : 'Inloggen als opdrachtgever'}
-                    {!submitting ? (
-                      <FiArrowRight className="login-card__btn-icon" aria-hidden />
-                    ) : null}
-                  </button>
-                </form>
+                <PortalLoginForm
+                  emailId="login-company-email"
+                  passwordId="login-company-password"
+                  emailPlaceholder="naam@bedrijf.nl"
+                  submitLabel="Inloggen als opdrachtgever"
+                  submittingLabel="Bezig met inloggen…"
+                  buttonClassName="hnb-btn hnb-btn--primary login-card__btn"
+                />
               )}
             </div>
 
