@@ -297,6 +297,14 @@
   color: var(--color-gold);
 }
 
+.site-header__login--btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  width: 100%;
+}
+
 .site-header__drawer-contact {
   margin-top: var(--space-8);
   padding-top: var(--space-6);
@@ -532,6 +540,17 @@
   }
 
   .site-header__login--active {
+    color: var(--color-gold);
+  }
+
+  .site-header__login--btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .site-header__login--btn:hover {
     color: var(--color-gold);
   }
 }

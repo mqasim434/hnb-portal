@@ -660,6 +660,47 @@
   margin-top: var(--space-2);
 }
 
+#b2b-request-form {
+  scroll-margin-top: 6rem;
+}
+
+.b2b-form__fieldset {
+  border: none;
+  margin: 0 0 var(--space-5);
+  padding: 0;
+  min-width: 0;
+}
+
+.b2b-form__checks {
+  display: grid;
+  gap: var(--space-3);
+}
+
+@media (min-width: 480px) {
+  .b2b-form__checks {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.b2b-form__advies-panel {
+  margin: var(--space-4) 0 var(--space-5);
+  padding: var(--space-5);
+  border-radius: var(--radius-card);
+  border: 1px solid color-mix(in srgb, var(--color-gold) 35%, var(--border));
+  background: color-mix(in srgb, var(--color-gold) 8%, var(--surface-raised));
+}
+
+.b2b-form__location-row {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  margin-bottom: var(--space-3);
+}
+
+.b2b-form__location-row .b2b-form__input {
+  flex: 1;
+}
+
 .b2b-form input:disabled,
 .b2b-form select:disabled,
 .b2b-form textarea:disabled {

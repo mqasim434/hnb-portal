@@ -17,13 +17,13 @@ export default function BedrijvenHospitalitySecuritySplit() {
       <div className="b2b-split__grid">
         <article className="b2b-split__panel b2b-split__panel--hospitality">
           <h3>
-            <FiCoffee aria-hidden /> Hospitality
+            <FiCoffee aria-hidden /> Servicemedewerkers (hosts)
           </h3>
           <p className="b2b-split__panel-text">{d.hospitalityBody}</p>
         </article>
         <article className="b2b-split__panel b2b-split__panel--security">
           <h3>
-            <FiShield aria-hidden /> Beveiliging &amp; support
+            <FiShield aria-hidden /> Beveiliging
           </h3>
           <ul>
             {d.securityBullets.map((t) => (

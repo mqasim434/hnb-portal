@@ -1,13 +1,13 @@
 /** Disciplines-blok voor /bedrijven/ons-aanbod (BedrijvenHospitalitySecuritySplit). */
 export const B2B_DISCIPLINES_SECTION = {
   eyebrow: 'DISCIPLINES',
-  title: 'Hospitality en beveiliging naast elkaar',
+  title: 'Servicemedewerkers en beveiliging naast elkaar',
   intro:
-    'Eén briefing en afgestemde call times — ideaal wanneer gastbeleving en gecontroleerde toegang samenkomen.',
+    'Twee hoofdcategorieën onder één briefing — ideaal wanneer gastbeleving en gecontroleerde toegang samenkomen.',
   hospitalityBody:
-    'Hosts, barteams en service-ondersteuning voor hoge drukte. Representatief gastheerschap dat past bij uw merk, met heldere afspraken over dresscode, aanspreektoon en service-windows.',
+    'Servicemedewerkers (hosts) voor ontvangst, routing en representatie. Representatief en professioneel, afgestemd op uw locatie, dresscode en verwachtingen.',
   securityBullets: [
-    'Bevoegde portiers en eventbeveiliging, afgestemd op uw locatiebeleid en de eisen van uw vergunning.',
-    'Algemeen eventpersoneel voor runners, accreditatie en logistiek backstage.',
+    'Bevoegde portiers, eventbeveiliging en objectbeveiliging — afgestemd op uw locatiebeleid.',
+    'Alleen inroosteren waar diploma, beveiligingspas en locatie-eisen aantoonbaar kloppen.',
   ],
 }

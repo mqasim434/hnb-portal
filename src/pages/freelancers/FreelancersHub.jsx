@@ -28,19 +28,19 @@ const CARDS = [
     to: '/freelancers/jouw-certificering',
     label: 'Compliance',
     title: 'Jouw certificering',
-    text: 'Overzicht per domein: hospitality en beveiliging, inclusief veelvoorkomende locatie-eisen.',
+    text: 'Overzicht per domein: servicemedewerker en beveiliging, inclusief veelvoorkomende locatie-eisen.',
   },
   {
     to: '/freelancers/direct-aanmelden',
     label: 'Aanmelden',
     title: 'Direct aanmelden',
-    text: 'Start uw profiel: voorkeursrollen, beschikbaarheid en contactgegevens. Wij nemen persoonlijk contact op.',
+    text: 'Start uw profiel: domein, ervaringsjaren en contactgegevens. Wij nemen persoonlijk contact op.',
   },
   {
     to: '/contact',
     label: 'Contact',
     title: 'Vragen vóór u zich aanmeldt?',
-    text: 'Ons team helpt met certificering, beschikbaarheid en praktische verwachtingen op locatie.',
+    text: 'Ons team helpt met certificering, beveiligingspassen en praktische verwachtingen op locatie.',
     linkText: 'Contact opnemen →',
   },
 ]
@@ -59,13 +59,13 @@ export default function FreelancersHub() {
         variant="navy"
         eyebrow="Freelancers"
         title="Werk dat past bij uw vak"
-        lead="H&B Service Group verbindt u aan hospitality- en beveiligingsopdrachten met duidelijke afspraken, vaste communicatielijnen en ondersteuning vanuit Amsterdam."
+        lead="H&B Service Group verbindt u aan opdrachten als servicemedewerker of beveiliger — met duidelijke afspraken, vaste communicatielijnen en ondersteuning."
         stackCtasOnMobile
       >
         <Link to="/freelancers/openstaande-opdrachten" className="hnb-btn hnb-btn--freelancer">
           Bekijk opdrachten
         </Link>
-        <Link to="/freelancers/direct-aanmelden" className="hnb-btn hnb-btn--freelancer">
+        <Link to="/freelancers/direct-aanmelden" className="hnb-btn hnb-btn--primary">
           Direct aanmelden
         </Link>
       </PageHero>

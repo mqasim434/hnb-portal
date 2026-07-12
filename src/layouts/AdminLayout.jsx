@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import AppShellHeader from '../components/AppShellHeader'
 import { signOutUser } from '../lib/auth/authService'
+import { clearAuth } from '../store/slices/authSlice'
 import './AppShellLayout.css'
 
 const ADMIN_LINKS = [
@@ -17,11 +18,16 @@ const ADMIN_LINKS = [
 
 export default function AdminLayout({ children }) {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
 
   async function handleLogout() {
-    await signOutUser()
-    navigate('/admin/login')
+    try {
+      await signOutUser()
+    } finally {
+      dispatch(clearAuth())
+      navigate('/admin/login', { replace: true })
+    }
   }
 
   return (

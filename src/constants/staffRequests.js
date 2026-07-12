@@ -21,9 +21,16 @@ export function staffRequestStatusLabel(status) {
 
 /** @param {string | null | undefined} staffType */
 export function staffTypeLabel(staffType) {
+  if (!staffType) return '—'
+  if (staffType.includes(',')) {
+    return staffType
+      .split(',')
+      .map((part) => staffTypeLabel(part.trim()))
+      .join(', ')
+  }
   switch (staffType) {
     case 'hospitality':
-      return 'Hospitality'
+      return 'Servicemedewerker'
     case 'beveiliging':
       return 'Beveiliging'
     case 'gemengd':
@@ -38,12 +45,18 @@ export function staffTypeLabel(staffType) {
 /** @param {string | null | undefined} eventType */
 export function eventTypeLabel(eventType) {
   switch (eventType) {
+    case 'advies':
+      return 'Adviesgesprek'
     case 'festival':
       return 'Festival'
     case 'corporate':
       return 'Corporate event'
+    case 'advies':
+      return 'Adviesgesprek'
+    case 'objecten':
+      return 'Objecten'
     case 'club':
-      return 'Clubavond'
+      return 'Objecten'
     case 'theater':
       return 'Theater of arena'
     case 'particulier':

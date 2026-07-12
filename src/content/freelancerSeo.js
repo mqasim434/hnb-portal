@@ -3,7 +3,7 @@ export const FREELANCER_SEO = {
   hub: {
     title: 'Freelancers bij H&B Service Group',
     description:
-      'Werk op events in hospitality en beveiliging via H&B: openstaande opdrachten, heldere processen, fair uitbetaling en ondersteuning vanuit Amsterdam.',
+      'Werk als servicemedewerker of beveiliger via H&B: openstaande opdrachten, heldere processen, fair uitbetaling en ondersteuning.',
     path: '/freelancers',
   },
   openstaande: {
@@ -21,19 +21,19 @@ export const FREELANCER_SEO = {
   inkomsten: {
     title: 'Inkomsten en betalingen voor freelancers',
     description:
-      'Tarieven, uren, facturatie en betaaltermijnen bij H&B Service Group — eerlijke afspraken voor hospitality- en beveiligingsprofessionals.',
+      'Tarieven, uren, facturatie en betaaltermijnen bij H&B Service Group — eerlijke afspraken voor servicemedewerkers en beveiligers.',
     path: '/freelancers/inkomsten-betalingen',
   },
   certificering: {
-    title: 'Jouw certificering — hospitality en beveiliging',
+    title: 'Jouw certificering — servicemedewerker en beveiliging',
     description:
-      'Welke diploma’s en vergunningen gelden voor hospitality en beveiliging bij H&B Service Group? Overzicht per domein en locatie-eisen.',
+      'Welke diploma’s en beveiligingspassen gelden bij H&B Service Group? Overzicht per domein en locatie-eisen.',
     path: '/freelancers/jouw-certificering',
   },
   aanmelden: {
     title: 'Direct aanmelden als freelancer',
     description:
-      'Meldt u aan bij H&B Service Group: voorkeursrollen, beschikbaarheid en contact. Na verzending sturen wij een bevestiging en volgen de vervolgstappen.',
+      'Meldt u aan bij H&B Service Group: domein, ervaring en contact. Na verzending sturen wij een bevestiging en volgen de vervolgstappen.',
     path: '/freelancers/direct-aanmelden',
   },
 }

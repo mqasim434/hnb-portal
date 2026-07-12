@@ -111,9 +111,57 @@
 
 | # | Action | Expected |
 |---|--------|----------|
-| B.1 | `/bedrijven/personeel-aanvragen` | Submit form |
-| B.2 | Firestore | `staffRequests` doc with `status: new` |
-| B.3 | Admin → `/admin/staff-requests` | Request visible; status can be updated |
+| B.1 | `/bedrijven/personeel-aanvragen` | Hero CTA scrolls to `#b2b-request-form` (not page header) |
+| B.2 | Submit form with multi-select staff types and locations | Success message; doc in `staffRequests` with `status: new` |
+| B.3 | Select only **Adviesgesprek** | Advies panel shown; event fields optional |
+| B.4 | Admin → `/admin/staff-requests` | Request visible; **Oppakken** / **Afgerond** do not overwrite `adminNotes` |
+
+---
+
+## Company portal (opdrachtgever)
+
+| # | Action | Expected |
+|---|--------|----------|
+| C.1 | Company login → `/company/dashboard` | KPI tiles: open assignments, pending applications, assigned |
+| C.2 | Create assignment → freelancer applies | Application visible on `/company/assignments` |
+| C.3 | Select freelancer | Assignment shows selected freelancer |
+| C.4 | **Uitloggen** (company layout or public navbar) | Redirect to `/` (homepage), not `/login` |
+
+---
+
+## Public UX & auth
+
+| # | Action | Expected |
+|---|--------|----------|
+| U.1 | Logged-in user on public pages | Navbar shows **Mijn portaal** / **Bedrijfsportaal** + **Uitloggen** (no **Inloggen**) |
+| U.2 | Logged-in user visits `/login` without `state.from` | Stays on login page or can browse public site (no forced redirect) |
+| U.3 | Public pages | No site footer (legal pages still at `/juridisch/*`) |
+| U.4 | `/admin/login` | **Wachtwoord vergeten?** links to `/auth/forgot-password` |
+
+---
+
+## Freelancer dashboard UX
+
+| # | Action | Expected |
+|---|--------|----------|
+| F.1 | `/portal/dashboard` with incomplete compliance | Prominent compliance alert at top with link to `/portal/compliance` |
+| F.2 | Dashboard tiles | Bold titles; stats where applicable (open opdrachten, uren, compliance) |
+
+---
+
+## Admin onboarding undo
+
+| # | Action | Expected |
+|---|--------|----------|
+| O.1 | `/admin/onboarding` — approved application | **Terug naar in behandeling** restores `status: pending` |
+
+---
+
+## Invoice PDF
+
+| # | Action | Expected |
+|---|--------|----------|
+| I.1 | Admin or freelancer → invoice **PDF** | Print dialog opens via hidden iframe (works with popup blockers) |
 
 ---
 
@@ -140,6 +188,10 @@
 ## Sign-off checklist
 
 - [ ] Steps 1–8 completed without console errors
+- [ ] B2B form scroll anchor and multi-select validation work
+- [ ] Company selection flow (C.1–C.4) verified if company accounts exist
+- [ ] Public navbar auth state (U.1–U.4) correct
+- [ ] Freelancer compliance alert (F.1) when documents incomplete
 - [ ] Firestore data consistent at each step
 - [ ] Freelancer cannot access admin routes
 - [ ] Pending freelancer cannot access portal routes

@@ -21,6 +21,17 @@ import '../auth/Auth.css'
  *   approvedInvoices: number
  * }} AdminKpis */
 
+const KPI_TONES = {
+  pendingUsers: 'violet',
+  pendingOnboarding: 'blue',
+  newStaffRequests: 'amber',
+  submittedHours: 'orange',
+  pendingCompliance: 'red',
+  draftInvoices: 'teal',
+  approvedInvoices: 'green',
+  activeFreelancers: 'slate',
+}
+
 const KPI_CARDS = [
   {
     key: 'pendingUsers',
@@ -154,34 +165,23 @@ export default function AdminDashboard() {
             gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 10rem), 1fr))',
             gap: 'var(--space-4)',
           }}
+          className="admin-kpi-grid"
         >
-          {KPI_CARDS.map((card) => (
+          {KPI_CARDS.map((card) => {
+            const count = kpis[card.key]
+            const tone = KPI_TONES[card.key] ?? 'slate'
+            const hasWork = count > 0
+            return (
             <Link
               key={card.key}
               to={card.to}
-              className="compliance-card"
-              style={{
-                textDecoration: 'none',
-                color: 'inherit',
-                padding: 'var(--space-5)',
-              }}
+              className={`admin-kpi-card admin-kpi-card--${tone}${hasWork ? ' admin-kpi-card--active' : ''}`}
             >
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: '2rem',
-                  fontWeight: 700,
-                  lineHeight: 1.1,
-                  color: 'var(--brand-freelancer, var(--text-primary))',
-                }}
-              >
-                {kpis[card.key]}
-              </p>
-              <p className="compliance-card__hint" style={{ marginTop: 'var(--space-2)' }}>
-                {card.label}
-              </p>
+              <p className="admin-kpi-card__value">{count}</p>
+              <p className="admin-kpi-card__label">{card.label}</p>
             </Link>
-          ))}
+            )
+          })}
         </div>
       ) : null}
 

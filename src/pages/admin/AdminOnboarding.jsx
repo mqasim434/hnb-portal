@@ -5,6 +5,7 @@ import {
   approveOnboardingApplication,
   fetchOnboardingApplications,
   rejectOnboardingApplication,
+  reopenOnboardingApplication,
   saveOnboardingNotes,
 } from '../../lib/onboarding/applications'
 import '../auth/Auth.css'
@@ -95,6 +96,19 @@ export default function AdminOnboarding() {
       await loadApplications()
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Goedkeuren mislukt.')
+    } finally {
+      setActionId(null)
+    }
+  }
+
+  async function handleReopen(application) {
+    setActionId(application.id)
+    setError(null)
+    try {
+      await reopenOnboardingApplication(application.id, notesDraft[application.id] ?? application.adminNotes)
+      await loadApplications()
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Terugzetten mislukt.')
     } finally {
       setActionId(null)
     }
@@ -212,7 +226,16 @@ export default function AdminOnboarding() {
                                 Afwijzen
                               </button>
                             </>
-                          ) : null}
+                          ) : (
+                            <button
+                              type="button"
+                              className="hnb-btn hnb-btn--outline"
+                              disabled={isBusy}
+                              onClick={() => handleReopen(application)}
+                            >
+                              Terug naar in behandeling
+                            </button>
+                          )}
                         </div>
                       </td>
                     </tr>
@@ -231,13 +254,10 @@ export default function AdminOnboarding() {
                                 <strong>Geboortedatum:</strong> {application.geboortedatum || '—'}
                               </p>
                               <p>
-                                <strong>Ervaring:</strong> {application.ervaringsniveau || '—'}
+                                <strong>Ervaringsjaren:</strong> {application.ervaringsniveau || '—'}
                               </p>
                               <p>
                                 <strong>Rollen:</strong> {formatList(application.voorkeursrollen)}
-                              </p>
-                              <p>
-                                <strong>Beschikbaarheid:</strong> {formatList(application.beschikbaarheid)}
                               </p>
                               <p>
                                 <strong>Reisbereidheid:</strong> {application.reisbereidheid || '—'}
@@ -252,7 +272,10 @@ export default function AdminOnboarding() {
                                     {application.beveilig_diploma || '—'}
                                   </p>
                                   <p>
-                                    <strong>Grijze pas:</strong> {application.beveilig_grijze_pas || '—'}
+                                    <strong>Beveiligingspassen:</strong>{' '}
+                                    {formatList(application.beveilig_passen) ||
+                                      application.beveilig_grijze_pas ||
+                                      '—'}
                                   </p>
                                   <p>
                                     <strong>BHV:</strong> {application.beveilig_bhv || '—'}
@@ -268,10 +291,7 @@ export default function AdminOnboarding() {
                                     <strong>SVH:</strong> {application.hosp_svh || '—'}
                                   </p>
                                   <p>
-                                    <strong>BHV hospitality:</strong> {application.hosp_bhv || '—'}
-                                  </p>
-                                  <p>
-                                    <strong>HACCP:</strong> {application.hosp_haccp || '—'}
+                                    <strong>BHV servicemedewerker:</strong> {application.hosp_bhv || '—'}
                                   </p>
                                 </>
                               ) : null}

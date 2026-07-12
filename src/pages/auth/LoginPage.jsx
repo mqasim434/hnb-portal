@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import PageHero from '../../components/marketing/PageHero'
 import { LOGIN_SEO } from '../../content/loginSeo'
-import { ACCOUNT_STATUS, getRoleHomePath } from '../../constants/roles'
+import { ACCOUNT_STATUS } from '../../constants/roles'
 import { usePageSeo } from '../../hooks/usePageSeo'
 import { mapAuthError, signInWithEmail } from '../../lib/auth/authService'
 import { auth } from '../../firebase/config'
@@ -112,19 +112,14 @@ export default function Login() {
   useEffect(() => {
     if (loading || !user || accountStatus == null) return
 
+    if (!redirectPath) return
+
     if (accountStatus !== ACCOUNT_STATUS.ACTIVE) {
       navigate('/auth/pending', { replace: true })
       return
     }
 
-    if (redirectPath && role) {
-      navigate(redirectPath, { replace: true })
-      return
-    }
-
-    if (role) {
-      navigate(getRoleHomePath(role), { replace: true })
-    }
+    navigate(redirectPath, { replace: true })
   }, [user, role, accountStatus, loading, navigate, redirectPath])
 
   return (

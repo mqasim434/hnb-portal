@@ -1,13 +1,12 @@
 import { useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
+import { useFieldArray, useForm, useWatch } from 'react-hook-form'
 import { useCompanyStaffRequestSubmit } from '../../hooks/useCompanyStaffRequestSubmit'
 import { isSubmissionInProgressError } from '../../lib/submissionErrors'
 import { createSubmitErrorHandler, rhfRules } from '../../lib/validation'
 
-const STAFF_TYPES = [
-  { value: '', label: 'Maak een keuze' },
-  { value: 'hospitality', label: 'Hospitality' },
+const STAFF_TYPE_OPTS = [
+  { value: 'hospitality', label: 'Servicemedewerker' },
   { value: 'beveiliging', label: 'Beveiliging' },
   { value: 'gemengd', label: 'Gemengd team' },
   { value: 'advies', label: 'Adviesgesprek' },
@@ -17,7 +16,7 @@ const EVENT_TYPES = [
   { value: '', label: 'Maak een keuze' },
   { value: 'festival', label: 'Festival' },
   { value: 'corporate', label: 'Corporate event' },
-  { value: 'club', label: 'Clubavond' },
+  { value: 'objecten', label: 'Objecten' },
   { value: 'theater', label: 'Theater of arena' },
   { value: 'particulier', label: 'Particulier event' },
   { value: 'overig', label: 'Overig' },
@@ -28,9 +27,9 @@ const FIELD_ORDER = [
   'contactPerson',
   'email',
   'phone',
-  'staffType',
+  'staffTypes',
   'eventType',
-  'location',
+  'locations',
   'eventDateStart',
   'eventDateEnd',
   'numberOfWorkers',
@@ -38,19 +37,28 @@ const FIELD_ORDER = [
   'privacyConsent',
 ]
 
+const todayIso = new Date().toISOString().slice(0, 10)
+
 const defaultValues = {
   companyName: '',
   contactPerson: '',
   email: '',
   phone: '',
-  staffType: '',
+  staffTypes: [],
   eventType: '',
-  location: '',
+  locations: [''],
   eventDateStart: '',
   eventDateEnd: '',
   numberOfWorkers: '',
   additionalNotes: '',
   privacyConsent: false,
+}
+
+/** @param {unknown} v */
+function asArray(v) {
+  if (Array.isArray(v)) return v
+  if (v) return [v]
+  return []
 }
 
 function Req() {
@@ -70,6 +78,7 @@ export default function CompanyStaffRequestForm() {
     handleSubmit,
     reset,
     setFocus,
+    control,
     getValues,
     formState: { errors, isSubmitting },
   } = useForm({
@@ -79,6 +88,15 @@ export default function CompanyStaffRequestForm() {
     criteriaMode: 'firstError',
   })
 
+  const staffTypesWatch = useWatch({ control, name: 'staffTypes', defaultValue: [] })
+  const staffTypes = asArray(staffTypesWatch)
+  const isAdviesOnly = staffTypes.length === 1 && staffTypes[0] === 'advies'
+
+  const { fields: locationFields, append, remove } = useFieldArray({
+    control,
+    name: 'locations',
+  })
+
   const { status, errorMessage, submit, reset: resetRemote } = useCompanyStaffRequestSubmit()
 
   useEffect(() => {
@@ -86,25 +104,35 @@ export default function CompanyStaffRequestForm() {
     document.getElementById('b2b-request-success')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, [status])
 
+  const staffTypesRules = {
+    validate: (v) => (asArray(v).length > 0 ? true : 'Selecteer minstens één type personeel.'),
+  }
+
   const onValid = async (data) => {
     try {
+      const types = asArray(data.staffTypes)
+      const locs = asArray(data.locations).map((l) => String(l).trim()).filter(Boolean)
+      const adviesOnly = types.length === 1 && types[0] === 'advies'
+
+      const eventDateStart = adviesOnly ? todayIso : data.eventDateStart
+      const eventDateEnd = adviesOnly ? todayIso : data.eventDateEnd
       const eventDates =
-        data.eventDateStart && data.eventDateEnd
-          ? `${data.eventDateStart} t/m ${data.eventDateEnd}`
-          : ''
+        eventDateStart && eventDateEnd ? `${eventDateStart} t/m ${eventDateEnd}` : ''
 
       await submit({
         companyName: data.companyName.trim(),
         contactPerson: data.contactPerson.trim(),
         email: data.email.trim(),
         phone: data.phone.trim(),
-        staffType: data.staffType,
-        eventType: data.eventType,
-        location: data.location.trim(),
-        eventDateStart: data.eventDateStart,
-        eventDateEnd: data.eventDateEnd,
+        staffTypes: types,
+        staffType: types.join(','),
+        eventType: adviesOnly ? 'advies' : data.eventType,
+        locations: locs,
+        location: locs.join('; '),
+        eventDateStart,
+        eventDateEnd,
         eventDates,
-        numberOfWorkers: data.numberOfWorkers,
+        numberOfWorkers: adviesOnly ? 0 : data.numberOfWorkers,
         additionalNotes: (data.additionalNotes ?? '').trim(),
         privacyConsent: data.privacyConsent,
       })
@@ -162,7 +190,7 @@ export default function CompanyStaffRequestForm() {
       ) : null}
 
       {status !== 'success' ? (
-        <form className="b2b-form" onSubmit={onSubmit} noValidate aria-busy={isSubmitting}>
+        <form className="b2b-form" id="b2b-request-form" onSubmit={onSubmit} noValidate aria-busy={isSubmitting}>
           <p className="visually-hidden" id="b2b-form-desc">
             Velden met een sterretje zijn verplicht; validatie na het verlaten van een veld.
           </p>
@@ -243,140 +271,181 @@ export default function CompanyStaffRequestForm() {
             {errors.phone ? <p className="b2b-form__error">{errors.phone.message}</p> : null}
           </div>
 
-          <div className="b2b-form__row b2b-form__row--2">
-            <div className="b2b-form__field">
-              <label className="b2b-form__label" htmlFor="b2b-field-staffType">
-                Type personeel <Req />
-              </label>
-              <select
-                id="b2b-field-staffType"
-                disabled={isSubmitting}
-                className={`b2b-form__select${selClass('staffType')}`}
-                {...register('staffType', { required: 'Selecteer een type personeel.' })}
-              >
-                {STAFF_TYPES.map(({ value, label }) => (
-                  <option key={value || 'empty'} value={value} disabled={value === ''}>
-                    {label}
-                  </option>
-                ))}
-              </select>
-              {errors.staffType ? <p className="b2b-form__error">{errors.staffType.message}</p> : null}
-            </div>
-            <div className="b2b-form__field">
-              <label className="b2b-form__label" htmlFor="b2b-field-eventType">
-                Type event <Req />
-              </label>
-              <select
-                id="b2b-field-eventType"
-                disabled={isSubmitting}
-                className={`b2b-form__select${selClass('eventType')}`}
-                {...register('eventType', { required: 'Selecteer het type event.' })}
-              >
-                {EVENT_TYPES.map(({ value, label }) => (
-                  <option key={value || 'e-empty'} value={value} disabled={value === ''}>
-                    {label}
-                  </option>
-                ))}
-              </select>
-              {errors.eventType ? <p className="b2b-form__error">{errors.eventType.message}</p> : null}
-            </div>
-          </div>
-
-          <div className="b2b-form__field">
-            <label className="b2b-form__label" htmlFor="b2b-field-location">
-              Locatie van het event <Req />
-            </label>
-            <input
-              id="b2b-field-location"
-              type="text"
-              autoComplete="street-address"
-              placeholder="Adres, locatienaam of stad"
-              disabled={isSubmitting}
-              className={`b2b-form__input${inpClass('location')}`}
-              {...register('location', {
-                required: 'Vul de locatie in.',
-                maxLength: { value: 240, message: 'Maximaal 240 tekens.' },
-              })}
-            />
-            {errors.location ? <p className="b2b-form__error">{errors.location.message}</p> : null}
-          </div>
-
-          <div className="b2b-form__field">
-            <span className="b2b-form__label" id="b2b-dates-label">
-              Datum of periode <Req />
-            </span>
-            <div className="b2b-form__daterow" role="group" aria-labelledby="b2b-dates-label">
-              <div>
-                <label className="b2b-form__hint" htmlFor="b2b-field-eventDateStart" style={{ display: 'block', marginBottom: '0.35rem' }}>
-                  Startdatum
+          <fieldset className="b2b-form__fieldset" disabled={isSubmitting}>
+            <legend className="b2b-form__label">
+              Type personeel <Req />
+            </legend>
+            <p className="b2b-form__hint">Selecteer alles wat van toepassing is.</p>
+            <div className="b2b-form__checks">
+              {STAFF_TYPE_OPTS.map((o) => (
+                <label key={o.value} className="b2b-form__check">
+                  <input type="checkbox" value={o.value} {...register('staffTypes', staffTypesRules)} />
+                  <span>{o.label}</span>
                 </label>
-                <input
-                  id="b2b-field-eventDateStart"
-                  type="date"
+              ))}
+            </div>
+            {errors.staffTypes ? <p className="b2b-form__error">{errors.staffTypes.message}</p> : null}
+          </fieldset>
+
+          {isAdviesOnly ? (
+            <div className="b2b-form__advies-panel">
+              <h3>Adviesgesprek</h3>
+              <p>
+                Wilt u eerst sparren over wat u nodig heeft? Neem direct contact op — wij plannen een vrijblijvend
+                gesprek.
+              </p>
+              <Link to="/contact" className="hnb-btn hnb-btn--primary">
+                Contact opnemen
+              </Link>
+              <p className="b2b-form__hint" style={{ marginTop: 'var(--space-3)' }}>
+                Of vul hieronder aanvullende details in en verstuur de aanvraag — wij bellen u terug.
+              </p>
+            </div>
+          ) : null}
+
+          {!isAdviesOnly ? (
+            <>
+              <div className="b2b-form__field">
+                <label className="b2b-form__label" htmlFor="b2b-field-eventType">
+                  Type event <Req />
+                </label>
+                <select
+                  id="b2b-field-eventType"
                   disabled={isSubmitting}
-                  className={`b2b-form__input${inpClass('eventDateStart')}`}
-                  {...register('eventDateStart', { required: 'Kies een startdatum.' })}
-                />
-                {errors.eventDateStart ? (
-                  <p className="b2b-form__error">{errors.eventDateStart.message}</p>
+                  className={`b2b-form__select${selClass('eventType')}`}
+                  {...register('eventType', { required: 'Selecteer het type event.' })}
+                >
+                  {EVENT_TYPES.map(({ value, label }) => (
+                    <option key={value || 'e-empty'} value={value} disabled={value === ''}>
+                      {label}
+                    </option>
+                  ))}
+                </select>
+                {errors.eventType ? <p className="b2b-form__error">{errors.eventType.message}</p> : null}
+              </div>
+
+              <div className="b2b-form__field">
+                <span className="b2b-form__label">
+                  Locatie(s) <Req />
+                </span>
+                {locationFields.map((field, index) => (
+                  <div key={field.id} className="b2b-form__location-row">
+                    <input
+                      type="text"
+                      autoComplete="street-address"
+                      placeholder="Adres, locatienaam of stad"
+                      disabled={isSubmitting}
+                      className={`b2b-form__input${inpClass('locations')}`}
+                      {...register(`locations.${index}`, {
+                        required: index === 0 ? 'Vul minstens één locatie in.' : false,
+                        maxLength: { value: 240, message: 'Maximaal 240 tekens.' },
+                      })}
+                    />
+                    {index > 0 ? (
+                      <button type="button" className="hnb-btn hnb-btn--outline" onClick={() => remove(index)}>
+                        Verwijderen
+                      </button>
+                    ) : null}
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  className="hnb-btn hnb-btn--outline"
+                  style={{ marginTop: 'var(--space-2)' }}
+                  onClick={() => append('')}
+                >
+                  Locatie toevoegen
+                </button>
+                {errors.locations ? (
+                  <p className="b2b-form__error">{errors.locations.message || errors.locations.root?.message}</p>
                 ) : null}
               </div>
-              <div>
-                <label className="b2b-form__hint" htmlFor="b2b-field-eventDateEnd" style={{ display: 'block', marginBottom: '0.35rem' }}>
-                  Einddatum
+
+              <div className="b2b-form__field">
+                <span className="b2b-form__label" id="b2b-dates-label">
+                  Datum of periode <Req />
+                </span>
+                <div className="b2b-form__daterow" role="group" aria-labelledby="b2b-dates-label">
+                  <div>
+                    <label className="b2b-form__hint" htmlFor="b2b-field-eventDateStart" style={{ display: 'block', marginBottom: '0.35rem' }}>
+                      Startdatum
+                    </label>
+                    <input
+                      id="b2b-field-eventDateStart"
+                      type="date"
+                      min={todayIso}
+                      disabled={isSubmitting}
+                      className={`b2b-form__input${inpClass('eventDateStart')}`}
+                      {...register('eventDateStart', {
+                        required: 'Kies een startdatum.',
+                        validate: (v) =>
+                          v && v < todayIso ? 'Datum mag niet in het verleden liggen.' : true,
+                      })}
+                    />
+                    {errors.eventDateStart ? (
+                      <p className="b2b-form__error">{errors.eventDateStart.message}</p>
+                    ) : null}
+                  </div>
+                  <div>
+                    <label className="b2b-form__hint" htmlFor="b2b-field-eventDateEnd" style={{ display: 'block', marginBottom: '0.35rem' }}>
+                      Einddatum
+                    </label>
+                    <input
+                      id="b2b-field-eventDateEnd"
+                      type="date"
+                      min={todayIso}
+                      disabled={isSubmitting}
+                      className={`b2b-form__input${inpClass('eventDateEnd')}`}
+                      {...register('eventDateEnd', {
+                        required: 'Kies een einddatum.',
+                        validate: (v) => {
+                          if (v && v < todayIso) return 'Datum mag niet in het verleden liggen.'
+                          const s = getValues('eventDateStart')
+                          if (!v || !s) return true
+                          if (v < s) return 'Einddatum moet op of na de startdatum liggen.'
+                          return true
+                        },
+                      })}
+                    />
+                    {errors.eventDateEnd ? (
+                      <p className="b2b-form__error">{errors.eventDateEnd.message}</p>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
+
+              <div className="b2b-form__field">
+                <label className="b2b-form__label" htmlFor="b2b-field-numberOfWorkers">
+                  Benodigde bezetting <Req />
                 </label>
                 <input
-                  id="b2b-field-eventDateEnd"
-                  type="date"
+                  id="b2b-field-numberOfWorkers"
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
                   disabled={isSubmitting}
-                  className={`b2b-form__input${inpClass('eventDateEnd')}`}
-                  {...register('eventDateEnd', {
-                    required: 'Kies een einddatum.',
+                  className={`b2b-form__input${inpClass('numberOfWorkers')}`}
+                  {...register('numberOfWorkers', {
                     validate: (v) => {
-                      const s = getValues('eventDateStart')
-                      if (!v || !s) return true
-                      if (v < s) return 'Einddatum moet op of na de startdatum liggen.'
+                      const raw = v === undefined || v === null ? '' : String(v).trim()
+                      if (raw === '') return 'Vul het gewenste aantal in.'
+                      if (!/^\d+$/.test(raw)) return 'Voer een geheel getal in (alleen cijfers).'
+                      const n = Number(raw)
+                      if (n < 1) return 'Minimaal 1.'
+                      if (n > 5000) return 'Voor zeer grote crews: neem even telefonisch contact op.'
                       return true
                     },
                   })}
                 />
-                {errors.eventDateEnd ? <p className="b2b-form__error">{errors.eventDateEnd.message}</p> : null}
+                <p className="b2b-form__hint">
+                  Bijv. 5 servicemedewerkers en 3 portiers — splits u graag in &apos;Aanvullende details&apos;.
+                </p>
+                {errors.numberOfWorkers ? (
+                  <p className="b2b-form__error">{errors.numberOfWorkers.message}</p>
+                ) : null}
               </div>
-            </div>
-          </div>
-
-          <div className="b2b-form__field">
-            <label className="b2b-form__label" htmlFor="b2b-field-numberOfWorkers">
-              Benodigde bezetting <Req />
-            </label>
-            <input
-              id="b2b-field-numberOfWorkers"
-              type="number"
-              min={1}
-              step={1}
-              inputMode="numeric"
-              disabled={isSubmitting}
-              className={`b2b-form__input${inpClass('numberOfWorkers')}`}
-              {...register('numberOfWorkers', {
-                validate: (v) => {
-                  const raw = v === undefined || v === null ? '' : String(v).trim()
-                  if (raw === '') return 'Vul het gewenste aantal in.'
-                  const n = Number(raw)
-                  if (!Number.isFinite(n)) return 'Voer een geldig getal in.'
-                  if (n < 1) return 'Minimaal 1.'
-                  if (n > 5000) return 'Voor zeer grote crews: neem even telefonisch contact op.'
-                  if (!Number.isInteger(n)) return 'Voer een geheel getal in.'
-                  return true
-                },
-              })}
-            />
-            <p className="b2b-form__hint">
-              Bijv. 5 hosts en 3 portiers — splits u graag in &apos;Aanvullende details&apos;.
-            </p>
-            {errors.numberOfWorkers ? (
-              <p className="b2b-form__error">{errors.numberOfWorkers.message}</p>
-            ) : null}
-          </div>
+            </>
+          ) : null}
 
           <div className="b2b-form__field">
             <label className="b2b-form__label" htmlFor="b2b-field-additionalNotes">
@@ -413,7 +482,7 @@ export default function CompanyStaffRequestForm() {
           </div>
 
           <button type="submit" className="hnb-btn hnb-btn--primary b2b-form__submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Bezig met versturen…' : 'Aanvraag versturen'}
+            {isSubmitting ? 'Bezig met versturen…' : isAdviesOnly ? 'Adviesaanvraag versturen' : 'Aanvraag versturen'}
           </button>
         </form>
       ) : null}

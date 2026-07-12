@@ -1,43 +1,43 @@
 /** Functieprofielen voor B2B-pagina (Nederlandse copy). */
 export const B2B_ROLE_PROFILES = [
   {
-    id: 'host',
-    title: 'Host / hostess',
-    tag: 'Hospitality',
+    id: 'service',
+    title: 'Servicemedewerker (host)',
+    tag: 'Servicemedewerker',
     bullets: [
-      'Ontvangst, routing en representatie volgens uw merkstandaard.',
-      'Ervaring met hoge drukte en VIP-programma’s.',
+      'Ontvangst, routing en representatie volgens uw standaard.',
+      'Ervaring met hoge drukte en publieksgerichte omgevingen.',
       'Dresscode en aanspreektoon afgestemd in de briefing.',
     ],
   },
   {
-    id: 'bar',
-    title: 'Bar & service',
-    tag: 'Hospitality',
-    bullets: [
-      'Bediening en barondersteuning tijdens pieken.',
-      'Sociale hygiëne (SVH) waar alcohol wordt geschonken.',
-      'Samenwerking met de locatie op taps en voorraad.',
-    ],
-  },
-  {
-    id: 'security',
-    title: 'Portier / eventbeveiliging',
+    id: 'security-portier',
+    title: 'Portier',
     tag: 'Beveiliging',
     bullets: [
-      'Bevoegd conform vergunning en locatiebeleid.',
+      'Bevoegd conform locatiebeleid en geldige beveiligingspas.',
       'Toegangscontrole en rustige menigte-aansturing.',
-      'Heldere lijn met dienstdoende manager en productie.',
+      'Heldere lijn met dienstdoende manager en locatie.',
     ],
   },
   {
-    id: 'runner',
-    title: 'Runner / productie',
-    tag: 'Algemeen',
+    id: 'security-event',
+    title: 'Eventbeveiliging',
+    tag: 'Beveiliging',
     bullets: [
-      'Logistiek, accreditatie en backstage-ondersteuning.',
-      'Flexibel in rooster; schakelt mee met wijzigingen.',
-      'Herhaalbare inzet voor terugkerende programma’s.',
+      'Inzet op evenementen en drukke programma\'s.',
+      'De-escalatie en overzicht in de menigte.',
+      'Afgestemd op risicoprofiel en vergunningscontext van de locatie.',
+    ],
+  },
+  {
+    id: 'security-object',
+    title: 'Objectbeveiliging',
+    tag: 'Beveiliging',
+    bullets: [
+      'Beveiliging van vaste objecten, terreinen en locaties.',
+      'Rondes, toegang en meldplicht volgens locatieprotocol.',
+      'Structurele inzet met vaste afspraken en rapportage.',
     ],
   },
 ]

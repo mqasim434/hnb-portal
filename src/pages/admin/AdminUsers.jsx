@@ -69,8 +69,9 @@ export default function AdminUsers() {
     <main className="hnb-container" style={{ paddingBlock: 'var(--space-6)' }}>
       <h1 className="hnb-type-section">Gebruikers — wachtrij</h1>
       <p className="hnb-type-subhead" style={{ marginTop: 'var(--space-3)', maxWidth: '42rem' }}>
-        Accounts met status <strong>in behandeling</strong>. Goedkeuring wijst de rol toe op basis van
-        bedoelde rol (freelancer of bedrijf).
+        <strong>Gebruikers</strong> zijn freelancers en opdrachtgevers (bedrijven) die zich hebben geregistreerd en
+        wachten op goedkeuring — geen intern H&amp;B-personeel. Goedkeuring wijst de rol toe op basis van bedoelde rol
+        (freelancer of bedrijf).
       </p>
 
       {error ? (

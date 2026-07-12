@@ -12,7 +12,7 @@ import './overhb-pages.css'
 const copy = MARKETING_PAGES['hb-wie-wij-zijn']
 
 const CULTURE_TEXT =
-  'Wij geloven dat respect voor podium-, hospitality- en beveiligingsteams de kwaliteit van elk event verhoogt. Open communicatie, voorspelbare processen en geen romantiek over \'gewoon even regelen\' — alleen afspraken die kloppen onder tijdsdruk. Wij behandelen mensen die voor ons werken als professionals, en daarom houden zij seizoen na seizoen vol.'
+  'Wij geloven dat respect voor servicemedewerkers en beveiligingsteams de kwaliteit van elke opdracht verhoogt. Open communicatie, voorspelbare processen en geen romantiek over \'gewoon even regelen\' — alleen afspraken die kloppen onder tijdsdruk. Wij behandelen mensen die voor ons werken als professionals, en daarom houden zij jaar na jaar vol.'
 
 export default function HetTeamPage() {
   const seo = ABOUT_SEO.team

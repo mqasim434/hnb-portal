@@ -27,6 +27,20 @@ export function getRoleHomePath(role) {
   }
 }
 
+/** @param {string | null | undefined} role */
+export function getRolePortalLabel(role) {
+  switch (role) {
+    case ROLES.ADMIN:
+      return 'Beheer'
+    case ROLES.FREELANCER:
+      return 'Mijn portaal'
+    case ROLES.COMPANY:
+      return 'Bedrijfsportaal'
+    default:
+      return 'Portaal'
+  }
+}
+
 /** @param {string | null | undefined} status */
 export function canAccessPortal(status) {
   return status === ACCOUNT_STATUS.ACTIVE

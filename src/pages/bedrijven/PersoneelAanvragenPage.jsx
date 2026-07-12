@@ -21,10 +21,10 @@ export default function PersoneelAanvragenPage() {
         variant="navy"
         eyebrow="Bedrijven"
         title="Personeel dat past bij uw productie"
-        lead="Vul de gegevens zo compleet mogelijk in. Wij reageren met capaciteit, een tariefindicatie waar mogelijk en concrete vervolgstappen. Geen verplichting vóór uw akkoord op het rooster."
+        lead="Vul de gegevens zo compleet mogelijk in. Wij reageren met capaciteit, een prijsopgave op aanvraag en concrete vervolgstappen. Geen verplichting vóór uw akkoord op het rooster."
         stackCtasOnMobile
       >
-        <a href="#b2b-form-anchor" className="hnb-btn hnb-btn--primary">
+        <a href="#b2b-request-form" className="hnb-btn hnb-btn--primary">
           Naar het formulier
         </a>
         <Link to="/bedrijven/ons-aanbod" className="hnb-btn hnb-btn--outline">
@@ -34,7 +34,7 @@ export default function PersoneelAanvragenPage() {
       <BedrijvenTrustBadges />
 
       <section className="b2b-request hnb-container" aria-labelledby="b2b-request-title">
-        <header className="b2b-request__intro" id="b2b-form-anchor">
+        <header className="b2b-request__intro">
           <span className="b2b-section__eyebrow">Personeelsaanvraag</span>
           <h2 id="b2b-request-title" className="b2b-section__title">
             Plan uw volgende event met H&amp;B
@@ -61,7 +61,7 @@ export default function PersoneelAanvragenPage() {
               <li>
                 Compliance-check op vergunningen en certificaten, passend bij het beleid van uw locatie.
               </li>
-              <li>Eén aanspreekpunt dat uw briefing kent — minder gedoe tijdens opbouw en show.</li>
+              <li>Eén aanspreekpunt dat uw briefing kent — minder gedoe tijdens de inzet.</li>
               <li>
                 Voor spoed of afwijkende vergunningscontext:{' '}
                 <Link className="b2b-sidebar__inline-link" to="/contact">
@@ -76,7 +76,7 @@ export default function PersoneelAanvragenPage() {
 
       <BedrijvenCtaStrip
         title="Nog oriënteren?"
-        lead="Lees hoe we hospitality en beveiliging combineren — of bekijk typische rollen en sectoren."
+        lead="Lees hoe we servicemedewerkers en beveiliging combineren — of bekijk typische rollen en sectoren."
         primaryTo="/bedrijven/ons-aanbod"
         primaryLabel="Ons aanbod"
         secondaryTo="/bedrijven/functies"

@@ -13,7 +13,7 @@ export const HOME_PAGE_HERO = {
   src: HOME_PAGE_HERO_SRC,
   width: 2400,
   height: 1350,
-  alt: 'Publiek en sfeer tijdens een live event — H&B Service Group levert hospitality en beveiliging voor festivals, venues en zakelijke programma\'s.',
+  alt: 'Professionals in een publieksgerichte omgeving — H&B Service Group levert servicemedewerkers en beveiliging voor diverse sectoren in Nederland.',
 }
 
 export const CORPORATE_DAYLIGHT_EVENT_HERO_SRC =
@@ -24,5 +24,5 @@ export const CORPORATE_DAYLIGHT_EVENT_HERO = {
   src: CORPORATE_DAYLIGHT_EVENT_HERO_SRC,
   width: 2400,
   height: 1350,
-  alt: 'Professionals tijdens een zakelijke bespreking overdag — H&B Service Group levert hospitality en beveiliging voor congressen en live events.',
+  alt: 'Professionals tijdens een zakelijke bespreking — H&B Service Group levert servicemedewerkers en beveiliging voor bedrijven en publieke opdrachtgevers.',
 }

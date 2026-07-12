@@ -45,12 +45,12 @@ export async function createOnboardingApplication(formData, options = {}) {
     beschikbaarheid: Array.isArray(formData.beschikbaarheid) ? formData.beschikbaarheid : [],
     reisbereidheid: String(formData.reisbereidheid ?? ''),
     beveilig_diploma: String(formData.beveilig_diploma ?? ''),
+    beveilig_passen: Array.isArray(formData.beveilig_passen) ? formData.beveilig_passen : [],
     beveilig_grijze_pas: String(formData.beveilig_grijze_pas ?? ''),
     beveilig_bhv: String(formData.beveilig_bhv ?? ''),
     beveilig_vog: String(formData.beveilig_vog ?? ''),
     hosp_svh: String(formData.hosp_svh ?? ''),
     hosp_bhv: String(formData.hosp_bhv ?? ''),
-    hosp_haccp: String(formData.hosp_haccp ?? ''),
     contractvoorkeur: String(formData.contractvoorkeur ?? ''),
     aanvullendeInfo: String(formData.aanvullendeInfo ?? '').trim(),
     privacyConsent: formData.privacyConsent === true,
@@ -70,8 +70,11 @@ export async function createOnboardingApplication(formData, options = {}) {
 /** @param {Record<string, unknown>} formData */
 function hasInterestWithoutLicence(formData) {
   const diploma = String(formData.beveilig_diploma ?? '')
-  const pas = String(formData.beveilig_grijze_pas ?? '')
-  return diploma === 'nee' || diploma === 'opleiding' || pas === 'nee' || pas === 'aanvraag'
+  const passen = Array.isArray(formData.beveilig_passen) ? formData.beveilig_passen : []
+  const legacyPas = String(formData.beveilig_grijze_pas ?? '')
+  const noPass =
+    passen.length === 0 && (legacyPas === 'nee' || legacyPas === 'aanvraag' || legacyPas === '')
+  return diploma === 'nee' || diploma === 'opleiding' || noPass
 }
 
 /**
@@ -145,6 +148,7 @@ function mapApplication(id, data) {
     source: data.source ?? ONBOARDING_SOURCE.DIRECT_AANMELDEN,
     aanvullendeInfo: data.aanvullendeInfo ?? '',
     beveilig_diploma: data.beveilig_diploma ?? '',
+    beveilig_passen: data.beveilig_passen ?? [],
     beveilig_grijze_pas: data.beveilig_grijze_pas ?? '',
     beveilig_bhv: data.beveilig_bhv ?? '',
     beveilig_vog: data.beveilig_vog ?? '',
@@ -160,6 +164,26 @@ function mapApplication(id, data) {
  * @param {string} applicationId
  * @param {string} notes
  */
+/**
+ * Zet een beoordeelde aanmelding terug naar in behandeling (correctie).
+ * @param {string} applicationId
+ * @param {string} [adminNotes]
+ */
+export async function reopenOnboardingApplication(applicationId, adminNotes) {
+  const db = assertFirestore()
+  if (!auth?.currentUser) {
+    throw new Error('Je moet ingelogd zijn als beheerder.')
+  }
+
+  await updateDoc(doc(db, 'onboardingApplications', applicationId), {
+    status: ONBOARDING_STATUS.PENDING,
+    adminNotes: adminNotes?.trim() ?? '',
+    reviewedAt: null,
+    reviewedBy: null,
+    updatedAt: serverTimestamp(),
+  })
+}
+
 export async function saveOnboardingNotes(applicationId, notes) {
   const db = assertFirestore()
   await updateDoc(doc(db, 'onboardingApplications', applicationId), {

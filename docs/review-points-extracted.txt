@@ -1,0 +1,134 @@
+Review Points – H&amp;B Portal &amp; Website
+hnb-portal.vercel.app · feedback for the developer
+Prepared: July 2026
+Note: this document has been translated into English for the developer. The explanatory text is in English; portal text, field labels, categories and Dutch terminology that actually appear (or must appear) in the live portal are kept in Dutch, since the portal itself is Dutch. Nothing has been altered in meaning during translation.
+This document bundles all review points, organized by part of the site. Each point has a priority tag so it is immediately clear what is blocking and what is a wish. Section 0 contains the overarching positioning and text changes that apply site-wide; the later sections refer back to it instead of repeating them.
+Legend of priority tags
+[BLOCKER] Must be resolved before going live; blocks usage.
+[BUG] Does not work as intended / technical error.
+[UX] Usability and clarity.
+[DESIGN] Layout and styling.
+[CONTENT] Texts, terminology and positioning.
+[LATER] Wish for later, or lower priority.
+0. Overarching — positioning &amp; terminology
+These points apply site-wide and recur across multiple pages. Apply them consistently everywhere.
+[CONTENT] The site currently gives the impression that we only do festivals. We are broader: we provide service staff (&quot;servicemedewerker&quot; / hosts) and security guards for a wide range of sectors. Remove the one-sided festival emphasis everywhere.
+[CONTENT] Replace &quot;host / hostess / hospitality&quot; everywhere with &quot;servicemedewerker&quot; (adding &quot;(hosts)&quot; as a clarification where useful). This term is broader and more recognizable; we still do hosts.
+[CONTENT] Remove everything related to bar service: &quot;bar, barback, ondersteuning bij piekdrukte&quot; (bar, barback, support during peak times), bar teams, and &quot;samenwerking met de locatie op taps en voorraad&quot; (collaboration with the venue on taps and stock). We do not provide bar service.
+[CONTENT] &quot;Runner productie&quot; (production runner) and &quot;afbouw&quot; (breakdown/strike) — remove both. We are not involved in physical build-up or breakdown (tents, stage).
+[CONTENT] Limit the offering to two main categories: (1) service staff (&quot;servicemedewerker&quot; / hosts) — with many sector examples — and (2) security (&quot;beveiliging&quot;).
+[CONTENT] Show these sectors/clients: ISG, COA, companies looking for security or service staff, municipalities/public sector (&quot;gemeentes/publieke sector&quot;), hospitality (&quot;horeca&quot;), events/festivals (currently via ISG), sites/objects (&quot;objecten&quot;) and fairs (&quot;kermissen&quot;). Still to be determined (input needed from Ismail): do we explicitly include night/site security, AZC/COA, and housing for labor migrants?
+[CONTENT] &quot;Vergunningen aanvragen&quot; (applying for permits) is not correct — we do not apply for permits. Adjust the text under the heading &quot;compliance-first&quot; accordingly.
+
+Current block, for reference.
+1. Public website
+Feedback on the public marketing pages.
+[CONTENT] Homepage, 2nd sentence: this does not read well from several angles. Please rewrite.
+
+[UX] Do we also get an email notification as soon as requests come in? Please confirm, and set this up if needed.
+
+[CONTENT] Clean up the services block (see section 0): remove &quot;afbouw&quot; (breakdown), &quot;bar/barback/ondersteuning bij piekdrukte&quot; (bar/barback/peak-time support), &quot;samenwerking met de locatie op taps en voorraad&quot; (collaboration with the venue on taps and stock), and &quot;backstage en perimeter&quot; (backstage and perimeter).
+[CONTENT] &quot;Briefings op toon en servicenorm van uw merk&quot; (briefings on the tone and service standard of your brand) — unclear what this is meant to convey. Rephrase or remove.
+[CONTENT] Step plan / process: this is not always the same — it depends on the client. Replace it with this generic process:
+Step 1. Fill in the request form, or email us.
+Step 2. Intake: find out what the client wants and what we can offer.
+Step 3. Price quote (pre-calculation).
+Step 4. Order confirmation / agreement / execution plan (number of staff, parking, etc.).
+Step 5. Post an internal vacancy and assess whether candidates meet the requirements.
+Step 6. Briefing with candidates on site (at the client&apos;s location).
+Step 7. Start!
+Step 8. Evaluation.
+
+[DESIGN] The page /freelancers/inkomsten-betalingen (freelancers/income-payments) looks strange; the layout of this type of page is not attractive.
+
+[DESIGN] &quot;Waar wij dagelijks werken&quot; (Where we work daily): currently a photo of Amsterdam (black, with a single dot marker). Turn this into a map of the whole of the Netherlands instead.
+
+[CONTENT] Documentation by staff: do we handle that digitally, and if so, in which system? Align the text with the actual process.
+[CONTENT] Bring the remaining text blocks on the public pages in line with section 0. Specifically: &quot;Operators&quot; → &quot;opdrachtgevers&quot; (clients); remove &quot;geen lijst met namen&quot; (no list of names); remove the top block; correct &quot;vergunningen aanvragen&quot; (applying for permits).
+
+
+
+
+[CONTENT] Remove rates/pricing: show prices on request only.
+
+[DESIGN] The footer repeats on every page; as far as I&apos;m concerned it can be removed from all of these pages.
+
+[BUG] Scroll/anchor jumps to the wrong place: clicking certain buttons makes the page jump to the wrong spot (see the two examples).
+
+
+
+2. Request form (client)
+The request form clients use to submit a request.
+[UX] Type of service: it must be possible to select multiple options (checkboxes instead of a single choice).
+
+[CONTENT] &quot;Hospitality&quot; → &quot;servicemedewerker&quot;.
+[UX] Add an option &quot;adviesgesprek&quot; (advisory conversation) for clients who don&apos;t yet know what they need.
+[UX] Location: it must be possible to enter multiple locations.
+
+[CONTENT] Remove &quot;Clubavond&quot; (club night), add &quot;Objecten&quot; (sites/objects).
+[BUG] The quantity field accepts the letter &quot;e&quot;; that should not be possible. Also, after typing a number and then a space twice, a &quot;.&quot; appears (see example).
+
+
+[BUG] A date in the past can be entered; this should be blocked.
+[UX] This block can be hidden as soon as the user clicks &quot;contact opnemen&quot; (get in touch).
+
+3. Dashboards &amp; tiles (freelancer + admin)
+Applies to both the freelancer dashboard and the admin dashboard.
+[BLOCKER] &quot;Compliance-documenten: 0/4 goedgekeurd, 4 in behandeling&quot; (compliance documents: 0/4 approved, 4 pending) is a red flag that needs to be far more prominent: at the top, and in a warning color. Without approved documents a freelancer cannot work.
+[UX] Freelancer tiles only show a description, no figures/status — unlike the admin dashboard, which does show numbers. A freelancer wants to see at a glance, e.g.: &quot;2 open opdrachten, 8 uren in behandeling&quot; (2 open assignments, 8 hours pending).
+[DESIGN] &quot;Bekijk opdrachten&quot; (view assignments) and &quot;direct aanmelden&quot; (sign up directly) currently have the same color. Make them visually distinct (e.g. one orange, one blue), and likewise for &quot;personeel aanvragen&quot; (request staff) and &quot;openstaande opdrachten&quot; (open assignments).
+[DESIGN] Admin dashboard: give the tiles distinct colors. Currently, empty tiles (&quot;0&quot;) and tiles with a number look the same.
+[UX] The login button stays visible even while already logged in — is that because the site isn&apos;t live yet? Please fix.
+4. Freelancer registration (&quot;direct aanmelden&quot;)
+The registration form freelancers use to sign up.
+[CONTENT] Remove the &quot;hospitality&quot; preferred-role options entirely; they can all go.
+
+[CONTENT] &quot;Hospitality&quot; category/domain → &quot;Servicemedewerkers (hosts)&quot;.
+[CONTENT] Security: remove &quot;Backstage&quot; and &quot;perimeter&quot;. Instead, make &quot;Portier&quot; (doorman) its own separate option, and &quot;Eventbeveiliging&quot; (event security) its own separate option.
+
+[CONTENT] &quot;Seizoenen&quot; (seasons) → replace with &quot;ervaringsjaren&quot; (years of experience).
+[CONTENT] &quot;Beschikbaarheid&quot; (availability) can be removed.
+[BUG] There is an error in this section (see screenshot).
+
+[UX] Replace the current question with &quot;Welke pas heb je in bezit?&quot; (Which pass/permit do you hold?), with multiple selectable options:
+Grijze beveiligingspas — allround beveiliger (Grey security pass — all-round security guard)
+Groene beveiligingspas — beveiliger in opleiding (Green security pass — security guard in training)
+Blauwe beveiligingspas — portier (Blue security pass — doorman)
+Blauwe beveiligingspas — evenement (Blue security pass — event)
+Oranje beveiligingspas — voetbalsteward (Orange security pass — football steward)
+5. Freelancer environment
+The logged-in environment for freelancers.
+[UX] Make the call-to-action clearer. Clicking it reveals valuable information, but it doesn&apos;t currently invite clicking — for example, make the titles bold.
+
+[CONTENT] Bring diplomas and certificates (such as passes/permits) in line with section 4. Remove the HACCP certificate.
+
+[BUG] Invoices cannot be viewed: even with pop-up blocking disabled, this message keeps appearing.
+
+6. Admin environment
+The environment for the admin/manager.
+[BLOCKER] Forgot/change password: I don&apos;t see this option. Can it be added?
+
+[BUG] A submission no longer seems editable once it has been approved — it becomes final immediately. Please add a correction or undo option.
+
+[BUG] This page has bugs: previously &quot;oppakken&quot; (pick up / take on) was shown as the action. Also, where do notes end up? I type them in, but they just stay in the text field.
+
+[UX] &quot;Gebruikers&quot; (users): what do we mean by this — clients, or our own internal staff who use the portal? Please clarify in the interface.
+
+7. Client environment
+The logged-in environment for clients (opdrachtgevers).
+[BLOCKER] Logging out doesn&apos;t work after logging in. I also can&apos;t reach the site again via the link: as soon as I click anything, the site remembers I was last logged in as a client and jumps straight there.
+8. Delivery requirement
+Important for the developer: for every point in this document that is changed or resolved, a delivery file (&quot;opleverbestand&quot;) must be provided upon completion, before the change is considered final and accepted. This applies to each point individually as well as to the batch as a whole — please do not mark items as done without an accompanying opleverbestand, so that everything can be verified against this list before go-live.
+9. Setting up accounts &amp; connecting a custom domain (Firebase)
+Since this project runs on Firebase, please follow the steps below.
+9.1 Creating your own account
+Do not reuse a personal or client Google account for development work. Create (or use) your own Google account, and sign in to the Firebase console at https://console.firebase.google.com with it.
+Ask the client to add this Google account as a member on the existing Firebase project (Firebase console → Project settings → &quot;Users and permissions&quot; → Add member), with the role that matches the work you need to do (Editor for most development tasks; Owner only if strictly necessary).
+Once added, confirm you can see the project in your own Firebase console and that you can access the products already in use on this project (e.g. Hosting, Authentication, Firestore) — check with the client which products are active for this project.
+Do the same for Vercel if you also need access there: ask to be invited as a member of the Vercel team/project (Vercel dashboard → Project → Settings → Members).
+9.2 Connecting a custom domain
+In the Firebase console, go to Hosting → &quot;Add custom domain&quot;, and enter the domain that should point to the portal.
+Firebase will provide a TXT record to verify domain ownership. Add this record at the domain registrar (DNS settings) for that domain.
+Once verification succeeds, Firebase provides one or more A records (or a similar hosting record) to point the domain to Firebase Hosting. Add these records at the registrar as well.
+Allow time for DNS propagation (this can take anywhere from a few minutes up to 24–48 hours) and for Firebase to automatically issue an SSL certificate for the domain.
+Note: the portal currently also runs on Vercel (hnb-portal.vercel.app). If the final hosting platform is Vercel rather than Firebase, the domain must instead be added under Vercel → Project → Settings → Domains, and the DNS records at the registrar should point to Vercel (typically a CNAME to cname.vercel-dns.com, or the A record Vercel provides) rather than to Firebase. Please confirm with the client which platform will be the final production host before configuring DNS, to avoid configuring both and causing conflicts.

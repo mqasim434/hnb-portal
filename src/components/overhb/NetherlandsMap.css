@@ -1,6 +1,6 @@
 .ohb-map {
   margin: 0;
-  max-width: 22rem;
+  max-width: 28rem;
 }
 
 .ohb-map__svg {
@@ -14,6 +14,10 @@
   vector-effect: non-scaling-stroke;
 }
 
+.ohb-map__randstad {
+  vector-effect: non-scaling-stroke;
+}
+
 .ohb-map__dot {
   fill: var(--color-gold);
   stroke: var(--color-navy);
@@ -23,6 +27,9 @@
 .ohb-map__label {
   font-family: var(--font-sans);
   font-weight: 700;
+  paint-order: stroke fill;
+  stroke: color-mix(in srgb, var(--color-navy) 85%, transparent);
+  stroke-width: 0.4px;
 }
 
 .ohb-map__caption {
@@ -30,4 +37,5 @@
   font-size: 0.875rem;
   line-height: 1.5;
   color: color-mix(in srgb, var(--color-warm-white) 78%, transparent);
+  text-align: center;
 }

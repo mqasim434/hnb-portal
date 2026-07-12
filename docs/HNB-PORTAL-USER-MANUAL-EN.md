@@ -1,9 +1,9 @@
 # HNB Portal — User Manual
 
 **H&B Service Group**  
-**Version 1.0 · May 2026**
+**Version 1.1 · May 2026**
 
-This manual walks you through the H&B portal step by step. Follow the steps in order to understand how the system works and to test every major function from registration to paid invoice.
+This manual walks you through the H&B portal step by step. Follow the steps in order to understand how the system works and to test every major function — from company job posting and freelancer applications to hours and invoices.
 
 **How to read UI labels:** The website and portal are in Dutch. Throughout this manual, on-screen text appears as **Dutch (English translation)**.
 
@@ -15,10 +15,11 @@ This manual walks you through the H&B portal step by step. Follow the steps in o
 2. [Understanding user roles](#2-understanding-user-roles)
 3. [Part I — Public website (no login)](#part-i--public-website-no-login)
 4. [Part II — Freelancer: from sign-up to paid invoice](#part-ii--freelancer-from-sign-up-to-paid-invoice)
-5. [Part III — Administrator: managing the portal](#part-iii--administrator-managing-the-portal)
-6. [Part IV — Complete end-to-end test (recommended order)](#part-iv--complete-end-to-end-test-recommended-order)
-7. [Quick reference](#7-quick-reference)
-8. [Troubleshooting](#8-troubleshooting)
+5. [Part III — Company (client): post jobs and select freelancers](#part-iii--company-client-post-jobs-and-select-freelancers)
+6. [Part IV — Administrator: managing the portal](#part-iv--administrator-managing-the-portal)
+7. [Part V — Complete end-to-end test (recommended order)](#part-v--complete-end-to-end-test-recommended-order)
+8. [Quick reference](#8-quick-reference)
+9. [Troubleshooting](#9-troubleshooting)
 
 ---
 
@@ -27,33 +28,40 @@ This manual walks you through the H&B portal step by step. Follow the steps in o
 ### What you need
 
 - A modern web browser (Chrome, Edge, Firefox, or Safari)
-- A valid email address for each test user (freelancer and administrator)
+- Valid email addresses for each test user (freelancer, company, administrator)
 - For administrators: access to **Firebase Console** (one-time setup only)
 
-### What this portal includes (version 1.0)
+### What this portal includes (version 1.1)
 
 | Area | What you can do |
 |------|-----------------|
 | Public website | Read information, submit contact form, request staff, apply as freelancer |
-| Freelancer portal | Upload compliance documents, view assignments, submit hours, view invoices |
-| Admin portal | Approve users, review applications, assign jobs, approve hours, create invoices |
+| **Company portal** | Register as client, post open assignments, review applications, select a freelancer |
+| Freelancer portal | Browse open jobs, apply, upload compliance, view assigned jobs, submit hours, view invoices |
+| Admin portal | Approve users (freelancer + company), review applications, oversee assignments, approve hours, create invoices |
 
 ### What is not included yet
 
 - Online payment (invoices are marked **Betaald** (Paid) manually by admin)
 - Automatic email when something is approved or rejected
-- Separate login for B2B client companies
+- Multi-freelancer selection per assignment (one freelancer per job for now)
+- Shift scheduling / roster planning (Phase 2)
+
+### Mobile use
+
+All portals (company, freelancer, admin) use a **hamburger menu (☰)** on small screens. Tap it to open navigation, email, and log out.
 
 ---
 
 ## 2. Understanding user roles
 
-| Role | Who | After login you go to |
-|------|-----|------------------------|
-| Visitor | Anyone on the public website | No login — stay on marketing pages |
-| Freelancer (pending) | Registered but not yet approved | `/auth/pending` |
-| Freelancer (active) | Approved by H&B | `/portal/dashboard` |
-| Administrator | H&B staff with admin rights | `/admin/dashboard` |
+| Role | Who | Login URL | After login you go to |
+|------|-----|-----------|------------------------|
+| Visitor | Anyone on the public website | — | No login — stay on marketing pages |
+| Freelancer (pending) | Registered but not yet approved | `/login` (freelancer card) | `/auth/pending` |
+| Freelancer (active) | Approved by H&B | `/login` (freelancer card) | `/portal/dashboard` |
+| **Company (client)** | Approved opdrachtgever | `/login` (opdrachtgever card) | `/company/dashboard` |
+| Administrator | H&B staff with admin rights | **`/admin/login`** (not linked on public site) | `/admin/dashboard` |
 
 ---
 
@@ -70,392 +78,374 @@ Use these steps to test the public-facing website.
 ### Step 2 — Accept or decline cookies
 
 1. Read the cookie message.
-2. Click **Alleen noodzakelijk** (Essential only) to allow only required cookies, **or**
-3. Click **Alles accepteren** (Accept all) to also allow analytics (if configured).
-4. For more detail, open **Cookiebeleid** (Cookie policy) from the footer: `/juridisch/cookies`.
+2. Click **Alleen noodzakelijk** (Essential only) **or** **Alles accepteren** (Accept all).
+3. For more detail: footer → **Cookiebeleid** — `/juridisch/cookies`.
 
 ### Step 3 — Browse the website
 
 1. Use the top menu: **Freelancers**, **Bedrijven** (Companies), **Over H&B** (About H&B).
-2. Open any page and confirm content loads correctly.
-3. On mobile, open the menu icon and check navigation works.
+2. On mobile, open the **☰ menu** and check navigation works.
 
 ### Step 4 — Submit a contact message (optional)
 
 1. Go to **Contact** — `/contact`.
-2. Fill in name, email, subject, and message.
-3. Click **Bericht verzenden** (Send message).
-4. Confirm the success message appears.
+2. Fill in and send the form.
+3. Confirm the success message.
 
-### Step 5 — Submit a B2B staff request
+### Step 5 — Submit a B2B staff request (without account)
 
-1. Go to **Bedrijven** (Companies) → **Personeel aanvragen** (Request staff) — `/bedrijven/personeel-aanvragen`.
-2. Fill in all required fields:
-   - Company name and contact person
-   - Email and phone
-   - Staff type and event type
-   - Location, dates, number of workers
-3. Check the **privacyverklaring** (privacy statement) box.
-4. Click **Aanvraag versturen** (Submit request).
-5. Confirm the success message. The request is saved for H&B admin review (Part III, Step 22).
+1. Go to **Bedrijven** → **Personeel aanvragen** — `/bedrijven/personeel-aanvragen`.
+2. Fill in all required fields and privacy consent.
+3. Click **Aanvraag versturen** (Submit request).
+4. Admin reviews this at `/admin/staff-requests` (Part IV, Step 24).
 
-### Step 6 — Submit a freelancer application form (optional at this stage)
+### Step 6 — Submit a freelancer application form (optional)
 
-1. Go to **Freelancers** → **Direct aanmelden** (Register directly) — `/freelancers/direct-aanmelden`.
-2. Complete the full application form (personal details, domains, certifications).
-3. Accept privacy consent and submit.
-4. Note the email address you used — you will need the same email in Part II.
+1. Go to **Freelancers** → **Direct aanmelden** — `/freelancers/direct-aanmelden`.
+2. Complete and submit the form.
+3. Use the **same email** when registering in Part II.
 
 ---
 
 ## Part II — Freelancer: from sign-up to paid invoice
 
-Follow every step below with a **freelancer test account**. Use a new email address that is not already in the system.
-
----
+Follow every step with a **freelancer test account**.
 
 ### Section A — Create account and wait for approval
 
 #### Step 7 — Create a portal login
 
-1. Go to **Inloggen** (Log in) — `/login`.
-2. Click **Nog geen account? Account aanmaken →** (Create account), or open `/auth/register` directly.
-3. Enter your **name**, **email**, and **password** (minimum 8 characters).
-4. Confirm the password.
+1. Go to **Inloggen** — `/login`.
+2. Use the **Ik ben freelancer** (I am a freelancer) card only (fields are separate from the company card).
+3. Click **Nog geen account? Account aanmaken →** or open `/auth/register`.
+4. Enter name, email, password (min. 8 characters), confirm password.
 5. Click **Account aanmaken** (Create account).
-6. You see a message that your account is **in behandeling** (pending).
+6. Account status: **in behandeling** (pending).
 
 #### Step 8 — View the pending screen
 
-1. You are redirected to `/auth/pending`.
-2. The page explains that H&B must approve your account before you can use the full portal.
-3. You remain logged in as your email address.
+1. Redirect to `/auth/pending`.
+2. Page explains H&B must approve your account.
 
 #### Step 9 — Upload compliance documents (while pending)
 
-1. On the pending page, click **Documenten uploaden** (Upload documents), or go to `/auth/compliance`.
-2. For each required document type, upload a PDF or image (maximum about 10 MB):
+1. Click **Documenten uploaden** — `/auth/compliance`.
+2. Upload required documents (PDF/image, max ~10 MB):
 
-   | Document on screen | When needed |
-   |--------------------|-------------|
-   | **VOG** (Certificate of conduct) | Always |
-   | **Identiteitsbewijs** (ID document) | Always |
-   | **Diploma Beveiliger 2+** | Security work |
-   | **Grijze pas** (WPBR grey pass) | Security work |
-   | **BHV-certificaat** (First aid) | If applicable |
-   | **SVH** / **HACCP** | Hospitality work |
+   | Document | When needed |
+   |----------|-------------|
+   | **VOG** | Always |
+   | **Identiteitsbewijs** (ID) | Always |
+   | **Diploma Beveiliger 2+** | Security |
+   | **Grijze pas** (WPBR) | Security |
+   | **BHV** / **SVH** / **HACCP** | If applicable |
 
-3. Enter document number and expiry date where the form asks for them.
-4. Submit each document. Status shows **In behandeling** (Pending) until admin approves.
-5. Repeat for all documents you need to upload.
+3. Submit each document. Status: **In behandeling** (Pending).
 
 #### Step 10 — Wait for H&B approval
 
-1. Stay on `/auth/pending` or log out and log in again later.
-2. An administrator must approve your onboarding application and/or your user account (Part III, Steps 18–21).
-3. When approved, the portal opens automatically in most cases. If not, click **Uitloggen** (Log out), then log in again at `/login`.
+1. Administrator approves onboarding and/or user account (Part IV, Steps 25–27).
+2. Portal opens automatically in most cases; otherwise log out and log in again at `/login`.
 
 ---
 
 ### Section B — Use the freelancer portal (after approval)
 
-**Requirement:** Your account status must be **active**. You should land on `/portal/dashboard`.
+**Requirement:** Account status **active**, role **freelancer**.
 
 #### Step 11 — Explore the dashboard
 
-1. After login, confirm you are on `/portal/dashboard`.
-2. Read the welcome message and summary.
-3. Use the quick-link cards to jump to **Opdrachten** (Assignments), **Uren** (Hours), **Facturen** (Invoices), or **Compliance**.
-4. Check the compliance summary (how many core documents are approved).
+1. Confirm `/portal/dashboard` after login.
+2. Use quick links: **Open opdrachten**, **Mijn opdrachten**, **Uren**, **Facturen**, **Compliance**.
 
 #### Step 12 — Review compliance status
 
-1. Click **Compliance** in the top menu — `/portal/compliance`.
-2. Review each document: **In behandeling** (Pending), **Goedgekeurd** (Approved), **Afgewezen** (Rejected), or **Verlopen** (Expired).
-3. If a document was **Afgewezen** (Rejected), upload a corrected file again.
+1. Click **Compliance** — `/portal/compliance`.
+2. Review document statuses; re-upload if **Afgewezen** (Rejected).
 
-#### Step 13 — View your assignments
+#### Step 13 — Browse open assignments and apply
 
-1. Click **Opdrachten** (Assignments) — `/portal/jobs`.
-2. If the list is empty, an administrator must assign you to a job first (Part III, Steps 26–29). Wait and refresh.
-3. When assignments appear, read title, location, dates, and status.
-4. Click **Details bekijken** (View details) on one assignment — `/portal/jobs/{id}`.
-5. Read the full job description, shift times, and client information.
-6. Click **Uren registreren** (Register hours) to open the hours form with this assignment pre-selected.
+1. Click **Open opdrachten** — `/portal/feed`.
+2. Read open jobs posted by companies (status **Open**).
+3. Click **Meer info** (More info) for details.
+4. Optionally add a short motivation, then click **Solliciteren** (Apply).
+5. Status on the card becomes **In behandeling** (Pending) — waiting for company selection.
+6. If already applied, the card shows your application status.
 
-#### Step 14 — Register hours as a draft
+#### Step 14 — View assigned jobs (after company selects you)
 
-1. Go to **Uren** (Hours) — `/portal/hours`, or use the link from Step 13.
-2. Click **Uren registreren** (Register hours) — `/portal/hours/new`.
-3. Select an **Opdracht** (Assignment) from the dropdown.
-4. Enter **work date**, **start time**, **end time**, and **break minutes** if applicable.
-5. Add optional notes.
-6. Check the calculated total hours preview.
-7. Click **Opslaan als concept** (Save as draft).
-8. You return to `/portal/hours`. The entry shows status **Concept** (Draft).
+1. Click **Mijn opdrachten** (My assignments) — `/portal/jobs`.
+2. **Empty list?** Either no company has selected you yet, or admin assigned you via legacy flow.
+3. After selection, the job appears here with status **Toegewezen** (Assigned).
+4. Click **Details bekijken** — `/portal/jobs/{id}`.
+5. Click **Uren registreren** to open hours form with assignment pre-selected.
 
-#### Step 15 — Edit and submit hours for approval
+#### Step 15 — Register hours as a draft
 
-1. On `/portal/hours`, find your draft entry.
-2. Click **Bewerken** (Edit).
-3. Correct any details if needed.
-4. Click **Indienen ter goedkeuring** (Submit for approval).
-5. Status changes to **Ingediend** (Submitted). You can no longer edit this entry.
-6. The summary at the top shows hours **in behandeling** (pending approval).
+1. Go to **Uren** — `/portal/hours` or `/portal/hours/new`.
+2. Select **Opdracht**, date, start/end time, break minutes.
+3. Click **Opslaan als concept** (Save as draft). Status: **Concept** (Draft).
 
-#### Step 16 — Wait for hours approval
+#### Step 16 — Submit hours for approval
 
-1. An administrator reviews your hours (Part III, Steps 30–32).
-2. Refresh `/portal/hours`. Status should become **Goedgekeurd** (Approved) or **Afgewezen** (Rejected).
-3. If **Afgewezen** (Rejected), click **Bewerken** (Edit), fix the entry, and submit again.
+1. On `/portal/hours`, click **Bewerken** (Edit) on a draft.
+2. Click **Indienen ter goedkeuring** (Submit for approval). Status: **Ingediend** (Submitted).
 
-#### Step 17 — View and download invoices
+#### Step 17 — Wait for hours approval
 
-1. Click **Facturen** (Invoices) — `/portal/invoices`.
-2. Only **Goedgekeurd** (Approved) and **Betaald** (Paid) invoices appear here (not drafts).
-3. Read invoice number, period, hours, amount, and status.
-4. Click **PDF** on a row. Your browser print dialog opens.
-5. Choose **Save as PDF** or print. The invoice is generated from your browser — it is not stored as a separate file on a server.
+1. Admin approves (Part IV, Step 30). Refresh `/portal/hours` for **Goedgekeurd** (Approved).
 
-#### Step 18 — Log out as freelancer
+#### Step 18 — View and download invoices
 
-1. Click **Uitloggen** (Log out) in the top-right of the portal header.
-2. You return to the public site or login page.
+1. Click **Facturen** — `/portal/invoices`.
+2. Only **Goedgekeurd** and **Betaald** invoices appear.
+3. Click **PDF** → browser print → Save as PDF.
+
+#### Step 19 — Log out
+
+1. Click **Uitloggen** (Log out). On mobile: open **☰ menu** first.
 
 ---
 
-## Part III — Administrator: managing the portal
+## Part III — Company (client): post jobs and select freelancers
 
-Follow these steps with an **administrator account**. If no admin exists yet, complete Steps 19–20 first.
+Use a **company test account**. Company accounts must be approved by H&B admin before login works.
+
+### Section A — Register and get approved
+
+#### Step 20 — Register a company account
+
+1. Go to `/login` → **Ik ben opdrachtgever** (I am a client) card, or `/auth/register/company`.
+2. Enter company name, contact name, email, password.
+3. Click register. Status: **in behandeling** (pending).
+
+#### Step 21 — Admin approves company account
+
+1. Admin opens `/admin/users` (Part IV, Step 26).
+2. Finds pending company user, clicks **Goedkeuren** (Approve).
+3. Firestore user gets `role: company` and `accountStatus: active`.
+
+#### Step 22 — Log in to the company portal
+
+1. Go to `/login`.
+2. Use the **Ik ben opdrachtgever** card (separate email/password fields from freelancer).
+3. Click **Inloggen als opdrachtgever** (Log in as client).
+4. Redirect to `/company/dashboard`.
 
 ---
+
+### Section B — Post an assignment and select a freelancer
+
+#### Step 23 — Open assignments
+
+1. Click **Opdrachten** (Assignments) — `/company/assignments`, or use dashboard link.
+2. On mobile, open **☰ menu** if navigation is hidden.
+
+#### Step 24 — Create a new assignment
+
+1. Click **Nieuwe opdracht** (New assignment).
+2. Fill in title, type, location, dates, optional shift times, rate note.
+3. Set status to **Open (zichtbaar voor freelancers)** — required for freelancer feed.
+4. Click **Opdracht plaatsen** (Post assignment).
+5. Assignment appears in the list. Click **Annuleren** to close the form without saving.
+
+#### Step 25 — Wait for applications
+
+1. Freelancer applies via `/portal/feed` (Part II, Step 13).
+2. On your assignment row, click **Beheren** (Manage).
+3. Scroll to **Sollicitaties** (Applications). Each row shows freelancer name, email, motivation, status.
+
+#### Step 26 — Select a freelancer
+
+1. In **Sollicitaties**, click **Selecteren** (Select) on the desired applicant.
+2. Assignment status becomes **Toegewezen** (Assigned).
+3. Selected freelancer sees the job under **Mijn opdrachten**; other pending applications become **Afgewezen** (Rejected).
+4. Assigned jobs can no longer be edited or deleted.
+
+#### Step 27 — Log out
+
+1. Click **Uitloggen** in the company header (or via **☰ menu** on mobile).
+
+---
+
+## Part IV — Administrator: managing the portal
+
+Use an **administrator account**. Admins log in at a **separate URL** — there is no admin link on the public website.
 
 ### Section A — First-time administrator setup
 
-#### Step 19 — Create the first admin account
+#### Step 28 — Create the first admin account
 
-1. Open `/auth/register` in your browser.
-2. Register with the email that will become the administrator.
-3. Note: the account starts as **in behandeling** (pending).
+1. Register via `/auth/register` (freelancer registration path).
+2. Account starts as **in behandeling** (pending).
 
-#### Step 20 — Promote the account in Firebase
+#### Step 29 — Promote the account in Firebase
 
-1. Open [Firebase Console](https://console.firebase.google.com) for project **hnb-services**.
-2. Go to **Firestore Database** → collection **users**.
-3. Find the document whose ID matches your user ID (same as Firebase Auth UID).
-4. Edit the document and set:
-   - `role` → `"admin"`
-   - `accountStatus` → `"active"`
-5. Save the document.
+1. Firebase Console → **hnb-services** → Firestore → **users** → your UID document.
+2. Set `role` → `"admin"` and `accountStatus` → `"active"`.
+3. Save.
 
-#### Step 21 — Log in to the admin portal
+#### Step 30 — Log in to the admin portal
 
-1. Go to `/login`.
-2. Enter admin email and password.
-3. Click **Inloggen als freelancer** (Log in as freelancer) — admins use the same login form.
-4. You are redirected to `/admin/dashboard`.
+1. Open **`/admin/login`** directly in the browser (bookmark this URL).
+2. Enter admin email and password only — **no registration or forgot-password links** on this page.
+3. Non-admin accounts are rejected with an error message.
+4. Redirect to `/admin/dashboard`.
+5. After logout, you return to `/admin/login`.
 
 ---
 
-### Section B — Daily admin tasks (step by step)
+### Section B — Daily admin tasks
 
-#### Step 22 — Review the dashboard
+#### Step 31 — Review the dashboard
 
-1. On `/admin/dashboard`, read the KPI numbers (pending users, open onboarding, new requests, hours to review, etc.).
-2. Click **Vernieuwen** (Refresh) to update counts.
-3. Click any KPI card to jump to the related screen.
+1. On `/admin/dashboard`, read KPI numbers.
+2. Click **Vernieuwen** (Refresh).
+3. Click KPI cards to jump to related screens.
+4. Use CSV export buttons at the bottom.
 
-#### Step 23 — Handle a B2B staff request
+#### Step 32 — Handle a B2B staff request
 
-1. Click **Aanvragen** (Requests) — `/admin/staff-requests`.
-2. Set filter to **Nieuw** (New).
-3. Find the request from Part I, Step 5.
-4. Click **Details** to read company and event information.
-5. Click **Oppakken** (Take on). Status becomes **In behandeling** (In progress).
-6. Add **interne notities** (internal notes) in the detail panel if needed.
-7. When finished, click **Afgerond** (Closed).
+1. **Aanvragen** — `/admin/staff-requests`.
+2. Filter **Nieuw** (New) → **Details** → **Oppakken** → notes → **Afgerond**.
 
-#### Step 24 — Review a freelancer onboarding application
+#### Step 33 — Review freelancer onboarding
 
-1. Click **Onboarding** — `/admin/onboarding`.
-2. Set filter to **In behandeling** (Pending).
-3. Find the application from Part I, Step 6 or Part II.
-4. Click **Details** and review all submitted information.
-5. Add internal notes if needed.
-6. Click **Goedkeuren** (Approve) to accept the application and activate the linked user account, **or** click **Afwijzen** (Reject) to decline.
+1. **Onboarding** — `/admin/onboarding`.
+2. Filter **In behandeling** → **Details** → **Goedkeuren** or **Afwijzen**.
 
-#### Step 25 — Approve a pending user account (alternative)
+#### Step 34 — Approve pending users (freelancer or company)
 
-1. Click **Gebruikers** (Users) — `/admin/users`.
-2. Find users with status **in behandeling** (pending).
-3. Click **Goedkeuren** (Approve) to activate as freelancer, or **Afwijzen** (Reject).
-4. The freelancer’s session updates live — they usually do not need to log in again.
+1. **Gebruikers** — `/admin/users`.
+2. **Goedkeuren** sets role from `intendedRole` (freelancer or company).
+3. Company users can then log in at `/login` (opdrachtgever card).
 
-#### Step 26 — Review compliance documents
+#### Step 35 — Review compliance documents
 
-1. Click **Compliance** — `/admin/compliance`.
-2. Set filter to **In behandeling** (Pending).
-3. Open **Details** on a document.
-4. Open the file link and verify the upload.
-5. Click **Goedkeuren** (Approve) with optional notes, **Afwijzen** (Reject) with feedback, or **Markeer verlopen** (Mark expired) for expired documents.
-6. The freelancer sees the updated status on `/portal/compliance` or `/auth/compliance`.
+1. **Compliance** — `/admin/compliance`.
+2. **Details** → verify file → **Goedkeuren**, **Afwijzen**, or **Markeer verlopen**.
 
-#### Step 27 — Create a new assignment
+#### Step 36 — Oversee assignments (read-only)
 
-1. Click **Opdrachten** (Assignments) — `/admin/assignments`.
-2. In the **Nieuwe opdracht** (New assignment) form, enter:
-   - Title and assignment type
-   - Location and date range
-   - Optional shift times and rate note
-   - Optional client company name
-3. Click **Opdracht aanmaken** (Create assignment).
-4. The new assignment appears in the list below.
+1. **Opdrachten** — `/admin/assignments`.
+2. View all assignments posted by companies. **Admin cannot create or assign jobs here** — companies manage their own opdrachten.
+3. Use **Beheren** to view details and assigned freelancers.
 
-#### Step 28 — Assign a freelancer to the job
+#### Step 37 — Approve submitted hours
 
-1. On the same page, find the assignment you created.
-2. Click **Beheren** (Manage) on that row.
-3. In the detail panel, check one or more active freelancers.
-4. Click **Toewijzing opslaan** (Save assignment).
-5. The freelancer now sees the job on `/portal/jobs` (Part II, Step 13).
+1. **Uren** — `/admin/hours`.
+2. Filter **Ingediend** → **Details** → **Goedkeuren** or **Afwijzen**.
 
-#### Step 29 — Approve submitted hours
+#### Step 38 — Generate and approve invoices
 
-1. Click **Uren** (Hours) — `/admin/hours`.
-2. Set filter to **Ingediend** (Submitted).
-3. Open **Details** on an entry from Part II, Step 15.
-4. Verify date, times, assignment, and total hours.
-5. Click **Goedkeuren** (Approve) with optional internal notes, or **Afwijzen** (Reject) with feedback.
-6. Confirm the freelancer sees the new status on `/portal/hours`.
+1. **Facturen** — `/admin/invoices`.
+2. Select freelancer, set hourly rate, **Factuur genereren**.
+3. Filter **Concept** → **Details** → **PDF** → **Goedkeuren**.
+4. After payment: **Betaald** (Paid).
 
-#### Step 30 — Generate an invoice from approved hours
+#### Step 39 — Export data and log out
 
-1. Click **Facturen** (Invoices) — `/admin/invoices`.
-2. In **Nieuwe factuur genereren** (Generate new invoice):
-   - Select the **Freelancer** from the dropdown.
-   - The screen shows how many approved, uninvoiced hours are available.
-   - Enter **Uurtarief (EUR)** (Hourly rate) — default is approximately €18.50.
-   - Add an optional note for the invoice.
-3. Click **Factuur genereren** (Generate invoice).
-4. A draft invoice is created. Approved hours are linked so they cannot be invoiced twice.
-
-#### Step 31 — Review and approve the invoice
-
-1. Set the invoice filter to **Concept** (Draft).
-2. Click **Details** and verify line items (dates, assignments, hours, amounts).
-3. Click **PDF** to preview via the browser print dialog.
-4. Click **Goedkeuren** (Approve).
-5. The freelancer can now see the invoice on `/portal/invoices` (Part II, Step 17).
-
-#### Step 32 — Mark the invoice as paid
-
-1. After payment is processed outside the system (bank transfer, etc.), filter invoices by **Goedgekeurd** (Approved).
-2. Open the invoice and click **Betaald** (Paid).
-3. Status becomes **Betaald** (Paid) for both admin and freelancer.
-
-#### Step 33 — Export data to CSV
-
-1. Return to `/admin/dashboard`.
-2. Click any export button:
-   - **Gebruikers exporteren** (Export users)
-   - **Uren exporteren** (Export hours)
-   - **Compliance exporteren** (Export compliance)
-   - **Facturen exporteren** (Export invoices)
-3. A CSV file downloads. Open it in Excel (UTF-8 encoding).
-
-#### Step 34 — Log out as administrator
-
-1. Click **Uitloggen** (Log out) in the admin header.
+1. Dashboard CSV exports (users, hours, compliance, invoices).
+2. **Uitloggen** → returns to `/admin/login`.
 
 ---
 
-## Part IV — Complete end-to-end test (recommended order)
+## Part V — Complete end-to-end test (recommended order)
 
-Use this single numbered list to test the **entire portal** from start to finish. Use two browsers: one for the freelancer, one for the admin.
+Use **three browsers** (or profiles): company, freelancer, admin.
 
 | Step | Who | Action | Verify |
 |------|-----|--------|--------|
-| 1 | Visitor | Part I, Steps 1–5: open site, cookies, B2B request | — |
-| 2 | Freelancer | Part I, Step 6: submit application form | — |
-| 3 | Freelancer | Part II, Steps 7–9: register, pending, upload compliance | Admin sees onboarding + compliance |
-| 4 | Admin | Part III, Steps 19–21: ensure admin access | Dashboard loads |
-| 5 | Admin | Steps 24–26: approve onboarding, user, compliance | Freelancer reaches dashboard |
-| 6 | Admin | Steps 27–28: create assignment, assign freelancer | Job on `/portal/jobs` |
-| 7 | Freelancer | Steps 14–15: save draft hours, submit | Admin sees **Ingediend** |
-| 8 | Admin | Step 29: approve hours | Freelancer sees **Goedgekeurd** |
-| 9 | Admin | Steps 30–31: generate and approve invoice | Freelancer sees invoice |
-| 10 | Admin | Step 32: mark **Betaald** (Paid) | Freelancer sees paid status |
-| 11 | Admin | Step 33: export CSV | File opens in Excel |
-| 12 | Both | Log out and log in again | Sessions work correctly |
+| 1 | Visitor | Part I: B2B staff request (optional) | Admin: request **Nieuw** |
+| 2 | Company | Steps 20–21: register company; admin approves | Company can log in |
+| 3 | Freelancer | Part II Steps 7–10: register, compliance | Admin: pending user + compliance |
+| 4 | Admin | Steps 28–30: admin access | Dashboard loads |
+| 5 | Admin | Steps 33–35: approve freelancer + compliance | Freelancer → dashboard |
+| 6 | Company | Steps 24–25: post **Open** assignment | Freelancer sees it on `/portal/feed` |
+| 7 | Freelancer | Step 13: **Solliciteren** | Company sees application |
+| 8 | Company | Step 26: **Selecteren** | Job on freelancer `/portal/jobs` |
+| 9 | Freelancer | Steps 15–16: submit hours | Admin: **Ingediend** |
+| 10 | Admin | Step 37: approve hours | Freelancer: **Goedgekeurd** |
+| 11 | Admin | Step 38: invoice generate + approve | Freelancer sees invoice |
+| 12 | Admin | Step 38: mark **Betaald** | Freelancer: paid status |
+| 13 | All | Log out / log in on each portal | Correct login URLs work |
 
-**Pass criteria:** No errors in the browser console; each status matches the Quick Reference below; freelancers cannot open `/admin/*`; pending users cannot open `/portal/*` except pending and compliance pages.
+**Pass criteria:** No console errors; statuses match Quick Reference; freelancers cannot open `/admin/*`; company cannot open `/portal/*`; pending users only see pending + compliance pages.
 
 ---
 
-## 7. Quick reference
+## 8. Quick reference
 
 ### Main URLs
 
 | Purpose | URL |
 |---------|-----|
-| Log in | `/login` |
-| Register | `/auth/register` |
-| Forgot password | `/auth/forgot-password` |
+| Log in (freelancer or company) | `/login` |
+| Register freelancer | `/auth/register` |
+| Register company | `/auth/register/company` |
+| **Admin log in** | **`/admin/login`** |
+| Forgot password | `/auth/forgot-password` (not on admin login) |
 | Account pending | `/auth/pending` |
-| Upload documents (pending) | `/auth/compliance` |
+| Compliance (pending user) | `/auth/compliance` |
 | Freelancer dashboard | `/portal/dashboard` |
-| Freelancer jobs | `/portal/jobs` |
+| **Open assignments feed** | **`/portal/feed`** |
+| **Assigned jobs** | **`/portal/jobs`** |
 | Register hours | `/portal/hours/new` |
-| Freelancer hours list | `/portal/hours` |
+| Freelancer hours | `/portal/hours` |
 | Freelancer invoices | `/portal/invoices` |
+| **Company dashboard** | **`/company/dashboard`** |
+| **Company assignments** | **`/company/assignments`** |
 | Admin dashboard | `/admin/dashboard` |
 | Staff requests | `/admin/staff-requests` |
 | Users | `/admin/users` |
 | Onboarding | `/admin/onboarding` |
-| Assignments | `/admin/assignments` |
-| Hours approval | `/admin/hours` |
+| Assignments (read-only) | `/admin/assignments` |
+| Hours | `/admin/hours` |
 | Invoices | `/admin/invoices` |
-| Compliance review | `/admin/compliance` |
-| Request staff (public) | `/bedrijven/personeel-aanvragen` |
-| Freelancer application (public) | `/freelancers/direct-aanmelden` |
+| Compliance | `/admin/compliance` |
 
-### Status labels on screen
+### Portal menus
 
-| Dutch (English) | Used for |
-|-----------------|----------|
-| **In behandeling** (Pending / In progress) | Accounts, onboarding, compliance, requests |
-| **Goedgekeurd** (Approved) | Compliance, hours, invoices |
-| **Afgewezen** (Rejected) | Applications, compliance, hours |
-| **Verlopen** (Expired) | Compliance documents |
-| **Concept** (Draft) | Hours, invoices (admin only for invoices) |
-| **Ingediend** (Submitted) | Hours awaiting review |
-| **Betaald** (Paid) | Invoices |
-| **Nieuw** (New) | B2B staff requests |
-| **Afgerond** (Closed) | Completed staff requests |
+**Freelancer:** Dashboard · Open opdrachten · Compliance · Mijn opdrachten · Uren · Facturen
 
-### Freelancer portal menu
+**Company:** Dashboard · Opdrachten
 
-**Dashboard** · **Compliance** · **Opdrachten** (Assignments) · **Uren** (Hours) · **Facturen** (Invoices)
+**Admin:** Dashboard · Aanvragen · Gebruikers · Onboarding · Opdrachten · Uren · Facturen · Compliance
 
-### Admin portal menu
+### Assignment statuses
 
-**Dashboard** · **Aanvragen** (Requests) · **Gebruikers** (Users) · **Onboarding** · **Opdrachten** (Assignments) · **Uren** (Hours) · **Facturen** (Invoices) · **Compliance**
+| Status | Meaning |
+|--------|---------|
+| **Concept** (Draft) | Not visible in freelancer feed |
+| **Open** | Visible on `/portal/feed`; accepts applications |
+| **Toegewezen** (Assigned) | Freelancer selected; no more edits by company |
+| **Afgerond** / **Geannuleerd** | Completed / cancelled |
+
+### Application statuses (company selection)
+
+| Status | Meaning |
+|--------|---------|
+| **In behandeling** (Pending) | Awaiting company decision |
+| **Geaccepteerd** (Accepted) | Selected — job moves to freelancer **Mijn opdrachten** |
+| **Afgewezen** (Rejected) | Not selected |
 
 ---
 
-## 8. Troubleshooting
+## 9. Troubleshooting
 
 | Problem | What to check |
 |---------|----------------|
-| Cannot log in | Email/password correct; account approved (`accountStatus: active` in Firestore) |
-| Stuck on pending page | Admin must approve at **Gebruikers** (Users) or **Onboarding** |
-| No assignments visible | Admin must assign you at **Opdrachten** (Assignments) → **Beheren** (Manage) → **Toewijzing opslaan** (Save) |
-| Upload fails | PDF or image only; max ~10 MB; ImageKit must be configured |
-| Cannot submit hours | Select an assignment; end time after start time; only **Concept** or **Afgewezen** entries are editable |
-| No hours for invoice | Hours must be **Goedgekeurd** (Approved) and not already on another invoice |
-| No invoice in freelancer portal | Admin must click **Goedkeuren** (Approve) on the invoice — drafts are admin-only |
-| PDF button does nothing | Allow pop-ups; use browser print → Save as PDF |
-| Forgot password email missing | Check spam; confirm Firebase email auth is enabled |
+| Cannot log in as freelancer/company | Use correct card on `/login`; account **active** in Firestore |
+| Cannot log in as admin | Use **`/admin/login`**, not `/login`; `role: admin`, `accountStatus: active` |
+| Admin URL shows 404 on production | Redeploy with `vercel.json` SPA rewrite; hard refresh |
+| Stuck on pending | Admin approves at **Gebruikers** or **Onboarding** |
+| No jobs on `/portal/feed` | Company must post assignment with status **Open** |
+| Apply fails | Freelancer must be **active**; assignment still **Open**; Firebase UID must match `users/{uid}` |
+| No jobs on `/portal/jobs` | Company must **Selecteren** a freelancer, or admin legacy assign |
+| Company cannot edit assignment | Status **Toegewezen** — editing locked after selection |
+| Upload fails | PDF/image; max ~10 MB; ImageKit configured |
+| Mobile menu missing items | Tap **☰** in portal header |
+| No invoice in freelancer portal | Admin must **Goedkeuren** invoice — drafts are admin-only |
 
 ---
 
@@ -463,26 +453,21 @@ Use this single numbered list to test the **entire portal** from start to finish
 
 | ✓ | Step | Done |
 |---|------|------|
-| ☐ | 1. Website loads, cookie banner works | |
-| ☐ | 2. B2B staff request submitted | |
-| ☐ | 3. Freelancer application form submitted | |
-| ☐ | 4. Freelancer account registered | |
-| ☐ | 5. Compliance documents uploaded (pending) | |
-| ☐ | 6. Admin: onboarding approved | |
-| ☐ | 7. Admin: compliance approved | |
-| ☐ | 8. Freelancer: dashboard accessible | |
-| ☐ | 9. Admin: assignment created and assigned | |
-| ☐ | 10. Freelancer: hours submitted | |
-| ☐ | 11. Admin: hours approved | |
-| ☐ | 12. Admin: invoice generated and approved | |
-| ☐ | 13. Freelancer: invoice visible + PDF | |
-| ☐ | 14. Admin: invoice marked paid | |
-| ☐ | 15. Admin: CSV export works | |
-| ☐ | 16. Forgot password tested | |
-| ☐ | 17. Log out / log in on both roles | |
+| ☐ | 1. Website + cookie banner | |
+| ☐ | 2. Company registered + admin approved | |
+| ☐ | 3. Freelancer registered + admin approved | |
+| ☐ | 4. Compliance uploaded + approved | |
+| ☐ | 5. Company posts **Open** assignment | |
+| ☐ | 6. Freelancer applies on `/portal/feed` | |
+| ☐ | 7. Company selects freelancer | |
+| ☐ | 8. Job visible on `/portal/jobs` | |
+| ☐ | 9. Hours submitted + approved | |
+| ☐ | 10. Invoice generated + approved + paid | |
+| ☐ | 11. Admin login at `/admin/login` | |
+| ☐ | 12. Mobile ☰ menu on all portals | |
 
 ---
 
-**H&B Service Group — HNB Portal User Manual v1.0**
+**H&B Service Group — HNB Portal User Manual v1.1**
 
-*Document path: `docs/HNB-PORTAL-USER-MANUAL.pdf` · Regenerate with `npm run manual:pdf`*
+*Regenerate PDF: `npm run manual:pdf`*

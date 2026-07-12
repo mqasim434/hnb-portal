@@ -80,3 +80,20 @@
 .admin-login-page__form .auth-alert--info {
   color: var(--text-on-dark);
 }
+
+.admin-login-page__forgot {
+  margin: var(--space-5) 0 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.admin-login-page__forgot a {
+  color: var(--color-light-gold);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.admin-login-page__forgot a:hover {
+  color: var(--color-gold);
+}

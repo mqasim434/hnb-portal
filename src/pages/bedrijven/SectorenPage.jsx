@@ -42,7 +42,7 @@ export default function SectorenPage() {
             <span className="b2b-section__eyebrow">Focus</span>
             <h2 className="b2b-section__title">Waar we sterk in zijn</h2>
             <p className="b2b-section__lead">
-              Elk segment vraagt andere verhoudingen tussen hospitality en beveiliging — wij stemmen roosters af op uw
+              Elk segment vraagt andere verhoudingen tussen servicemedewerkers en beveiliging — wij stemmen roosters af op uw
               productie, niet op een standaardpakket.
             </p>
           </header>

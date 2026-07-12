@@ -3,15 +3,14 @@ import { Link } from 'react-router-dom'
 import {
   FiAward,
   FiBriefcase,
-  FiCoffee,
   FiHeadphones,
   FiMapPin,
-  FiMoon,
-  FiMusic,
   FiShield,
   FiUserCheck,
+  FiUsers,
 } from 'react-icons/fi'
 import { getCanonicalOrigin, getCanonicalUrl } from '../../config/site'
+import { CLIENT_PROCESS_STEPS } from '../../content/clientProcessSteps'
 import { HOME_SEO } from '../../content/homeSeo'
 import { HOME_PAGE_HERO } from '../../content/marketingHeroImages'
 import ResponsivePicture from '../../components/performance/ResponsivePicture'
@@ -69,15 +68,15 @@ export default function Home() {
         <div className="home-hero__inner hnb-container">
           <h1 id="home-hero-heading" className="home-hero__title">
             <span className="home-hero__title-line">
-              Hospitality en beveiliging voor live events.
+              Servicemedewerkers en beveiliging voor uw organisatie.
             </span>
             <span className="home-hero__title-line home-hero__title-line--secondary">
-              Één contactpersoon. Alles onder controle.
+              Één contactpersoon. Duidelijke afspraken.
             </span>
           </h1>
           <p className="home-hero__lead">
-            Gescreend personeel voor festivals, venues en zakelijke events. Vaste begeleiding van
-            boeking tot afbouw.
+            Gescreend personeel voor ISG, COA, horeca, objecten, kermissen en bedrijven — van intake tot
+            evaluatie, met één vaste coördinator.
           </p>
           <div className="home-hero__actions">
             <Link to="/bedrijven/personeel-aanvragen" className="hnb-btn hnb-btn--primary home-hero__btn">
@@ -93,81 +92,81 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. Wat wij leveren — licht, witte kaarten */}
+      {/* 2. Wat wij leveren */}
       <MarketingBand
         tone="light"
         titleId="home-leveren-heading"
         eyebrow="Wat wij leveren"
-        title="Hospitality en beveiliging in één rooster"
-        intro="Van gastgericht team tot gecontroleerde toegang — wij matchen het juiste profiel aan het tempo, de risico’s en de compliance van uw event."
+        title="Twee hoofdcategorieën, één aanspreekpunt"
+        intro="Servicemedewerkers (hosts) en beveiliging — afgestemd op uw sector, locatie en compliance-eisen."
       >
         <div className="home-card-grid home-card-grid--2">
           <MarketingFeatureCard
             variant="light"
-            icon={<FiCoffee />}
-            title="Hospitality-medewerkers"
-            text="Hosts, barteams en ondersteuning voor hoge drukte — afgestemd op uw programma, merkstandaarden en verantwoorde service."
+            icon={<FiUsers />}
+            title="Servicemedewerkers (hosts)"
+            text="Ontvangst, routing en representatie voor horeca, evenementen, bedrijven en publieke locaties — professioneel en afgestemd op uw verwachtingen."
             linkTo="/bedrijven/functies"
             linkText="Functieprofielen bekijken"
           />
           <MarketingFeatureCard
             variant="light"
             icon={<FiShield />}
-            title="Beveiligingsmedewerkers"
-            text="Bevoegde portiers en eventbeveiliging met focus op toegang, de-escalatie en heldere lijn met uw productie — zonder de gastbeleving te schaden."
+            title="Beveiliging"
+            text="Portiers, eventbeveiliging en objectbeveiliging met focus op toegang, de-escalatie en heldere lijn met uw locatie — conform diploma en beveiligingspas."
             linkTo="/bedrijven/functies"
             linkText="Functieprofielen bekijken"
           />
         </div>
       </MarketingBand>
 
-      {/* 3. Waar wij actief zijn — donker, mid-navy kaarten */}
+      {/* 3. Waar wij actief zijn */}
       <MarketingBand
         tone="dark"
         titleId="home-actief-heading"
         eyebrow="Waar wij actief zijn"
-        title="Gebouwd voor veeleisende omgevingen"
-        intro="Korte lijnen, wisselende bezetting en pieken tot laat horen bij ons vak — we schalen mee zonder kwaliteit te verliezen."
+        title="Breed inzetbaar in Nederland"
+        intro="Van ISG en COA tot horeca, objecten en kermissen — wij schalen mee zonder kwaliteit te verliezen."
       >
         <ul className="home-card-grid home-card-grid--4">
           <MarketingFeatureCard
             as="li"
             variant="mid"
-            icon={<FiMusic />}
-            title="Festivals"
-            text="Opbouw, afscherming, backstage. Teams die meegroeien met je festival."
-          />
-          <MarketingFeatureCard
-            as="li"
-            variant="mid"
             icon={<FiBriefcase />}
-            title="Zakelijke events"
-            text="Gala&apos;s en launches met discreet beveiligingspersoneel dat de elegantie bewaart."
-          />
-          <MarketingFeatureCard
-            as="li"
-            variant="mid"
-            icon={<FiMoon />}
-            title="Nachtleven"
-            text="Clubs en nachtlocaties. Volledig verzorgde security en bar-service."
+            title="ISG & evenementen"
+            text="Servicemedewerkers en beveiliging voor festivals en evenementenprogramma's."
           />
           <MarketingFeatureCard
             as="li"
             variant="mid"
             icon={<FiMapPin />}
-            title="Locaties"
-            text="Arena&apos;s en theaters. Dezelfde betrouwbare teams elke keer."
+            title="COA & publieke sector"
+            text="Inzet voor COA-locaties, gemeenten en publieke opdrachtgevers."
+          />
+          <MarketingFeatureCard
+            as="li"
+            variant="mid"
+            icon={<FiUsers />}
+            title="Bedrijven & horeca"
+            text="Hosts en beveiliging voor recepties, congressen en horecalocaties."
+          />
+          <MarketingFeatureCard
+            as="li"
+            variant="mid"
+            icon={<FiShield />}
+            title="Objecten & kermissen"
+            text="Objectbeveiliging en serviceteams voor vaste locaties en terreinen."
           />
         </ul>
       </MarketingBand>
 
-      {/* 4. Waarom H&B — licht, witte kaarten */}
+      {/* 4. Waarom H&B */}
       <MarketingBand
         tone="lightAlt"
         titleId="home-waarom-heading"
         eyebrow="Waarom H&amp;B"
-        title="Een partner op de vloer, geen lijst met namen"
-        intro="Operators kiezen voor ons omdat we zekerheid bieden: heldere processen, betrouwbare teams en personeel dat jouw merk begrijpt."
+        title="Een partner op de vloer"
+        intro="Opdrachtgevers kiezen voor ons omdat we zekerheid bieden: heldere processen, betrouwbare teams en personeel dat uw locatie begrijpt."
       >
         <ul className="home-card-grid home-card-grid--3">
           <MarketingFeatureCard
@@ -182,19 +181,19 @@ export default function Home() {
             variant="light"
             icon={<FiHeadphones />}
             title="Eén vaste coördinator"
-            text="Van briefing tot afbouw — minder overdracht, snellere besluiten als het programma schuift."
+            text="Van intake tot evaluatie — minder overdracht en snellere besluiten als het programma schuift."
           />
           <MarketingFeatureCard
             as="li"
             variant="light"
             icon={<FiShield />}
             title="Compliance-first"
-            text="Roosters afgestemd op locatie, RI&amp;E en vergunningen — aantoonbaar in orde voor de eerste shift."
+            text="Documentatie en screening vóór inzet — diploma's, passen en identiteit digitaal beheerd via ons portaal, aantoonbaar voor uw locatie en verzekeraar."
           />
         </ul>
       </MarketingBand>
 
-      {/* 5. Vertrouwen — donker, mid-navy kaarten */}
+      {/* 5. Vertrouwen */}
       <MarketingBand
         tone="dark"
         titleId="home-trust-heading"
@@ -208,7 +207,7 @@ export default function Home() {
             variant="mid"
             icon={<FiShield />}
             title="Compliance op orde"
-            text="Documentatie en checks die aansluiten op uw locatie, verzekering en vergunning."
+            text="Digitale documentatie en checks die aansluiten op uw locatie, verzekering en vergunningscontext."
           />
           <MarketingFeatureCard
             as="li"
@@ -227,85 +226,52 @@ export default function Home() {
         </ul>
       </MarketingBand>
 
-      {/* 6. Sectoren — teaser naar sectorenpagina */}
+      {/* 6. Sectoren */}
       <MarketingBand
         tone="lightAlt"
         titleId="home-sectoren-heading"
         eyebrow="SECTOREN"
         title="Waar we werken"
-        intro="Van festivalterrein tot zakelijke receptie. Elk segment vraagt een andere verhouding tussen hospitality en beveiliging — wij stemmen het rooster af op uw programma, niet op een standaardpakket."
+        intro="ISG, COA, bedrijven, gemeenten, horeca, evenementen, objecten en kermissen — wij stemmen bezetting af op uw programma, niet op een standaardpakket."
       >
         <ul className="home-sector-grid">
           <li className="home-sector-grid__item">
             <Link to="/bedrijven/sectoren" className="home-sector-tile">
-              Festivals &amp; buitenprogramma&apos;s
+              ISG &amp; evenementen
             </Link>
           </li>
           <li className="home-sector-grid__item">
             <Link to="/bedrijven/sectoren" className="home-sector-tile">
-              Corporate &amp; private events
+              COA &amp; publieke sector
             </Link>
           </li>
           <li className="home-sector-grid__item">
             <Link to="/bedrijven/sectoren" className="home-sector-tile">
-              Nachtleven &amp; venues
+              Bedrijven &amp; horeca
             </Link>
           </li>
           <li className="home-sector-grid__item">
             <Link to="/bedrijven/sectoren" className="home-sector-tile">
-              Theaters, arena&apos;s &amp; multifunctionele locaties
+              Objecten &amp; kermissen
             </Link>
           </li>
         </ul>
       </MarketingBand>
 
-      {/* 7. Zo werkt het — preview met link naar volledige aanpak */}
+      {/* 7. Zo werkt het */}
       <MarketingBand tone="light" titleId="home-how-heading" title="Zo werkt het">
         <ol className="home-how__steps">
-          <li className="home-how__step">
-            <span className="home-how__step-num" aria-hidden="true">
-              1
-            </span>
-            <div className="home-how__step-copy">
-              <h3 className="home-how__step-title">Verkenning &amp; scope</h3>
-              <p className="home-how__step-text">
-                We inventariseren bezetting, locatie en risico&apos;s.
-              </p>
-            </div>
-          </li>
-          <li className="home-how__step">
-            <span className="home-how__step-num" aria-hidden="true">
-              2
-            </span>
-            <div className="home-how__step-copy">
-              <h3 className="home-how__step-title">Rooster &amp; akkoord</h3>
-              <p className="home-how__step-text">
-                Rooster met functies en incheckijden, bevestigd na jouw goedkeuring.
-              </p>
-            </div>
-          </li>
-          <li className="home-how__step">
-            <span className="home-how__step-num" aria-hidden="true">
-              3
-            </span>
-            <div className="home-how__step-copy">
-              <h3 className="home-how__step-title">Briefing &amp; inzet</h3>
-              <p className="home-how__step-text">
-                Compleet: locatie, dresscode, contacten en protocol.
-              </p>
-            </div>
-          </li>
-          <li className="home-how__step">
-            <span className="home-how__step-num" aria-hidden="true">
-              4
-            </span>
-            <div className="home-how__step-copy">
-              <h3 className="home-how__step-title">Op locatie &amp; evaluatie</h3>
-              <p className="home-how__step-text">
-                Volledige ondersteuning ter plaatse en evaluatie achteraf.
-              </p>
-            </div>
-          </li>
+          {CLIENT_PROCESS_STEPS.map((step, index) => (
+            <li key={step.title} className="home-how__step">
+              <span className="home-how__step-num" aria-hidden="true">
+                {index + 1}
+              </span>
+              <div className="home-how__step-copy">
+                <h3 className="home-how__step-title">{step.title}</h3>
+                <p className="home-how__step-text">{step.body}</p>
+              </div>
+            </li>
+          ))}
         </ol>
         <div className="home-how__cta-wrap">
           <Link to="/over-hb/onze-aanpak" className="home-how__cta">
@@ -318,8 +284,8 @@ export default function Home() {
       <MarketingCtaStrip
         prominent
         headingId="home-final-heading"
-        title="Klaar voor je volgende event?"
-        lead="Deel de details van je event. Wij reageren binnen 24 uur met capaciteit en offerte."
+        title="Klaar om personeel aan te vragen?"
+        lead="Deel uw vraag. Wij reageren binnen 24 uur met capaciteit en een prijsopgave op aanvraag."
         primaryTo="/bedrijven/personeel-aanvragen"
         primaryLabel="Personeel aanvragen"
         secondaryTo="/freelancers/openstaande-opdrachten"

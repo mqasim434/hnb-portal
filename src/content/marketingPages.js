@@ -58,7 +58,7 @@ export const MARKETING_PAGES = {
       {
         heading: 'Certificaten en vergunningen',
         paragraphs: [
-          'Voor beveiligingswerk zijn geldige diploma’s en vergunningen verplicht. Voor hospitality-rollen kunnen extra eisen gelden (hygiëne, sociale hygiëne, BHV). U uploadt kopieën veilig in het onboardingtraject; wij controleren actualiteit.',
+          'Voor beveiligingswerk zijn geldige diploma’s en beveiligingspassen verplicht. Voor servicemedewerkers kunnen extra eisen gelden (BHV). U uploadt kopieën digitaal in het portaal; wij controleren actualiteit.',
         ],
       },
       {
@@ -83,9 +83,9 @@ export const MARKETING_PAGES = {
     lead: 'Praktische afspraken over communicatie, planning en representativiteit op locatie.',
     sections: [
       {
-        heading: 'Planning en beschikbaarheid',
+        heading: 'Planning en opdrachten',
         paragraphs: [
-          'U geeft uw beschikbaarheid actueel door. Aanvragen worden gematcht op skills en voorkeur. Een bevestigde shift verwachten wij dat u op tijd bent, tenzij u tijdig afmeldt volgens de overeengekomen regels.',
+          'Na goedkeuring bekijkt u open opdrachten in het portaal en solliciteert u op passende shifts. Een bevestigde opdracht verwachten wij dat u op tijd bent, tenzij u tijdig afmeldt volgens de overeengekomen regels.',
         ],
       },
       {
@@ -153,22 +153,10 @@ export const MARKETING_PAGES = {
   'bv-tarieven': {
     eyebrow: 'Bedrijven',
     title: 'Tarieven',
-    lead: 'Heldere scopes en tariefkaarten per type inzet — afgestemd op duur, risicoklasse en doorlooptijd van het project.',
-    indicativeEyebrow: 'INDICATIE',
-    indicativeTitle: 'Indicatieve tarieven per rol',
-    indicativeIntro:
-      'Onderstaande bedragen zijn richtprijzen voor reguliere inzet (dagdienst, doordeweeks). Definitieve tarieven volgen in de offerte en zijn afhankelijk van duur, risicoklasse, doorlooptijd en eventuele toeslagen.',
-    indicativeRates: [
-      'Host / hostess — vanaf €29 per uur',
-      'Bar & service — vanaf €29 per uur',
-      'Portier / eventbeveiliging — vanaf €35 per uur',
-      'Runner / productie — vanaf €27 per uur',
-    ],
-    indicativeSurcharge:
-      'Toeslagen kunnen gelden voor nachturen, weekenddiensten, feestdagen, hoog-risico-events en spoedinzet binnen 72 uur.',
+    lead: 'Prijzen op aanvraag — wij leveren een concrete offerte na intake, afgestemd op rol, sector en doorlooptijd.',
     quoteHeading: 'Offerte op maat',
     quoteBody:
-      'Voor een concreet voorstel hebben wij inzicht nodig in data, bezetting, type rol (hospitality, beveiliging, podiumondersteuning), locatie en eventuele nacht- of feestdagentoeslagen. Vraag vrijblijvend capaciteit aan via het formulier voor personeelsaanvragen.',
+      'Voor een concreet voorstel hebben wij inzicht nodig in data, bezetting, type rol (servicemedewerker of beveiliging), locatie en eventuele nacht- of feestdagentoeslagen. Vraag vrijblijvend capaciteit aan via het formulier voor personeelsaanvragen.',
     quoteCta: { to: '/bedrijven/personeel-aanvragen', label: 'Personeelsaanvraag indienen' },
     ctas: [{ to: '/bedrijven/personeel-aanvragen', label: 'Personeelsaanvraag indienen', primary: true }],
   },
@@ -181,10 +169,10 @@ export const MARKETING_PAGES = {
       {
         heading: 'Beschikbare filterdimensies',
         bullets: [
-          'Rol en senioriteit (host, bar, beveiliging, algemeen event).',
+          'Rol en senioriteit (servicemedewerker, beveiliging).',
           'Taal en gastgerichtheid.',
-          'Certificering (SGHV, BHV, beveiliging, etc.).',
-          'Beschikbaarheid en reisbereidheid binnen regio’s.',
+          'Certificering (diploma, beveiligingspas, BHV).',
+          'Reisbereidheid binnen regio\'s.',
         ],
       },
       {
@@ -199,7 +187,7 @@ export const MARKETING_PAGES = {
   'bv-sectoren': {
     eyebrow: 'Bedrijven',
     title: 'Sectoren',
-    lead: 'Van festivalterrein tot zakelijke receptie: wij kennen het tempo en de risico’s van verschillende sectoren.',
+    lead: 'Van ISG en COA tot horeca en objecten: wij kennen het tempo en de risico’s van verschillende sectoren.',
     sections: [
       {
         heading: 'Sectorspecifieke compliance',
@@ -245,7 +233,7 @@ export const MARKETING_PAGES = {
   'hb-wat-wij-doen': {
     eyebrow: 'Over H&B Service Group',
     title: 'Wat wij doen',
-    lead: 'Wij verbinden organisatoren van live events met gescreend hospitality- en beveiligingspersoneel — van eerste brief tot uitloop.',
+    lead: 'Wij verbinden opdrachtgevers met gescreende servicemedewerkers en beveiliging — van eerste aanvraag tot evaluatie.',
     sections: [
       {
         heading: 'Wat wij voor u regelen',
@@ -344,7 +332,7 @@ export const MARKETING_PAGES = {
   'bv-ons-aanbod': {
     eyebrow: 'Bedrijven',
     title: 'Ons aanbod',
-    lead: 'Hospitality en beveiliging uit één hand: van korte piek tot vaste pool — altijd met voorgecontroleerde professionals en één coördinator.',
+    lead: 'Servicemedewerkers en beveiliging uit één hand: van korte piek tot vaste pool — altijd met voorgecontroleerde professionals en één coördinator.',
     sections: [
       {
         heading: 'Hoe we leveren',
@@ -361,15 +349,15 @@ export const MARKETING_PAGES = {
 
   'hb-vergunningen': {
     eyebrow: 'OVER H&B SERVICE GROUP',
-    title: 'Vergunningen & compliance',
-    lead: 'We roosteren volgens geldende wet- en locatie-eisen — met traceerbare documentatie voor uw verzekeraar en vergunningverlener.',
+    title: 'Compliance & documentatie',
+    lead: 'We screenen en documenteren vóór inzet — met traceerbare dossiers voor uw verzekeraar en locatie. Wij vragen geen vergunningen aan namens opdrachtgevers.',
     sections: [
       {
         heading: 'Waar we op sturen naast het wettelijke kader',
         bullets: [
           'Recht om te werken en identiteit.',
           'Diploma’s en registraties voor beveiligingsrollen.',
-          'Aanvullende certificaten (BHV, sociale hygiëne) die uw locatie voorschrijft.',
+          'Aanvullende certificaten (BHV) die uw locatie voorschrijft.',
         ],
       },
       {

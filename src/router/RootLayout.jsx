@@ -2,7 +2,6 @@ import { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
 import CookieConsentBanner from '../components/CookieConsentBanner'
 import FirebaseAuthSync from '../components/FirebaseAuthSync'
-import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import PageRouteSkeleton from '../components/performance/PageRouteSkeleton'
 import SiteJsonLd from '../components/seo/SiteJsonLd'
@@ -21,7 +20,6 @@ export default function RootLayout() {
           <Outlet />
         </Suspense>
       </div>
-      <Footer />
       <CookieConsentBanner />
     </div>
   )

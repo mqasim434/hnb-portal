@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { FiLock } from 'react-icons/fi'
 import { useSelector } from 'react-redux'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { ACCOUNT_STATUS, ROLES } from '../../constants/roles'
 import { usePageSeo } from '../../hooks/usePageSeo'
 import { mapAuthError, signInWithEmail, signOutUser, fetchUserProfile } from '../../lib/auth/authService'
@@ -119,6 +119,10 @@ export default function AdminLoginPage() {
               </button>
             </form>
           )}
+
+          <p className="admin-login-page__forgot">
+            <Link to="/auth/forgot-password">Wachtwoord vergeten?</Link>
+          </p>
         </div>
       </section>
     </main>

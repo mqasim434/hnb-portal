@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import AppShellHeader from '../components/AppShellHeader'
 import { signOutUser } from '../lib/auth/authService'
+import { clearAuth } from '../store/slices/authSlice'
 import './AppShellLayout.css'
 
 const PORTAL_LINKS = [
@@ -15,11 +16,16 @@ const PORTAL_LINKS = [
 
 export default function PortalLayout({ children }) {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
 
   async function handleLogout() {
-    await signOutUser()
-    navigate('/login')
+    try {
+      await signOutUser()
+    } finally {
+      dispatch(clearAuth())
+      navigate('/', { replace: true })
+    }
   }
 
   return (

@@ -28,7 +28,7 @@ export default function OnsVerhaalPage() {
         variant="navy"
         eyebrow="H&B Service Group"
         title="Ons verhaal"
-        lead="We verbinden serieuze eventorganisatoren met betrouwbaar hospitality- en beveiligingstalent — zodat elke rij bij de bar, elke deur en elke backstage-overdracht strak loopt, zonder dat uw team uitbrandt op last-minute personeelsgaten."
+        lead="We verbinden opdrachtgevers met betrouwbare servicemedewerkers en beveiliging — zodat ontvangst, toegang en coördinatie strak lopen, zonder dat uw team uitbrandt op last-minute personeelsgaten."
         stackCtasOnMobile
       >
         <Link to="/over-hb/het-team" className="hnb-btn hnb-btn--primary">
@@ -49,11 +49,11 @@ export default function OnsVerhaalPage() {
               Waarom wij bestaan
             </h2>
             <p className="about-prose">
-              H&amp;B Service Group is gebouwd rond een simpel idee: de mensen op de vloer maken de avond. Een feestje
-              staat of valt bij hosts die de gast in twee seconden welkom doen voelen, bij portiers die rustig blijven
-              als het druk wordt, bij barteams die service onder druk volhouden. Wij investeren in screening, heldere
-              communicatie en coördinatoren die uw event behandelen als hun eigen product — of u nu één clubnacht
-              draait of een meerdaags festivalprogramma.
+              H&amp;B Service Group is gebouwd rond een simpel idee: de mensen op de vloer maken het verschil. Een
+              locatie staat of valt bij servicemedewerkers die de bezoeker welkom doen voelen, bij portiers die rustig
+              blijven als het druk wordt, bij teams die onder druk professioneel blijven. Wij investeren in screening,
+              heldere communicatie en coördinatoren die uw opdracht behandelen als hun eigen verantwoordelijkheid — of
+              u nu een COA-locatie, een bedrijfsevenement of een object beheert.
             </p>
             <p className="about-prose">
               Wij zijn opgericht omdat wij zelf vaak zagen wat er misging in de markt: scherpe tarieven die ten koste
@@ -89,23 +89,22 @@ export default function OnsVerhaalPage() {
           <div className="about-section__inner about-section__inner--wide">
             <span className="about-section__eyebrow">Wat we doen</span>
             <h2 id="about-what-title" className="about-section__title">
-              Hospitality- en beveiligingspersoneel van A tot Z
+              Servicemedewerkers en beveiliging van A tot Z
             </h2>
             <p className="about-prose about-prose--after-title">
-              We roosteren, briefen en zetten teams in voor live events in Nederland
-              en daarbuiten — altijd met controle op werkrecht, vergunningen en
-              rolpas vóór definitieve bevestiging op uw locatie.
+              We roosteren, briefen en zetten teams in voor opdrachtgevers in Nederland
+              en daarbuiten — altijd met controle op werkrecht, certificaten en
+              beveiligingspas vóór definitieve bevestiging op uw locatie.
             </p>
             <div className="about-split">
               <article className="about-pillar">
                 <div className="about-pillar__icon" aria-hidden="true">
                   <FiCoffee />
                 </div>
-                <h3 className="about-pillar__title">Hospitality</h3>
+                <h3 className="about-pillar__title">Servicemedewerkers (hosts)</h3>
                 <p className="about-pillar__text">
-                  Hosts, hostesses, barteams en gastgericht personeel dat tempo,
-                  uitstraling en verantwoorde uitgifte begrijpt — afgestemd op uw
-                  merkstandaarden en servicewindows.
+                  Ontvangst, routing en representatie voor horeca, evenementen, bedrijven
+                  en publieke locaties — professioneel en afgestemd op uw verwachtingen.
                 </p>
               </article>
               <article className="about-pillar">
@@ -169,7 +168,7 @@ export default function OnsVerhaalPage() {
                 <div>
                   <h3 className="about-value__title">Menselijke coördinatie</h3>
                   <p className="about-value__text">
-                    Eén coördinator bewaakt uw briefing van boeking tot afbouw —
+                    Eén coördinator bewaakt uw briefing van intake tot evaluatie —
                     geen anonieme overdracht of verloren context tussen diensten.
                   </p>
                 </div>

@@ -100,7 +100,7 @@ export default function Contact() {
             Neem <span className="contact-page__hero-accent">contact op</span>
           </>
         }
-        lead="Plan een gesprek over hospitality- en beveiligingsteams voor uw programma. We reageren schriftelijk binnen één werkdag — sneller bij lopende shifts."
+        lead="Plan een gesprek over servicemedewerkers en beveiliging voor uw organisatie. We reageren schriftelijk binnen één werkdag — sneller bij lopende diensten."
       />
 
       <TrustBlurb ariaLabel="Waarom opdrachtgevers ons vertrouwen">

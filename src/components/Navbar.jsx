@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useId, useState } from 'react'
 import { FiChevronDown, FiMenu, FiX } from 'react-icons/fi'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { COMPANY, companyPhoneDisplay, companyPhoneHref } from '../content/company'
 import {
   HEADER_CTAS,
@@ -8,6 +9,9 @@ import {
   MOBILE_MENU_SECONDARY_CTA,
   NAV_GROUPS,
 } from '../content/navigation'
+import { ACCOUNT_STATUS, getRoleHomePath, getRolePortalLabel } from '../constants/roles'
+import { signOutUser } from '../lib/auth/authService'
+import { clearAuth } from '../store/slices/authSlice'
 import './Navbar.css'
 
 function sublinkClassName({ isActive }) {
@@ -32,10 +36,28 @@ function groupIsActive(group, pathname) {
 
 export default function Navbar() {
   const menuId = useId()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { user, role, accountStatus } = useSelector((state) => state.auth)
   const [menuOpen, setMenuOpen] = useState(false)
   const [mobileOpenGroup, setMobileOpenGroup] = useState(null)
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
+
+  const isLoggedIn = Boolean(user && accountStatus === ACCOUNT_STATUS.ACTIVE && role)
+
+  const closeMenu = useCallback(() => setMenuOpen(false), [])
+  const toggleMenu = useCallback(() => setMenuOpen((o) => !o), [])
+
+  const handleLogout = useCallback(async () => {
+    setMenuOpen(false)
+    try {
+      await signOutUser()
+    } finally {
+      dispatch(clearAuth())
+      navigate('/', { replace: true })
+    }
+  }, [dispatch, navigate])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -58,9 +80,6 @@ export default function Navbar() {
       document.body.style.overflow = prev
     }
   }, [menuOpen])
-
-  const closeMenu = useCallback(() => setMenuOpen(false), [])
-  const toggleMenu = useCallback(() => setMenuOpen((o) => !o), [])
 
   useEffect(() => {
     if (!menuOpen) return
@@ -141,9 +160,24 @@ export default function Navbar() {
               {label}
             </Link>
           ))}
-          <NavLink to="/login" className={loginClassName}>
-            Inloggen
-          </NavLink>
+          {isLoggedIn ? (
+            <>
+              <Link to={getRoleHomePath(role)} className="site-header__btn site-header__btn--primary">
+                {getRolePortalLabel(role)}
+              </Link>
+              <button
+                type="button"
+                className="site-header__login site-header__login--btn"
+                onClick={handleLogout}
+              >
+                Uitloggen
+              </button>
+            </>
+          ) : (
+            <NavLink to="/login" className={loginClassName}>
+              Inloggen
+            </NavLink>
+          )}
         </div>
 
         <button
@@ -226,15 +260,34 @@ export default function Navbar() {
             >
               {MOBILE_MENU_SECONDARY_CTA.label}
             </Link>
-            <NavLink
-              to="/login"
-              className={({ isActive }) =>
-                `site-header__login site-header__login--block${isActive ? ' site-header__login--active' : ''}`
-              }
-              onClick={closeMenu}
-            >
-              Inloggen
-            </NavLink>
+            {isLoggedIn ? (
+              <>
+                <Link
+                  to={getRoleHomePath(role)}
+                  className="site-header__btn site-header__btn--primary site-header__btn--block"
+                  onClick={closeMenu}
+                >
+                  {getRolePortalLabel(role)}
+                </Link>
+                <button
+                  type="button"
+                  className="site-header__login site-header__login--block site-header__login--btn"
+                  onClick={handleLogout}
+                >
+                  Uitloggen
+                </button>
+              </>
+            ) : (
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  `site-header__login site-header__login--block${isActive ? ' site-header__login--active' : ''}`
+                }
+                onClick={closeMenu}
+              >
+                Inloggen
+              </NavLink>
+            )}
           </div>
 
           <div className="site-header__drawer-contact">

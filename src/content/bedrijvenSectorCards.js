@@ -1,19 +1,19 @@
-/** Vier sectortegels voor /bedrijven/sectoren. */
+/** Sectortegels voor /bedrijven/sectoren en homepage-teaser. */
 export const B2B_SECTOR_CARDS = [
   {
-    title: "Festivals & buitenprogramma's",
-    body: 'Schaalbaar personeel en duidelijke perimeterbriefings. Wij plannen meerdaagse opbouwen, bemensen entree- en barwerk en houden rekening met weersomstandigheden en piekuren rond hoofdacts.',
+    title: 'ISG & evenementen',
+    body: 'Servicemedewerkers en beveiliging voor festivals, buitenprogramma\'s en evenementen via ISG — schaalbaar en afgestemd op locatie-eisen.',
   },
   {
-    title: 'Corporate & private events',
-    body: 'Representatieve teams en discrete beveiliging. Past bij zakelijke recepties, gala\'s, productlanceringen en privé-evenementen waar gastbeleving en vertrouwelijkheid hand in hand gaan.',
+    title: 'COA & publieke sector',
+    body: 'Inzet voor COA-locaties, gemeenten en overheid — representatief, betrouwbaar en met aantoonbare documentatie.',
   },
   {
-    title: 'Nachtleven & venues',
-    body: 'Piekbezetting en ervaring met dynamische ruimtes. Vaste flexpools voor terugkerende clubavonden, met portofoondiscipline tussen duty manager, productie en deurteam.',
+    title: 'Bedrijven & horeca',
+    body: 'Servicemedewerkers (hosts) en beveiliging voor horeca, recepties, congressen en bedrijfsevenementen.',
   },
   {
-    title: "Theaters, arena's & multifunctionele locaties",
-    body: 'Herhalingsprogramma\'s met vaste gezichten waar gewenst. Coördinatie tussen reguliere zaalwacht, evenementgebonden inzet en omschakeling tussen producties.',
+    title: 'Objecten & kermissen',
+    body: 'Objectbeveiliging, toegangscontrole en serviceteams voor vaste locaties, terreinen en kermissen.',
   },
 ]

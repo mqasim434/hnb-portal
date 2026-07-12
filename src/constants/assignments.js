@@ -37,7 +37,7 @@ export function assignmentStatusLabel(status) {
 export function assignmentTypeLabel(type) {
   switch (type) {
     case ASSIGNMENT_TYPES.HOSPITALITY:
-      return 'Hospitality'
+      return 'Servicemedewerker'
     case ASSIGNMENT_TYPES.BEVEILIGING:
       return 'Beveiliging'
     case ASSIGNMENT_TYPES.GEMENGD:
@@ -50,10 +50,9 @@ export function assignmentTypeLabel(type) {
 }
 
 export const ASSIGNMENT_TYPE_OPTIONS = [
-  { value: ASSIGNMENT_TYPES.HOSPITALITY, label: 'Hospitality' },
+  { value: ASSIGNMENT_TYPES.HOSPITALITY, label: 'Servicemedewerker' },
   { value: ASSIGNMENT_TYPES.BEVEILIGING, label: 'Beveiliging' },
   { value: ASSIGNMENT_TYPES.GEMENGD, label: 'Gemengd team' },
-  { value: ASSIGNMENT_TYPES.ALGEMEEN, label: 'Algemeen eventpersoneel' },
 ]
 
 export const ASSIGNMENT_STATUS_OPTIONS = [

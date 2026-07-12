@@ -36,7 +36,7 @@ export default function FreelancerCertification() {
         <header className="fl-section__head">
           <span className="fl-section__eyebrow">Overzicht</span>
           <h2 id="fl-cert-lists-title" className="fl-section__title">
-            Hospitality en beveiliging
+            Servicemedewerker en beveiliging
           </h2>
           <p className="fl-section__lead">
             Locaties kunnen aanvullende eisen stellen. Onderstaande lijsten vormen het uitgangspunt voor inroostering
@@ -47,7 +47,7 @@ export default function FreelancerCertification() {
           <div className="fl-cert-panel">
             <h2>
               <FiCoffee aria-hidden />
-              Hospitality
+              Servicemedewerkers (hosts)
             </h2>
             <ul>
               {CERT_HOSPITALITY_ITEMS.map((item) => (

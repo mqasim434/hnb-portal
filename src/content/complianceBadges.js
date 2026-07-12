@@ -7,13 +7,13 @@ export const COMPLIANCE_BADGES = [
   },
   {
     id: 'security-certs',
-    title: 'Beveiligingsdiploma’s',
-    text: 'Diploma’s en registraties voor beveiligingsrollen worden gevalideerd tegen actuele eisen en locatiebeleid.',
+    title: 'Beveiligingsdiploma’s & passen',
+    text: 'Diploma’s en beveiligingspassen worden gevalideerd tegen actuele eisen en locatiebeleid.',
   },
   {
     id: 'extra-certs',
     title: 'Locatiecertificaten',
-    text: 'BHV, sociale hygiëne en overige locatie-eisen worden gekoppeld aan de juiste shift en briefing.',
+    text: 'BHV en overige locatie-eisen worden gekoppeld aan de juiste shift en briefing.',
   },
   {
     id: 'rie',
@@ -22,12 +22,12 @@ export const COMPLIANCE_BADGES = [
   },
   {
     id: 'audit',
-    title: 'Traceerbaar dossier',
-    text: 'Documentatie blijft beschikbaar voor audits, verzekeraar en vergunningverlener volgens afspraak.',
+    title: 'Digitaal dossier',
+    text: 'Documentatie wordt digitaal beheerd in ons portaal — beschikbaar voor audits, verzekeraar en locatie volgens afspraak.',
   },
   {
     id: 'updates',
     title: 'Actieve doorvertaling',
-    text: 'Wijzigingen in beleid of vergunning communiceren we naar teams vóór aanvang van de shift.',
+    text: 'Wijzigingen in beleid of locatie-eisen communiceren we naar teams vóór aanvang van de shift.',
   },
 ]

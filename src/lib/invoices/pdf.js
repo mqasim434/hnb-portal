@@ -8,18 +8,49 @@ const COMPANY = {
 
 /**
  * Opens a print-friendly invoice view (save as PDF via browser print).
+ * Uses a hidden iframe to avoid pop-up blockers.
  * @param {Record<string, unknown>} invoice
  */
 export function printInvoicePdf(invoice) {
   const html = buildInvoiceHtml(invoice)
-  const printWindow = window.open('', '_blank', 'noopener,noreferrer')
-  if (!printWindow) {
-    throw new Error('Pop-up geblokkeerd. Sta pop-ups toe om de factuur te printen.')
+  const iframe = document.createElement('iframe')
+  iframe.setAttribute('title', `Factuur ${invoice.invoiceNumber}`)
+  iframe.style.cssText =
+    'position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden;'
+  document.body.appendChild(iframe)
+
+  const doc = iframe.contentWindow?.document
+  if (!doc) {
+    document.body.removeChild(iframe)
+    throw new Error('Factuurweergave kon niet worden geopend.')
   }
-  printWindow.document.write(html)
-  printWindow.document.close()
-  printWindow.focus()
-  printWindow.print()
+
+  doc.open()
+  doc.write(html)
+  doc.close()
+
+  const cleanup = () => {
+    if (iframe.parentNode) document.body.removeChild(iframe)
+  }
+
+  iframe.onload = () => {
+    try {
+      iframe.contentWindow?.focus()
+      iframe.contentWindow?.print()
+    } finally {
+      window.setTimeout(cleanup, 1500)
+    }
+  }
+
+  window.setTimeout(() => {
+    if (!iframe.parentNode) return
+    try {
+      iframe.contentWindow?.focus()
+      iframe.contentWindow?.print()
+    } finally {
+      window.setTimeout(cleanup, 1500)
+    }
+  }, 400)
 }
 
 /** @param {Record<string, unknown>} invoice */

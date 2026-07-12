@@ -38,7 +38,7 @@ export const NAV_GROUPS = [
       { to: '/over-hb/het-team', label: 'Het team' },
       { to: '/over-hb/werkgebied', label: 'Werkgebied' },
       { to: '/over-hb/onze-aanpak', label: 'Onze aanpak' },
-      { to: '/over-hb/vergunningen-compliance', label: 'Vergunningen & compliance' },
+      { to: '/over-hb/vergunningen-compliance', label: 'Compliance & documentatie' },
       { to: '/over-hb/nieuws', label: 'Nieuws' },
     ],
   },

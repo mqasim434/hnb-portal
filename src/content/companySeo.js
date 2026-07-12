@@ -1,33 +1,33 @@
 /** SEO voor Bedrijven-routes (Nederlands). */
 export const COMPANY_SEO = {
   personeel: {
-    title: 'Personeel aanvragen voor uw event',
+    title: 'Personeel aanvragen',
     description:
-      'Vraag gescreend hospitality- en beveiligingspersoneel aan bij H&B Service Group. Eén coördinator, duidelijke briefing, rooster naar akkoord.',
+      'Vraag gescreende servicemedewerkers en beveiliging aan bij H&B Service Group. Eén coördinator, duidelijke briefing, rooster naar akkoord.',
     path: '/bedrijven/personeel-aanvragen',
   },
   aanbod: {
-    title: 'Ons aanbod — hospitality en beveiliging',
+    title: 'Ons aanbod — servicemedewerkers en beveiliging',
     description:
-      'Hosts, bar, portiers en eventpersoneel uit één hand. H&B Service Group levert briefing, rooster en nazorg voor live events.',
+      'Servicemedewerkers (hosts) en beveiliging uit één hand. H&B Service Group levert briefing, rooster en nazorg voor diverse sectoren.',
     path: '/bedrijven/ons-aanbod',
   },
   tarieven: {
     title: 'Tarieven op aanvraag',
     description:
-      'Tariefkaarten en offertes afgestemd op rol, risico en doorlooptijd. Vraag een vrijblijvende personeelsaanvraag aan bij H&B Service Group.',
+      'Prijzen en offertes op aanvraag, afgestemd op rol, sector en doorlooptijd. Vraag een vrijblijvende personeelsaanvraag aan bij H&B Service Group.',
     path: '/bedrijven/tarieven',
   },
   sectoren: {
     title: 'Onze sectoren',
     description:
-      'Festivals, corporate, nachtleven en theaters: H&B stemt teams af op tempo, risico en wat de locatie voorschrijft.',
+      'ISG, COA, horeca, objecten en kermissen: H&B stemt teams af op tempo, risico en wat de locatie voorschrijft.',
     path: '/bedrijven/sectoren',
   },
   functies: {
     title: 'Functieprofielen',
     description:
-      'Overzicht van hospitality- en beveiligingsrollen die H&B inplant — met duidelijke verwachtingen en bevoegdheden.',
+      'Overzicht van servicemedewerker- en beveiligingsrollen die H&B inplant — met duidelijke verwachtingen en bevoegdheden.',
     path: '/bedrijven/functies',
   },
   vaste: {

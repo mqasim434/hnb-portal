@@ -3,13 +3,11 @@ import { Link } from 'react-router-dom'
 import { useForm, useWatch } from 'react-hook-form'
 import PageHero from '../../components/marketing/PageHero'
 import {
-  FL_REG_BESCHIKBAARHEID_OPTS,
+  FL_REG_BEVEILIGINGSPAS_OPTS,
   FL_REG_CONTRACT_OPTS,
   FL_REG_DOMEIN_OPTS,
   FL_REG_ERVARING_OPTS,
-  FL_REG_HACCP_OPTS,
   FL_REG_JA_NEE,
-  FL_REG_JA_NEE_AANVRAAG,
   FL_REG_JA_NEE_OPLEIDING,
   FL_REG_REIS_OPTS,
   FL_REG_ROLLEN_BY_DOMEIN,
@@ -50,15 +48,13 @@ const FIELD_ORDER = [
   'domeinen',
   'voorkeursrollen',
   'ervaringsniveau',
-  'beschikbaarheid',
   'reisbereidheid',
   'beveilig_diploma',
-  'beveilig_grijze_pas',
+  'beveilig_passen',
   'beveilig_bhv',
   'beveilig_vog',
   'hosp_svh',
   'hosp_bhv',
-  'hosp_haccp',
   'contractvoorkeur',
   'aanvullendeInfo',
   'privacyConsent',
@@ -106,15 +102,13 @@ const defaultValues = {
   domeinen: [],
   voorkeursrollen: [],
   ervaringsniveau: '',
-  beschikbaarheid: [],
   reisbereidheid: '',
   beveilig_diploma: '',
-  beveilig_grijze_pas: '',
+  beveilig_passen: [],
   beveilig_bhv: '',
   beveilig_vog: '',
   hosp_svh: '',
   hosp_bhv: '',
-  hosp_haccp: '',
   contractvoorkeur: '',
   aanvullendeInfo: '',
   privacyConsent: false,
@@ -130,13 +124,20 @@ const domeinenCheckboxRules = {
 }
 
 const voorkeursrollenRules = {
-  validate: (v) =>
-    validateMinOne(v, 'Selecteer minstens één voorkeursrol.'),
+  validate: (v, formValues) => {
+    const domeinen = asArray(formValues?.domeinen)
+    const needsRoles = domeinen.includes('beveiliging')
+    if (!needsRoles) return true
+    return validateMinOne(v, 'Selecteer minstens één voorkeursrol.')
+  },
 }
 
-const beschikbaarheidRules = {
-  validate: (v) =>
-    validateMinOne(v, 'Selecteer minstens één beschikbaarheidsoptie.'),
+const beveiligPassenRules = {
+  validate: (v, formValues) => {
+    const domeinen = asArray(formValues?.domeinen)
+    if (!domeinen.includes('beveiliging')) return true
+    return validateMinOne(v, 'Selecteer minstens één beveiligingspas.')
+  },
 }
 
 export default function FreelancerDirectRegister() {
@@ -201,15 +202,13 @@ export default function FreelancerDirectRegister() {
         domeinen: asArray(data.domeinen),
         voorkeursrollen: asArray(data.voorkeursrollen),
         ervaringsniveau: data.ervaringsniveau,
-        beschikbaarheid: asArray(data.beschikbaarheid),
         reisbereidheid: data.reisbereidheid,
         beveilig_diploma: data.beveilig_diploma ?? '',
-        beveilig_grijze_pas: data.beveilig_grijze_pas ?? '',
+        beveilig_passen: asArray(data.beveilig_passen),
         beveilig_bhv: data.beveilig_bhv ?? '',
         beveilig_vog: data.beveilig_vog ?? '',
         hosp_svh: data.hosp_svh ?? '',
         hosp_bhv: data.hosp_bhv ?? '',
-        hosp_haccp: data.hosp_haccp ?? '',
         contractvoorkeur: data.contractvoorkeur,
         aanvullendeInfo: data.aanvullendeInfo?.trim() ?? '',
         privacyConsent: data.privacyConsent,
@@ -489,7 +488,7 @@ export default function FreelancerDirectRegister() {
                 aria-invalid={errors.ervaringsniveau ? 'true' : 'false'}
               >
                 <legend className="fl-form__legend">
-                  Ervaringsniveau <ReqMarker />
+                  Ervaringsjaren <ReqMarker />
                 </legend>
                 <div className="fl-form__checks">
                   {FL_REG_ERVARING_OPTS.map((o) => (
@@ -497,7 +496,7 @@ export default function FreelancerDirectRegister() {
                       <input
                         type="radio"
                         value={o.value}
-                        {...register('ervaringsniveau', { required: 'Kies uw ervaringsniveau.' })}
+                        {...register('ervaringsniveau', { required: 'Kies uw ervaringsjaren.' })}
                       />
                       <span>{o.label}</span>
                     </label>
@@ -505,32 +504,6 @@ export default function FreelancerDirectRegister() {
                 </div>
                 {errors.ervaringsniveau ? (
                   <p className="fl-form__error">{errors.ervaringsniveau.message}</p>
-                ) : null}
-              </fieldset>
-
-              <fieldset
-                className="fl-form__fieldset"
-                id={flFieldElementId('beschikbaarheid')}
-                disabled={isSubmitting}
-                aria-invalid={errors.beschikbaarheid ? 'true' : 'false'}
-              >
-                <legend className="fl-form__legend">
-                  Beschikbaarheid <ReqMarker />
-                </legend>
-                <div className="fl-form__checks">
-                  {FL_REG_BESCHIKBAARHEID_OPTS.map((o) => (
-                    <label key={o.value} className="fl-form__check">
-                      <input
-                        type="checkbox"
-                        value={o.value}
-                        {...register('beschikbaarheid', beschikbaarheidRules)}
-                      />
-                      <span>{o.label}</span>
-                    </label>
-                  ))}
-                </div>
-                {errors.beschikbaarheid ? (
-                  <p className="fl-form__error">{errors.beschikbaarheid.message}</p>
                 ) : null}
               </fieldset>
 
@@ -592,30 +565,32 @@ export default function FreelancerDirectRegister() {
                   ) : null}
                 </div>
 
-                <div className="fl-form__field">
-                  <label htmlFor={flFieldElementId('beveilig_grijze_pas')}>
-                    Geldige grijze pas (WPBR-legitimatie)? <ReqMarker />{' '}
-                    <span className="visually-hidden">verplicht</span>
-                  </label>
-                  <select
-                    id={flFieldElementId('beveilig_grijze_pas')}
-                    aria-invalid={errors.beveilig_grijze_pas ? 'true' : 'false'}
-                    disabled={isSubmitting}
-                    {...register('beveilig_grijze_pas', { required: 'Maak een keuze.' })}
-                  >
-                    <option value="" disabled>
-                      Maak een keuze…
-                    </option>
-                    {FL_REG_JA_NEE_AANVRAAG.map((o) => (
-                      <option key={o.value} value={o.value}>
-                        {o.label}
-                      </option>
+                <fieldset
+                  className="fl-form__fieldset"
+                  id={flFieldElementId('beveilig_passen')}
+                  disabled={isSubmitting}
+                  aria-invalid={errors.beveilig_passen ? 'true' : 'false'}
+                >
+                  <legend className="fl-form__legend">
+                    Welke pas heb je in bezit? <ReqMarker />
+                  </legend>
+                  <p className="fl-form__hint">Selecteer alles wat op u van toepassing is.</p>
+                  <div className="fl-form__checks">
+                    {FL_REG_BEVEILIGINGSPAS_OPTS.map((o) => (
+                      <label key={o.value} className="fl-form__check">
+                        <input
+                          type="checkbox"
+                          value={o.value}
+                          {...register('beveilig_passen', beveiligPassenRules)}
+                        />
+                        <span>{o.label}</span>
+                      </label>
                     ))}
-                  </select>
-                  {errors.beveilig_grijze_pas ? (
-                    <p className="fl-form__error">{errors.beveilig_grijze_pas.message}</p>
+                  </div>
+                  {errors.beveilig_passen ? (
+                    <p className="fl-form__error">{errors.beveilig_passen.message}</p>
                   ) : null}
-                </div>
+                </fieldset>
 
                 <div className="fl-form__field">
                   <label htmlFor={flFieldElementId('beveilig_bhv')}>BHV-certificering?</label>
@@ -662,7 +637,7 @@ export default function FreelancerDirectRegister() {
             {showHospitality ? (
               <div className="fl-form__section" aria-labelledby="fl-reg-sect-3-hosp-title">
                 <h3 id="fl-reg-sect-3-hosp-title" className="fl-form__section-title">
-                  Certificering — hospitality
+                  Certificering — servicemedewerker
                 </h3>
 
                 <div className="fl-form__field">
@@ -699,26 +674,6 @@ export default function FreelancerDirectRegister() {
                     ))}
                   </select>
                   {errors.hosp_bhv ? <p className="fl-form__error">{errors.hosp_bhv.message}</p> : null}
-                </div>
-
-                <div className="fl-form__field">
-                  <label htmlFor={flFieldElementId('hosp_haccp')}>HACCP-basis?</label>
-                  <select
-                    id={flFieldElementId('hosp_haccp')}
-                    aria-invalid={errors.hosp_haccp ? 'true' : 'false'}
-                    disabled={isSubmitting}
-                    {...register('hosp_haccp')}
-                  >
-                    <option value="">Maak een keuze… (optioneel)</option>
-                    {FL_REG_HACCP_OPTS.map((o) => (
-                      <option key={o.value} value={o.value}>
-                        {o.label}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.hosp_haccp ? (
-                    <p className="fl-form__error">{errors.hosp_haccp.message}</p>
-                  ) : null}
                 </div>
               </div>
             ) : null}

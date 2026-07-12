@@ -1,11 +1,14 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { usePageSeo } from '../../hooks/usePageSeo'
+import { fetchCompanyDashboardStats } from '../../lib/portal/dashboardStats'
 import '../auth/Auth.css'
 
 export default function CompanyDashboard() {
   const { profile, user } = useSelector((state) => state.auth)
   const companyName = profile?.companyName || user?.displayName || 'jouw bedrijf'
+  const [stats, setStats] = useState(null)
 
   usePageSeo({
     title: 'Bedrijfsportaal — dashboard',
@@ -14,29 +17,64 @@ export default function CompanyDashboard() {
     noIndex: true,
   })
 
+  useEffect(() => {
+    if (!user?.uid) return
+    fetchCompanyDashboardStats(user.uid)
+      .then(setStats)
+      .catch(() => setStats(null))
+  }, [user?.uid])
+
   return (
-    <main className="hnb-container" style={{ paddingBlock: 'var(--space-6)' }}>
+    <main className="hnb-container portal-dashboard" style={{ paddingBlock: 'var(--space-6)' }}>
       <h1 className="hnb-type-section">Dashboard</h1>
       <p className="hnb-type-subhead" style={{ marginTop: 'var(--space-3)', maxWidth: '42rem' }}>
         Welkom, <strong>{companyName}</strong>. Plaats opdrachten waar freelancers op kunnen reageren.
       </p>
 
-      <div
-        style={{
-          marginTop: 'var(--space-5)',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(14rem, 1fr))',
-          gap: 'var(--space-4)',
-          maxWidth: '42rem',
-        }}
-      >
-        <Link to="/company/assignments" className="compliance-card" style={{ textDecoration: 'none', color: 'inherit', padding: 'var(--space-5)' }}>
-          <p style={{ margin: 0, fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent-b2b, #d4a018)' }}>
-            Opdrachten
+      <div className="portal-dashboard__grid" style={{ maxWidth: '48rem' }}>
+        <Link to="/company/assignments" className="portal-dashboard__tile">
+          <p className="portal-dashboard__tile-stat">
+            {stats ? (
+              <>
+                <span className="portal-dashboard__tile-num">{stats.openAssignments}</span>
+                <span className="portal-dashboard__tile-unit">open</span>
+              </>
+            ) : (
+              <span className="portal-dashboard__tile-num portal-dashboard__tile-num--muted">—</span>
+            )}
           </p>
-          <p className="compliance-card__hint" style={{ marginTop: 'var(--space-2)' }}>
-            Nieuwe opdracht plaatsen of bestaande beheren
+          <h2 className="portal-dashboard__tile-title">Opdrachten</h2>
+          <p className="portal-dashboard__tile-desc">Nieuwe opdracht plaatsen of bestaande beheren</p>
+        </Link>
+
+        <Link to="/company/assignments" className="portal-dashboard__tile">
+          <p className="portal-dashboard__tile-stat">
+            {stats ? (
+              <>
+                <span className="portal-dashboard__tile-num">{stats.pendingApplications}</span>
+                <span className="portal-dashboard__tile-unit">sollicitaties</span>
+              </>
+            ) : (
+              <span className="portal-dashboard__tile-num portal-dashboard__tile-num--muted">—</span>
+            )}
           </p>
+          <h2 className="portal-dashboard__tile-title">Sollicitaties</h2>
+          <p className="portal-dashboard__tile-desc">Bekijk en selecteer freelancers per opdracht</p>
+        </Link>
+
+        <Link to="/company/assignments" className="portal-dashboard__tile">
+          <p className="portal-dashboard__tile-stat">
+            {stats ? (
+              <>
+                <span className="portal-dashboard__tile-num">{stats.assignedAssignments}</span>
+                <span className="portal-dashboard__tile-unit">toegewezen</span>
+              </>
+            ) : (
+              <span className="portal-dashboard__tile-num portal-dashboard__tile-num--muted">—</span>
+            )}
+          </p>
+          <h2 className="portal-dashboard__tile-title">Toegewezen</h2>
+          <p className="portal-dashboard__tile-desc">Opdrachten met een geselecteerde freelancer</p>
         </Link>
       </div>
 

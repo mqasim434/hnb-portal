@@ -59,13 +59,13 @@ export const NEWS_ARTICLES = [
     isoDate: '2026-02-01',
     title: 'Partnerschap met Amsterdamse venuegroep',
     excerpt:
-      'Vaste flexpool voor hospitality en deurbeveiliging op meerdere locaties — kortere instaptijd voor teams en consistente service voor terugkerende bezoekers',
+      'Vaste flexpool voor servicemedewerkers en deurbeveiliging op meerdere locaties — kortere instaptijd voor teams en consistente service voor terugkerende bezoekers',
     author: 'H&B Redactie',
     sections: [
       {
         heading: 'Één briefing, meerdere zaaldeuren',
         paragraphs: [
-          'We werken samen met een Amsterdamse venuegroep aan vaste flexpools voor hospitality en deurbeveiliging. Terugkerende bezoekers zien herkenbare teams; locaties krijgen voorspelbare coördinatielijnen tussen opbouw en show.',
+          'We werken samen met een venuegroep aan vaste flexpools voor servicemedewerkers en deurbeveiliging. Terugkerende bezoekers zien herkenbare teams; locaties krijgen voorspelbare coördinatielijnen.',
           'Uniform- en huisregels zijn per locatie vastgelegd; roosters worden afgestemd op publieksprofiel en vergunning.',
         ],
       },

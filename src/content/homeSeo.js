@@ -1,6 +1,6 @@
 export const HOME_SEO = {
-  title: 'Hospitality en beveiliging voor live events',
+  title: 'Servicemedewerkers en beveiliging voor uw organisatie',
   description:
-    'H&B Service Group levert vooraf gescreend hospitality- en beveiligingspersoneel voor festivals, venues en zakelijke events — met één vaste coördinator van boeking tot afbouw.',
+    'H&B Service Group levert vooraf gescreende servicemedewerkers (hosts) en beveiliging voor ISG, COA, horeca, objecten, kermissen en bedrijven — met één vaste coördinator.',
   canonicalPath: '/',
 }

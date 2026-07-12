@@ -36,18 +36,6 @@ export default function TarievenPage() {
       <BedrijvenTrustBadges />
       <section className="b2b-section">
         <div className="hnb-container">
-          <div className="b2b-indicative">
-            <span className="b2b-indicative__eyebrow">{data.indicativeEyebrow}</span>
-            <h2 className="b2b-indicative__title">{data.indicativeTitle}</h2>
-            <p className="b2b-indicative__intro">{data.indicativeIntro}</p>
-            <ul className="b2b-rate-list">
-              {data.indicativeRates.map((line) => (
-                <li key={line}>{line}</li>
-              ))}
-            </ul>
-            <p className="b2b-indicative__surcharge">{data.indicativeSurcharge}</p>
-          </div>
-
           <div className="b2b-quote-block">
             <h2>{data.quoteHeading}</h2>
             <p>{data.quoteBody}</p>
@@ -58,8 +46,8 @@ export default function TarievenPage() {
         </div>
       </section>
       <BedrijvenCtaStrip
-        title="Concrete tariefkaart nodig?"
-        lead="Deel uw data en bezetting — wij leveren een voorstel passend bij rol, risico en doorlooptijd."
+        title="Concrete offerte nodig?"
+        lead="Deel uw data en bezetting — wij leveren een voorstel op aanvraag, passend bij rol, sector en doorlooptijd."
         primaryTo="/bedrijven/personeel-aanvragen"
         primaryLabel="Vraag offerte aan"
         secondaryTo="/contact"

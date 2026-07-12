@@ -168,11 +168,7 @@ export default function AdminStaffRequests() {
                               disabled={isBusy}
                               onClick={() =>
                                 runAction(request.id, () =>
-                                  updateStaffRequestStatus(
-                                    request.id,
-                                    STAFF_REQUEST_STATUS.IN_PROGRESS,
-                                    notesDraft[request.id],
-                                  ),
+                                  updateStaffRequestStatus(request.id, STAFF_REQUEST_STATUS.IN_PROGRESS),
                                 )
                               }
                             >
@@ -186,11 +182,7 @@ export default function AdminStaffRequests() {
                               disabled={isBusy}
                               onClick={() =>
                                 runAction(request.id, () =>
-                                  updateStaffRequestStatus(
-                                    request.id,
-                                    STAFF_REQUEST_STATUS.CLOSED,
-                                    notesDraft[request.id],
-                                  ),
+                                  updateStaffRequestStatus(request.id, STAFF_REQUEST_STATUS.CLOSED),
                                 )
                               }
                             >

@@ -1,7 +1,7 @@
 # HNB Portal — Gebruikershandleiding
 
 **H&B Service Group — Portaal & website**  
-**Versie:** 1.0 · **Datum:** mei 2026  
+**Versie:** 1.1 · **Datum:** mei 2026  
 **Doel:** Scenario-gebaseerde handleiding om alle functionaliteiten A tot Z te testen.
 
 ---
@@ -14,12 +14,13 @@
 4. [Scenario A — Bezoeker: personeelsaanvraag (B2B)](#4-scenario-a--bezoeker-personeelsaanvraag-b2b)
 5. [Scenario B — Freelancer: aanmelden tot portaaltoegang](#5-scenario-b--freelancer-aanmelden-tot-portaaltoegang)
 6. [Scenario C — Freelancer: dagelijks portaalgebruik](#6-scenario-c--freelancer-dagelijks-portaalgebruik)
-7. [Scenario D — Beheerder: eerste inrichting](#7-scenario-d--beheerder-eerste-inrichting)
-8. [Scenario E — Beheerder: dagelijkse operatie](#8-scenario-e--beheerder-dagelijkse-operatie)
-9. [Scenario F — Masterflow A tot Z (acceptatietest)](#9-scenario-f--masterflow-a-tot-z-acceptatietest)
-10. [Referentie: schermen & URL’s](#10-referentie-schermen--urls)
-11. [Referentie: statussen](#11-referentie-statussen)
-12. [Veelgestelde vragen & tips](#12-veelgestelde-vragen--tips)
+7. [Scenario G — Opdrachtgever: opdracht plaatsen en freelancer selecteren](#7-scenario-g--opdrachtgever-opdracht-plaatsen-en-freelancer-selecteren)
+8. [Scenario D — Beheerder: eerste inrichting](#8-scenario-d--beheerder-eerste-inrichting)
+9. [Scenario E — Beheerder: dagelijkse operatie](#9-scenario-e--beheerder-dagelijkse-operatie)
+10. [Scenario F — Masterflow A tot Z (acceptatietest)](#10-scenario-f--masterflow-a-tot-z-acceptatietest)
+11. [Referentie: schermen & URL’s](#11-referentie-schermen--urls)
+12. [Referentie: statussen](#12-referentie-statussen)
+13. [Veelgestelde vragen & tips](#13-veelgestelde-vragen--tips)
 
 ---
 
@@ -27,30 +28,35 @@
 
 Deze handleiding beschrijft het **H&B-portaal** en de gekoppelde **marketingwebsite**. U kunt de scenario’s in volgorde doorlopen om een volledige acceptatietest uit te voeren.
 
-**Wat is inbegrepen in versie 1.0 (MVP):**
+**Wat is inbegrepen in versie 1.1 (MVP + bedrijfsportaal):**
 
 - Publieke website (informatie, contact, aanmeldformulieren)
-- Freelancerportaal (compliance, opdrachten, uren, facturen)
-- Beheerportaal (dashboard, gebruikers, onboarding, aanvragen, opdrachten, uren, facturen, compliance)
+- **Bedrijfsportaal** (opdrachtgever): opdrachten plaatsen, sollicitaties bekijken, freelancer selecteren
+- Freelancerportaal: open opdrachten feed, solliciteren, compliance, toegewezen opdrachten, uren, facturen
+- Beheerportaal (dashboard, gebruikers, onboarding, aanvragen, opdrachten-overzicht, uren, facturen, compliance)
 - Inloggen met e-mail en wachtwoord (Firebase)
+- Aparte admin-login via **`/admin/login`** (niet zichtbaar op de website)
 
 **Wat valt buiten deze versie:**
 
 - Online betalen (facturen worden handmatig op *Betaald* gezet)
 - E-mailnotificaties bij goedkeuring/afwijzing (behalve optionele formulier-e-mails)
-- Apart inlogportaal voor opdrachtgevers (B2B-klanten)
+- Meerdere freelancers per opdracht selecteren
 - Roosterplanning / shiftplanning (Phase 2)
+
+**Mobiel gebruik:** In alle portalen (bedrijf, freelancer, beheer) opent u op smalle schermen het **☰ menu** voor navigatie, e-mail en uitloggen.
 
 ---
 
 ## 2. Wie gebruikt wat?
 
-| Rol | Toegang | Start-URL na inloggen |
-|-----|---------|------------------------|
-| **Bezoeker** | Geen account nodig | Marketingpagina’s, formulieren |
-| **Freelancer (in behandeling)** | Account aangemaakt, nog niet goedgekeurd | `/auth/pending` |
-| **Freelancer (actief)** | Goedgekeurd door H&B | `/portal/dashboard` |
-| **Beheerder (admin)** | Rol `admin` in systeem | `/admin/dashboard` |
+| Rol | Toegang | Inlog-URL | Start-URL na inloggen |
+|-----|---------|-----------|------------------------|
+| **Bezoeker** | Geen account nodig | — | Marketingpagina’s, formulieren |
+| **Freelancer (in behandeling)** | Account aangemaakt, nog niet goedgekeurd | `/login` (freelancer-kaart) | `/auth/pending` |
+| **Freelancer (actief)** | Goedgekeurd door H&B | `/login` (freelancer-kaart) | `/portal/dashboard` |
+| **Opdrachtgever / bedrijf (actief)** | Goedgekeurd door H&B | `/login` (opdrachtgever-kaart) | `/company/dashboard` |
+| **Beheerder (admin)** | Rol `admin` in systeem | **`/admin/login`** | `/admin/dashboard` |
 
 ---
 
@@ -60,516 +66,329 @@ Deze handleiding beschrijft het **H&B-portaal** en de gekoppelde **marketingwebs
 
 1. Open de website in een moderne browser (Chrome, Edge, Firefox, Safari).
 2. Bij eerste bezoek verschijnt de **cookiebalk** onderaan.
-   - **Alleen noodzakelijk** — geen analytische cookies.
-   - **Alles accepteren** — ook Google Analytics (indien geconfigureerd).
 3. Meer info: footer → **Cookiebeleid** (`/juridisch/cookies`).
 
-### 3.2 Inloggen
+### 3.2 Inloggen (freelancer of opdrachtgever)
 
 | Stap | Actie |
 |------|--------|
 | 1 | Ga naar **Inloggen** (`/login`) via het menu of footer. |
-| 2 | Kies het blok **Freelancerportaal** of **Beheer**. |
-| 3 | Vul **e-mailadres** en **wachtwoord** in. |
-| 4 | Klik **Inloggen**. |
+| 2 | Er zijn **twee aparte kaarten** met **eigen invoervelden**: **Ik ben freelancer** en **Ik ben opdrachtgever**. |
+| 3 | Vul e-mail en wachtwoord in op de juiste kaart. |
+| 4 | Klik **Inloggen als freelancer** of **Inloggen als opdrachtgever**. |
 
 **Na succesvolle login:**
 
 - Actieve **freelancer** → `/portal/dashboard`
-- Actieve **beheerder** → `/admin/dashboard`
+- Actieve **opdrachtgever** → `/company/dashboard`
 - Account **in behandeling** → `/auth/pending`
 - Account **afgewezen** of **gepauzeerd** → melding op pending-pagina
 
-### 3.3 Account aanmaken (freelancer)
+### 3.3 Inloggen (beheerder)
 
 | Stap | Actie |
 |------|--------|
-| 1 | Op `/login` → link **Account aanmaken** of ga direct naar `/auth/register`. |
+| 1 | Typ handmatig **`/admin/login`** in de browser (geen knop op de website). |
+| 2 | Vul alleen e-mail en wachtwoord in — **geen registratie of wachtwoord vergeten**. |
+| 3 | Klik **Inloggen**. |
+
+**Verwacht:** redirect naar `/admin/dashboard`. Bij uitloggen terug naar `/admin/login`. Niet-admin accounts worden geweigerd.
+
+### 3.4 Account aanmaken (freelancer)
+
+| Stap | Actie |
+|------|--------|
+| 1 | Op `/login` (freelancer-kaart) → **Account aanmaken** of `/auth/register`. |
 | 2 | Vul naam, e-mail en wachtwoord in (minimaal 8 tekens). |
-| 3 | Bevestig wachtwoord. |
-| 4 | Klik registreren. |
+| 3 | Bevestig wachtwoord en registreer. |
 
-**Verwacht resultaat:** melding dat het account **in behandeling** is. U kunt nog niet het volledige portaal gebruiken tot H&B goedkeurt.
+**Verwacht resultaat:** account **in behandeling** tot H&B goedkeurt.
 
-### 3.4 Wachtwoord vergeten
+### 3.5 Account aanmaken (opdrachtgever / bedrijf)
 
 | Stap | Actie |
 |------|--------|
-| 1 | `/login` → **Wachtwoord vergeten?** (`/auth/forgot-password`). |
-| 2 | Vul uw e-mail in. |
-| 3 | Volg de link in de e-mail van Firebase om een nieuw wachtwoord in te stellen. |
+| 1 | Op `/login` (opdrachtgever-kaart) → **Bedrijfsaccount aanmaken** of `/auth/register/company`. |
+| 2 | Vul bedrijfsnaam, contactpersoon, e-mail en wachtwoord in. |
+| 3 | Registreer. |
 
-### 3.5 Uitloggen
+**Verwacht:** account **in behandeling**. Admin keurt goed via `/admin/users` → rol **company**.
 
-- In het portaal of beheer: knop **Uitloggen** rechtsboven in de blauwe balk.
-- Op pending-pagina: knop **Uitloggen**.
+### 3.6 Wachtwoord vergeten
+
+Alleen voor freelancer/opdrachtgever via `/login` → **Wachtwoord vergeten?** (`/auth/forgot-password`). Niet beschikbaar op `/admin/login`.
+
+### 3.7 Uitloggen
+
+- Freelancer/opdrachtgever: **Uitloggen** in portaalheader (op mobiel via **☰ menu**).
+- Beheerder: **Uitloggen** → `/admin/login`.
 
 ---
 
 ## 4. Scenario A — Bezoeker: personeelsaanvraag (B2B)
 
-**Doel:** Testen of een opdrachtgever zonder account personeel kan aanvragen.
+**Doel:** Testen of een opdrachtgever **zonder account** personeel kan aanvragen (los van het bedrijfsportaal).
 
 | # | Stap | Verwacht resultaat |
 |---|------|-------------------|
-| A1 | Ga naar **Bedrijven** → **Personeel aanvragen** (`/bedrijven/personeel-aanvragen`). | Formulier met bedrijfs- en eventgegevens. |
-| A2 | Vul alle verplichte velden in (bedrijfsnaam, contactpersoon, e-mail, telefoon, type personeel, type event, locatie, aantal medewerkers, datums). | Validatie accepteert alleen complete invoer. |
-| A3 | Vink **privacyverklaring** aan. | Verplicht vóór verzenden. |
-| A4 | Klik **Aanvraag verzenden** (of equivalente verzendknop). | Succesmelding op scherm. |
-| A5 | *(Beheerder)* Open later `/admin/staff-requests`. | Nieuwe aanvraag met status **Nieuw**. |
-
-**Optioneel — contactformulier:**
-
-| # | Stap | URL |
-|---|------|-----|
-| A6 | Vul het contactformulier in. | `/contact` |
+| A1 | **Bedrijven** → **Personeel aanvragen** (`/bedrijven/personeel-aanvragen`). | Formulier met bedrijfs- en eventgegevens. |
+| A2 | Vul verplichte velden in + privacy akkoord. | Validatie accepteert complete invoer. |
+| A3 | Verzend aanvraag. | Succesmelding. |
+| A4 | *(Beheerder)* `/admin/staff-requests`. | Nieuwe aanvraag status **Nieuw**. |
 
 ---
 
 ## 5. Scenario B — Freelancer: aanmelden tot portaaltoegang
 
-**Doel:** Volledige onboarding van nieuwe freelancer vóór actieve portaaltoegang.
-
-**Tip:** Gebruik voor testen een **nieuw e-mailadres** dat nog niet in het systeem staat (bijv. `test.freelancer+1@uwbedrijf.nl`).
-
-### Deel B1 — Uitgebreid aanmeldformulier
+*(Ongewijzigd kernproces — zie v1.0)*
 
 | # | Stap | Verwacht resultaat |
 |---|------|-------------------|
-| B1 | Ga naar **Freelancers** → **Direct aanmelden** (`/freelancers/direct-aanmelden`). | Lang formulier met persoonlijke gegevens, domeinen, certificering. |
-| B2 | Vul het formulier volledig in (hospitality en/of beveiliging; conditionele velden verschijnen per domein). | — |
-| B3 | Geef toestemming (privacy). | — |
-| B4 | Verzend. | Succesmelding; gegevens opgeslagen in onboarding-wachtrij. |
-
-### Deel B2 — Portaalaccount koppelen
-
-| # | Stap | Verwacht resultaat |
-|---|------|-------------------|
-| B5 | Ga naar `/auth/register` met **dezelfde e-mail** als in B1. | — |
-| B6 | Maak account aan met wachtwoord. | Account status: **in behandeling**. |
-| B7 | U wordt doorgestuurd naar `/auth/pending`. | Tekst: account wacht op goedkeuring. |
-
-### Deel B3 — Compliance uploaden (vóór goedkeuring)
-
-| # | Stap | Verwacht resultaat |
-|---|------|-------------------|
-| B8 | Op `/auth/pending` → klik **Documenten uploaden** (`/auth/compliance`). | Overzicht compliance-documenten. |
-| B9 | Upload minimaal kerndocumenten, bijv.: **VOG**, **Identiteitsbewijs**; voor beveiliging ook **Diploma**, **Grijze pas**. | PDF of afbeelding, max. ca. 10 MB per bestand. |
-| B10 | Vul verplichte velden in (documentnummer, vervaldatum waar gevraagd). | Status per document: **In behandeling**. |
-| B11 | Herhaal voor elk vereist documenttype. | — |
-
-**Documenttypes in het systeem:**
-
-| Type | Wanneer nodig |
-|------|----------------|
-| VOG | Altijd (kern) |
-| Identiteitsbewijs | Altijd (kern) |
-| Diploma Beveiliger 2+ | Beveiliging |
-| Grijze pas (WPBR) | Beveiliging |
-| BHV | Indien van toepassing |
-| SVH / HACCP | Hospitality |
-
-### Deel B4 — Wachten op H&B (beheerder)
-
-De freelancer blijft op `/auth/pending` tot de beheerder in **Scenario D/E** de aanmelding en het account goedkeurt (stappen D3–D5).
-
-**Verwacht na goedkeuring:** freelancer hoeft **niet opnieuw in te loggen** — het portaal opent automatisch (live synchronisatie). Zo niet: uitloggen en opnieuw inloggen.
+| B1–B4 | Optioneel: `/freelancers/direct-aanmelden` | Onboarding-wachtrij |
+| B5–B7 | `/auth/register` + pending | Account in behandeling |
+| B8–B11 | `/auth/compliance` — documenten uploaden | Status **In behandeling** per document |
+| B12 | Admin keurt goed (Scenario E2/E3/E4) | Portaal opent (live sync) |
 
 ---
 
 ## 6. Scenario C — Freelancer: dagelijks portaalgebruik
 
-**Voorwaarde:** Account status = **actief**, rol = **freelancer**.
+**Voorwaarde:** Account **actief**, rol **freelancer**.
 
-Navigatie: blauwe balk bovenaan — **Dashboard · Compliance · Opdrachten · Uren · Facturen**.
+**Navigatie:** Dashboard · **Open opdrachten** · Compliance · **Mijn opdrachten** · Uren · Facturen  
+*(Op mobiel: **☰ menu**)*
 
-### C1 — Dashboard
+### C1 — Dashboard (`/portal/dashboard`)
 
-| # | Stap | URL | Verwacht resultaat |
-|---|------|-----|-------------------|
-| C1 | Open dashboard. | `/portal/dashboard` | Welkomsttekst + snelkoppelingen naar opdrachten, uren, facturen, compliance. |
-| C2 | Controleer compliance-samenvatting. | — | Aantal goedgekeurde kerndocumenten / totaal. |
+Welkomsttekst + snelkoppelingen.
 
-### C2 — Compliance (actieve freelancer)
+### C2 — Compliance (`/portal/compliance`)
 
-| # | Stap | URL |
-|---|------|-----|
-| C3 | Ga naar **Compliance**. | `/portal/compliance` |
-| C4 | Bekijk status per document (In behandeling / Goedgekeurd / Afgewezen / Verlopen). | — |
-| C5 | Bij afwijzing: opnieuw uploaden via het formulier. | — |
+Documentstatus bekijken en opnieuw uploaden bij afwijzing.
 
-### C3 — Opdrachten bekijken
-
-| # | Stap | URL | Verwacht resultaat |
-|---|------|-----|-------------------|
-| C6 | Open **Opdrachten**. | `/portal/jobs` | Lijst van aan u toegewezen opdrachten. |
-| C7 | Klik **Details bekijken** bij een opdracht. | `/portal/jobs/{id}` | Titel, locatie, periode, diensttijden, omschrijving. |
-| C8 | Klik **Uren registreren** op detailpagina. | → `/portal/hours/new?assignmentId=...` | Urenformulier met opdracht vooringevuld. |
-
-*Als er geen opdrachten staan:* de beheerder moet eerst een opdracht aanmaken en u toewijzen (Scenario E3).
-
-### C4 — Uren registreren en indienen
-
-| # | Stap | URL / actie | Verwacht resultaat |
-|---|------|-------------|-------------------|
-| C9 | Ga naar **Uren** of gebruik link uit C8. | `/portal/hours` of `/portal/hours/new` | — |
-| C10 | Klik **Uren registreren** (indien vanaf overzicht). | `/portal/hours/new` | Formulier: opdracht, datum, starttijd, eindtijd, pauze, opmerking. |
-| C11 | Selecteer **opdracht**, vul datum en tijden in. | — | Voorbeeld totaal uren wordt berekend. |
-| C12 | Klik **Opslaan als concept** of **Indienen ter goedkeuring**. | — | Respectievelijk status **Concept** (bewerkbaar) of **Ingediend**. |
-| C13 | Open concept via **Bewerken** op `/portal/hours`. | `?edit={id}` | — |
-| C14 | Bewerk en klik opnieuw **Indienen ter goedkeuring**. | — | Status **Ingediend**; niet meer bewerkbaar door freelancer. |
-| C15 | Controleer overzicht. | `/portal/hours` | Telling goedgekeurd / in behandeling bovenaan. |
-
-**Urenstatussen (freelancer):**
-
-| Status | Betekenis | Freelancer kan bewerken? |
-|--------|-----------|--------------------------|
-| Concept | Opgeslagen, nog niet ingediend | Ja |
-| Ingediend | Wacht op H&B | Nee |
-| Goedgekeurd | Geaccepteerd door H&B | Nee |
-| Afgewezen | Ter correctie | Ja (opnieuw indienen) |
-
-### C5 — Facturen bekijken
-
-| # | Stap | URL | Verwacht resultaat |
-|---|------|-----|-------------------|
-| C16 | Open **Facturen**. | `/portal/invoices` | Alleen **goedgekeurde** en **betaalde** facturen zichtbaar. |
-| C17 | Controleer openstaand vs. betaald bedrag. | — | Samenvatting bovenaan. |
-| C18 | Klik **PDF** bij een factuur. | — | Printvenster opent → opslaan als PDF via browser. |
-
-*Conceptfacturen* ziet de freelancer **niet** — alleen H&B in beheer.
-
----
-
-## 7. Scenario D — Beheerder: eerste inrichting
-
-**Doel:** Eénmalige setup zodat u het beheerportaal kunt gebruiken.
-
-### D1 — Eerste beheerder aanmaken
+### C3 — Open opdrachten bekijken en solliciteren (`/portal/feed`)
 
 | # | Stap | Verwacht resultaat |
 |---|------|-------------------|
-| D1 | Registreer een account via `/auth/register` (e-mail van de toekomstige beheerder). | Account **in behandeling**. |
-| D2 | In **Firebase Console** → Firestore → collectie `users` → document `{uw-uid}`: | — |
-| D3 | Zet velden: `role` = `"admin"` en `accountStatus` = `"active"`. | — |
-| D4 | Log in op `/login` met dat account. | Redirect naar `/admin/dashboard`. |
+| C3.1 | Open **Open opdrachten**. | Lijst open opdrachten van opdrachtgevers. |
+| C3.2 | **Meer info** → optionele motivatie → **Solliciteren**. | Status **In behandeling** op de kaart. |
+| C3.3 | Na selectie door opdrachtgever. | Status **Geaccepteerd** + link naar Mijn opdrachten. |
 
-> **Belangrijk:** Alleen gebruikers met rol `admin` en status `active` komen in het beheerportaal.
+*Geen opdrachten?* Opdrachtgever moet status **Open** zetten (Scenario G).
+
+### C4 — Toegewezen opdrachten (`/portal/jobs`)
+
+| # | Stap | Verwacht resultaat |
+|---|------|-------------------|
+| C4.1 | Open **Mijn opdrachten**. | Alleen opdrachten waarvoor u bent **geselecteerd**. |
+| C4.2 | **Details bekijken** → **Uren registreren**. | Urenformulier met opdracht vooringevuld. |
+
+*Lege lijst?* Opdrachtgever moet u selecteren (Scenario G) — solliciteren alleen op feed is niet genoeg.
+
+### C5 — Uren (`/portal/hours`, `/portal/hours/new`)
+
+Concept opslaan → **Indienen ter goedkeuring** → status **Ingediend**.
+
+### C6 — Facturen (`/portal/invoices`)
+
+Alleen **Goedgekeurd** en **Betaald** zichtbaar. **PDF** via browser.
+
+---
+
+## 7. Scenario G — Opdrachtgever: opdracht plaatsen en freelancer selecteren
+
+**Voorwaarde:** Bedrijfsaccount **actief** (`role: company`).
+
+### G1 — Registratie en goedkeuring
+
+| # | Stap | Verwacht resultaat |
+|---|------|-------------------|
+| G1 | `/auth/register/company` | Account pending |
+| G2 | Admin `/admin/users` → **Goedkeuren** | Rol company, status active |
+| G3 | Inloggen op `/login` (opdrachtgever-kaart) | `/company/dashboard` |
+
+### G2 — Opdracht plaatsen
+
+| # | Stap | Verwacht resultaat |
+|---|------|-------------------|
+| G4 | `/company/assignments` → **Nieuwe opdracht** | Formulier opent |
+| G5 | Vul gegevens in; status **Open** | Zichtbaar in freelancer feed |
+| G6 | **Opdracht plaatsen** | Opdracht in lijst; form sluit |
+
+### G3 — Sollicitaties en selectie
+
+| # | Stap | Verwacht resultaat |
+|---|------|-------------------|
+| G7 | Freelancer solliciteert (Scenario C3) | Sollicitatie in **Beheren** → **Sollicitaties** |
+| G8 | **Selecteren** bij gewenste freelancer | Opdracht **Toegewezen**; overige sollicitaties **Afgewezen** |
+| G9 | Freelancer opent **Mijn opdrachten** | Opdracht zichtbaar |
+
+Toegewezen opdrachten kunnen niet meer worden bewerkt of verwijderd.
+
+---
+
+## 8. Scenario D — Beheerder: eerste inrichting
+
+### D1 — Eerste beheerder
+
+| # | Stap |
+|---|------|
+| D1 | Registreer via `/auth/register` |
+| D2 | Firebase: `users/{uid}` → `role: "admin"`, `accountStatus: "active"` |
+| D3 | Log in via **`/admin/login`** → `/admin/dashboard` |
 
 ### D2 — Beheerportaal verkennen
-
-Navigatie (beheer-balk):
 
 | Menu | URL | Functie |
 |------|-----|---------|
 | Dashboard | `/admin/dashboard` | KPI’s + CSV-export |
-| Aanvragen | `/admin/staff-requests` | B2B personeelsaanvragen |
-| Gebruikers | `/admin/users` | Wachtrij pending accounts |
+| Aanvragen | `/admin/staff-requests` | B2B personeelsaanvragen (zonder account) |
+| Gebruikers | `/admin/users` | Freelancer- **en bedrijfs**accounts goedkeuren |
 | Onboarding | `/admin/onboarding` | Freelancer-aanmeldformulieren |
-| Opdrachten | `/admin/assignments` | Opdrachten CRUD + toewijzen |
-| Uren | `/admin/hours` | Uren goedkeuren/afwijzen |
-| Facturen | `/admin/invoices` | Facturen genereren + status |
-| Compliance | `/admin/compliance` | Documenten beoordelen |
+| Opdrachten | `/admin/assignments` | **Alleen-lezen overzicht** (bedrijven plaatsen opdrachten) |
+| Uren / Facturen / Compliance | — | Zie Scenario E |
+
+---
+
+## 9. Scenario E — Beheerder: dagelijkse operatie
+
+*(Stappen E1–E4 onboarding/compliance grotendeels ongewijzigd)*
+
+### E5 — Opdrachten (alleen overzicht)
 
 | # | Stap | Verwacht resultaat |
 |---|------|-------------------|
-| D5 | Open **Dashboard** → klik **Vernieuwen**. | Aantallen openstaande taken. |
-| D6 | Klik op een KPI-kaart (bijv. *Uren te beoordelen*). | Navigatie naar juist scherm. |
+| E17 | `/admin/assignments` | Alle opdrachten van bedrijven inzien |
+| — | Geen aanmaken/toewijzen door admin | Bedrijf beheert via `/company/assignments` |
+
+### E6–E8 — Uren, facturen, export
+
+*(Zelfde als v1.0: uren goedkeuren, factuur genereren, CSV-export)*
 
 ---
 
-## 8. Scenario E — Beheerder: dagelijkse operatie
+## 10. Scenario F — Masterflow A tot Z (acceptatietest)
 
-Doorloop deze stappen in logische volgorde wanneer u een nieuwe freelancer end-to-end verwerkt.
-
-### E1 — B2B-aanvraag afhandelen
-
-| # | Stap | Actie | Verwacht resultaat |
-|---|------|-------|-------------------|
-| E1 | `/admin/staff-requests` | Filter **Nieuw** | Lijst openstaande aanvragen |
-| E2 | Open **Details** | Lees bedrijfs- en eventinfo | — |
-| E3 | Klik **Oppakken** | — | Status **In behandeling** |
-| E4 | Voeg interne notities toe | In detailpaneel | Opgeslagen bij aanvraag |
-| E5 | Klik **Afgerond** | — | Status **Afgerond** |
-
-### E2 — Onboarding-aanmelding beoordelen
-
-| # | Stap | Actie | Verwacht resultaat |
-|---|------|-------|-------------------|
-| E6 | `/admin/onboarding` | Filter **In behandeling** | Aanmelding uit Scenario B |
-| E7 | **Details** | Controleer alle velden (domeinen, certificaten, ervaring) | — |
-| E8 | Voeg **interne notities** toe indien nodig | — | — |
-| E9 | **Goedkeuren** | — | Status aanmelding **Goedgekeurd**; gekoppeld gebruikersaccount wordt **actieve freelancer** |
-| E10 | Of **Afwijzen** (test) | — | Gekoppeld account **afgewezen** |
-
-**Alternatief:** goedkeuring via `/admin/users` → **Goedkeuren** op pending account (zonder onboarding-detail).
-
-### E3 — Gebruiker goedkeuren (alleen account)
-
-| # | Stap | URL | Actie |
-|---|------|-----|-------|
-| E11 | Open wachtrij | `/admin/users` | **Goedkeuren** of **Afwijzen** per rij |
-
-### E4 — Compliance documenten beoordelen
-
-| # | Stap | Actie | Verwacht resultaat |
-|---|------|-------|-------------------|
-| E12 | `/admin/compliance` | Filter **In behandeling** | Uploads uit Scenario B |
-| E13 | **Details** | Bekijk bestand (link), nummer, vervaldatum | — |
-| E14 | **Goedkeuren** | Optioneel interne notitie | Freelancer ziet **Goedgekeurd** |
-| E15 | **Afwijzen** | Met feedback in notities | Freelancer kan opnieuw uploaden |
-| E16 | **Markeer verlopen** | Bij verlopen document | Status **Verlopen** |
-
-### E5 — Opdracht aanmaken en freelancer toewijzen
-
-| # | Stap | Actie | Verwacht resultaat |
-|---|------|-------|-------------------|
-| E17 | `/admin/assignments` | Vul formulier **Nieuwe opdracht** (titel, type, locatie, datums, optioneel diensttijden, tariefnotitie) | — |
-| E18 | Klik **Opdracht aanmaken** | — | Opdracht in lijst |
-| E19 | Klik **Beheren** bij de opdracht | — | Detailpaneel |
-| E20 | Vink actieve **freelancer(s)** aan | — | — |
-| E21 | Klik **Toewijzing opslaan** | — | Freelancer ziet opdracht op `/portal/jobs` |
-
-### E6 — Uren goedkeuren
-
-| # | Stap | Actie | Verwacht resultaat |
-|---|------|-------|-------------------|
-| E22 | `/admin/hours` | Filter **Ingediend** | Uren uit Scenario C |
-| E23 | **Details** | Controleer datum, tijden, opdracht | — |
-| E24 | **Goedkeuren** | Optioneel interne notitie | Freelancer: status **Goedgekeurd** |
-| E25 | Of **Afwijzen** | Met notitie | Freelancer kan corrigeren en opnieuw indienen |
-
-### E7 — Factuur genereren en afhandelen
-
-| # | Stap | Actie | Verwacht resultaat |
-|---|------|-------|-------------------|
-| E26 | `/admin/invoices` | Sectie **Nieuwe factuur genereren** | — |
-| E27 | Selecteer **freelancer** | — | Telling goedgekeurde, nog niet gefactureerde uren |
-| E28 | Stel **uurtarief (EUR)** in | Standaard ca. € 18,50 | — |
-| E29 | Optioneel: opmerking op factuur | — | — |
-| E30 | **Factuur genereren** | — | Conceptfactuur; uren gekoppeld (`invoiceId`) |
-| E31 | Filter **Concept** → **Details** | Controleer regels | — |
-| E32 | **PDF** | Print / opslaan als PDF | — |
-| E33 | **Goedkeuren** | — | Freelancer ziet factuur op `/portal/invoices` |
-| E34 | Na handmatige betaling: filter **Goedgekeurd** → **Betaald** | — | Status **Betaald** |
-
-**Factuurstatussen:**
-
-| Status | Zichtbaar voor freelancer | Betekenis |
-|--------|---------------------------|-----------|
-| Concept | Nee | Intern, nog controleren |
-| Goedgekeurd | Ja | Officiële factuur, wacht op betaling |
-| Betaald | Ja | Betaling verwerkt door H&B |
-
-### E8 — Dashboard & data-export
-
-| # | Stap | Actie |
-|---|------|-------|
-| E35 | `/admin/dashboard` → **Vernieuwen** | KPI’s bijwerken na bovenstaande stappen |
-| E36 | **Gebruikers exporteren** | CSV-download |
-| E37 | **Uren exporteren** | CSV-download |
-| E38 | **Compliance exporteren** | CSV-download |
-| E39 | **Facturen exporteren** | CSV-download |
-
-Open CSV-bestanden in Excel (UTF-8, komma-gescheiden).
-
----
-
-## 9. Scenario F — Masterflow A tot Z (acceptatietest)
-
-Gebruik **twee browsers** (of incognito + normaal): één als **freelancer**, één als **beheerder**.
+Gebruik **drie browsers**: opdrachtgever, freelancer, beheerder.
 
 | Fase | Wie | Stappen | Controle |
 |------|-----|---------|----------|
-| **1. Lead** | Bezoeker | Scenario A (B2B-aanvraag) | Admin: aanvraag **Nieuw** |
-| **2. Apply** | Freelancer | Scenario B (formulier + register + compliance upload) | Admin: onboarding **In behandeling** |
-| **3. Approve account** | Admin | E2 + E4 compliance | Freelancer: portaal opent |
-| **4. Assign** | Admin | E5 | Freelancer: opdracht op `/portal/jobs` |
-| **5. Hours** | Freelancer | Scenario C4 (concept → indienen) | Admin: uren **Ingediend** |
-| **6. Approve hours** | Admin | E6 | Freelancer: **Goedgekeurd** |
-| **7. Invoice** | Admin | E7 (genereren → goedkeuren) | Freelancer: factuur + PDF |
-| **8. Pay** | Admin | E7 stap **Betaald** | Freelancer: status **Betaald** |
-| **9. Report** | Admin | E8 export + dashboard KPI’s | CSV klopt met handmatige telling |
+| **1. Setup** | Admin | Scenario D | Admin dashboard |
+| **2. Accounts** | Admin | Goedkeur bedrijf + freelancer | Beide kunnen inloggen |
+| **3. Post** | Bedrijf | Scenario G2 — **Open** opdracht | Feed `/portal/feed` |
+| **4. Apply** | Freelancer | Scenario C3 — **Solliciteren** | Sollicitatie bij bedrijf |
+| **5. Select** | Bedrijf | Scenario G3 — **Selecteren** | `/portal/jobs` |
+| **6. Hours** | Freelancer + Admin | Scenario C5 + E6 | Goedgekeurde uren |
+| **7. Invoice** | Admin | E7 | Freelancer ziet factuur |
+| **8. Pay** | Admin | **Betaald** | Afgerond |
 
-**Acceptatiecriteria:** geen foutmeldingen in browserconsole; elke status overeenkomstig met tabel in §11; freelancer kan **geen** admin-URL’s openen; pending freelancer kan **geen** `/portal/*` openen (alleen pending + compliance).
+**Acceptatiecriteria:** geen consolefouten; pending gebruikers geen `/portal/*` behalve pending/compliance; admin-login alleen via `/admin/login`.
 
 ---
 
-## 10. Referentie: schermen & URL’s
-
-### Publieke website (selectie)
-
-| Pagina | URL |
-|--------|-----|
-| Home | `/` |
-| Freelancers overzicht | `/freelancers` |
-| Direct aanmelden | `/freelancers/direct-aanmelden` |
-| Openstaande opdrachten (marketing) | `/freelancers/openstaande-opdrachten` |
-| Personeel aanvragen | `/bedrijven/personeel-aanvragen` |
-| Contact | `/contact` |
-| Privacy | `/juridisch/privacy` |
-| Cookiebeleid | `/juridisch/cookies` |
-| Algemene voorwaarden | `/juridisch/algemene-voorwaarden` |
+## 11. Referentie: schermen & URL’s
 
 ### Authenticatie
 
 | Pagina | URL |
 |--------|-----|
-| Inloggen | `/login` |
-| Registreren | `/auth/register` |
+| Inloggen freelancer / opdrachtgever | `/login` |
+| Registreren freelancer | `/auth/register` |
+| Registreren bedrijf | `/auth/register/company` |
+| **Beheer inloggen** | **`/admin/login`** |
 | Wachtwoord vergeten | `/auth/forgot-password` |
-| Account in behandeling | `/auth/pending` |
-| Compliance (pending user) | `/auth/compliance` |
+| Pending | `/auth/pending` |
+| Compliance (pending) | `/auth/compliance` |
 
-### Freelancerportaal *(login verplicht, rol freelancer, status actief)*
+### Bedrijfsportaal
+
+| Pagina | URL |
+|--------|-----|
+| Dashboard | `/company/dashboard` |
+| Opdrachten | `/company/assignments` |
+
+### Freelancerportaal
 
 | Pagina | URL |
 |--------|-----|
 | Dashboard | `/portal/dashboard` |
+| **Open opdrachten** | **`/portal/feed`** |
 | Compliance | `/portal/compliance` |
-| Opdrachten | `/portal/jobs` |
-| Opdrachtdetail | `/portal/jobs/{id}` |
-| Urenoverzicht | `/portal/hours` |
-| Uren registreren | `/portal/hours/new` |
-| Uren bewerken | `/portal/hours/new?edit={id}` |
+| **Mijn opdrachten** | **`/portal/jobs`** |
+| Uren | `/portal/hours` |
 | Facturen | `/portal/invoices` |
 
-### Beheerportaal *(login verplicht, rol admin, status actief)*
+### Beheerportaal
 
 | Pagina | URL |
 |--------|-----|
 | Dashboard | `/admin/dashboard` |
-| Personeelsaanvragen | `/admin/staff-requests` |
-| Gebruikers | `/admin/users` |
-| Onboarding | `/admin/onboarding` |
-| Opdrachten | `/admin/assignments` |
-| Uren | `/admin/hours` |
-| Facturen | `/admin/invoices` |
-| Compliance | `/admin/compliance` |
+| Overige schermen | `/admin/staff-requests`, `/admin/users`, … |
 
 ---
 
-## 11. Referentie: statussen
+## 12. Referentie: statussen
 
-### Accountstatus (`users`)
+### Opdracht (`assignments`)
 
-| Status | Freelancer ervaring |
-|--------|---------------------|
-| `pending` | Alleen `/auth/pending` + compliance upload |
-| `active` | Volledig portaal of beheer |
-| `rejected` | Melding: aanmelding afgewezen |
-| `suspended` | Melding: account gepauzeerd |
+| Status | Betekenis |
+|--------|-----------|
+| `draft` | Concept — niet in feed |
+| `open` | Zichtbaar op `/portal/feed`; sollicitaties mogelijk |
+| `assigned` | Freelancer geselecteerd |
+| `completed` / `cancelled` | Afgerond / geannuleerd |
 
-### Onboarding-aanmelding
-
-| Status | Label in beheer |
-|--------|-----------------|
-| `pending` | In behandeling |
-| `approved` | Goedgekeurd |
-| `rejected` | Afgewezen |
-
-### B2B personeelsaanvraag
-
-| Status | Label |
-|--------|-------|
-| `new` | Nieuw |
-| `in_progress` | In behandeling |
-| `closed` | Afgerond |
-
-### Compliance-document
+### Sollicitatie (`assignmentApplications`)
 
 | Status | Label |
 |--------|-------|
 | `pending` | In behandeling |
-| `approved` | Goedgekeurd |
-| `rejected` | Afgewezen |
-| `expired` | Verlopen |
-
-### Urenregistratie
-
-| Status | Label |
-|--------|-------|
-| `draft` | Concept |
-| `submitted` | Ingediend |
-| `approved` | Goedgekeurd |
+| `accepted` | Geaccepteerd (geselecteerd) |
 | `rejected` | Afgewezen |
 
-### Factuur
-
-| Status | Label |
-|--------|-------|
-| `draft` | Concept |
-| `approved` | Goedgekeurd |
-| `paid` | Betaald |
+*(Overige statussen: account, compliance, uren, facturen — zie v1.0)*
 
 ---
 
-## 12. Veelgestelde vragen & tips
+## 13. Veelgestelde vragen & tips
 
-### De freelancer ziet geen opdrachten
+### Geen opdrachten op `/portal/feed`
 
-- Controleer of de beheerder de freelancer heeft **toegewezen** bij de opdracht (`/admin/assignments` → **Beheren** → **Toewijzing opslaan**).
-- Controleer of het account **actief** is.
+- Opdrachtgever moet status **Open** zetten en `companyId` moet aanwezig zijn.
 
-### Upload van compliance mislukt
+### Solliciteren mislukt
 
-- Bestandstype: PDF of afbeelding; max. ca. 10 MB.
-- ImageKit moet correct geconfigureerd zijn (technische beheerder).
-- Probeer een andere browser of kleiner bestand.
+- Freelancer **actief**; Firebase Auth UID = Firestore `users/{uid}`; opdracht nog **open**.
 
-### Uren kunnen niet worden ingediend
+### Geen opdrachten op `/portal/jobs`
 
-- Selecteer een **toegewezen opdracht**.
-- Eindtijd moet na starttijd liggen; pauze mag totaal niet langer zijn dan gewerkte tijd.
-- Alleen **concept** of **afgewezen** registraties zijn bewerkbaar.
+- Opdrachtgever moet **Selecteren** klikken — sollicitatie alleen is niet genoeg.
 
-### Geen uren beschikbaar voor factuur
+### Admin-URL geeft 404 op productie
 
-- Uren moeten status **Goedgekeurd** hebben.
-- Uren die al op een factuur staan (`invoiceId` gevuld) worden niet opnieuw gefactureerd.
+- `vercel.json` moet SPA-rewrite bevatten; opnieuw deployen.
 
-### Freelancer ziet geen conceptfactuur
+### Mobiele navigatie
 
-- **Bedoeld gedrag:** alleen goedgekeurde en betaalde facturen zijn zichtbaar in het freelancerportaal.
-
-### PDF-factuur
-
-- Klik **PDF** → browserprintdialoog → kies **Opslaan als PDF** (niet een apart opgeslagen serverbestand).
-
-### Cookie-instellingen wijzigen
-
-- Wis sitegegevens/cookies voor het domein en herlaad de pagina om de cookiebalk opnieuw te zien.
-
-### Technische ondersteuning
-
-- Contact via `/contact` of het e-mailadres in de footer.
-- Voor technische implementatie: zie `docs/E2E-WORKFLOW-TEST.md` en `docs/REMAINING-WORK.md` (intern).
+- Tap **☰** in portaalheader voor menu.
 
 ---
 
 ## Bijlage — Testchecklist (afdrukken)
 
-| # | Test | OK | Opmerkingen |
-|---|------|----|-------------|
-| 1 | Cookiebalk werkt | ☐ | |
-| 2 | B2B-aanvraag verzonden | ☐ | |
-| 3 | Freelancer aanmeldformulier | ☐ | |
-| 4 | Freelancer register + pending | ☐ | |
-| 5 | Compliance upload (pending) | ☐ | |
-| 6 | Admin onboarding goedkeuren | ☐ | |
-| 7 | Admin compliance goedkeuren | ☐ | |
-| 8 | Freelancer portaal toegang | ☐ | |
-| 9 | Opdracht toewijzen | ☐ | |
-| 10 | Uren indienen | ☐ | |
-| 11 | Uren goedkeuren | ☐ | |
-| 12 | Factuur genereren | ☐ | |
-| 13 | Factuur goedkeuren (freelancer ziet) | ☐ | |
-| 14 | Factuur betaald | ☐ | |
-| 15 | CSV-export dashboard | ☐ | |
-| 16 | Wachtwoord vergeten | ☐ | |
-| 17 | Uitloggen / opnieuw inloggen | ☐ | |
+| # | Test | OK |
+|---|------|----|
+| 1 | Bedrijf registreren + admin goedkeuren | ☐ |
+| 2 | Freelancer registreren + goedkeuren | ☐ |
+| 3 | Open opdracht plaatsen (bedrijf) | ☐ |
+| 4 | Solliciteren op `/portal/feed` | ☐ |
+| 5 | Freelancer selecteren (bedrijf) | ☐ |
+| 6 | Opdracht op `/portal/jobs` | ☐ |
+| 7 | Uren + factuur flow | ☐ |
+| 8 | Admin login `/admin/login` | ☐ |
+| 9 | Mobiel ☰ menu | ☐ |
 
 ---
 
-**H&B Service Group — HNB Portal User Manual v1.0**  
-*Voor vragen over deze handleiding: neem contact op met uw implementatiepartner of H&B Service Group.*
+**H&B Service Group — HNB Portal Gebruikershandleiding v1.1**  
+*PDF (Engels): `npm run manual:pdf` → `docs/HNB-PORTAL-USER-MANUAL.pdf`*

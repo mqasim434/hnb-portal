@@ -17,9 +17,8 @@ import './freelancers-pages.css'
 
 const DOMAIN_FILTERS = [
   { id: 'alle', label: 'Alle' },
-  { id: 'Hospitality', label: 'Hospitality' },
+  { id: 'Servicemedewerker', label: 'Servicemedewerker' },
   { id: 'Beveiliging', label: 'Beveiliging' },
-  { id: 'Algemeen', label: 'Algemeen' },
 ]
 
 const PERIOD_FILTERS = [
@@ -319,7 +318,7 @@ export default function FreelancerOpenAssignments() {
               <FiCalendar />
             </div>
             <h3>Variatie in events</h3>
-            <p>Van corporate tot nachtprogramma — bouw ervaring binnen uw vergunning.</p>
+            <p>Van servicemedewerker tot beveiliger — bouw ervaring binnen uw beveiligingspas en diploma.</p>
           </li>
         </ul>
       </section>

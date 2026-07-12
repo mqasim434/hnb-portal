@@ -27,9 +27,10 @@ export default function FreelancerIncome() {
         </Link>
       </PageHero>
 
-      <section className="fl-section fl-section--muted hnb-container" aria-label="Inkomsten en betalingen">
+      <section className="fl-section fl-section--muted hnb-container fl-income-section" aria-label="Inkomsten en betalingen">
+        <div className="fl-income-grid">
         {COPY.sections.map((section) => (
-          <div key={section.heading} className="fl-prose-block">
+          <article key={section.heading} className="fl-income-card">
             {section.heading ? <h2>{section.heading}</h2> : null}
             {section.paragraphs?.map((p) => (
               <p key={p.slice(0, 40)}>{p}</p>
@@ -42,8 +43,9 @@ export default function FreelancerIncome() {
           </ul>
         ) : null}
         {section.closing ? <p key={section.closing.slice(0, 40)}>{section.closing}</p> : null}
-          </div>
+          </article>
         ))}
+        </div>
       </section>
 
       <MarketingCtaStrip

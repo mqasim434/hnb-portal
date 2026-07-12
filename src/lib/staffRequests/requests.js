@@ -33,8 +33,10 @@ export async function createStaffRequest(formData) {
       .toLowerCase(),
     phone: String(formData.phone ?? '').trim(),
     staffType: String(formData.staffType ?? ''),
+    staffTypes: Array.isArray(formData.staffTypes) ? formData.staffTypes : [],
     eventType: String(formData.eventType ?? ''),
     location: String(formData.location ?? '').trim(),
+    locations: Array.isArray(formData.locations) ? formData.locations : [],
     eventDateStart: String(formData.eventDateStart ?? ''),
     eventDateEnd: String(formData.eventDateEnd ?? ''),
     eventDates: String(formData.eventDates ?? ''),
@@ -71,7 +73,7 @@ export async function fetchStaffRequests(filterStatus = STAFF_REQUEST_STATUS.NEW
  * @param {string} status
  * @param {string} [adminNotes]
  */
-export async function updateStaffRequestStatus(requestId, status, adminNotes) {
+export async function updateStaffRequestStatus(requestId, status) {
   const db = assertFirestore()
   if (!auth?.currentUser) {
     throw new Error('Je moet ingelogd zijn als beheerder.')
@@ -79,7 +81,6 @@ export async function updateStaffRequestStatus(requestId, status, adminNotes) {
 
   await updateDoc(doc(db, 'staffRequests', requestId), {
     status,
-    adminNotes: adminNotes?.trim() ?? '',
     updatedAt: serverTimestamp(),
     ...(status === STAFF_REQUEST_STATUS.CLOSED
       ? {

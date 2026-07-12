@@ -7,6 +7,7 @@ import {
   COMPLIANCE_STATUS,
   COMPLIANCE_TYPE_CONFIG,
   CORE_COMPLIANCE_TYPES,
+  OPTIONAL_COMPLIANCE_TYPES,
   complianceDisplayStatus,
 } from '../../constants/compliance'
 import { ACCOUNT_STATUS } from '../../constants/roles'
@@ -48,9 +49,7 @@ export default function ComplianceDocumentsPage({ variant = 'auth' }) {
   }, [loadRecords])
 
   const isPending = accountStatus === ACCOUNT_STATUS.PENDING
-  const optionalTypes = Object.keys(COMPLIANCE_TYPE_CONFIG).filter(
-    (type) => !CORE_COMPLIANCE_TYPES.includes(type),
-  )
+  const optionalTypes = OPTIONAL_COMPLIANCE_TYPES
 
   const approvedCount = CORE_COMPLIANCE_TYPES.filter(
     (type) => complianceDisplayStatus(records[type]) === COMPLIANCE_STATUS.APPROVED,

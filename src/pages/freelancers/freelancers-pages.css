@@ -675,3 +675,54 @@
 .fl-alert__list li + li {
   margin-top: var(--space-2);
 }
+
+.fl-income-section {
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+}
+
+.fl-income-grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .fl-income-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.fl-income-card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-xs);
+}
+
+.fl-income-card h2 {
+  margin: 0 0 var(--space-3);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.fl-income-card p {
+  margin: 0 0 var(--space-3);
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.fl-income-card p:last-child {
+  margin-bottom: 0;
+}
+
+.fl-income-card ul {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.fl-income-card ul li + li {
+  margin-top: var(--space-2);
+}

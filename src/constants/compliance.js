@@ -53,17 +53,23 @@ export const COMPLIANCE_TYPE_CONFIG = {
   },
   [COMPLIANCE_TYPES.SVH]: {
     label: 'SVH Sociale Hygiëne',
-    hint: 'Upload uw SVH-certificaat (hospitality).',
+    hint: 'Upload uw SVH-certificaat indien van toepassing op uw rol.',
     requiresNumber: false,
     requiresExpiry: true,
   },
   [COMPLIANCE_TYPES.HACCP]: {
     label: 'HACCP-basis',
-    hint: 'Upload uw HACCP-bewijs (hospitality).',
+    hint: 'Niet meer vereist — alleen voor bestaande dossiers.',
     requiresNumber: false,
     requiresExpiry: true,
   },
 }
+
+/** Optionele documenten die freelancers kunnen uploaden (HACCP uitgesloten). */
+export const OPTIONAL_COMPLIANCE_TYPES = [
+  COMPLIANCE_TYPES.BHV,
+  COMPLIANCE_TYPES.SVH,
+]
 
 /** @type {string[]} */
 export const CORE_COMPLIANCE_TYPES = [

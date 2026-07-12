@@ -12,6 +12,7 @@ import BedrijvenTrustBadges from '../../components/bedrijven/BedrijvenTrustBadge
 import BedrijvenCtaStrip from '../../components/bedrijven/BedrijvenCtaStrip'
 import { B2B_INCLUDED_PACKAGE } from '../../content/bedrijvenIncludedPackage'
 import { B2B_ROLE_PROFILES } from '../../content/bedrijvenRoleProfiles'
+import { CLIENT_PROCESS_STEPS } from '../../content/clientProcessSteps'
 import { COMPANY_SEO } from '../../content/companySeo'
 import { usePageSeo } from '../../hooks/usePageSeo'
 import '../public/Services.css'
@@ -31,7 +32,7 @@ export default function FunctieprofielenPage() {
         variant="light"
         eyebrow="Bedrijven"
         title="Functieprofielen"
-        lead="H&amp;B Service Group levert hospitality en beveiliging voor live events — van briefing en rooster tot coördinatie op locatie — zodat uw productieleiding zich op de gast kan richten, niet op gaten in de planning."
+        lead="H&amp;B Service Group levert servicemedewerkers (hosts) en beveiliging — van intake en rooster tot coördinatie op locatie — zodat uw organisatie zich op de uitvoering kan richten, niet op gaten in de planning."
         stackCtasOnMobile
       >
         <Link to="/bedrijven/personeel-aanvragen" className="hnb-btn hnb-btn--primary">
@@ -51,14 +52,13 @@ export default function FunctieprofielenPage() {
               Eén partner voor gastheerschap en gecontroleerde toegang
             </h2>
             <p className="svc-section__lead">
-              We combineren planning, compliance-checks en één coördinator, zodat u niet twee bureaus hoeft te
-              managen voor bar en deur. Elke opdracht is afgestemd op locatie, vergunningscontext en programma.
+              We combineren planning, compliance-checks en één coördinator — twee hoofdcategorieën onder één
+              aanspreekpunt.
             </p>
           </header>
           <p className="svc-prose">
-            Of u nu een compacte pool voor een vaste clubavond nodig heeft of een grote crew voor een festivalweekend:
-            we stemmen bezetting, diensten en skillmix af op uw risicoprofiel — zonder koude service bij de deur of aan
-            de bar.
+            Of u servicemedewerkers nodig heeft voor een receptie, beveiliging voor een object of een gemengd team
+            voor een evenement: we stemmen bezetting, diensten en skillmix af op uw risicoprofiel en locatie-eisen.
           </p>
         </div>
       </section>
@@ -71,11 +71,11 @@ export default function FunctieprofielenPage() {
           <header className="svc-section__head">
             <span className="svc-section__eyebrow">Wat we leveren</span>
             <h2 id="svc-deliver-title" className="svc-section__title">
-              Hospitality en beveiliging gezamenlijk ingekocht
+              Servicemedewerkers en beveiliging gezamenlijk ingekocht
             </h2>
             <p className="svc-section__lead">
-              Twee disciplines, één briefing — hosts, bartenders en beveiliging delen dezelfde aanmeldmomenten,
-              toegangsregels en escalatielijn op de avond.
+              Twee disciplines, één briefing — servicemedewerkers en beveiliging delen dezelfde aanmeldmomenten,
+              toegangsregels en escalatielijn.
             </p>
           </header>
           <div className="svc-grid-2">
@@ -83,12 +83,11 @@ export default function FunctieprofielenPage() {
               <div className="svc-card__icon" aria-hidden="true">
                 <FiCoffee />
               </div>
-              <h3 className="svc-card__title">Hospitality</h3>
+              <h3 className="svc-card__title">Servicemedewerkers (hosts)</h3>
               <ul className="svc-card__list">
-                <li>Hosts, hostesses en ontvangst aan de deur</li>
-                <li>Bar, barback en ondersteuning bij piekdrukte</li>
+                <li>Ontvangst, routing en representatie</li>
                 <li>Garderobe, accreditatie en VIP-routes</li>
-                <li>Briefings op toon en servicenorm van uw merk</li>
+                <li>Professioneel en afgestemd op uw locatie en dresscode</li>
               </ul>
             </article>
             <article className="svc-card">
@@ -97,10 +96,9 @@ export default function FunctieprofielenPage() {
               </div>
               <h3 className="svc-card__title">Beveiliging</h3>
               <ul className="svc-card__list">
-                <li>Bevoegde portiers en eventbeveiliging</li>
-                <li>Toegang, perimeter en overzicht in de menigte</li>
-                <li>Portofoondiscipline met dienstdoende manager en productie</li>
-                <li>Alleen inroosteren waar vergunning en locatiebeleid matchen</li>
+                <li>Portier, eventbeveiliging en objectbeveiliging</li>
+                <li>Toegang en overzicht in de menigte</li>
+                <li>Alleen inroosteren waar diploma, pas en locatiebeleid matchen</li>
               </ul>
             </article>
           </div>
@@ -148,37 +146,13 @@ export default function FunctieprofielenPage() {
             </p>
           </header>
           <ol className="svc-steps">
-            <li className="svc-step">
-              <span className="svc-step__num">1</span>
-              <h3 className="svc-step__title">Verkenning &amp; scope</h3>
-              <p className="svc-step__text">
-                We vastleggen data, bezettingsbandbreedte, plattegrond, vergunningsnotities en uniformen — daarna
-                bevestigen we haalbaarheid en planning.
-              </p>
-            </li>
-            <li className="svc-step">
-              <span className="svc-step__num">2</span>
-              <h3 className="svc-step__title">Rooster &amp; akkoord</h3>
-              <p className="svc-step__text">
-                U ontvangt een voorstel met rollen en aanmeldmomenten. Niets is definitief zonder uw akkoord op namen en
-                verdeling.
-              </p>
-            </li>
-            <li className="svc-step">
-              <span className="svc-step__num">3</span>
-              <h3 className="svc-step__title">Brief &amp; inzet</h3>
-              <p className="svc-step__text">
-                Teams krijgen één pakket: ingangen, escalatie, bedieningsvensters en locatieregels.
-              </p>
-            </li>
-            <li className="svc-step">
-              <span className="svc-step__num">4</span>
-              <h3 className="svc-step__title">Op locatie &amp; evaluatie</h3>
-              <p className="svc-step__text">
-                Uw coördinator blijft bereikbaar tijdens het event. Na afbouw bespreken we uren, incidenten en leerpunten
-                voor de volgende boeking.
-              </p>
-            </li>
+            {CLIENT_PROCESS_STEPS.map((step, index) => (
+              <li key={step.title} className="svc-step">
+                <span className="svc-step__num">{index + 1}</span>
+                <h3 className="svc-step__title">{step.title}</h3>
+                <p className="svc-step__text">{step.body}</p>
+              </li>
+            ))}
           </ol>
         </div>
       </section>
@@ -200,10 +174,10 @@ export default function FunctieprofielenPage() {
           </header>
           <ul className="svc-sectors">
             {[
-              'Festivals & outdoor',
-              'Corporate & besloten',
-              'Nachtleven & locaties',
-              'Theater & arena’s',
+              'ISG & evenementen',
+              'COA & publieke sector',
+              'Bedrijven & horeca',
+              'Objecten & kermissen',
             ].map((label) => (
               <li key={label} className="svc-sector">
                 {label}
